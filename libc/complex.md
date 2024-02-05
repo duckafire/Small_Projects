@@ -1,5 +1,6 @@
 # complex (6; 0)
-Fornece funções para a manipulação de números complexos (números formados por uma parte real e uma parte imaginária, por exemplo: a + !b).
+Fornece funções para a manipulação de números complexos
+(números formados por uma parte real e uma parte imaginária, por exemplo "a + !b", que em C é representado por "a + b * I").
 
 1. double **cabs**(double complex n);
 	* n: Número complexo.
