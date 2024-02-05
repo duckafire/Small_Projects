@@ -489,49 +489,6 @@ A biblioteca setjmp.h em C possui apenas uma função principal, que é a setjmp
 Lembre-se de que setjmp.h não é uma biblioteca extensa, e a função setjmp é a única presente nela.
 
 <signal.h>
-
-
-<stdalign.h>
-
-
-<stdarg.h>
-
-
-<stdatomic.h>
-
-
-<stdbool.h>
-
-
-<stddef.h>
-
-
-<stdint.h>
-
-
-<stdio.h>
-
-
-<stdlib.h>
-
-
-<stdnoreturn.h>
-
-
-<tgmath.h>
-
-
-<threads.h>
-
-
-<time.h>
-
-
-<uchar.h>
-
-
-<wchar.h>
-
 A biblioteca signal.h em C fornece funções relacionadas ao tratamento de sinais. Aqui estão algumas das principais funções dessa biblioteca:
 
     Função signal:
@@ -550,10 +507,9 @@ A biblioteca signal.h em C fornece funções relacionadas ao tratamento de sinai
         Descrição completa: A função raise gera um sinal especificado por signum no próprio processo, permitindo simular a ocorrência de um sinal.
 
 Essas são algumas das principais funções da biblioteca signal.h. Note que o tratamento de sinais é uma parte avançada da programação C e deve ser usado com cuidado.
-User
-Faça uma lista com o nome de TODAS as funções presentes dentro da biblioteca "stdalign.h" da linguagem (de programação) C, especificando um breve descrição para a função da biblioteca, o tipo e o nome de cada parâmetro de cada função, além de uma descrição completa para a função (seus usos).
-ChatGPT
 
+
+<stdalign.h>
 A biblioteca stdalign.h em C define macros para controle de alinhamento de objetos. Aqui estão as principais macros dessa biblioteca:
 
     Macro alignas:
@@ -567,10 +523,9 @@ A biblioteca stdalign.h em C define macros para controle de alinhamento de objet
         Descrição completa: A macro alignof retorna o alinhamento necessário para um tipo ou objeto. Isso é útil para garantir que os objetos estejam alinhados corretamente na memória.
 
 Essas são as principais macros da biblioteca stdalign.h. Elas são utilizadas principalmente para controlar o alinhamento de objetos na memória, o que pode ser crucial para otimização e compatibilidade em sistemas específicos.
-User
-Faça uma lista com o nome de TODAS as funções presentes dentro da biblioteca "stdarg.h" da linguagem (de programação) C, especificando um breve descrição para a função da biblioteca, o tipo e o nome de cada parâmetro de cada função, além de uma descrição completa para a função (seus usos).
-ChatGPT
 
+
+<stdarg.h>
 A biblioteca stdarg.h em C fornece funcionalidades para lidar com funções variádicas, ou seja, funções que aceitam um número variável de argumentos. No entanto, não há funções diretamente relacionadas nessa biblioteca. Em vez disso, ela define macros e tipos que facilitam a implementação de funções variádicas.
 
 A principal estrutura definida é va_list, e as principais macros são:
@@ -591,10 +546,9 @@ A principal estrutura definida é va_list, e as principais macros são:
         Descrição completa: A macro va_end é usada para finalizar o uso do objeto va_list após a leitura de todos os argumentos variáveis.
 
 Essas macros são fundamentais para criar funções que podem receber um número variável de argumentos. Geralmente, essas funções são usadas em situações em que é necessário lidar com uma quantidade indefinida de argumentos, como em funções de formatação de texto, por exemplo.
-User
-Faça uma lista com o nome de TODAS as funções presentes dentro da biblioteca "stdatomic.h" da linguagem (de programação) C, especificando um breve descrição para a função da biblioteca, o tipo e o nome de cada parâmetro de cada função, além de uma descrição completa para a função (seus usos).
-ChatGPT
 
+
+<stdatomic.h>
 A biblioteca stdatomic.h em C fornece suporte para operações atômicas, permitindo a execução segura de operações em ambientes concorrentes. No entanto, ela não possui funções tradicionais como em outras bibliotecas. Em vez disso, ela define tipos e macros para operações atômicas. Aqui estão alguns dos principais componentes:
 
     Tipo atomic_flag:
@@ -614,10 +568,9 @@ A biblioteca stdatomic.h em C fornece suporte para operações atômicas, permit
         Descrição completa: Essas funções permitem operações atômicas como armazenar um valor, carregar um valor ou trocar um valor em uma variável atômica, garantindo que essas operações ocorram sem serem interrompidas por outras threads.
 
 O uso principal dessa biblioteca está em situações em que é necessário garantir que certas operações em variáveis ocorram atomicamente, sem serem interrompidas por operações de outras threads. Isso é essencial para evitar condições de corrida e garantir a consistência dos dados em ambientes concorrentes.
-User
-Faça uma lista com o nome de TODAS as funções presentes dentro da biblioteca "stdbool.h" da linguagem (de programação) C, especificando um breve descrição para a função da biblioteca, o tipo e o nome de cada parâmetro de cada função, além de uma descrição completa para a função (seus usos).
-ChatGPT
 
+
+<stdbool.h>
 A biblioteca stdbool.h em C não contém funções, mas sim um tipo e algumas macros que facilitam o uso de valores booleanos. Aqui estão os principais componentes:
 
     Tipo _Bool:
@@ -637,10 +590,9 @@ A biblioteca stdbool.h em C não contém funções, mas sim um tipo e algumas ma
         Descrição completa: A macro boolalpha é usada para imprimir ou formatar valores booleanos como "true" ou "false", enquanto noboolalpha restaura o comportamento padrão.
 
 Esses componentes da biblioteca stdbool.h são úteis para melhorar a legibilidade do código ao utilizar valores booleanos de forma mais expressiva. O uso do tipo _Bool e das macros bool, true, e false facilita o desenvolvimento de código mais claro e conciso quando se trabalha com lógica booleana.
-User
-Faça uma lista com o nome de TODAS as funções presentes dentro da biblioteca "stddef.h" da linguagem (de programação) C, especificando um breve descrição para a função da biblioteca, o tipo e o nome de cada parâmetro de cada função, além de uma descrição completa para a função (seus usos).
-ChatGPT
 
+
+<stddef.h>
 A biblioteca stddef.h em C não fornece funções, mas sim tipos e macros relacionadas a ponteiros e tamanhos de objetos. Aqui estão os principais componentes:
 
     Tipo ptrdiff_t:
@@ -660,10 +612,9 @@ A biblioteca stddef.h em C não fornece funções, mas sim tipos e macros relaci
         Descrição completa: A macro NULL é usada para representar um ponteiro nulo. Pode ser utilizado para inicializar ponteiros ou verificar se um ponteiro não aponta para nenhum objeto.
 
 Esses são os principais componentes da biblioteca stddef.h. Ela é especialmente útil para garantir portabilidade e consistência em programas C, uma vez que define tipos padrão para representar tamanhos e diferenças entre ponteiros.
-User
-Faça uma lista com o nome de TODAS as funções presentes dentro da biblioteca "stdint.h" da linguagem (de programação) C, especificando um breve descrição para a função da biblioteca, o tipo e o nome de cada parâmetro de cada função, além de uma descrição completa para a função (seus usos).
-ChatGPT
 
+
+<stdint.h>
 A biblioteca stdint.h em C não fornece funções, mas sim tipos inteiros de largura fixa e macros relacionadas. Aqui estão os principais componentes:
 
     Tipos inteiros de largura fixa (e.g., int8_t, int16_t, uint8_t, uint16_t):
@@ -683,10 +634,9 @@ A biblioteca stdint.h em C não fornece funções, mas sim tipos inteiros de lar
         Descrição completa: Esses tipos representam os inteiros com a maior largura suportada pelo compilador. São úteis quando se precisa da maior precisão possível, independentemente da largura exata.
 
 Esses tipos e macros da biblioteca stdint.h são projetados para melhorar a portabilidade e garantir uma manipulação precisa de tamanhos de dados em diferentes plataformas. Eles são particularmente valiosos em situações onde a precisão do tamanho é crucial, como em programação de sistemas e embarcada.
-User
-Faça uma lista com o nome de TODAS as funções presentes dentro da biblioteca "stdio.h" da linguagem (de programação) C, especificando um breve descrição para a função da biblioteca, o tipo e o nome de cada parâmetro de cada função, além de uma descrição completa para a função (seus usos).
-ChatGPT
 
+
+<stdio.h>
 A biblioteca stdio.h em C fornece funções para entrada e saída padrão. Abaixo estão algumas das principais funções dessa biblioteca:
 
     Função printf:
@@ -721,10 +671,9 @@ A biblioteca stdio.h em C fornece funções para entrada e saída padrão. Abaix
         Descrição completa: A função fclose é usada para fechar um arquivo previamente aberto. Isso libera os recursos associados ao arquivo e torna o ponteiro de arquivo inválido.
 
 Essas são apenas algumas das funções fornecidas pela biblioteca stdio.h. Elas são essenciais para a entrada e saída padrão, bem como para operações de arquivo em programas C.
-User
-Faça uma lista com o nome de TODAS as funções presentes dentro da biblioteca "stdlib.h" da linguagem (de programação) C, especificando um breve descrição para a função da biblioteca, o tipo e o nome de cada parâmetro de cada função, além de uma descrição completa para a função (seus usos).
-ChatGPT
 
+
+<stdlib.h>
 A biblioteca stdlib.h em C fornece funções relacionadas a alocação de memória, conversões de string para outros tipos, geração de números aleatórios e controle de processo. Aqui estão algumas das principais funções dessa biblioteca:
 
     Função malloc:
@@ -765,10 +714,9 @@ A biblioteca stdlib.h em C fornece funções relacionadas a alocação de memór
         Descrição completa: A função atoi converte uma string representando um número inteiro em um valor inteiro equivalente.
 
 Essas são apenas algumas das funções fornecidas pela biblioteca stdlib.h. Elas são fundamentais para a manipulação de memória dinâmica, conversão de strings e outras operações essenciais em C.
-User
-Faça uma lista com o nome de TODAS as funções presentes dentro da biblioteca "stdnoreturn.h" da linguagem (de programação) C, especificando um breve descrição para a função da biblioteca, o tipo e o nome de cada parâmetro de cada função, além de uma descrição completa para a função (seus usos).
-ChatGPT
 
+
+<stdnoreturn.h>
 A biblioteca stdnoreturn.h em C não fornece funções, mas sim uma macro chamada noreturn. Aqui está o principal componente dessa biblioteca:
 
     Macro noreturn:
@@ -777,10 +725,9 @@ A biblioteca stdnoreturn.h em C não fornece funções, mas sim uma macro chamad
         Descrição completa: A macro noreturn é usada para indicar ao compilador que uma função não deve retornar ao chamador. Isso é útil para funções que encerram o programa ou lançam exceções, informando ao compilador que não é necessário gerar código para lidar com um retorno dessas funções.
 
 Essa macro é frequentemente usada em contextos onde uma função tem a intenção de encerrar o programa, como funções que chamam a função exit ou lançam exceções. O uso de noreturn ajuda o compilador a realizar otimizações específicas para essas situações e a gerar mensagens de aviso caso o código após a chamada da função não seja alcançável.
-User
-Faça uma lista com o nome de TODAS as funções presentes dentro da biblioteca "tgmath.h" da linguagem (de programação) C, especificando um breve descrição para a função da biblioteca, o tipo e o nome de cada parâmetro de cada função, além de uma descrição completa para a função (seus usos).
-ChatGPT
 
+
+<tgmath.h>
 A biblioteca tgmath.h em C não fornece funções específicas, mas sim macros que adaptam funções matemáticas para trabalhar com argumentos de diferentes tipos, incluindo tipos primitivos e tipos definidos pelo usuário. Aqui estão algumas das principais macros dessa biblioteca:
 
     Macro cabs:
@@ -802,10 +749,9 @@ A biblioteca tgmath.h em C não fornece funções específicas, mas sim macros q
         Descrição completa: A macro cexp é usada para calcular a exponenciação de um número complexo. Ela se adapta automaticamente aos diferentes tipos de argumentos.
 
 Essas são apenas algumas das macros oferecidas pela biblioteca tgmath.h. Elas permitem que as funções matemáticas sejam utilizadas de forma genérica, proporcionando flexibilidade no uso de tipos diferentes, incluindo tipos definidos pelo usuário.
-User
-Faça uma lista com o nome de TODAS as funções presentes dentro da biblioteca "threads.h" da linguagem (de programação) C, especificando um breve descrição para a função da biblioteca, o tipo e o nome de cada parâmetro de cada função, além de uma descrição completa para a função (seus usos).
-ChatGPT
 
+
+<threads.h>
 A biblioteca threads.h em C11 introduz suporte para programação concorrente utilizando threads. Aqui estão algumas das principais funções dessa biblioteca:
 
     Função thrd_create:
@@ -840,10 +786,9 @@ A biblioteca threads.h em C11 introduz suporte para programação concorrente ut
         Descrição completa: A função thrd_sleep coloca a thread em espera até o tempo especificado em time_point. O tempo restante (se houver) é armazenado em remaining.
 
 Essas são algumas das funções principais da biblioteca threads.h em C11. Elas são usadas para criar, gerenciar e sincronizar threads em programas concorrentes, proporcionando uma forma padrão de trabalhar com threads na linguagem C.
-User
-Faça uma lista com o nome de TODAS as funções presentes dentro da biblioteca "time.h" da linguagem (de programação) C, especificando um breve descrição para a função da biblioteca, o tipo e o nome de cada parâmetro de cada função, além de uma descrição completa para a função (seus usos).
-ChatGPT
 
+
+<time.h>
 A biblioteca time.h em C fornece funções relacionadas à manipulação de tempo e data. Aqui estão algumas das principais funções dessa biblioteca:
 
     Função time:
@@ -882,17 +827,16 @@ A biblioteca time.h em C fornece funções relacionadas à manipulação de temp
         Descrição completa: A função gmtime converte o tempo especificado pelo ponteiro timer para uma estrutura struct tm representando o tempo no fuso horário UTC.
 
 Essas são algumas das principais funções da biblioteca time.h. Elas são usadas para manipulação, formatação e conversão de valores de tempo em programas C.
-User
-Faça uma lista com o nome de TODAS as funções presentes dentro da biblioteca "uchar.h" da linguagem (de programação) C, especificando um breve descrição para a função da biblioteca, o tipo e o nome de cada parâmetro de cada função, além de uma descrição completa para a função (seus usos).
-ChatGPT
 
+
+<uchar.h>
 Até o meu conhecimento mais recente em janeiro de 2022, não existe uma biblioteca padrão chamada "uchar.h" na linguagem de programação C. Pode ser que novas bibliotecas ou padrões tenham sido introduzidos após essa data.
 
 Se houver uma atualização ou extensão para a linguagem C que inclui uma biblioteca chamada "uchar.h", recomendo consultar a documentação mais recente ou fontes confiáveis para obter informações detalhadas sobre as funções fornecidas por essa biblioteca.
 User
-Faça uma lista com o nome de TODAS as funções presentes dentro da biblioteca "wchar.h" da linguagem (de programação) C, especificando um breve descrição para a função da biblioteca, o tipo e o nome de cada parâmetro de cada função, além de uma descrição completa para a função (seus usos).
-ChatGPT
 
+
+<wchar.h>
 A biblioteca wchar.h em C fornece funções para manipulação de caracteres de largura estendida (wide characters) e operações relacionadas a strings wide. Aqui estão algumas das principais funções dessa biblioteca:
 
     Função wmemset:
