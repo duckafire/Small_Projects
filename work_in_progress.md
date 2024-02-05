@@ -7,15 +7,15 @@
 * [complex](#complex)
 * [ctype](#ctype)
 * [errno](#errno)
-* [](#)
+* [fenv](#fenv)
 * [](#)
 
 <!----------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
 <!----------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
 <!----------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
 
-# assert (1)
-Verifica expressões booleanas.
+# assert
+(1) Verifica expressões booleanas.
 
 1. void **assert**(int expr);
 	* expr: Expressão (booleana).
@@ -26,8 +26,8 @@ Verifica expressões booleanas.
 <!----------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
 <!----------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
 
-# complex(6)
-Fornece funções para a manipulação de números complexos (números formados por uma parte real e uma parte imaginária, por exemplo: a + !b).
+# complex
+(6) Fornece funções para a manipulação de números complexos (números formados por uma parte real e uma parte imaginária, por exemplo: a + !b).
 
 1. double **cabs**(double complex n);
 	* n: Número complexo.
@@ -78,8 +78,8 @@ Fornece funções para a manipulação de números complexos (números formados 
 <!----------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
 <!----------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
 
-# ctype (7)
-Fornece funções para a manipulação e teste de caracteres.
+# ctype
+(7) Fornece funções para a manipulação e teste de caracteres.
 
 1. int **isalpha**(int c);
 	* c: Caractere.
@@ -120,8 +120,8 @@ Fornece funções para a manipulação e teste de caracteres.
 <!----------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
 <!----------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
 
-# errno (0; 1)
-Fornece uma variável global chamada **errno**, seu valor é alterado por diversas funções da biblioteca padrão, para indicar erros.
+# errno
+(0; 1) Fornece uma variável global chamada **errno**, seu valor é alterado por diversas funções da biblioteca padrão, para indicar erros.
 
 1. extern int **errno**;
 	* Armazena códigos de error retornados por várias funções da bilioteca padrão de C. Quando uma função encontra um erro, ela modifica o valor de **errno** para indicar o tipo
@@ -150,41 +150,33 @@ Fornece uma variável global chamada **errno**, seu valor é alterado por divers
 <!----------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
 <!----------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
 
-# fenv()
-Fornece funções para manipulação de ambientes de ponto flutuante (conjunto de características e regras que regem a representação e manipulação de números de ponto flutuante em um OS)
+# fenv
+(5) Fornece funções para manipulação de ambientes de ponto flutuante (conjunto de características e regras que regem a representação e manipulação de números de ponto flutuante em um OS)
 
 1. int **fegetround**(void);
 	* Nenhum.
 	* fegetround();
 	* Retorna o modo de arredondamento atual do ambiente de ponto flutuante.
 
-2.int **fesetround**(int round_mode);
+2. int **fesetround**(int round_mode);
 	* round_mode: Modo de arredondamento desejado.
 	* *fesetrounf(FE_UPWARD);* // FE_TONEAREST (para o mais próximo);  FE_DOWNWARD (para o menor valor; truncamento); FE_UPWARD (para o maior valor; +inf); FE_TOWARDZERO (para zero)
 	* Configura o modo de arredondamento do ambiente de ponto flutuante.
 
-Função fegetenv
-int fegetenv(fenv_t *envp);
-Descrição:
-    Parâmetros:
-        envp: Ponteiro para a estrutura de ambiente de ponto flutuante.
-Uso:
-    A função fegetenv salva o estado atual do ambiente de ponto flutuante na estrutura apontada por envp.
-Função fesetenv
-int fesetenv(const fenv_t *envp);
-Descrição:
-    Parâmetros:
-        envp: Ponteiro para a estrutura de ambiente de ponto flutuante.
-Uso:
-    A função fesetenv configura o ambiente de ponto flutuante de acordo com o estado salvo na estrutura apontada por envp.
-Função feupdateenv
-int feupdateenv(const fenv_t *envp);
-Descrição:
-    Parâmetros:
-        envp: Ponteiro para a estrutura de ambiente de ponto flutuante.
-Uso:
-    A função feupdateenv atualiza o ambiente de ponto flutuante com base no estado salvo na estrutura apontada por envp.
-Essas funções são úteis para controlar e modificar o comportamento de operações de ponto flutuante, como o modo de arredondamento, permitindo maior controle sobre o tratamento de resultados em operações matemáticas.
+3. int **fegetenv**(fenv_t *envp);
+	* envp: Ponteiro para a estrutura de ambiente de ponto flutuante.
+	* *fegetenv(&variable);*
+	* Salva o estado atual do ambiente de ponto flutuante na estrutura apontada por seu parâmetro.
+
+4. int **fesetenv**(const fenv_t *envp);
+	* envp: Ponteiro para a estrutura de ambiente de ponto flutuante.
+	* *fesetenv(*variable);*
+	* Configura o ambiente de ponto flutuante de acordo com o estado salvo na estrutura apontada por seu parâmetro.
+
+5. int **feupdateenv**(const fenv_t *envp);
+	* envp: Ponteiro para a estrutura de ambiente de ponto flutuante.
+	* *feupdateenv();*
+	* Atualiza o ambiente de ponto flutuante com base no estado salvo na estrutura apontada por seu parâmetro.
 
 <!----------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
 <!----------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
@@ -488,6 +480,10 @@ A biblioteca setjmp.h em C possui apenas uma função principal, que é a setjmp
         Descrição completa: A função setjmp é usada para salvar o estado do ambiente em env, permitindo que mais tarde o programa retorne a esse estado usando a função longjmp. Isso é útil para implementar exceções ou para sair de maneira não usual de uma função sem executar todas as instruções intermediárias.
 Lembre-se de que setjmp.h não é uma biblioteca extensa, e a função setjmp é a única presente nela.
 
+<!----------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+<!----------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+<!----------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+
 <signal.h>
 A biblioteca signal.h em C fornece funções relacionadas ao tratamento de sinais. Aqui estão algumas das principais funções dessa biblioteca:
 
@@ -508,6 +504,9 @@ A biblioteca signal.h em C fornece funções relacionadas ao tratamento de sinai
 
 Essas são algumas das principais funções da biblioteca signal.h. Note que o tratamento de sinais é uma parte avançada da programação C e deve ser usado com cuidado.
 
+<!----------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+<!----------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+<!----------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
 
 <stdalign.h>
 A biblioteca stdalign.h em C define macros para controle de alinhamento de objetos. Aqui estão as principais macros dessa biblioteca:
@@ -524,6 +523,9 @@ A biblioteca stdalign.h em C define macros para controle de alinhamento de objet
 
 Essas são as principais macros da biblioteca stdalign.h. Elas são utilizadas principalmente para controlar o alinhamento de objetos na memória, o que pode ser crucial para otimização e compatibilidade em sistemas específicos.
 
+<!----------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+<!----------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+<!----------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
 
 <stdarg.h>
 A biblioteca stdarg.h em C fornece funcionalidades para lidar com funções variádicas, ou seja, funções que aceitam um número variável de argumentos. No entanto, não há funções diretamente relacionadas nessa biblioteca. Em vez disso, ela define macros e tipos que facilitam a implementação de funções variádicas.
@@ -547,6 +549,9 @@ A principal estrutura definida é va_list, e as principais macros são:
 
 Essas macros são fundamentais para criar funções que podem receber um número variável de argumentos. Geralmente, essas funções são usadas em situações em que é necessário lidar com uma quantidade indefinida de argumentos, como em funções de formatação de texto, por exemplo.
 
+<!----------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+<!----------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+<!----------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
 
 <stdatomic.h>
 A biblioteca stdatomic.h em C fornece suporte para operações atômicas, permitindo a execução segura de operações em ambientes concorrentes. No entanto, ela não possui funções tradicionais como em outras bibliotecas. Em vez disso, ela define tipos e macros para operações atômicas. Aqui estão alguns dos principais componentes:
@@ -569,6 +574,9 @@ A biblioteca stdatomic.h em C fornece suporte para operações atômicas, permit
 
 O uso principal dessa biblioteca está em situações em que é necessário garantir que certas operações em variáveis ocorram atomicamente, sem serem interrompidas por operações de outras threads. Isso é essencial para evitar condições de corrida e garantir a consistência dos dados em ambientes concorrentes.
 
+<!----------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+<!----------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+<!----------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
 
 <stdbool.h>
 A biblioteca stdbool.h em C não contém funções, mas sim um tipo e algumas macros que facilitam o uso de valores booleanos. Aqui estão os principais componentes:
@@ -591,6 +599,9 @@ A biblioteca stdbool.h em C não contém funções, mas sim um tipo e algumas ma
 
 Esses componentes da biblioteca stdbool.h são úteis para melhorar a legibilidade do código ao utilizar valores booleanos de forma mais expressiva. O uso do tipo _Bool e das macros bool, true, e false facilita o desenvolvimento de código mais claro e conciso quando se trabalha com lógica booleana.
 
+<!----------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+<!----------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+<!----------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
 
 <stddef.h>
 A biblioteca stddef.h em C não fornece funções, mas sim tipos e macros relacionadas a ponteiros e tamanhos de objetos. Aqui estão os principais componentes:
@@ -613,6 +624,9 @@ A biblioteca stddef.h em C não fornece funções, mas sim tipos e macros relaci
 
 Esses são os principais componentes da biblioteca stddef.h. Ela é especialmente útil para garantir portabilidade e consistência em programas C, uma vez que define tipos padrão para representar tamanhos e diferenças entre ponteiros.
 
+<!----------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+<!----------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+<!----------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
 
 <stdint.h>
 A biblioteca stdint.h em C não fornece funções, mas sim tipos inteiros de largura fixa e macros relacionadas. Aqui estão os principais componentes:
@@ -635,6 +649,9 @@ A biblioteca stdint.h em C não fornece funções, mas sim tipos inteiros de lar
 
 Esses tipos e macros da biblioteca stdint.h são projetados para melhorar a portabilidade e garantir uma manipulação precisa de tamanhos de dados em diferentes plataformas. Eles são particularmente valiosos em situações onde a precisão do tamanho é crucial, como em programação de sistemas e embarcada.
 
+<!----------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+<!----------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+<!----------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
 
 <stdio.h>
 A biblioteca stdio.h em C fornece funções para entrada e saída padrão. Abaixo estão algumas das principais funções dessa biblioteca:
@@ -672,6 +689,9 @@ A biblioteca stdio.h em C fornece funções para entrada e saída padrão. Abaix
 
 Essas são apenas algumas das funções fornecidas pela biblioteca stdio.h. Elas são essenciais para a entrada e saída padrão, bem como para operações de arquivo em programas C.
 
+<!----------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+<!----------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+<!----------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
 
 <stdlib.h>
 A biblioteca stdlib.h em C fornece funções relacionadas a alocação de memória, conversões de string para outros tipos, geração de números aleatórios e controle de processo. Aqui estão algumas das principais funções dessa biblioteca:
@@ -715,6 +735,9 @@ A biblioteca stdlib.h em C fornece funções relacionadas a alocação de memór
 
 Essas são apenas algumas das funções fornecidas pela biblioteca stdlib.h. Elas são fundamentais para a manipulação de memória dinâmica, conversão de strings e outras operações essenciais em C.
 
+<!----------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+<!----------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+<!----------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
 
 <stdnoreturn.h>
 A biblioteca stdnoreturn.h em C não fornece funções, mas sim uma macro chamada noreturn. Aqui está o principal componente dessa biblioteca:
@@ -726,6 +749,9 @@ A biblioteca stdnoreturn.h em C não fornece funções, mas sim uma macro chamad
 
 Essa macro é frequentemente usada em contextos onde uma função tem a intenção de encerrar o programa, como funções que chamam a função exit ou lançam exceções. O uso de noreturn ajuda o compilador a realizar otimizações específicas para essas situações e a gerar mensagens de aviso caso o código após a chamada da função não seja alcançável.
 
+<!----------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+<!----------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+<!----------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
 
 <tgmath.h>
 A biblioteca tgmath.h em C não fornece funções específicas, mas sim macros que adaptam funções matemáticas para trabalhar com argumentos de diferentes tipos, incluindo tipos primitivos e tipos definidos pelo usuário. Aqui estão algumas das principais macros dessa biblioteca:
@@ -750,6 +776,9 @@ A biblioteca tgmath.h em C não fornece funções específicas, mas sim macros q
 
 Essas são apenas algumas das macros oferecidas pela biblioteca tgmath.h. Elas permitem que as funções matemáticas sejam utilizadas de forma genérica, proporcionando flexibilidade no uso de tipos diferentes, incluindo tipos definidos pelo usuário.
 
+<!----------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+<!----------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+<!----------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
 
 <threads.h>
 A biblioteca threads.h em C11 introduz suporte para programação concorrente utilizando threads. Aqui estão algumas das principais funções dessa biblioteca:
@@ -787,6 +816,9 @@ A biblioteca threads.h em C11 introduz suporte para programação concorrente ut
 
 Essas são algumas das funções principais da biblioteca threads.h em C11. Elas são usadas para criar, gerenciar e sincronizar threads em programas concorrentes, proporcionando uma forma padrão de trabalhar com threads na linguagem C.
 
+<!----------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+<!----------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+<!----------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
 
 <time.h>
 A biblioteca time.h em C fornece funções relacionadas à manipulação de tempo e data. Aqui estão algumas das principais funções dessa biblioteca:
@@ -828,6 +860,9 @@ A biblioteca time.h em C fornece funções relacionadas à manipulação de temp
 
 Essas são algumas das principais funções da biblioteca time.h. Elas são usadas para manipulação, formatação e conversão de valores de tempo em programas C.
 
+<!----------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+<!----------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+<!----------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
 
 <uchar.h>
 Até o meu conhecimento mais recente em janeiro de 2022, não existe uma biblioteca padrão chamada "uchar.h" na linguagem de programação C. Pode ser que novas bibliotecas ou padrões tenham sido introduzidos após essa data.
@@ -835,6 +870,9 @@ Até o meu conhecimento mais recente em janeiro de 2022, não existe uma bibliot
 Se houver uma atualização ou extensão para a linguagem C que inclui uma biblioteca chamada "uchar.h", recomendo consultar a documentação mais recente ou fontes confiáveis para obter informações detalhadas sobre as funções fornecidas por essa biblioteca.
 User
 
+<!----------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+<!----------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+<!----------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
 
 <wchar.h>
 A biblioteca wchar.h em C fornece funções para manipulação de caracteres de largura estendida (wide characters) e operações relacionadas a strings wide. Aqui estão algumas das principais funções dessa biblioteca:
@@ -873,3 +911,8 @@ A biblioteca wchar.h em C fornece funções para manipulação de caracteres de 
         Descrição completa: A função wcscmp compara as strings wide str1 e str2. Retorna um valor inteiro que indica a relação entre as strings.
 
 Essas são apenas algumas das funções fornecidas pela biblioteca wchar.h. Elas são utilizadas para manipular e comparar strings wide, que são úteis quando se trabalha com caracteres de largura estendida.
+
+<!----------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+<!----------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+<!----------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+
