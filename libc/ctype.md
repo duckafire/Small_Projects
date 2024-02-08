@@ -1,5 +1,10 @@
-# ctype (13)
+# ctype
 Fornece funções para a manipulação e teste de caracteres ASCII.
+
+<br>
+
+-----
+<br>
 
 1. int **isalnum**(int c)
 	* c: Um argumento inteiro, cujo valor possa ser represetado como um `usingned char` (caractere) ou `EOF`.
@@ -17,6 +22,11 @@ int main(){
 }
 ```
 
+<br>
+
+-----
+<br>
+
 2. int **isalpha**(int c)
 	* c: Um caractere. Caso um inteiro seja passado, ele será convertido para caractere (ASCII).
 	* Retorno: 1 caso seja uma letra maiúscula, 2 caso seja minúscula ou 0 caso não esteja no alfabeto.
@@ -32,6 +42,11 @@ int main(){
 }
 ```
 
+<br>
+
+-----
+<br>
+
 3. int **iscntrl**(int c)
 	* c: Um caractere. Caso receba um inteiro, ele será convertido para caractere (ASCII).
 	* Retorno: Um valor diferente de zero caso seu argumento seja um caractere de controle (0-31 em ASCII) ou 0 caso contrário.
@@ -45,6 +60,11 @@ int main(){
 }
 
 ```
+
+<br>
+
+-----
+<br>
 
 4. int **isdigit**(int c)
 	* c: Um caractere. Caso seja um inteiro, ele será convertido para caractere (ASCII).
@@ -60,6 +80,11 @@ int main(){
 
 ```
 
+<br>
+
+-----
+<br>
+
 5. int **isgraph**(int c)
 	* c: Um caractere. Caso seja um inteiro, ele será convertido para caractere (ASCII).
 	* Retorno: Um valor diferente de zero caso seu argumento seja um caractere que possa ser imprimido (exceto o espaço) ou 0 caso contrário.
@@ -73,6 +98,11 @@ int main(){
 }
 
 ```
+
+<br>
+
+-----
+<br>
 
 6. int **islower**(int c)
 	* c: Um caractere. Caso seja um inteiro, ele será convertido para caractere (ASCII).
@@ -88,6 +118,11 @@ int main(){
 
 ```
 
+<br>
+
+-----
+<br>
+
 7. int **isprint**(int c)
 	* c: Um caractere. Caso seja um inteiro, ele será convertido para caractere (ASCII).
 	* Retorno: Um valor diferente de zero caso seu argumento seja uma letra imprimível (incluindo o espaço) ou 0 zero caso contrário.
@@ -102,6 +137,8 @@ int main(){
 
 ```
 
+-----
+
 8. int **ispunct**(int c)
 	* c: Um caractere.  Caso seja um inteiro, ele será convertido para caractere (ASCII).
 	* Retorno: Um valor diferente de zero caso seja um sinal de pontuação (qualquer caractere imprimível que não seja sepaço ou alfanúmerico) ou 0 caso contrário.
@@ -115,6 +152,8 @@ int main(){
 }
 
 ```
+
+-----
 
 9. int **isspace**(int c)
 	* c: Um caractere.  Caso seja um inteiro, ele será convertido para caractere (ASCII).
@@ -131,6 +170,8 @@ int main(){
 
 ```
 
+-----
+
 10. int **isupper**(int c)
 	* c: Um caractere.  Caso seja um inteiro, ele será convertido para caractere (ASCII).
 	* Retorno: Um valor diferente de zero caso seu argumento seja uma letra maiúscula ou 0 caso contrário.
@@ -144,6 +185,8 @@ int main(){
 }
 
 ```
+
+-----
 
 11. int **isxdigit**(int c)
 	* c: Um caractere.  Caso seja um inteiro, ele será convertido para caractere (ASCII).
@@ -159,6 +202,8 @@ int main(){
 
 ```
 
+-----
+
 12. int **tolower**(int c)
 	* c: Um caractere.  Caso seja um inteiro, ele será convertido para caractere (ASCII).
 	* Retorno: Caso seu argumento seja uma letra maiúscula, sua versão minúscula será retornada, caso contrário retornará o próprio argumento.
@@ -172,6 +217,8 @@ int main(){
 }
 
 ```
+
+-----
 
 13. int **toupper**(int c)
 	* c: Um caractere.  Caso seja um inteiro, ele será convertido para caractere (ASCII).
@@ -187,5 +234,14 @@ int main(){
 
 ```
 
-###### Fonte: https://petbcc.ufscar.br/ctype/
-	
+<br>
+
+-----
+<br>
+
+#### Fonte:
+* https://petbcc.ufscar.br/ctype/
+
+<br>
+
+-----

@@ -1,5 +1,10 @@
-# errno (0; 1)
+# errno
 Fornece uma variável global chamada **errno**, seu valor é alterado por diversas funções da biblioteca padrão, para indicar erros.
+
+<br>
+
+-----
+<br>
 
 1. extern int **errno**;
 	* 0: valor incial.
@@ -34,6 +39,15 @@ int main(){
 
 ```
 
-## Fonte:
+<br>
+
+-----
+<br>
+
+#### Fonte:
 * https://en.wikipedia.org/wiki/Errno.h
 * https://www.geeksforgeeks.org/error-handling-in-c/
+
+<br>
+
+-----

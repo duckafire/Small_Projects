@@ -1,5 +1,10 @@
-# assert (1; 0)
+# assert
 Possui uma função que verifica expressões booleanas.
+
+<br>
+
+-----
+<br>
 
 1. void **assert**(int expr);
 	* expr: Expressão (booleana).
@@ -19,6 +24,15 @@ int main(){
 }
 ```
 
-###### Fonte:
+<br>
+
+-----
+<br>
+
+#### Fonte:
 * https://en.wikipedia.org/wiki/Assert.h
 * https://petbcc.ufscar.br/assert/
+
+<br>
+
+-----
