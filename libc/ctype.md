@@ -6,7 +6,7 @@ Fornece funções para a manipulação e teste de caracteres ASCII.
 -----
 <br>
 
-1. int **isalnum**(int c)
+1. int **isalnum**(int c);
 	* c: Um caractere ou <ins>um número (código em ASCII).
 	* Retorno: Um valor diferente de zero caso seu parâemtro seja um alfanúmerico ou 0 caso contrário.
 	
@@ -27,7 +27,7 @@ int main(){
 -----
 <br>
 
-2. int **isalpha**(int c)
+2. int **isalpha**(int c);
 	* c: Um caractere ou um <ins>um número (código em ASCII).
 	* Retorno: 1 caso seja uma letra maiúscula, 2 caso seja minúscula ou 0 caso não esteja no alfabeto.
 	
@@ -48,7 +48,7 @@ int main(){
 -----
 <br>
 
-3. int **iscntrl**(int c)
+3. int **iscntrl**(int c);
 	* c: Um caractere ou um <ins>um número (código em ASCII).
 	* Retorno: Um valor diferente de zero caso seu argumento seja um caractere de controle (0-31 em ASCII) ou 0 caso contrário.
 	
@@ -70,7 +70,7 @@ int main(){
 -----
 <br>
 
-4. int **isdigit**(int c)
+4. int **isdigit**(int c);
 	* c: Um caractere ou um <ins>um número (código em ASCII).
 	* Retorno: Um valor diferente de zero caso seu argumento seja um digito de 0-9 ou 0 caso contrário.
 	
@@ -92,7 +92,7 @@ int main(){
 -----
 <br>
 
-5. int **isgraph**(int c)
+5. int **isgraph**(int c);
 	* c: Um caractere ou um <ins>um número (código em ASCII).
 	* Retorno: Um valor diferente de zero caso seu argumento tenha uma representação gráfica (exceto o espaço; 33-126) ou 0 caso contrário.
 	
@@ -114,7 +114,7 @@ int main(){
 -----
 <br>
 
-6. int **islower**(int c)
+6. int **islower**(int c);
 	* c: Um caractere ou um <ins>um número (código em ASCII).
 	* Retorno: Um valor diferente de zero caso seu argumento seja uma letra minúscula ou 0 caso contrário.
 	
@@ -136,7 +136,7 @@ int main(){
 -----
 <br>
 
-7. int **isprint**(int c)
+7. int **isprint**(int c);
 	* c: Um caractere ou um <ins>um número (código em ASCII).
 	* Retorno: Um valor diferente de zero caso seu argumento seja imprimível (incluindo o espaço; 32-126) ou 0 zero caso contrário.
 	
@@ -155,7 +155,7 @@ int main(){
 
 -----
 
-8. int **ispunct**(int c)
+8. int **ispunct**(int c);
 	* c: Um caractere ou um <ins>um número (código em ASCII).
 	* Retorno: Um valor diferente de zero caso seja um sinal de pontuação (qualquer caractere imprimível que não seja espaço ou alfanúmerico) ou 0 caso contrário.
 	
@@ -174,7 +174,7 @@ int main(){
 
 -----
 
-9. int **isspace**(int c)
+9. int **isspace**(int c);
 	* c: Um caractere ou um <ins>um número (código em ASCII).
 	* Retorno: Um valor diferente de zero caso seu argumento seja um espaço, um caractere de mudança de linha (\n), retorno de transporte/carro (\r), de mudança de página (\f),
 	ou de tabulação horizontal (\t) ou vertical (\v) ou 0 caso contrário.
@@ -194,7 +194,7 @@ int main(){
 
 -----
 
-10. int **isupper**(int c)
+10. int **isupper**(int c);
 	* c: Um caractere ou um <ins>um número (código em ASCII).
 	* Retorno: Um valor diferente de zero caso seu argumento seja uma letra maiúscula ou 0 caso contrário.
 	
@@ -213,7 +213,7 @@ int main(){
 
 -----
 
-11. int **isxdigit**(int c)
+11. int **isxdigit**(int c);
 	* c: Um caractere ou um <ins>um número (código em ASCII).
 	* Retorno: Um valor diferente de zero caso seu argumento seja um dígito de um número hexadecimal ou 0 caso contrário.
 	
@@ -232,7 +232,7 @@ int main(){
 
 -----
 
-12. int **tolower**(int c)
+12. int **tolower**(int c);
 	* c: Um caractere ou um <ins>um número (código em ASCII).
 	* Retorno: Caso seu argumento seja uma letra maiúscula, sua versão minúscula será retornada, caso contrário retornará o próprio argumento.
 	
@@ -251,7 +251,7 @@ int main(){
 
 -----
 
-13. int **toupper**(int c)
+13. int **toupper**(int c);
 	* c: Um caractere ou um <ins>um número (código em ASCII).
 	* Retorno: Caso seu argumento seja uma letra minúscula, sua versão maiúscula será retornada, caso contrário retornará o próprio argumento.
 	
