@@ -15,9 +15,9 @@ Possui uma função que verifica expressões booleanas.
 
 int main(){
 	
-	int toReturn = 0;
+	assert(0 == 0); // is true, not stop the program 
 	
-	assert(toReturn != 0); // true
+	assert(0 != 0); // is false, stop the program and print the mensage of error on console
 	
 	return toReturn;
 
