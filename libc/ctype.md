@@ -8,7 +8,8 @@ Fornece funções para a manipulação e teste de caracteres ASCII.
 
 1. int **isalnum**(int c);
 	* c: Um caractere ou <ins>um número (código em ASCII).
-	* Retorno: Um valor diferente de zero caso seu parâemtro seja um alfanúmerico ou 0 caso contrário.
+	* Uso: Verifica se seu argumento é um alfanúmerico.
+	* Retorno: Um valor diferente de zero caso verdadeiro ou 0 caso falso.
 	
 ``` c
 int main(){
@@ -29,6 +30,7 @@ int main(){
 
 2. int **isalpha**(int c);
 	* c: Um caractere ou um <ins>um número (código em ASCII).
+	* Uso: Verifica se seu argumento é uma letra (E se é maiúscula ou minúscula) ou não.
 	* Retorno: 1 caso seja uma letra maiúscula, 2 caso seja minúscula ou 0 caso não esteja no alfabeto.
 	
 ``` c
@@ -50,7 +52,8 @@ int main(){
 
 3. int **iscntrl**(int c);
 	* c: Um caractere ou um <ins>um número (código em ASCII).
-	* Retorno: Um valor diferente de zero caso seu argumento seja um caractere de controle (0-31 em ASCII) ou 0 caso contrário.
+	* Uso: Verifica se seu argumento é um caractere de controle (0-31 em ASCII).
+	* Retorno: Um valor diferente de zero caso verdadeiro ou 0 caso falso.
 	
 ``` c
 int main(){
@@ -72,7 +75,8 @@ int main(){
 
 4. int **isdigit**(int c);
 	* c: Um caractere ou um <ins>um número (código em ASCII).
-	* Retorno: Um valor diferente de zero caso seu argumento seja um digito de 0-9 ou 0 caso contrário.
+	* Uso: Verifica se seu argumento é um dígito numérico (0-9).
+	* Retorno: Um valor diferente de zero caso verdadeiro ou 0 caso falso.
 	
 ``` c
 int main(){
@@ -94,7 +98,8 @@ int main(){
 
 5. int **isgraph**(int c);
 	* c: Um caractere ou um <ins>um número (código em ASCII).
-	* Retorno: Um valor diferente de zero caso seu argumento tenha uma representação gráfica (exceto o espaço; 33-126) ou 0 caso contrário.
+	* Uso: Verifica se seu argumento tem uma representação gráfica (exceto espaços; 33-126).
+	* Retorno: Um valor diferente de zero caso verdadeiro ou 0 caso falso.
 	
 ``` c
 int main(){
@@ -116,7 +121,8 @@ int main(){
 
 6. int **islower**(int c);
 	* c: Um caractere ou um <ins>um número (código em ASCII).
-	* Retorno: Um valor diferente de zero caso seu argumento seja uma letra minúscula ou 0 caso contrário.
+	* Uso: Verifica se seu argumento é uma letra minúscula.
+	* Retorno: Um valor diferente de zero caso verdadeiro ou 0 caso falso.
 	
 ``` c
 int main(){
@@ -138,7 +144,8 @@ int main(){
 
 7. int **isprint**(int c);
 	* c: Um caractere ou um <ins>um número (código em ASCII).
-	* Retorno: Um valor diferente de zero caso seu argumento seja imprimível (incluindo o espaço; 32-126) ou 0 zero caso contrário.
+	* Uso: Verifica se seu argumento é imprímível (incluindo espaços; 32-126).
+	* Retorno: Um valor diferente de zero caso verdadeiro ou 0 caso falso.
 	
 ``` c
 int main(){
@@ -157,7 +164,8 @@ int main(){
 
 8. int **ispunct**(int c);
 	* c: Um caractere ou um <ins>um número (código em ASCII).
-	* Retorno: Um valor diferente de zero caso seja um sinal de pontuação (qualquer caractere imprimível que não seja espaço ou alfanúmerico) ou 0 caso contrário.
+	* Uso: Verifica se seu argumento é um sinal de pontuação (qualquer caractere imprimível que não seja espaço ou alfanúmerico).
+	* Retorno: Um valor diferente de zero caso verdadeiro ou 0 caso falso.
 	
 ``` c
 int main(){
@@ -176,8 +184,8 @@ int main(){
 
 9. int **isspace**(int c);
 	* c: Um caractere ou um <ins>um número (código em ASCII).
-	* Retorno: Um valor diferente de zero caso seu argumento seja um espaço, um caractere de mudança de linha (\n), retorno de transporte/carro (\r), de mudança de página (\f),
-	ou de tabulação horizontal (\t) ou vertical (\v) ou 0 caso contrário.
+	* Uso: Verifica se seu argumento é um espaço, `\n` (quebra de linha), `\r` (retorno de transporte/carro), `\f` (mudança de página), ou `\t` (tabulação horizontal) ou `\v` (vertical).
+	* Retorno: Um valor diferente de zero caso verdadeiro ou 0 caso falso.
 	
 ``` c
 int main(){
@@ -196,7 +204,8 @@ int main(){
 
 10. int **isupper**(int c);
 	* c: Um caractere ou um <ins>um número (código em ASCII).
-	* Retorno: Um valor diferente de zero caso seu argumento seja uma letra maiúscula ou 0 caso contrário.
+	* Uso: Verifica se seu argumento seja uma letra maiúscula.
+	* Retorno: Um valor diferente de zero caso verdadeiro ou 0 caso falso.
 	
 ``` c
 int main(){
@@ -215,7 +224,8 @@ int main(){
 
 11. int **isxdigit**(int c);
 	* c: Um caractere ou um <ins>um número (código em ASCII).
-	* Retorno: Um valor diferente de zero caso seu argumento seja um dígito de um número hexadecimal ou 0 caso contrário.
+	* Uso: Verifica se seu argumento um dígito hexadecimal.
+	* Retorno: Um valor diferente de zero caso verdadeiro ou 0 caso falso.
 	
 ``` c
 int main(){
@@ -234,7 +244,8 @@ int main(){
 
 12. int **tolower**(int c);
 	* c: Um caractere ou um <ins>um número (código em ASCII).
-	* Retorno: Caso seu argumento seja uma letra maiúscula, sua versão minúscula será retornada, caso contrário retornará o próprio argumento.
+	* Uso: Verifica se seu argumento é uma letra maiúscula.
+	* Retorno: Caso verdadeiro, retorna sua versão minúsula, caso falso, retorna ele mesmo.
 	
 ``` c
 int main(){
@@ -253,7 +264,8 @@ int main(){
 
 13. int **toupper**(int c);
 	* c: Um caractere ou um <ins>um número (código em ASCII).
-	* Retorno: Caso seu argumento seja uma letra minúscula, sua versão maiúscula será retornada, caso contrário retornará o próprio argumento.
+	* Uso: Verifica se seu argumento é uma letra minúscula.
+	* Retorno: Caso verdadeiro, retorna sua versão maiúsula, caso falso, retorna ele mesmo.
 	
 ``` c
 int main(){
@@ -273,7 +285,7 @@ int main(){
 -----
 <br>
 
-#### Fonte:
+#### Fontes:
 * https://petbcc.ufscar.br/ctype/
 * https://en.m.wikipedia.org/wiki/ASCII
 * https://www.ascii-code.com/
