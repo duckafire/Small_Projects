@@ -29,12 +29,15 @@ Fornece uma variável global chamada **errno**, seu valor é alterado por divers
 * ###### Bibliotecas distintas podem adicionar mais possibilidades de valores para *errno*.
 
 ``` c
-#include <stdio.h>
+#include <stdio.h> // fopen
 #include <errno.h>
 
 int main(){
-	FILE* file = fopen("example.txt", "r"); // stdio.h function
+
+	FILE* file = fopen("example.txt", "r");
 	// errno = 2
+	
+	return 0;
 }
 
 ```
