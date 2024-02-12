@@ -36,7 +36,6 @@ int main(){
 * https://www.geeksforgeeks.org/bool-in-c/
 * https://pt.wikipedia.org/wiki/Stdbool.h
 
------
 <br>
 
 -----
