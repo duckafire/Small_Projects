@@ -6,7 +6,7 @@ Possui uma função que verifica expressões booleanas.
 -----
 <br>
 
-1. void **assert**(int expr);
+* void **assert**(int expr);
 	* expr: Expressão (booleana).
 	* Verificar a validade de uma expressão durante a execução do programa. Encerra o programa e gera um erro caso a expressão passada seja falsa.
 	

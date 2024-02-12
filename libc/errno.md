@@ -6,7 +6,7 @@ Fornece uma variável global chamada **errno**, seu valor é alterado por divers
 -----
 <br>
 
-1. extern int **errno**;
+* extern int **errno**;
 	* 0: valor incial.
 	* É uma variável global que armazena valores de erro. Seu valor é alterado sempre que uma função encontrar um erro.
 	
