@@ -16,7 +16,7 @@
 * stdalign
 * stdarg
 * stdatomic
-* stdbool
+* [stdbool](https://github.com/duckafire/Small_Projects/blob/main/libc/stdbool.md)
 * stddef
 * stdint
 * stdio
