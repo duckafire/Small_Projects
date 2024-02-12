@@ -29,7 +29,7 @@ int main(){
 -----
 <br>
 
-#### Fonte:
+#### Fontes:
 * https://en.wikipedia.org/wiki/Assert.h
 * https://petbcc.ufscar.br/assert/
 

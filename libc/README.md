@@ -8,7 +8,7 @@
 * float
 * inttypes
 * iso646
-* limits
+* [limits](https://github.com/duckafire/Small_Projects/blob/main/libc/limits.md)
 * locale
 * math
 * setjmp
@@ -17,7 +17,7 @@
 * stdarg
 * stdatomic
 * [stdbool](https://github.com/duckafire/Small_Projects/blob/main/libc/stdbool.md)
-* stddef
+* [stddef](https://github.com/duckafire/Small_Projects/blob/main/libc/stddef.md)
 * stdint
 * stdio
 * stdlib

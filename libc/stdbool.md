@@ -32,7 +32,7 @@ int main(){
 -----
 <br>
 
-#### Fonte:
+#### Fontes:
 * https://www.geeksforgeeks.org/bool-in-c/
 * https://pt.wikipedia.org/wiki/Stdbool.h
 

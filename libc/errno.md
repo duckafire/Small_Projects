@@ -47,7 +47,7 @@ int main(){
 -----
 <br>
 
-#### Fonte:
+#### Fontes:
 * https://en.wikipedia.org/wiki/Errno.h
 * https://www.geeksforgeeks.org/error-handling-in-c/
 

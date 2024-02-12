@@ -577,7 +577,7 @@ int main(){
 -----
 <br>
 
-#### Fonte:
+#### Fontes:
 * https://linguagemc.com.br/a-biblioteca-string-h/
 * https://www.tutorialspoint.com/c_standard_library/string_h.htm
 * https://bytes.com/topic/c/answers/485925-difference-between-memcmp-strncmp-functions
