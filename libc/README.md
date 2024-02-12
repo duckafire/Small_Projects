@@ -1,0 +1,29 @@
+# **C** *default* libraries
+
+* [assert](https://github.com/duckafire/Small_Projects/blob/main/libc/assert.md)
+* complex
+* [ctype](https://github.com/duckafire/Small_Projects/blob/main/libc/ctype.md)
+* [errno](https://github.com/duckafire/Small_Projects/blob/main/libc/errno.md)
+* fenv
+* float
+* inttypes
+* iso646
+* limits
+* locale
+* math
+* setjmp
+* signal
+* stdalign
+* stdarg
+* stdatomic
+* stdbool
+* stddef
+* stdint
+* stdio
+* stdlib
+* stdnoreturn
+* [string](https://github.com/duckafire/Small_Projects/blob/main/libc/string.md)
+* tgmath
+* threads
+* time
+* wchar
