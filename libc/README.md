@@ -13,8 +13,8 @@
 * math
 * [setjmp](https://github.com/duckafire/Small_Projects/blob/main/libc/setjmp.md)
 * signal
+* [stdarg](https://github.com/duckafire/Small_Projects/blob/main/libc/stdarg.md)
 * stdalign
-* stdarg
 * stdatomic
 * [stdbool](https://github.com/duckafire/Small_Projects/blob/main/libc/stdbool.md)
 * [stddef](https://github.com/duckafire/Small_Projects/blob/main/libc/stddef.md)

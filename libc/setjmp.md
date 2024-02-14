@@ -26,7 +26,7 @@ os quais são definidos nesta biblioteca, e estão listadas de maneira respectiv
 <br>
 
 ``` c
-#include <stdio.h>  // printf
+#include <stdio.h>  // printf ; getchar
 #include <setjmp.h>
 
 jmp_buf memory;
@@ -59,9 +59,8 @@ int main(){
 	
 	printf("[ END ]\n");
 	
-	printf("\n\n[ Press ENTER ]"); // pause
+	printf("\n\n[ Press ENTER ]"); // paused
 	getchar();
-	
 	return 0;
 }
 ```
