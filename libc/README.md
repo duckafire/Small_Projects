@@ -11,7 +11,7 @@
 * [limits](https://github.com/duckafire/Small_Projects/blob/main/libc/limits.md)
 * locale
 * math
-* setjmp
+* [setjmp](https://github.com/duckafire/Small_Projects/blob/main/libc/setjmp.md)
 * signal
 * stdalign
 * stdarg
