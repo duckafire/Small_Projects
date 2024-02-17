@@ -1,6 +1,4 @@
-libc/console.c
-libc/console.exe
-libc/!template.md
-libc/!template2.md
-libc/!template3.md
-libc/!no_added.md
+lib-c/zzz.c
+lib-c/zzz.exe
+/templates/
+/minesweeper/
