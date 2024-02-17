@@ -6,22 +6,22 @@ Fornece um conjunto de quatro macros e um tipo que podem ser usados, ordenadamen
 
 * void va_start(va_list arg, last_arg)
 	* arg: Uma variável do tipo `va_list`. | last_arg: Última parâmetro antes da lista de argumentos variáveis (`...`), da função a qual ela está sendo usada.
-	* Usos: Inicializa o argumento passado como `arg` para ser posteriormente usado por `va_arg` e `va_end`.
+	* Uso: Inicializa o argumento passado como `arg` para ser posteriormente usado por `va_arg` e `va_end`.
 	* Retorno: Sem retorno.
 
 * type va_arg(va_list arg, type)
 	* arg: Variável inicializada, anteriormente, por `va_start`. | type: Tipo dos valores retornados por esta função.
-	* Usos: Obtém cada um dos valores armazenados em `arg`, um a um, em ordem, a cada chamada. Não consegue indetificar o fim da lista de argumentos, podendo gerar valores imprevisíveis (lixo).
+	* Uso: Obtém cada um dos valores armazenados em `arg`, um a um, em ordem, a cada chamada. Não consegue indetificar o fim da lista de argumentos, podendo gerar valores imprevisíveis (lixo).
 	* Retorno: Cada um dos valores presentes em `arg`, na ordem em que eles são obtidos. Atribuíndo o tipo especificado em `type` a eles.
 
 * void va_end(va_list arg)
 	* arg: Variável inicializada, anteriormente, por `va_start` e (opcionalmente) ultilizada por `va_arg`.
-	* Usos: Finaliza à lista presente na variável passado para `arg`, tornando-a indefinida.
+	* Uso: Finaliza à lista presente na variável passado para `arg`, tornando-a indefinida.
 	* Retorno: Sem retorno.
 	
 * void va_copy(va_list arg1, va_list arg2);
 	* arg1: A variável, do tipo `va_list`, que receberá um novo valor. | arg2: Variável inicializada por `va_start`.
-	* Usos: Copia os valores armazenados em `arg2` para `arg1`.
+	* Uso: Copia os valores armazenados em `arg2` para `arg1`.
 	* Retono: Sem retorno.
 
 ``` c

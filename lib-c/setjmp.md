@@ -7,13 +7,13 @@ os quais são definidos nesta biblioteca, e estão listadas de maneira respectiv
 
 * int setjmp(jmp_buf env)
 	* env: Matriz do tipo `jmp_buf` que será usada para armazenar o ambiente atual.
-	* Usos: Armazena o ambiente atual na matriz especificada como argumento para `env`, para uso posterior por `longjmp`.
+	* Uso: Armazena o ambiente atual na matriz especificada como argumento para `env`, para uso posterior por `longjmp`.
 	* Retorno: 0 caso seja chamada diretamente ou o valor do parâmetro `value`, da função `longjmp`, após o primeiro "salto" (usando a mesma matriz).
 
 * void longjmp(jmp_buf env, int value)
 	* env: Matriz que contém o ambiente salvo (por `setjmp`). | value: Valor que será passado para `jmp_buf` após o primeiro salto. Caso seja 0, o valor passado será 1.
-	* Usos: Restaura o ambiente salvo na matriz especificada como argumento para `env` (oriunda de `setjmp`).
-	* Retorno: Não possui retorno.
+	* Uso: Restaura o ambiente salvo na matriz especificada como argumento para `env` (oriunda de `setjmp`).
+	* Retorno: Sem retorno.
 	
 <br>
 

@@ -35,7 +35,7 @@ Simplifica a manipulação de cadeias de caracteres (`strings`).
 ##### 1
 * void *memchr(const void *str, int c, size_t n);
 	* *str: Um vetor de caracteres ou uma string. | c: Um caractere para "pesquisa/buscar". | n: A quantidade máxima de caracteres que serão verificados.
-	* Usos: Compara todos os caracteres dentro do `*str` com `c`. NÃO irá parar ao encontrar um `\0`.
+	* Uso: Compara todos os caracteres dentro do `*str` com `c`. NÃO irá parar ao encontrar um `\0`.
 	* Retorno: Caso seja encontrado um caracter igual a `c`, retornará um ponteiro para uma string que irá da primeira ocorrência deste caracter até o final da string, caso não seja, retornará ´NULL´.
 	
 ``` c
@@ -61,7 +61,7 @@ int main(){
 ##### 2
 * int memcmp(const void *str1, const void *str2, size_t n);
 	* *str1: Um vetor de caracteres ou uma string. | *str2: Um vetor de caracteres ou um string. | n: A quantidade máxima de caracteres que serão comparados.
-	* Usos: Compara o valor em byte dos primeiros `n` caracteres de duas cadeiras de caracteres. A comparação NÃO é encerada quando um terminador da string (`\0`) é encontrado.
+	* Uso: Compara o valor em byte dos primeiros `n` caracteres de duas cadeiras de caracteres. A comparação NÃO é encerada quando um terminador da string (`\0`) é encontrado.
 	* Retorno: 0 se forem iguais, valor negativo se `str1` for menor que `str2`, ou valor positivo se `str1` for maior que `str2`.
 	
 ``` c
@@ -93,7 +93,7 @@ int main(){
 ##### 3
 * void *memcpy(void *dest, const void *src, size_t n);
 	* *dest: Um vetor de caracteres. | *src: Uma string ou um vetor de caracteres | n: A quantidade máxima de caracteres que serão copiados.
-	* Usos: Copia (ou substinui) os primeira `n` caracteres do primeira vetor pelos primeiros `n` caracteres do segundo vetor (ou string). Não trata corretamente caracteres nulos e pode estourar o limite de caracteres de `*dest`. É incapaz de evitar a sobreposição de memória.
+	* Uso: Copia (ou substinui) os primeira `n` caracteres do primeira vetor pelos primeiros `n` caracteres do segundo vetor (ou string). Não trata corretamente caracteres nulos e pode estourar o limite de caracteres de `*dest`. É incapaz de evitar a sobreposição de memória.
 	* Função: A nova string presente no primeiro vetor. 
 	
 ``` c
@@ -116,7 +116,7 @@ int main(){
 ##### 4
 * void *memmove(void *dest, const void *src, size_t n);
 	* *dest: Um vetor de caracteres. | *src: Uma string ou um vetor de caracteres | n: A quantidade máxima de caracteres que serão copiados.
-	* Usos: Copia (ou substinui) os primeira `n` caracteres do primeira vetor pelos primeiros `n` caracteres do segundo vetor (ou string). Não trata corretamente caracteres nulos e pode estourar o limite de caracteres de `*dest`. Consegue evitar a sobreposição de memória.
+	* Uso: Copia (ou substinui) os primeira `n` caracteres do primeira vetor pelos primeiros `n` caracteres do segundo vetor (ou string). Não trata corretamente caracteres nulos e pode estourar o limite de caracteres de `*dest`. Consegue evitar a sobreposição de memória.
 	* Função: A nova string presente no primeiro vetor. 
 	
 ``` c
@@ -162,7 +162,7 @@ int main(){
 ##### 6
 * char *strcat(char *dest, const char *src);
 	* *dest: Um vetor de caracteres. | *src: Uma string ou um vetor de caracteres.
-	* Usos: Concatena o segundo vetor (ou string) com o primeiro.
+	* Uso: Concatena o segundo vetor (ou string) com o primeiro.
 	* Retorno: Um ponteiro para a nova string presente no primeiro vetor.
 	
 ``` c
@@ -186,7 +186,7 @@ int main(){
 ##### 7
 * char *strncat(char *dest, const char *src, size_t n)
 	* *dest: Um vetor de caracteres. | *src: Uma string ou um vetor de caracteres. | n: A quantidade de caracteres.
-	* Usos: Concatena o segundo vetor (ou string) com o primeiro.
+	* Uso: Concatena o segundo vetor (ou string) com o primeiro.
 	* Retorno: Um ponteiro para a nova string presente no primeiro vetor.
 	
 ``` c
@@ -209,7 +209,7 @@ int main(){
 ##### 8
 * char *strchr(const char *str, int c);
 	* *str: Um vetor de caracteres ou uma string. | c: Um caractere para "pesquisa/buscar".
-	* Usos: Compara todos os caracteres dentro do `*str` com `c`. Irá parar ao encontrar um `\0`.
+	* Uso: Compara todos os caracteres dentro do `*str` com `c`. Irá parar ao encontrar um `\0`.
 	* Retorno: Caso seja encontrado um caracter igual a `c`, retornará um ponteiro para uma string que irá da primeira ocorrência deste caracter até o final da string, caso não seja, retornará ´NULL´.
 	
 ``` c
@@ -235,7 +235,7 @@ int main(){
 ##### 9
 * int strcmp(const char *str1, const char *str2);
 	* *str1: Um vetor de caracteres ou uma string. | *str2: Um vetor de caracteres ou uma string.
-	* Usos: Compara o valor ASCII de duas cadeiras de caracteres.
+	* Uso: Compara o valor ASCII de duas cadeiras de caracteres.
 	* Retorno: 0 se forem iguais, valor negativo se `str1` for menor que `str2`, ou valor positivo se `str1` for maior que `str2`.
 	
 ``` c
@@ -259,7 +259,7 @@ int main(){
 ##### 10
 * int strncmp(const char *str1, const char *str2, size_t);
 	* *str1: Um vetor de caracteres ou uma string. | *str2: Um vetor de caracteres ou uma string. | n: A quantidade máxima de caracteres que serão comparados.
-	* Usos: Compara o valor ASCII dos primeiros `n` caracteres de duas cadeiras de caracteres. A comparação é encerada quando um terminador da string (`\0`) é encontrado.
+	* Uso: Compara o valor ASCII dos primeiros `n` caracteres de duas cadeiras de caracteres. A comparação é encerada quando um terminador da string (`\0`) é encontrado.
 	* Retorno: 0 se forem iguais, <0 se `str1` for menor que `str2`, ou 0> se `str1` for maior que `str2`.
 	
 ``` c
@@ -291,7 +291,7 @@ int main(){
 ##### 11
 * int strcoll(const char *str1, const char *str2);
 	* *str1: Um vetor de caracteres ou uma string. | *str2: Um vetor de caracteres ou uma string.
-	* Usos: Compara o valor ASCII de duas cadeiras de caracteres. Seu resultado depende da configuração `LC_COLLATE` do local.
+	* Uso: Compara o valor ASCII de duas cadeiras de caracteres. Seu resultado depende da configuração `LC_COLLATE` do local.
 	* Retorno: 0 se forem iguais, valor negativo se `str1` for menor que `str2`, ou valor positivo se `str1` for maior que `str2`.
 	
 ``` c
@@ -315,7 +315,7 @@ int main(){
 ##### 12
 * char *strcpy(char *dest, const char *src);
 	* *dest: Um vetor de caracteres. | *src: Uma string ou um vetor de caracteres.
-	* Usos: Copia todo o conteúdo do segundo vetor (ou string) para dentro do primeiro vetor, substituindo todo o seu conteúdo anterior no processo.
+	* Uso: Copia todo o conteúdo do segundo vetor (ou string) para dentro do primeiro vetor, substituindo todo o seu conteúdo anterior no processo.
 	* Função: Um ponteiro para a nova string presente no primeiro vetor.
 	
 ``` c
@@ -338,7 +338,7 @@ int main(){
 ##### 13
 * char *strncpy(char *dest, const char *src, size_t n);
 	* *dest: Um vetor de caracteres. | *src: Uma string ou um vetor de caracteres | n: A quantidade máxima de caracteres que serão copiados.
-	* Usos: Copia (ou substinui) os primeira `n` caracteres do primeira vetor pelos primeiros `n` caracteres do segundo vetor (ou string). Adiciona `\0` a espaços vazios em `*dest` (caso existam) e respeita seu limite de caracteres (não o estoura).
+	* Uso: Copia (ou substinui) os primeira `n` caracteres do primeira vetor pelos primeiros `n` caracteres do segundo vetor (ou string). Adiciona `\0` a espaços vazios em `*dest` (caso existam) e respeita seu limite de caracteres (não o estoura).
 	* Função: Um ponteiro para a nova string presente no primeiro vetor. 
 	
 ``` c
@@ -414,7 +414,7 @@ int main(){
 ##### 16
 * size_t strlen(const char *str);
 	* *str: Um vetor de caracteres ou uma string.
-	* Usos: Calcula a quantidade de caracteres que o vetor especificado possui.
+	* Uso: Calcula a quantidade de caracteres que o vetor especificado possui.
 	* Retorna: A quantidade de caracteres.
 	
 ``` c
@@ -437,7 +437,7 @@ int main(){
 ##### 17
 * char *strpbrk(const char *str1, const char str2);
 	* *str: Um vetor de caracteres ou uma string. | c: Um caractere para "pesquisa/buscar".
-	* Usos: Compara todos os caracteres dentro do `*str1` com todos os caracteres dentro do `str2`. Irá para ao encontrar `\0` em `*str1` e iguinorará `\0` caso encontre-o em `*str2`, não comparando ele.
+	* Uso: Compara todos os caracteres dentro do `*str1` com todos os caracteres dentro do `str2`. Irá para ao encontrar `\0` em `*str1` e iguinorará `\0` caso encontre-o em `*str2`, não comparando ele.
 	* Retorno: Caso seja encontrado um caracter igual a `c`, retornará um ponteiro para uma string que irá do deste caracter até o final da string, caso não seja, retornará ´NULL´.
 	
 ``` c
@@ -461,7 +461,7 @@ int main(){
 ##### 18
 * char *strrchr(const char *str, int c);
 	* *str: Um vetor de caracteres ou uma string. | c: Um caractere para "pesquisa/buscar".
-	* Usos: Compara todos os caracteres dentro do `*str` com `c`. Irá parar ao encontrar um `\0`.
+	* Uso: Compara todos os caracteres dentro do `*str` com `c`. Irá parar ao encontrar um `\0`.
 	* Retorno: Caso seja encontrado um caracter igual a `c`, retornará um ponteiro para uma string que irá da última ocorrência deste caracter até o final da string, caso não seja, retornará ´NULL´.
 	
 ``` c
@@ -484,7 +484,7 @@ int main(){
 ##### 19
 * size_t strspn(const char *str1, const char *str2);
 	* *str1: Um vetor de caracteres ou string. | *str2: Um vetor de caracteres ou string.
-	* Usos: Compara (da esquerda para a direita) cada um dos caracteres de cada string de maneira equivalente (0-0, 1-1, ..., n--n) e para quando encontra um par diferente.
+	* Uso: Compara (da esquerda para a direita) cada um dos caracteres de cada string de maneira equivalente (0-0, 1-1, ..., n--n) e para quando encontra um par diferente.
 	* Retorno: A quantidade de caracteres iguais.
 	
 ``` c
@@ -507,7 +507,7 @@ int main(){
 ##### 20
 * char *strstr(const char *haytack, const char *needle);
 	* *haytack: Um vetor de caracteres ou string para efetuar uma busca. | *needle: Um vetor ou string para ser buscado dentro de `*haytack`.
-	* Usos: Busca em `*haystack` um fragmento/sub-string que seja igual a `*needle`.
+	* Uso: Busca em `*haystack` um fragmento/sub-string que seja igual a `*needle`.
 	* Retorno: Caso seja encontrado um caracter igual a `c`, retornará um ponteiro para a primeira ocorrência deste fragmento/sub-string, caso não seja, retornará ´NULL´.
 	
 ``` c
@@ -529,7 +529,7 @@ int main(){
 ##### 21
 * char *strtok(char *str, const char *delim);
 	* *str: Um vetor de caracteres ou string para ser dividido (use `NULL` caso queira continuar dividindo o vetor dividido anteriormente). | *delim: Um vetor ou string para delimitar as divisões de `*str` (quando ele será dividido).
-	* Usos: Divide `*str` sempre que um caracter igual a `delim` é encontrado nele.
+	* Uso: Divide `*str` sempre que um caracter igual a `delim` é encontrado nele.
 	* Retorno: Caso seja encontrado um caracter igual a `c`, retornará um ponteiro para esse fragmento retirado, caso não seja, retornará ´NULL´.
 	
 ``` c
@@ -556,7 +556,7 @@ int main(){
 ##### 22
 * size_t strxfrm(char *dest, const char *src, size_t n);
 	* *dest: Um vetor de caracteres. | *src: Um vetor 
-	* Usos: Transforma os primeiros `n` caracteres de `*src` em localidade atual e os coloca em `*dest`.
+	* Uso: Transforma os primeiros `n` caracteres de `*src` em localidade atual e os coloca em `*dest`.
 	* Retorno: O comprimento da nova cadeia de caracteres.
 	
 ``` c

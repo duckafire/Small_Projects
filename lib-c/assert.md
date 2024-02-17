@@ -8,7 +8,8 @@ Possui uma função que verifica expressões booleanas.
 
 * void **assert**(int expr);
 	* expr: Expressão (booleana).
-	* Verificar a validade de uma expressão durante a execução do programa. Encerra o programa e gera um erro caso a expressão passada seja falsa.
+	* Uso: Verificar a validade de uma expressão durante a execução do programa. Encerra o programa e gera um erro caso a expressão passada seja falsa.
+	* Retorno: Sem retorno.
 	
 ``` c
 #include <assert.h>
