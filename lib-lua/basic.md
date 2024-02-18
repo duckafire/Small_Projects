@@ -230,17 +230,14 @@ call()
 -----
 <br>
 
-###### 1
-* type name(type parameter1, type parameter2)
-	* parameter1: blank. | parameter2: blank.
-	* Uso: Blank.
-	* Retorno: Blank.
+###### 8
+* 
+	* 
+	* Uso:
+	* Retorno:
 
-``` c
-int main(){
-	
-	return 0;
-}
+``` lua
+
 ```
 
 <br>
@@ -250,17 +247,14 @@ int main(){
 -----
 <br>
 
-###### 1
-* type name(type parameter1, type parameter2)
-	* parameter1: blank. | parameter2: blank.
-	* Uso: Blank.
-	* Retorno: Blank.
+###### 9
+* 
+	* 
+	* Uso:
+	* Retorno:
 
-``` c
-int main(){
-	
-	return 0;
-}
+``` lua
+
 ```
 
 <br>
@@ -270,17 +264,14 @@ int main(){
 -----
 <br>
 
-###### 1
-* type name(type parameter1, type parameter2)
-	* parameter1: blank. | parameter2: blank.
-	* Uso: Blank.
-	* Retorno: Blank.
+###### 10
+* 
+	* 
+	* Uso:
+	* Retorno:
 
-``` c
-int main(){
-	
-	return 0;
-}
+``` lua
+
 ```
 
 <br>
@@ -290,17 +281,14 @@ int main(){
 -----
 <br>
 
-###### 1
-* type name(type parameter1, type parameter2)
-	* parameter1: blank. | parameter2: blank.
-	* Uso: Blank.
-	* Retorno: Blank.
+###### 11
+* 
+	* 
+	* Uso:
+	* Retorno:
 
-``` c
-int main(){
-	
-	return 0;
-}
+``` lua
+
 ```
 
 <br>
@@ -310,17 +298,14 @@ int main(){
 -----
 <br>
 
-###### 1
-* type name(type parameter1, type parameter2)
-	* parameter1: blank. | parameter2: blank.
-	* Uso: Blank.
-	* Retorno: Blank.
+###### 12
+* 
+	* 
+	* Uso:
+	* Retorno:
 
-``` c
-int main(){
-	
-	return 0;
-}
+``` lua
+
 ```
 
 <br>
@@ -330,17 +315,14 @@ int main(){
 -----
 <br>
 
-###### 1
-* type name(type parameter1, type parameter2)
-	* parameter1: blank. | parameter2: blank.
-	* Uso: Blank.
-	* Retorno: Blank.
+###### 13
+* 
+	* 
+	* Uso:
+	* Retorno:
 
-``` c
-int main(){
-	
-	return 0;
-}
+``` lua
+
 ```
 
 <br>
@@ -350,17 +332,14 @@ int main(){
 -----
 <br>
 
-###### 1
-* type name(type parameter1, type parameter2)
-	* parameter1: blank. | parameter2: blank.
-	* Uso: Blank.
-	* Retorno: Blank.
+###### 14
+* 
+	* 
+	* Uso:
+	* Retorno:
 
-``` c
-int main(){
-	
-	return 0;
-}
+``` lua
+
 ```
 
 <br>
@@ -370,17 +349,14 @@ int main(){
 -----
 <br>
 
-###### 1
-* type name(type parameter1, type parameter2)
-	* parameter1: blank. | parameter2: blank.
-	* Uso: Blank.
-	* Retorno: Blank.
+###### 15
+* 
+	* 
+	* Uso:
+	* Retorno:
 
-``` c
-int main(){
-	
-	return 0;
-}
+``` lua
+
 ```
 
 <br>
@@ -390,17 +366,14 @@ int main(){
 -----
 <br>
 
-###### 1
-* type name(type parameter1, type parameter2)
-	* parameter1: blank. | parameter2: blank.
-	* Uso: Blank.
-	* Retorno: Blank.
+###### 16
+* 
+	* 
+	* Uso:
+	* Retorno:
 
-``` c
-int main(){
-	
-	return 0;
-}
+``` lua
+
 ```
 
 <br>
@@ -410,17 +383,14 @@ int main(){
 -----
 <br>
 
-###### 1
-* type name(type parameter1, type parameter2)
-	* parameter1: blank. | parameter2: blank.
-	* Uso: Blank.
-	* Retorno: Blank.
+###### 17
+* 
+	* 
+	* Uso:
+	* Retorno:
 
-``` c
-int main(){
-	
-	return 0;
-}
+``` lua
+
 ```
 
 <br>
@@ -430,17 +400,14 @@ int main(){
 -----
 <br>
 
-###### 1
-* type name(type parameter1, type parameter2)
-	* parameter1: blank. | parameter2: blank.
-	* Uso: Blank.
-	* Retorno: Blank.
+###### 18
+* 
+	* 
+	* Uso:
+	* Retorno:
 
-``` c
-int main(){
-	
-	return 0;
-}
+``` lua
+
 ```
 
 <br>
@@ -450,17 +417,14 @@ int main(){
 -----
 <br>
 
-###### 1
-* type name(type parameter1, type parameter2)
-	* parameter1: blank. | parameter2: blank.
-	* Uso: Blank.
-	* Retorno: Blank.
+###### 19
+* 
+	* 
+	* Uso:
+	* Retorno:
 
-``` c
-int main(){
-	
-	return 0;
-}
+``` lua
+
 ```
 
 <br>
@@ -470,17 +434,14 @@ int main(){
 -----
 <br>
 
-###### 1
-* type name(type parameter1, type parameter2)
-	* parameter1: blank. | parameter2: blank.
-	* Uso: Blank.
-	* Retorno: Blank.
+###### 20
+* 
+	* 
+	* Uso:
+	* Retorno:
 
-``` c
-int main(){
-	
-	return 0;
-}
+``` lua
+
 ```
 
 <br>
@@ -490,17 +451,14 @@ int main(){
 -----
 <br>
 
-###### 1
-* type name(type parameter1, type parameter2)
-	* parameter1: blank. | parameter2: blank.
-	* Uso: Blank.
-	* Retorno: Blank.
+###### 21
+* 
+	* 
+	* Uso:
+	* Retorno:
 
-``` c
-int main(){
-	
-	return 0;
-}
+``` lua
+
 ```
 
 <br>
@@ -510,17 +468,14 @@ int main(){
 -----
 <br>
 
-###### 1
-* type name(type parameter1, type parameter2)
-	* parameter1: blank. | parameter2: blank.
-	* Uso: Blank.
-	* Retorno: Blank.
+###### 22
+* 
+	* 
+	* Uso:
+	* Retorno:
 
-``` c
-int main(){
-	
-	return 0;
-}
+``` lua
+
 ```
 
 <br>
