@@ -1,4 +1,4 @@
-lib-c/zzz.c
-lib-c/zzz.exe
+libs/c/zzz.c
+libs/c/zzz.exe
 /templates/
 /minesweeper/

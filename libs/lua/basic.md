@@ -221,7 +221,7 @@ table "_tbl address"
 ``` lua
 local txt = "return 'Hello World!'"
 local lTxt = load(txt)
-print(lTxt()) -- Hello World1
+print(lTxt()) -- Hello World!
 
 local global = {
 	add = 12,
