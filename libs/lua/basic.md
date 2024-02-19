@@ -26,7 +26,8 @@ Oferece uma série de funções báscias para usos diversos e essenciais.
 * [tonumber](#19)
 * [tostring](#20)
 * [type](#21)
-* [xpcall](#22)
+* [warn](#22)
+* [xpcall](#23)
 
 <br>
 
@@ -460,10 +461,16 @@ a, b, c = select(-1,  9, 8, 7) -- 7, 8, 9
 ``` lua
 local tbl = {}
 
-setmetatable(tbl, {__call = function() return "Hello World!" end})
-tbl() -- Hello World!
+setmetatable(tbl, {__call = function() return "Hello World!" end})-- add __call
+local txt = tbl()) -- txt = "Hello World!"
 
-setmetatable(tbl, nil) -- remove: __call
+setmetatable(tbl, {__add  = function(...) local temp = {...} return 20 + temp[2] end}) -- remove __call and add __add
+local add = tbl + 5 -- add = 20 + 5
+
+setmetatable(tbl, nil) -- remove: __add
+
+setmetatable(tbl, {__metatable = function() return "__metatable" end}) -- add __call
+setmetatable(tbl, {__call = function() return "Hello World!" end}) -- generates an error
 ```
 
 <br>
@@ -494,13 +501,21 @@ tonumber("88", 15) -- 128
 <br>
 
 ###### 20
-* 
-	* 
-	* Uso:
-	* Retorno:
+* tostring(value)
+	* value: Valor de qualquer tipo.
+	* Uso: Converte `value` em uma cadeia de caracteres, mas caso `value` possua um campo `__tostring`, ele será chamado com `value` como argumento.
+	* Retorno: Uma cadeia de caracteres convertida ou o returno de `__tostring` (caso este campo esteja presente em `value`).
 
 ``` lua
+tostring(true) -- "true"
+tostring(1234) -- "1234"
 
+local value, qtt = {}
+setmetatable(value, {__tostring = function(Self) return #Self end})
+qtt = tostring(value) -- qtt = 0
+
+for i = 1, 5 do value[i] = i end
+qtt = tostring(value) -- qtt = 5
 ```
 
 <br>
@@ -511,8 +526,30 @@ tonumber("88", 15) -- 128
 <br>
 
 ###### 21
-* 
-	* 
+* type(value)
+	* value: Valor de qualquer tipo.
+	* Uso: Obtem o tipo de `value`.
+	* Retorno: O tipo de `value` em formato de string (podendo ser "nil", "number", "string", "boolean", "table", "function", "thread" ou "userdata").
+
+``` lua
+local str, num, boo = 1, "a", false
+local tStr, tNum, tBoo
+
+tStr = type(str) -- "number"
+tNum = type(num) -- "string"
+tBoo = type(boo) -- "boolean"
+```
+
+<br>
+
+-----
+* ###### [Para o topo](#basic)
+-----
+<br>
+
+###### 22
+* warn(...)
+	* (...): Uma quantidade não definida de strings.
 	* Uso:
 	* Retorno:
 
@@ -527,7 +564,7 @@ tonumber("88", 15) -- 128
 -----
 <br>
 
-###### 22
+###### 23
 * 
 	* 
 	* Uso:
