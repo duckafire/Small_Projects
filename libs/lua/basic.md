@@ -221,7 +221,7 @@ table "_tbl address"
 ``` lua
 local txt = "return 'Hello World!'"
 local lTxt = load(txt)
-print(lTxt()) -- Hello World!
+local nTxt = lTxt() -- nTxt = "Hello World!"
 
 local global = {
 	add = 12,
@@ -231,7 +231,7 @@ local global = {
 }
 
 local calculation = load("return ((18 + add) // div + (sub - (sub * mlt)) / div) * mlt ", nil, nil, global)
-print(calculation()) -- 49.2
+calculation() -- 49.2
 ```
 
 <br>
@@ -251,7 +251,7 @@ print(calculation()) -- 49.2
 -- FILE ONE (main)
 
 local file = loadfile("example.lua")
-print(file()) -- Hello World
+local txt = file() -- txt = "Hello World!"
 ```
 
 ``` lua
@@ -279,8 +279,8 @@ local tbl = {9, 8, 7, 6, 5, 4, 3, 2, 1}
 
 local i, v = next(tbl, 6)
 
-print(i) -- 7 (- 1 = 6[i] -> 3[v])
-print(v) -- 2
+-- i = 7 (- 1 = 6[i] -> 3[v])
+-- v = 2
 ```
 
 <br>
@@ -302,7 +302,7 @@ local tbl = {[4] = 9, [7] = 8, [13] = 7}
 for i, v in pairs(tbl) do print(i.." "..v) end-- 4 9 |-| 13 7 |-| 7 8
 
 setmetatable(tbl, {__pairs = function(t) print("Hello World!") end})
-pairs(tbl)-- Hello World
+pairs(tbl)-- Hello World!
 ```
 
 <br>
@@ -313,13 +313,24 @@ pairs(tbl)-- Hello World
 <br>
 
 ###### 11
-* 
-	* 
-	* Uso:
-	* Retorno:
+* pcall(func, [arg])
+	* func: A função que será chamda. | Os argumentos que serão atribuídos a `func`.
+	* Uso: Chama a `func` em "modo protegido", ou seja, caso haja algum erro em `func` ele não parará o programa e nem será imprimido no console.
+	* Retorno: `true` e os possíveis retornos de `func` caso não haja nenhum erro em na mesma, caso contrário, retornará `false` e um erro.
 
 ``` lua
+local function add(a, b)
+	return a + b, a - b
+end
 
+local func, erro = pcall(add, 1, false)
+-- func = false
+-- erro = main.lua:2: attempt to perform arithmetic on a boolean value (local 'b')
+
+local fun2, rtn1, rtn2 = pcall(add, 2, 3)
+-- fun2 = true
+-- rtn1 = 5
+-- rtn2 = -1
 ```
 
 <br>
@@ -330,13 +341,14 @@ pairs(tbl)-- Hello World
 <br>
 
 ###### 12
-* 
-	* 
-	* Uso:
-	* Retorno:
+* print(...)
+	* (...): Valores para serem imprimidos no console.
+	* Uso: Imprime todos os seus argumentos no console, de maneira **não formatada**. Argumentos diferentes, quando imprimidos, são separados por uma tabulação.
+	* Retorno: Sem retorno.
 
 ``` lua
-
+print("Hello World!") -- Hello World!
+print(1, 2, 3, 4, 5)  -- 1    2    3    4    5
 ```
 
 <br>
@@ -347,13 +359,14 @@ pairs(tbl)-- Hello World
 <br>
 
 ###### 13
-* 
-	* 
-	* Uso:
-	* Retorno:
+* rawequal(v1, v2)
+	* v1: Valor que será comparado com `v2`. | v2: Valor que será comparado com `v1`.
+	* Uso: Verifica se dois valores são iguais, sem chamar o metamétodo `__eq`.
+	* Retorno: `true` caso sejam iguais ou `false` caso contrário.
 
 ``` lua
-
+rawequal(1,   1) -- true
+rawequal(1, "1") -- false
 ```
 
 <br>
@@ -364,13 +377,14 @@ pairs(tbl)-- Hello World
 <br>
 
 ###### 14
-* 
-	* 
-	* Uso:
-	* Retorno:
+* rawget(tbl, id)
+	* tbl: Um tabela. | id: Um índice numérico de `tbl`.
+	* Uso: Obtem o valor armazenado no índice `id` de `tbl`, sem chamar o metamétodo `__index`.
+	* Retorno: O valor obtido.
 
 ``` lua
-
+local tbl = {9, 8, 7, 6, 5}
+rawget(tbl, 2) -- 8
 ```
 
 <br>
@@ -381,13 +395,14 @@ pairs(tbl)-- Hello World
 <br>
 
 ###### 15
-* 
-	* 
-	* Uso:
-	* Retorno:
+* rawlen(tbl_string)
+	* tbl_string: Uma tabela ou cadeia de caracteres.
+	* Uso: Retorno o comprimento de `tbl_string`, sem chama o metamétodo `__leg`.
+	* Retorno: O comprimento de `tbl_string`.
 
 ``` lua
-
+rawlen("Hello World!") -- 12
+rawlen({9, 8, 7, 6})   -- 4
 ```
 
 <br>
@@ -398,13 +413,14 @@ pairs(tbl)-- Hello World
 <br>
 
 ###### 16
-* 
-	* 
-	* Uso:
-	* Retorno:
+* rawset(tbl, id, newValue)
+	* tbl: Um tabela. | id: Um índice numérico de `tbl`. | newValue: Um novo valor para `tbl[id]`.
+	* Uso: Atribui `newValue` para o índice `id` de `tbl`, sem chamar o metamétodo `__newindex`.
+	* Retorno: `tbl`, com seu índice (`id`) alterado.
 
 ``` lua
-
+local tbl = {9, 8, 7, 6, 5}
+rawset(tbl, 2, 12) -- tbl[2] = 12
 ```
 
 <br>
@@ -415,13 +431,17 @@ pairs(tbl)-- Hello World
 <br>
 
 ###### 17
-* 
-	* 
-	* Uso:
-	* Retorno:
+* select(id, ...)
+	* id: Um valor numérico (ou `"#"`). | (...): .
+	* Uso: Retorna valores de acordo com o valor de `id`.
+	* Retorno: Todos os argumentos em `...`, de `id` até último (da esquerda para a direta, caso seja positivo, ou da direita para a esquerda,c aso contrário). Caso seja `id` igual a `"#"` retornará a quantidade de argumentos em `...`.
 
 ``` lua
+local a, b, c
 
+a, b, c = select("#", 9, 8, 7) -- 3, nil, nil
+a, b, c = select( 1,  9, 8, 7) -- 9, 8, 7
+a, b, c = select(-1,  9, 8, 7) -- 7, 8, 9
 ```
 
 <br>
@@ -432,13 +452,18 @@ pairs(tbl)-- Hello World
 <br>
 
 ###### 18
-* 
-	* 
-	* Uso:
-	* Retorno:
+* setmetatable(tbl, mtbl)
+	* tbl: Uma tabela. | mtbl: Uma metatabela.
+	* Uso: Atribui `mtbl` como uma metatabela para `tbl`. Caso `mtbl` for `nil`, removerá a metatabela de `tbl`. Caso `tbl` tenha uma campo `__metatable`, gerará um erro.
+	* Retorno: `tbl`.
 
 ``` lua
+local tbl = {}
 
+setmetatable(tbl, {__call = function() return "Hello World!" end})
+tbl() -- Hello World!
+
+setmetatable(tbl, nil) -- remove: __call
 ```
 
 <br>
@@ -449,13 +474,16 @@ pairs(tbl)-- Hello World
 <br>
 
 ###### 19
-* 
-	* 
-	* Uso:
-	* Retorno:
+* tonumber(value, [base])
+	* value: Valor que será convertido. | base: Usada para a conversão (qualquer valor entre 2-36; 10 por padrão).
+	* Uso: Converte `value` para número, caso ele seja uma string válida (contendo apenas números).
+	* Retorno: O valor convertido, ou `nil`, caso não seja possível converter `value`.
 
 ``` lua
-
+tonumber("1")  -- 1
+tonumber("a")  -- nil
+tonumber(0xda) -- 218
+tonumber("88", 15) -- 128
 ```
 
 <br>
