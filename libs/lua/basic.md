@@ -1,8 +1,8 @@
 # Basic
-Oferece uma série de funções báscias para usos diversos e essenciais.
+Oferece duas variáveis globais e uma série de funções báscias para usos diversos e essenciais.
 
-> _G: **Variável global** que armazena o ambiente global. LUA não usa essa variável em sim; Alterar seu valor não afeta nenhum ambiente, e vice-versa.
-> _VERSION: **Variável global** que possui o valor do interpretador LUA em execução.
+> _G: **Variável global** que armazena o ambiente global. LUA não usa essa variável em sim; Alterar seu valor não afeta nenhum ambiente, e vice-versa. <br>
+> _VERSION: **Variável global** que possui a versão do interpretador LUA em execução.
 
 ## Funções
 * [assert](#1)
@@ -39,13 +39,13 @@ Oferece uma série de funções báscias para usos diversos e essenciais.
 ###### 1
 * assert(exp, [msg])
 	* exp: Expressão booleana. | msg: Mensagem de erro customizada ("assertion failed!" por padrão).
-	* Uso: Verifica se `exp` é verdadeiro, caso não, interrompe o programa e imprime a mensagem espeficada em `msg` no console.
+	* Uso: Verifica se `exp` é verdadeiro, caso não, interrompe o programa e imprime a mensagem espeficada, em `msg`, no console.
 	* Retorno: Sem retorno.
 
 ``` lua
 assert(true, ">>> Program end <<<")-- not stop the program
 
-assert(false, ">>> Program end <<<")-- stop the program
+assert(0 < 0, ">>> Program end <<<")-- stop the program
 ```
 
 <br>
@@ -57,19 +57,19 @@ assert(false, ">>> Program end <<<")-- stop the program
 
 ###### 2
 * collectgarbage([action], [arg])
-	* action: A ação que será executada pelo coletor de lixo. | arg: Valor opcional, requerido por (algumas ações): `step`
+	* action: A ação que será executada pelo coletor de lixo. | arg: Valor opcional, requerido por (algumas ações): `step`.
 	* Uso: Permiti ordenar que o coletor de lixo execute uma deteminada ação.
 	* Retorno: Apenas as ações `count`, `step` geram retorno(s).
 
 | Ação         | Descrição |
 | :-:          | :-:       |
 | collect      | Realiza um ciclo de coleta (padrão) |
-| stop         | Para a coleta automatica |
+| stop         | Interrompe a coleta automatica |
 | restart      | Reinicia a execução da coleta automática |
 | count        | Permite retorna a memória total em uso (em `Kbytes`). |
-| step         | Executa um passo da coleta de lixo. Seu "tamanho" é controlado por `arg`, onde `0` executará uma etapa básica (indivisível) e, caso seja diferente de `0`, o coletor tratará esse valor como se fosse uma quantidade de memória (em `Kbytes`) em uso. Permite o retorno de `true`, caso a etapa conclua um ciclo de coleta. |
+| step         | Executa um passo da coleta de lixo. Seu "tamanho" é controlado por `arg`, e caso seja `0` executará uma etapa básica (indivisível), caso contrário, o coletor tratará esse valor como se fosse uma quantidade de memória (em `Kbytes`) em uso. Permite o retorno de `true`, caso a etapa conclua um ciclo de coleta. |
 | isrunning    | Permite retornar `true` caso o coletor esteja em execução. |
-| incremental  | Altera o modo do coletor para *incremental*. Esa configuração pode ser seguida por três números (`arg`, `arg2` e `arg3`): O intervalo entre os ciclos (pausa), o multiplicador de passos e o tamanho do degrau (´0´ = valor não alterado; [sobre](https://lua.org/manual/5.4/manual.html#2.5.1 "Coleta Incremental")) |
+| incremental  | Altera o modo do coletor para *incremental*. Essa configuração pode ser seguida por três números (`arg`, `arg2` e `arg3`): O intervalo entre os ciclos (pausa), o multiplicador de passos e o tamanho do degrau (´0´ = valor não alterado; [sobre](https://lua.org/manual/5.4/manual.html#2.5.1 "Coleta Incremental")) |
 | generational | Altera o modo do coletor para *geracional*. Essa configuração pode ser seguida por dois números (`arg` e `arg2`): O multiplicador menor e o maior (do coletor de lixo; ´0´ = valor não alterado; [sobre](https://lua.org/manual/5.4/manual.html#2.5.2 "Coleta Geracional")). |
 
 <br>
@@ -88,11 +88,10 @@ assert(false, ">>> Program end <<<")-- stop the program
 ``` lua
 -- FILE ONE (main)
 
-local txt, txt2 = dofile("call.lua")
-
 print("[ CONSOLE ]\n")
-print(txt..txt2)
 
+local txt, txt2 = dofile("call.lua")
+print(txt..txt2)
 ```
 
 ``` lua
@@ -145,7 +144,7 @@ end
 * getmetatable(object)
 	* object: Uma metatabela (`metatable`).
 	* Uso: Verifica se o objeto possui alguma metatabela.
-	* Retorno: caso `object` possua uma metatabela, retornará o endereço de memória da mesma, caso não, retornará o valor de `object` (seu endereço, caso seja uma função ou tabela).
+	* Retorno: caso `object` possua uma metatabela, retornará o endereço de memória da mesma, caso não, retornará seu endereço de memória, mas caso `object` não seja uma tabela, retornará `nil`.
 
 ``` lua
 local a = {}
@@ -155,16 +154,6 @@ local c = setmetatable(b, a)-- "a" is the metatable of "c"
 
 print(a)               -- table: "a address"
 print(getmetatable(c)) -- table: "a address"
-
-local d = {}
-local e
-local f = function() end
-local g = 1
-
-print(d) -- table: "d adress"
-print(e) -- nil
-print(f) -- function: "f address"
-print(g) -- 1
 ```
 
 <br>
@@ -176,9 +165,9 @@ print(g) -- 1
 
 ###### 6
 * ipairs(tbl)
-	* tbl: Uma tabela.
+	* tbl: Uma tabela, preferencialmente, com índices numéricos ordenados.
 	* Uso: Intera entre os pares índice-valor de `tbl`, até o primeiro índice ausente. Comumente usada para percorrer tabelas com índices númericos ordenados, com `for`.
-	* Retorno: Uma função interadora, `tbl` e `0`.
+	* Retorno: Uma função interadora, a tabela usada em `tbl` e `0`.
 
 ``` lua
 print("[ CONSOLE ]")
@@ -216,7 +205,7 @@ table "_tbl address"
 ###### 7
 * load(ld, [source], [mode], [env])
 	* ld: Uma cadeira de caracteres. | source: Uma cadeia de caracteres, usada para mensagens de erro e depuração (`ld` ou ´"=(load)" por padrão´). | mode: Especifica o modo de compilação, onde `t` (padrão) trata códigos como texto (string) e `b` trata como binário. | env: Tabela que conterá o ambiente global, ou seja, se alguma variável "global" for solicitada, por algo presente em `ld`, os valores presentes nesta tabela serão usados.
-	* Uso: Carrega/compila/interpreta `ld` como código LUA, de acordo com `mode`. É úil para carregar arquivos externos, já que os mesmos são "lidos/carregados" em formato de string. Códigos binários malformados geram erros apropriados; entretanto LUA não verifica sua consistência; A execução de código de bytes criado com códigos maliciosos pode travar o interpretador.
+	* Uso: Carrega/compila/interpreta `ld` como código LUA, de acordo com `mode`. É úil para carregar arquivos externos, já que os mesmos são "lidos/carregados" em formato de string. Códigos binários malformados geram erros apropriados; entretanto LUA não verifica sua consistência; A execução de códigos de `bytes` criado com códigos maliciosos pode travar o interpretador.
 	* Retorno: Uma função caso a compilação seja bem suscedida ou `nil` caso não seja.
 
 ``` lua
@@ -231,7 +220,8 @@ local global = {
 	div = 5,
 }
 
-local calculation = load("return ((18 + add) // div + (sub - (sub * mlt)) / div) * mlt ", nil, nil, global)
+local code = "return ((18 + add) // div + (sub - (sub * mlt)) / div) * mlt"
+local calculation = load(code, nil, nil, global)
 calculation() -- 49.2
 ```
 
@@ -245,8 +235,8 @@ calculation() -- 49.2
 ###### 8
 * loadfile([file_name], [mode], [env])
 	* file_name: Nome do arquivo que contém o conteúdo a ser interpretado. | mode: Especifica o modo de compilação, onde `t` (padrão) trata códigos como texto (string) e `b` trata como binário. | env: Tabela que conterá o ambiente global.
-	* Uso: Funciona da mesma maneira que `[load](#7)`, mas exige (opconalmente) um arquivo ao invés de uma string.
-	* Retorno: Iguais aos de `[load](#7)`.
+	* Uso: Funciona da mesma maneira que [`load`](#7), mas exige (opconalmente) um arquivo ao invés de uma string.
+	* Retorno: Uma função caso a compilação seja bem suscedida ou `nil` caso não seja..
 
 ``` lua
 -- FILE ONE (main)
