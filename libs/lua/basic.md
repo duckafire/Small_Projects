@@ -317,7 +317,7 @@ pairs(tbl)-- Hello World!
 * pcall(func, [arg])
 	* func: A função que será chamda. | Os argumentos que serão atribuídos a `func`.
 	* Uso: Chama a `func` em "modo protegido", ou seja, caso haja algum erro em `func` ele não parará o programa e nem será imprimido no console.
-	* Retorno: `true` e os possíveis retornos de `func` caso não haja nenhum erro em na mesma, caso contrário, retornará `false` e um erro.
+	* Retorno: `true` e os possíveis retornos de `func` caso não haja nenhum erro na mesma, caso contrário, retornará `false` e um erro.
 
 ``` lua
 local function add(a, b)
@@ -549,12 +549,15 @@ tBoo = type(boo) -- "boolean"
 
 ###### 22
 * warn(...)
-	* (...): Uma quantidade não definida de strings.
-	* Uso:
-	* Retorno:
+	* (...): Uma quantidade não definida de strings. Por convensão, mensganens de peça única, que comecem com `@`, são destinadas ao próprio sistema de alerta.
+	* Uso: Imprime um aviso no console, semelhante a uma mensagem de erro, mas que não interrompe o programa. Chamá-la com `@on` (re)inicia a emissão de avisos, e `@off` à desativa.
+	* Retorno: Sem retorno.
 
 ``` lua
-
+warn("@on")
+warn("Hello", " ", "World", "!") -- Lua warning: Hello World!
+warn("@off")
+warn("No print", ":(")
 ```
 
 <br>
@@ -565,13 +568,28 @@ tBoo = type(boo) -- "boolean"
 <br>
 
 ###### 23
-* 
-	* 
-	* Uso:
-	* Retorno:
+* xpcall(func, erro, [arg])
+	* func: A função que será chamda. | erro: Função que será chamada caso `func` possua algum erro. | arg: Os argumentos que serão atribuídos a `func`.
+	* Uso: Semelhantemente a `pcall`, esta chama `func` em modo protegido, mas, caso haja algum erro, ela chamará `erro`, com a mensagem de erro como parâmetro.
+	* Retorno: `true` e os possíveis retornos de `func` caso não haja nenhum erro na mesma, caso contrário, retornará o retorno de `erro` (que usará a mensagem de erro como primeiro argumento; caso existente) e `false`.
 
 ``` lua
+local function add(a, b)
+	return a + b, a - b
+end
 
+local function ifErrror(msg)
+	return "THE ERROR IS: "..msg)
+end
+
+local func, erro = xpcall(add, ifErrror, 1, false)
+-- func = false
+-- erro = THE ERROR IS: main.lua:2: attempt to perform arithmetic on a boolean value (local 'b')
+
+local fun2, rtn1, rtn2 = xpcall(add, 2, 3)
+-- fun2 = true
+-- rtn1 = 5
+-- rtn2 = -1
 ```
 
 <br>
