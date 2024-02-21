@@ -43,9 +43,9 @@ Oferece duas variáveis globais e uma série de funções báscias para usos div
 	* Retorno: Sem retorno.
 
 ``` lua
-assert(true, ">>> Program end <<<")-- not stop the program
+assert(true, ">>> Program end <<<") -- not stop the program
 
-assert(0 < 0, ">>> Program end <<<")-- stop the program
+assert(0 < 0, ">>> Program end <<<") -- stop the program
 ```
 
 <br>
@@ -150,7 +150,7 @@ end
 local a = {}
 a.__index = a
 local b = {}
-local c = setmetatable(b, a)-- "a" is the metatable of "c"
+local c = setmetatable(b, a) -- "a" is the metatable of "c"
 
 print(a)               -- table: "a address"
 print(getmetatable(c)) -- table: "a address"
@@ -167,7 +167,7 @@ print(getmetatable(c)) -- table: "a address"
 * ipairs(tbl)
 	* tbl: Uma tabela, preferencialmente, com índices numéricos ordenados.
 	* Uso: Intera entre os pares índice-valor de `tbl`, até o primeiro índice ausente. Comumente usada para percorrer tabelas com índices númericos ordenados, com `for`.
-	* Retorno: Uma função interadora, a tabela usada em `tbl` e `0`.
+	* Retorno: Uma função interadora, à tabela usada em `tbl` e `0`.
 
 ``` lua
 print("[ CONSOLE ]")
@@ -261,7 +261,7 @@ return txt
 
 ###### 9
 * next(tbl, id)
-	* tbl: Uma tabela. | id: Um índice, numérico.
+	* tbl: Uma tabela com índices numéricos. | id: Um valor numérico.
 	* Uso: Percorre uma tabela (`tbl`), obtendo o valor armazenado no índice `id + 1`.
 	* Retorno: Baseado em `id + 1`, retonará este índice e seu valor respectivo, caso `id` seja omitido (`nil`), retornará o índice e o valor inicial, e caso `id` seja o último índice de `tbl`, ou caso `tbl` seja uma tabela vazia, retornará `nil`.
 
@@ -284,16 +284,16 @@ local i, v = next(tbl, 6)
 ###### 10
 * pairs(tbl)
 	* tbl: Um tabela.
-	* Uso: Caso `tbl` tenha o metamétodo `__pairs`, chamará-o (como uma função) usando `tbl` como argumento, caso contrário, retornará valores que permitirão a interação sobre todos os pares índice–valor da tabela `tbl` com `for`. Comumente usada para percorrer tabelas com índices númericos fora de ordem (`tbl = {[1] = 9, [2] = nil, [3] = 7}`), com `for`.
-	* Retorno: Os valores de retorno antes citados, sendo eles a função `[next](#9)`, `tbl` e `nil`.
+	* Uso: Caso `tbl` tenha o metamétodo `__pairs`, chamará-o (como uma função) usando `tbl` como argumento, caso contrário, retornará valores que permitirão a interação sobre todos os pares índice–valor da tabela `tbl` com `for`, de maneira desordenada. Comumente usada para percorrer tabelas com índices númericos fora de ordem (`tbl = {9, nil, 7}`), com `for`.
+	* Retorno: À função `[next](#9)`, à tabela usada em `tbl` e `nil`, mas caso o metamétodo `__pairs` esteja presente em `tbl`, ele será chamado usando `tbl` como argumento.
 
 ``` lua
 local tbl = {[4] = 9, [7] = 8, [13] = 7}
 
-for i, v in pairs(tbl) do print(i.." "..v) end-- 4 9 |-| 13 7 |-| 7 8
+for i, v in pairs(tbl) do print(i.." "..v) end -- 4 9 |-| 13 7 |-| 7 8
 
 setmetatable(tbl, {__pairs = function(t) print("Hello World!") end})
-pairs(tbl)-- Hello World!
+pairs(tbl) -- Hello World!
 ```
 
 <br>
@@ -307,7 +307,7 @@ pairs(tbl)-- Hello World!
 * pcall(func, [arg])
 	* func: A função que será chamda. | Os argumentos que serão atribuídos a `func`.
 	* Uso: Chama a `func` em "modo protegido", ou seja, caso haja algum erro em `func` ele não parará o programa e nem será imprimido no console.
-	* Retorno: `true` e os possíveis retornos de `func` caso não haja nenhum erro na mesma, caso contrário, retornará `false` e um erro.
+	* Retorno: `true` e os possíveis retornos de `func`, caso não haja nenhum erro na mesma, caso contrário, retornará `false` e um erro (string).
 
 ``` lua
 local function add(a, b)
@@ -333,7 +333,7 @@ local fun2, rtn1, rtn2 = pcall(add, 2, 3)
 
 ###### 12
 * print(...)
-	* (...): Valores para serem imprimidos no console.
+	* (...): Valores que serão imprimidos no console.
 	* Uso: Imprime todos os seus argumentos no console, de maneira **não formatada**. Argumentos diferentes, quando imprimidos, são separados por uma tabulação.
 	* Retorno: Sem retorno.
 
@@ -369,13 +369,14 @@ rawequal(1, "1") -- false
 
 ###### 14
 * rawget(tbl, id)
-	* tbl: Um tabela. | id: Um índice numérico de `tbl`.
+	* tbl: Um tabela com índices numéricos. | id: Um índice de `tbl`.
 	* Uso: Obtem o valor armazenado no índice `id` de `tbl`, sem chamar o metamétodo `__index`.
-	* Retorno: O valor obtido.
+	* Retorno: O valor obtido ou `nil` caso ele não exista.
 
 ``` lua
 local tbl = {9, 8, 7, 6, 5}
 rawget(tbl, 2) -- 8
+rawget(tbl, 6) -- nil
 ```
 
 <br>
@@ -423,16 +424,16 @@ rawset(tbl, 2, 12) -- tbl[2] = 12
 
 ###### 17
 * select(id, ...)
-	* id: Um valor numérico (ou `"#"`). | (...): .
+	* id: Um valor numérico (ou `"#"`). | (...): Um quantidade não especificada de valores de tipos diversos.
 	* Uso: Retorna valores de acordo com o valor de `id`.
-	* Retorno: Todos os argumentos em `...`, de `id` até último (da esquerda para a direta, caso seja positivo, ou da direita para a esquerda,c aso contrário). Caso seja `id` igual a `"#"` retornará a quantidade de argumentos em `...`.
+	* Retorno: Todos os argumentos em `...`, de `id` até último (da esquerda para a direta, caso seja positivo, ou da direita para a esquerda, caso contrário). Caso seja `id` igual à `"#"` retornará a quantidade de argumentos contidos em `...`.
 
 ``` lua
 local a, b, c
 
-a, b, c = select("#", 9, 8, 7) -- 3, nil, nil
-a, b, c = select( 1,  9, 8, 7) -- 9, 8, 7
-a, b, c = select(-1,  9, 8, 7) -- 7, 8, 9
+a, b, c = select("#", 9, "8", true) -- 3, nil, nil
+a, b, c = select( 1,  9, "8", true) -- 9, "8", true
+a, b, c = select(-2,  9, "8", true) -- true, 8, nil
 ```
 
 <br>
@@ -444,22 +445,22 @@ a, b, c = select(-1,  9, 8, 7) -- 7, 8, 9
 
 ###### 18
 * setmetatable(tbl, mtbl)
-	* tbl: Uma tabela. | mtbl: Uma metatabela.
+	* tbl: Uma tabela. | mtbl: Uma metatabela com um metamétodo.
 	* Uso: Atribui `mtbl` como uma metatabela para `tbl`. Caso `mtbl` for `nil`, removerá a metatabela de `tbl`. Caso `tbl` tenha uma campo `__metatable`, gerará um erro.
 	* Retorno: `tbl`.
 
 ``` lua
 local tbl = {}
 
-setmetatable(tbl, {__call = function() return "Hello World!" end})-- add __call
-local txt = tbl()) -- txt = "Hello World!"
+setmetatable(tbl, {__call = function() return "Hello World!" end})-- add '__call'
+local txt = tbl() -- txt = "Hello World!"
 
-setmetatable(tbl, {__add  = function(...) local temp = {...} return 20 + temp[2] end}) -- remove __call and add __add
+setmetatable(tbl, {__add  = function(...) local temp = {...} return 20 + temp[2] end}) -- remove '__call' and add '__add'
 local add = tbl + 5 -- add = 20 + 5
 
 setmetatable(tbl, nil) -- remove: __add
 
-setmetatable(tbl, {__metatable = function() return "__metatable" end}) -- add __call
+setmetatable(tbl, {__metatable = function() return "__metatable" end}) -- add '__call'
 setmetatable(tbl, {__call = function() return "Hello World!" end}) -- generates an error
 ```
 
@@ -473,7 +474,7 @@ setmetatable(tbl, {__call = function() return "Hello World!" end}) -- generates 
 ###### 19
 * tonumber(value, [base])
 	* value: Valor que será convertido. | base: Usada para a conversão (qualquer valor entre 2-36; 10 por padrão).
-	* Uso: Converte `value` para número, caso ele seja uma string válida (contendo apenas números).
+	* Uso: Converte `value` para número, caso ele seja uma string válida (contendo apenas valores númericos), usando `base` como "base".
 	* Retorno: O valor convertido, ou `nil`, caso não seja possível converter `value`.
 
 ``` lua
@@ -493,7 +494,7 @@ tonumber("88", 15) -- 128
 ###### 20
 * tostring(value)
 	* value: Valor de qualquer tipo.
-	* Uso: Converte `value` em uma cadeia de caracteres, mas caso `value` possua um campo `__tostring`, ele será chamado com `value` como argumento.
+	* Uso: Converte `value` em uma cadeia de caracteres, mas caso `value` possua o metamétodo `__tostring`, ele será chamado com `value` como argumento.
 	* Retorno: Uma cadeia de caracteres convertida ou o returno de `__tostring` (caso este campo esteja presente em `value`).
 
 ``` lua
@@ -539,14 +540,17 @@ tBoo = type(boo) -- "boolean"
 
 ###### 22
 * warn(...)
-	* (...): Uma quantidade não definida de strings. Por convensão, mensganens de peça única, que comecem com `@`, são destinadas ao próprio sistema de alerta.
+	* (...): Uma quantidade não definida de strings.
 	* Uso: Imprime um aviso no console, semelhante a uma mensagem de erro, mas que não interrompe o programa. Chamá-la com `@on` (re)inicia a emissão de avisos, e `@off` à desativa.
 	* Retorno: Sem retorno.
 
 ``` lua
 warn("@on")
+
 warn("Hello", " ", "World", "!") -- Lua warning: Hello World!
+
 warn("@off")
+
 warn("No print", ":(")
 ```
 
@@ -560,8 +564,8 @@ warn("No print", ":(")
 ###### 23
 * xpcall(func, erro, [arg])
 	* func: A função que será chamda. | erro: Função que será chamada caso `func` possua algum erro. | arg: Os argumentos que serão atribuídos a `func`.
-	* Uso: Semelhantemente a `pcall`, esta chama `func` em modo protegido, mas, caso haja algum erro, ela chamará `erro`, com a mensagem de erro como parâmetro.
-	* Retorno: `true` e os possíveis retornos de `func` caso não haja nenhum erro na mesma, caso contrário, retornará o retorno de `erro` (que usará a mensagem de erro como primeiro argumento; caso existente) e `false`.
+	* Uso: Semelhantemente a `pcall`, esta chama `func` em modo protegido, mas, caso haja algum erro, ela chamará `erro`, com a mensagem de erro como argumento.
+	* Retorno: `true` e os possíveis retornos de `func` caso não haja nenhum erro na mesma, caso contrário, retornará o retorno de `erro` (caso existente) e `false`.
 
 ``` lua
 local function add(a, b)
