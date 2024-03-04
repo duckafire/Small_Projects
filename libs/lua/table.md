@@ -188,7 +188,7 @@ local one, two, tree = table.unpack(tbl)
 <br>
 
 #### Fontes:
-* https://lua.org/manual/5.2/
+* https://lua.org/manual/5.4/
 
 <br>
 
