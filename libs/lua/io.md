@@ -110,7 +110,7 @@ io.close() -- close fil2
 ###### 2
 * io.flush()
 	* Sem parâmetros.
-	* Usos: Garante que as alterações feitas no arquivo de saída padrão (definido por `io.output`) sejam salvas.
+	* Usos: Garante que as alterações presentes no *buffer* do arquivo de saída padrão (definido por `io.output`) sejam salvas.
 	* Retorno: Sem retorno.
 
 ``` lua
@@ -256,7 +256,7 @@ file:close()
 * io.read(...)
 	* (...): Formatos de leitura, que especificam o que ler.
 	* Usos: Lê o arquivo de entrada padrão de acordo com as especificações dos formatos especificados em `...` (`"l"` por padrão).
-	* Retorno: Para cada formato, retornará uma cadeia de caracteres ou um número com os caracteres lidos.
+	* Retorno: Para cada formato, retornará uma cadeia de caracteres ou um número com os caracteres lidos. Caso chamada sem argumentos, retornará o que for escrito no console (pelo usuário).
 
 > [Formatos de leitura](#formatosdeleitura)
 
@@ -287,7 +287,7 @@ abcde
 * io.tmpfile()
 	* Sem parâmetros.
 	* Usos: Cria um arquivo temporário, que é descartado com o termino do programa.
-	* Retorno: Um indentificador para o arquivo criado.
+	* Retorno: Em caso de sucesso, retornará um indentificador para o arquivo criado.
 
 ``` lua
 local tempFile = io.tmpfile()
@@ -373,7 +373,7 @@ io.output():close()
 ###### 13
 * file:flush()
 	* Sem parâmetros.
-	* Usos: Garante que as alterações feitas em `file` sejam salvas.
+	* Usos: Garante que as alterações presentes no *buffer* de `file` sejam salvas.
 	* Retorno: Sem retorno.
 
 ``` lua
@@ -434,7 +434,7 @@ End of file
 * file:read(...)
 	* (...): Formatos de leitura, que especificam o que ler.
 	* Usos: Lê `file` de acordo com as especificações dos formatos especificados em `...` (`"l"` por padrão).
-	* Retorno: Para cada formato, retornará uma cadeia de caracteres ou um número com os caracteres lidos.
+	* Retorno: Para cada formato, retornará uma cadeia de caracteres ou um número com os caracteres lidos. Caso chamada sem argumentos, retornará o que for escrito no console (pelo usuário).
 
 > [Formatos de leitura](#formatosdeleitura)
 
@@ -461,14 +461,47 @@ abcde
 <br>
 
 ###### 16
-* file:seek(parameter1, parameter2)
-	* parameter1: blank. | parameter2: blank.
-	* Usos: Blank.
-	* Retorno: Blank.
+* file:seek([whence], [[offset]])
+	* whence: Ponto incial da medida (`"cur"` por padrão). | offset: Ponto final da medida (`0` por padrão).
+	* Usos: Estabelece a **posição atual** de `file`, usada pelo formato de feitura [`"a"`](formatosdeleitura). Através da medida da posição de início do arquivo até `offset`, mais `whence`.
+	* Retorno: A posição definida como atual (para `file`) ou a posição atual (caso chamada sem parâmetros) ou, em caso de falha, `0` e uma mensagem de erro.
+
+> `whence` pode assumir os seguintes valores:
+>> `"set"` -> Início do arquivo (0). <br>
+>> `"cur"` -> Posição atual. <br>
+>> `"end"` -> Fim do arquivo. <br>
 
 ``` lua
+local file = io.open("example.txt", "a+")
+print("[ CONSOLE ]\n")
+
+-- initial = 0; final = 
+print(file:read("a").."\n")
+
+file:seek("set", 12) -- 12 (10 + 2)
+print(file:read("a").."\n")
+
+file:seek("end", -5) -- 17 (15 + 2)
+print(file:read("a"))
+
+file:close()
+```
 
 ```
+[ CONSOLE ]
+
+0
+0123456789
+0123456789
+
+12
+0123456789
+
+17
+56789
+```
+
+> Quebras de linha são interpretadas como `"\n"`, logo cada quebra de linha acrescenta mais dois ao "comprimento" do arquivo.
 
 <br>
 
@@ -478,13 +511,24 @@ abcde
 <br>
 
 ###### 17
-* file:setvbuf(parameter1, parameter2)
-	* parameter1: blank. | parameter2: blank.
-	* Usos: Blank.
-	* Retorno: Blank.
+* file:setvbuf(mode, [size])
+	* mode: O modo que será usado | size: Especifica o tamanho do *buffer*, em *bytes*, caso `mode` seja igual à `full` ou `line` (seu padrão é um tamnho apropriado).
+	* Usos: Define o modo de *bufferização* de `file`.
+	* Retorno: Sem retorno.
+
+> `mode` pode assumir os seguintes valores:
+>> `"no"`   -> Sem *bufferização* (resultados instatâneos para qualquer operação de saída). <br>
+>> `"full"` -> *Bufferização* completa (a operação é realizada quando o *buffer* está cheio ou quando o usuário à explicifica [`io.flush`]). <br>
+>> `"line"` -> *Bufferização* de linha (a *bufferização* ocorre quando uma quebra de linha é produzida ou se ouver a entrada de arquivos especiais). <br>
 
 ``` lua
+local file = io.open("example.txt", "w")
+file:setvbuf("full")
 
+file:write("Hello World!")
+
+file:flush()
+file:close()
 ```
 
 <br>
