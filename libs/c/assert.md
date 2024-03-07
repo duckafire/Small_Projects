@@ -3,9 +3,6 @@ Possui uma função que verifica expressões booleanas.
 
 <br>
 
------
-<br>
-
 * void **assert**(int expr);
 	* expr: Expressão (booleana).
 	* Uso: Verificar a validade de uma expressão durante a execução do programa. Encerra o programa e gera um erro caso a expressão passada seja falsa.

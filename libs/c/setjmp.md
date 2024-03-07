@@ -3,15 +3,15 @@ Adiciona ferramentas capazes de manipular o fluxo de execução do código (seme
 os quais são definidos nesta biblioteca, e estão listadas de maneira respectiva abaixo. 
 
 * jmp_buf
-	* Tipo (matriz) usado como parâmetro e argumento em `setjmp` e `longjmp`, resposável por armazenar dados sobre o ambiente atual.
+	* Tipo (matriz) usado nos parâmetros e respectivos argumentos de `setjmp` e `longjmp`, resposável por armazenar dados sobre o ambiente atual.
 
 * int setjmp(jmp_buf env)
 	* env: Matriz do tipo `jmp_buf` que será usada para armazenar o ambiente atual.
 	* Uso: Armazena o ambiente atual na matriz especificada como argumento para `env`, para uso posterior por `longjmp`.
-	* Retorno: 0 caso seja chamada diretamente ou o valor do parâmetro `value`, da função `longjmp`, após o primeiro "salto" (usando a mesma matriz).
+	* Retorno: `0` caso seja chamada diretamente ou o valor do parâmetro `value`, da função `longjmp`, após o primeiro "salto" (usando a mesma matriz).
 
 * void longjmp(jmp_buf env, int value)
-	* env: Matriz que contém o ambiente salvo (por `setjmp`). | value: Valor que será passado para `jmp_buf` após o primeiro salto. Caso seja 0, o valor passado será 1.
+	* env: Matriz que contém o ambiente salvo (por `setjmp`). | value: Valor que será passado para `jmp_buf` após o primeiro salto. Caso `value` receba `0`, o valor passado será `1`.
 	* Uso: Restaura o ambiente salvo na matriz especificada como argumento para `env` (oriunda de `setjmp`).
 	* Retorno: Sem retorno.
 	
@@ -53,11 +53,11 @@ int main(){
 	
 	int rtn = setjmp(memory); // ReTorN
 	
-	printf("Main: %d\n", rtn);
+	printf("\nMain: %d\n\n", rtn);
 	
 	if(rtn == 0) timer();
 	
-	printf("[ END ]\n");
+	printf("\n\n[ END ]\n");
 	
 	printf("\n\n[ Press ENTER ]"); // paused
 	getchar();
@@ -67,14 +67,18 @@ int main(){
 
 ```
 [ CONSOLE ]
+
 Main: 0
+
 Timer: 1
 Timer: 2
 Timer: 3
 Timer: 4
 Timer: 5
 Timer: 6
+
 Main: 1
+
 [ END ]
 
 

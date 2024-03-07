@@ -2,7 +2,7 @@
 Fornece um conjunto de quatro macros e um tipo que podem ser usados, ordenadamente, para obter os argumentos de uma função, quando a quantidade de parâmetros dela
 é indefinida (`...`).
 
-> va_list: Tipo dos parâmetros e retorno dos macros abaixo.
+> va_list: Tipo dos parâmetros, argumentos e retorno dos macros abaixo.
 
 * void va_start(va_list arg, last_arg)
 	* arg: Uma variável do tipo `va_list`. | last_arg: Última parâmetro antes da lista de argumentos variáveis (`...`), da função a qual ela está sendo usada.
@@ -39,9 +39,9 @@ void unlimited(int n, ...){
 	printf("[ START ]\n");
 	
 	printf("\n");
-	for(int i = 1; i <= 5; i++) printf("%c\n", va_arg(queue, int));
+	for(int i = 1; i <= 5; i++) printf("%c", va_arg(queue, int));
 	printf("\n");
-	for(int i = 1; i <= 5; i++) printf("%c\n", va_arg(queu2, int));
+	for(int i = 1; i <= 5; i++) printf("%c", va_arg(queu2, int));
 	printf("\n");
 	
 	va_end(queue);
@@ -68,17 +68,9 @@ int main(){
 
 [ START ]
 
-A
-B
-C
-D
-E
+ABCDE
 
-A
-B
-C
-D
-E
+ABCDE
 
 [ END ]
 

@@ -1,5 +1,7 @@
 # limits
-Define constantes responsáveis por delimitar os valores mínimos e máximos que variáveis que determinados tipos podem assumir.
+Define constantes responsáveis por delimitar os valores mínimos e máximos que variáveis de determinados tipos podem assumir.
+
+<br>
 
 | Mínimo    | Máximo     | Tipo                   |
 | :-:       | :-:        | :-:                    |
