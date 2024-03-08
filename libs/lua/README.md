@@ -1,12 +1,12 @@
 # **LUA** *default* libraries
 
-* Basic
+* [Basic](https://github.com/duckafire/Small_Projects/blob/main/libs/lua/basic.md)
 * bit32
 * courotine
 * debug
-* io
+* [io](https://github.com/duckafire/Small_Projects/blob/main/libs/lua/io.md)
 * math
 * os
 * package
 * string
-* table
+* [table](https://github.com/duckafire/Small_Projects/blob/main/libs/lua/table.md)

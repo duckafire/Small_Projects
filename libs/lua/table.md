@@ -20,7 +20,7 @@ Algumas destas funções podem necessitar do comprimento de uma tabela, o que po
 
 ###### 1
 * table.concat(tbl, [sep], [init], [last])
-	* tbl: Uma tabela com índices numéricos. | sep: O caractere que será colocado entre cada valor de `tbl`. | init: O índice inicial (de `tbl`) à ser usado. | last: O índice final (de `tbl`) à ser usado.
+	* tbl: Uma tabela com índices numéricos. | sep: O caractere que será colocado entre cada valor de `tbl`. | init: O índice inicial (de `tbl`) à ser usado (`1` por padrão). | last: O índice final (de `tbl`) à ser usado (`#tbl` por padrão).
 	* Usos: Concatena todos os valores armazenados nos índices numéricos de `tbl`.
 	* Retorno: Uma cadeia de caracteres contendo todos os valores armazenados nos índices numéricos de `tbl`.
 
@@ -51,7 +51,7 @@ local woman = {
 ###### 2
 * table.insert(tbl, [id], value)
 	* tbl: Uma tabela numérica. | id: Índice que será preenchido por `value` (`#tbl + 1` por padrão). | value: Valor que será atríbuido à `tbl[id]`.
-	* Usos: Adiciona `value` à `tbl`. Caso já exista um valor em `tbl[id]`, ele será "empurrado" para frente, junto com seus sucessores, e `value` tomará o seu lugar.
+	* Usos: Atribui `value` à `tbl[id]`. Caso já exista um valor em `tbl[id]`, ele será "empurrado" para frente, junto com seus sucessores, e `value` tomará o seu lugar.
 	* Retorno: Sem retorno.
 
 ``` lua
@@ -122,7 +122,7 @@ end
 ###### 5
 * table.remove(tbl, [id])
 	* tbl: Uma tabela com índices numéricos. | id: O índice do valor a ser removido (`#tbl` por padrão).
-	* Usos: Remove `tbl[id]` da mesma. Caso hajam outros valores "acima" de `tbl[id]`, os mesmos "cairão" de posição, ocupando o espaço deixado pela remoção.
+	* Usos: Remove o valor de `tbl[id]`. Caso hajam outros valores "acima" de `tbl[id]`, os mesmos "cairão" de posição, ocupando o espaço deixado pela remoção.
 	* Retorno: O valor removido.
 
 ``` lua
@@ -144,7 +144,7 @@ local seven = table.remove(tbl, 2)
 ###### 6
 * table.sort(tbl, [func])
 	* tbl: Tabela com índices numéricos. | func: Função de tratamento, que recebrá dois valores e deverá retorna `true` ou `false`; permite um "tratamento" customizado.
-	* Usos: Organiza os valores presentes em `tbl`, usando a função `func`, mas caso ela seja omitida, `<` será usado em seu lugar, logo, apenas valores numéricos poderão ser organizados.
+	* Usos: Organiza os valores presentes em `tbl`, usando a função `func`, mas caso ela seja omitida, `<` será usado em seu lugar (logo, apenas valores numéricos poderão ser organizados).
 	* Retorno: Sem retorno.
 
 ``` lua
@@ -173,7 +173,7 @@ local withFunc = table.sort(string, ifString) -- {1, 3, 6, 7}
 * table.unpack(tbl, [init], [last])
 	* tbl: Uma tabela com índices númericos. | init: O primeiro índice de `tbl` que será usado (`1` por padrão). | final: O último índice de `tbl` que será usado (`#tbl` por padrão).
 	* Usos: "Desempacota" `tbl`.
-	* Retorno: Retorna todos os valores armazenados em índices numéricos na tabela `tbl`.
+	* Retorno: Retorna todos os valores armazenados, em índices numéricos, em `tbl`.
 
 ``` lua
 local tbl = {1, 2, 3}
