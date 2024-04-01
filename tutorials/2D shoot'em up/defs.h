@@ -5,10 +5,5 @@ void initSDL(void);
 void updateScene(void);
 void drawScene(void);
 void doInput(void);
-
-typedef struct{
-	SDL_Renderer *renderer;
-	SDL_Window   *window;
-} App;
-
-App app;
+SDL_Texture *loadImage(char *file);
+void draw(SDL_Texture *img, int x, int y);
