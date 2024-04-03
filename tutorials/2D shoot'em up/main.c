@@ -14,7 +14,7 @@ int main(int argc, char *argv[]){
 	
 	player.x = 100;
 	player.y = 100;
-	player.sprite = loadImage("img/shoot-em_up/player.png");
+	player.sprite = loadImage("player.png");
 	
 	atexit(NULL);
 	
@@ -22,7 +22,7 @@ int main(int argc, char *argv[]){
 		updateScene();
 		doInput();
 		
-		draw(player.sprite, player.x, player.y);
+		sprite(player.sprite, player.x, player.y, 2);
 		
 		drawScene();
 		

@@ -15,5 +15,5 @@ void initSDL(void){
 	app.window = SDL_CreateWindow("Shoot'em up", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, windowFlags);
 	app.renderer = SDL_CreateRenderer(app.window, -1, rendererFlags);
 	
-	SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "linear");
+	SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "nearest");
 }
