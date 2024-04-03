@@ -1,6 +1,7 @@
 typedef struct{
 	SDL_Renderer *renderer;
 	SDL_Window   *window;
+	int dirX, dirY;
 } App;
 
 typedef struct{

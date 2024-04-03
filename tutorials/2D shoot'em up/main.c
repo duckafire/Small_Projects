@@ -22,6 +22,18 @@ int main(int argc, char *argv[]){
 		updateScene();
 		doInput();
 		
+		if(app.dirY == -1 && player.y > 0){
+			player.y -= 4;
+		}else if(app.dirY == 1 && player.y < SCREEN_HEIGHT){
+			player.y += 4;
+		}
+		
+		if(app.dirX == -1 && player.x > 0){
+			player.x -= 4;
+		}else if(app.dirX == 1 && player.x < SCREEN_WIDTH){
+			player.x += 4;
+		}
+		
 		sprite(player.sprite, player.x, player.y, 2);
 		
 		drawScene();
