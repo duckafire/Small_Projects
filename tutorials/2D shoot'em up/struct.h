@@ -1,13 +1,27 @@
+#ifndef __STRUCT
+#define __STRUCT
+
 typedef struct{
 	SDL_Renderer *renderer;
 	SDL_Window   *window;
-	int dirX, dirY;
 } App;
 
 typedef struct{
-	int x, y;
-	SDL_Texture *sprite;
+	// dim -> dimension (width == height)
+	unsigned int x, y, dim;
+	float spd;
+	SDL_Texture *spt;
 } Entity;
+
+typedef struct{
+	unsigned short top;
+	unsigned short bel;
+	unsigned short lef;
+	unsigned short rig;
+} Control;
 
 App app;
 Entity player;
+Control control;
+
+#endif

@@ -2,23 +2,16 @@
 #include "defs.h"
 #include "struct.h"
 
-static void keyboard(SDL_KeyboardEvent *event, int down){
+static void keyboard(SDL_KeyboardEvent *event, short down){
 	if(event->repeat == 0){
-		int id[4] = {SDL_SCANCODE_UP, SDL_SCANCODE_DOWN, SDL_SCANCODE_LEFT, SDL_SCANCODE_RIGHT};
+		int id[4] = {SDL_SCANCODE_W, SDL_SCANCODE_S, SDL_SCANCODE_A, SDL_SCANCODE_D};
 		int key = event->keysym.scancode;
 		
-		int up = 1;
-		if(!down) up = 0;
+		if(key == id[0]) control.top = -1 * down;
+		if(key == id[1]) control.bel =  1 * down;
+		if(key == id[2]) control.lef = -1 * down;
+		if(key == id[3]) control.rig =  1 * down;
 		
-		int checkKey(int _id){
-			if(key == id[_id    ]){ return -1 * up; }
-			if(key == id[_id + 1]){ return  1 * up; }
-			return 0;
-		}
-		
-		// top - down; left - right
-		app.dirY = checkKey(0);
-		app.dirX = checkKey(2);
 	}
 }
 

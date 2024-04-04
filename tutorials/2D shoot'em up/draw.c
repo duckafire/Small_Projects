@@ -2,8 +2,8 @@
 #include <SDL.h>
 #include <SDL_image.h>
 
-#include "defs.h"
 #include "struct.h"
+#include "defs.h"
 
 void updateScene(void){
 	// background color (RGBA)
@@ -18,27 +18,23 @@ void drawScene(void){
 	SDL_RenderPresent(app.renderer);
 }
 
-SDL_Texture *loadImage(char *file){
+SDL_Texture *loadImage(char *file, Entity *obj, int scale){
 	char path[30]; // 17 -> path
 	memset(path, '\0', 30);
 	
 	strcpy(path, "img/shoot-em_up/");
 	strcat(path, file);
 	
-	return IMG_LoadTexture(app.renderer, path);
+	SDL_Texture *img = IMG_LoadTexture(app.renderer, path);
+	
+	SDL_QueryTexture(img, NULL, NULL, &(obj->dim), NULL);
+	obj->dim *= scale;
+	
+	return img;
 }
 
-void sprite(SDL_Texture *img, int x, int y, int scale){
-	// a structure with: x, y, w(idth), h(eight)
-	SDL_Rect obj;
-	obj.x = x;
-	obj.y = y;
-	
-	// get image width and height
-	SDL_QueryTexture(img, NULL, NULL, &obj.w, &obj.h);
-	obj.w *= scale;
-	obj.h *= scale;
-	
+void sprite(Entity *obj){
+	SDL_Rect body = {obj->x, obj->y, obj->dim, obj->dim};
 	// renderer image
-	SDL_RenderCopy(app.renderer, img, NULL, &obj);
+	SDL_RenderCopy(app.renderer, obj->spt, NULL, &body);
 }

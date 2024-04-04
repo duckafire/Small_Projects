@@ -14,7 +14,13 @@ int main(int argc, char *argv[]){
 	
 	player.x = 100;
 	player.y = 100;
-	player.sprite = loadImage("player.png");
+	player.spd = 4.0;
+	player.spt = loadImage("player.png", &player, 2);
+	
+	int movePlayer(int nPos, int mm){
+		if(mm != 0) return (nPos + player.dim <= mm ? nPos : mm - player.dim);
+		return (nPos >= mm ? nPos : mm);
+	}
 	
 	atexit(NULL);
 	
@@ -22,19 +28,14 @@ int main(int argc, char *argv[]){
 		updateScene();
 		doInput();
 		
-		if(app.dirY == -1 && player.y > 0){
-			player.y -= 4;
-		}else if(app.dirY == 1 && player.y < SCREEN_HEIGHT){
-			player.y += 4;
-		}
+		//if((control.top || control.bel) && (control.lef || control.rig)) player.spd = 5.65; else player.spd = 4.0; // a^2 = 4^2 + 4^2
+	
+		if(control.top) player.y = movePlayer(player.y - player.spd, 0);
+		if(control.bel) player.y = movePlayer(player.y + player.spd, SCREEN_HEIGHT);
+		if(control.lef) player.x = movePlayer(player.x - player.spd, 0);
+		if(control.rig) player.x = movePlayer(player.x + player.spd, SCREEN_WIDTH);
 		
-		if(app.dirX == -1 && player.x > 0){
-			player.x -= 4;
-		}else if(app.dirX == 1 && player.x < SCREEN_WIDTH){
-			player.x += 4;
-		}
-		
-		sprite(player.sprite, player.x, player.y, 2);
+		sprite(&player);
 		
 		drawScene();
 		
