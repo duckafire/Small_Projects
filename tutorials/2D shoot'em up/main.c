@@ -5,56 +5,46 @@
 #include "defs.h"
 #include "struct.h"
 
+const SDL_Texture playerBulletSpt = loadImage("player_bullet");
+const SDL_Texture enemyBulletSpt  = loadImage("enemy_bullet");
+
 int main(int argc, char *argv[]){
 	// define a struct and clear (to 0) all spaces
-	memset(&app,    0, sizeof(App));
-	memset(&player, 0, sizeof(Entity));
-	memset(&bullet, 0, sizeof(Entity));
+	memset(&app, 0, sizeof(App));
 	
 	initSDL();
 	
-	player.x = (int)SCREEN_WIDTH  * 0.1;
-	player.y = ((int)SCREEN_HEIGHT / 2) - player.dim / 2;
-	player.spd = 4.0;
-	player.spt = loadImage("player", &player, 2);
-	
-	bullet.spd = 15;
-	bullet.spt = loadImage("player_bullet", &bullet, 2);
-	
-	int movePlayer(int nPos, int mm){
-		if(mm != 0) return (nPos + player.dim <= mm ? nPos : mm - player.dim);
-		return (nPos >= mm ? nPos : mm);
-	}
-	
 	atexit(NULL);
+	
+	initMatch();
+	
+	long then = SDL_GetTicks();
+	float remainder = 0;
 	
 	while(1){
 		updateScene();
 		doInput();
-		
-		if(control.top) player.y = movePlayer(player.y - player.spd, 0);
-		if(control.bel) player.y = movePlayer(player.y + player.spd, SCREEN_HEIGHT);
-		if(control.lef) player.x = movePlayer(player.x - player.spd, 0);
-		if(control.rig) player.x = movePlayer(player.x + player.spd, SCREEN_WIDTH);
-		
-		if(control.fire && bullet.hp == 0){
-			bullet.x  = player.x + (player.dim - bullet.dim) / 2;
-			bullet.y  = player.y + (player.dim - bullet.dim) / 2;
-			bullet.hp = 1;
-		}
-		
-		if(bullet.x + bullet.dim > SCREEN_WIDTH) bullet.hp = 0;
-		
-		bullet.x += bullet.spd;
-		
-		if(bullet.hp) sprite(&bullet);
-		sprite(&player);
-		
+		app.update();
+		app.draw();
 		drawScene();
-		
-		// lock loop in ~62 (fps) tics/s
-		SDL_Delay(16);
+		lock60fps(&then, &remainder);
 	}
 	
 	return 0;
+}
+
+static void lock60fps(long *then, float *remainder){
+	long wait = 16 * *remainder;
+	long frameTime = SDL_GetTicks() - *then;
+	
+	*remainder -= (int)*remainder;
+	
+	wait -= frameTime;
+	
+	if(wait < 1) wait = 1;
+	
+	SDL_Delay(wait);
+	
+	*remainder += 0.667;
+	*then = SDL_GetTicks();
 }

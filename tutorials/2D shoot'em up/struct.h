@@ -2,15 +2,12 @@
 #define __STRUCT
 
 typedef struct{
-	SDL_Renderer *renderer;
-	SDL_Window   *window;
-} App;
-
-typedef struct{
 	// dim -> dimension (width == height)
-	unsigned int x, y, dim, hp;
-	float spd;
+	unsigned float x, y;
+	unsigned int dim, hp, cooldown;
 	SDL_Texture *spt;
+	float spd;
+	Entity *next;
 } Entity;
 
 typedef struct{
@@ -21,9 +18,16 @@ typedef struct{
 	unsigned short fire;
 } Control;
 
-App app;
-Entity player;
-Entity bullet;
+typedef struct{
+	SDL_Renderer *renderer;
+	SDL_Window   *window;
+	void (*update)(void);
+	void (*draw)(void);
+	Entity shipHead, projHead, *projTail, *shipTail;
+} App;
+
+Entity *player;
 Control control;
+App app;
 
 #endif
