@@ -24,6 +24,7 @@ SDL_Texture *loadImage(char *file, Entity *obj, int scale){
 	
 	strcpy(path, "img/shoot-em_up/");
 	strcat(path, file);
+	strcat(path, ".png");
 	
 	SDL_Texture *img = IMG_LoadTexture(app.renderer, path);
 	

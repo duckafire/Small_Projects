@@ -4,13 +4,14 @@
 
 static void keyboard(SDL_KeyboardEvent *event, short down){
 	if(event->repeat == 0){
-		int id[4] = {SDL_SCANCODE_W, SDL_SCANCODE_S, SDL_SCANCODE_A, SDL_SCANCODE_D};
+		int id[5] = {SDL_SCANCODE_W, SDL_SCANCODE_S, SDL_SCANCODE_A, SDL_SCANCODE_D, SDL_SCANCODE_SPACE};
 		int key = event->keysym.scancode;
 		
-		if(key == id[0]) control.top = -1 * down;
-		if(key == id[1]) control.bel =  1 * down;
-		if(key == id[2]) control.lef = -1 * down;
-		if(key == id[3]) control.rig =  1 * down;
+		if(key == id[0]) control.top  = -1 * down;
+		if(key == id[1]) control.bel  =  1 * down;
+		if(key == id[2]) control.lef  = -1 * down;
+		if(key == id[3]) control.rig  =  1 * down;
+		if(key == id[4]) control.fire =  1 * down;
 		
 	}
 }
