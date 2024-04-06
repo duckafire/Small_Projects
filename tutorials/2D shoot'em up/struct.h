@@ -1,14 +1,13 @@
 #ifndef __STRUCT
 #define __STRUCT
 
-typedef struct{
+struct Entity{
 	// dim -> dimension (width == height)
-	unsigned float x, y;
+	float x, y, spd;
 	unsigned int dim, hp, cooldown;
 	SDL_Texture *spt;
-	float spd;
-	Entity *next;
-} Entity;
+	struct Entity *next;
+};
 
 typedef struct{
 	unsigned short top;
@@ -20,13 +19,13 @@ typedef struct{
 
 typedef struct{
 	SDL_Renderer *renderer;
-	SDL_Window   *window;
+	SDL_Window *window;
 	void (*update)(void);
 	void (*draw)(void);
-	Entity shipHead, projHead, *projTail, *shipTail;
+	struct Entity shipHead, projHead, *shipTail, *projTail;
 } App;
 
-Entity *player;
+struct Entity *player;
 Control control;
 App app;
 

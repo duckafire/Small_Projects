@@ -7,15 +7,14 @@
 #define SCREEN_HEIGHT 640
 
 // main.c
-extern const SDL_Texture playerBulletSpt;
-extern const SDL_Texture enemyBulletSpt;
+extern SDL_Texture *playerBulletSpt;
 static void lock60fps(long *then, float *remainder);
 
 // draw.c
-void updateScene(void);
-void drawScene(void);
-SDL_Texture *loadImage(char *file, Entity *obj, int scale);
-void sprite(Entity *obj);
+void lastScene(void);
+void currentScene(void);
+SDL_Texture *loadImage(char *file, struct Entity *obj, int scale);
+void sprite(struct Entity *obj);
 
 // init.c and input.c
 void initSDL(void);

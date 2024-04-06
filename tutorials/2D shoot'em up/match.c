@@ -1,8 +1,11 @@
 #include <SDL.h>
 #include <stdio.h>
+#include <string.h>
 
 #include "defs.h"
 #include "struct.h"
+
+SDL_Texture *playerBulletSpt;
 
 void initMatch(void){
 	app.update = update;
@@ -25,43 +28,45 @@ static void draw(void){
 }
 
 static void initPlayer(void){
-	player = malloc(sizeof(Entity));
-	memset(player, 0, sizeof(Entity))
+	player = malloc(sizeof(struct Entity));
+	memset(player, 0, sizeof(struct Entity));
+	
+	playerBulletSpt = loadImage("player_bullet", player, 2);
 
 	app.shipTail->next = player;
 	app.shipTail = player;
 	
 	player->x = (int)SCREEN_WIDTH  * 0.1;
-	player->y = ((int)SCREEN_HEIGHT / 2) - player.dim / 2;
+	player->y = ((int)SCREEN_HEIGHT / 2) - player->dim / 2;
 	player->spd = 4.0;
 	player->spt = loadImage("player", player, 2);
 }
 
 static int movePlayer(int nPos, int mm){
-	if(mm != 0) return (nPos + player.dim <= mm ? nPos : mm - player.dim);
+	if(mm != 0) return (nPos + player->dim <= mm ? nPos : mm - player->dim);
 	return (nPos >= mm ? nPos : mm);
 }
 
 static void doPlayer(void){
-	if(control.top) player.y = movePlayer(player.y - player.spd, 0);
-	if(control.bel) player.y = movePlayer(player.y + player.spd, SCREEN_HEIGHT);
-	if(control.lef) player.x = movePlayer(player.x - player.spd, 0);
-	if(control.rig) player.x = movePlayer(player.x + player.spd, SCREEN_WIDTH);
+	if(control.top) player->y = movePlayer(player->y - player->spd, 0);
+	if(control.bel) player->y = movePlayer(player->y + player->spd, SCREEN_HEIGHT);
+	if(control.lef) player->x = movePlayer(player->x - player->spd, 0);
+	if(control.rig) player->x = movePlayer(player->x + player->spd, SCREEN_WIDTH);
 	
 	if(control.fire && player->cooldown == 0) shootPlayer();
 }
 
 static void shootPlayer(void){
-	Entity *bullet;
+	struct Entity *bullet;
 	
-	bullet = malloc(sizeof(Entity));
-	memset(bullet, 0, sizeof(Entity));
+	bullet = malloc(sizeof(struct Entity));
+	memset(bullet, 0, sizeof(struct Entity));
 	app.projTail->next = bullet;
 	app.projTail = bullet;
 
 	bullet->x  = player->x + (player->dim - bullet->dim) / 2;
 	bullet->y  = player->y + (player->dim - bullet->dim) / 2;
-	bullet->spd = 15
+	bullet->spd = 15;
 	bullet->hp = 1;
 	bullet->spt = playerBulletSpt;
 
@@ -73,7 +78,7 @@ static void drawPlayer(){
 }
 
 static void doBullets(void){
-	Entity *b, *prev;
+	struct Entity *b, *prev;
 	
 	for(b = app.projHead.next; b != NULL; b = b->next){
 		b->x += b->spd;
@@ -92,6 +97,6 @@ static void doBullets(void){
 }
 
 static void drawBullets(){
-	Entity *b;
-	for(b = app.projHead; b != NULL; b = b->) sprite(b);
+	struct Entity *b;
+	for(b = app.projHead.next; b != NULL; b = b->next) sprite(b);
 }

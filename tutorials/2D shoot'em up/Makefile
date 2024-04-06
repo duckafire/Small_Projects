@@ -9,6 +9,6 @@ GAME = Shoot-em_up.exe
 
 all:
 	${CC} -o ../!Build/${GAME} ${FILES_C} ${P4TH} ${LIBS}
-	
+
 run:
 	@cd ../!Build && ${GAME}
