@@ -14,7 +14,7 @@ typedef struct{
 	unsigned short bel;
 	unsigned short lef;
 	unsigned short rig;
-	unsigned short fire;
+	unsigned short sht; // SHooT
 } Control;
 
 typedef struct{

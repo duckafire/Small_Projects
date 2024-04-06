@@ -18,7 +18,7 @@ void currentScene(void){
 	SDL_RenderPresent(app.renderer);
 }
 
-SDL_Texture *loadImage(char *file, struct Entity *obj, int scale){
+SDL_Texture *loadImage(char *file){
 	char path[30]; // 17 -> path
 	memset(path, '\0', 30);
 	
@@ -26,12 +26,12 @@ SDL_Texture *loadImage(char *file, struct Entity *obj, int scale){
 	strcat(path, file);
 	strcat(path, ".png");
 	
-	SDL_Texture *img = IMG_LoadTexture(app.renderer, path);
-	
-	SDL_QueryTexture(img, NULL, NULL, &(obj->dim), NULL);
+	return IMG_LoadTexture(app.renderer, path);
+}
+
+void getDimensions(struct Entity *obj, int scale){
+	SDL_QueryTexture(obj->spt, NULL, NULL, &(obj->dim), NULL);
 	obj->dim *= scale;
-	
-	return img;
 }
 
 void sprite(struct Entity *obj){

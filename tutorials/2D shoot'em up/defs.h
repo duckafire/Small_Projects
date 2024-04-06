@@ -13,7 +13,8 @@ static void lock60fps(long *then, float *remainder);
 // draw.c
 void lastScene(void);
 void currentScene(void);
-SDL_Texture *loadImage(char *file, struct Entity *obj, int scale);
+SDL_Texture *loadImage(char *file);
+void getDimensions(struct Entity *obj, int scale);
 void sprite(struct Entity *obj);
 
 // init.c and input.c
@@ -26,7 +27,7 @@ static void update(void);
 static void draw();
 
 static void initPlayer(void);
-static int movePlayer(int nPos, int mm);
+static int movePlayer(int nPos, int dir, int mm);
 static void doPlayer(void);
 static void shootPlayer(void);
 static void drawPlayer();
