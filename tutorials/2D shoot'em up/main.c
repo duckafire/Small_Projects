@@ -10,38 +10,62 @@ int main(int argc, char *argv[]){
 	memset(&app, 0, sizeof(App));
 	
 	initSDL();
-	
-	atexit(NULL);
-	
 	initMatch();
 	
-	long then = SDL_GetTicks();
-	float remainder = 0;
+	long then = SDL_GetTicks(); // return the milliseconds after start sdl2 library
+	float remainder = 0;        // accrued time between tics
 	
 	while(1){
-		lastScene();
+		backScene();
+		
 		doInput();
+		
 		app.update();
 		app.draw();
-		currentScene();
+		
+		frontScene();
+		
 		lock60fps(&then, &remainder);
 	}
 	
 	return 0;
 }
 
-static void lock60fps(long *then, float *remainder){
-	long wait = 16 * *remainder;
-	long frameTime = SDL_GetTicks() - *then;
+static void initSDL(void){
+	// starts libs
+	SDL_Init(SDL_INIT_VIDEO);
+	IMG_Init(IMG_INIT_PNG);
 	
+	// window renderizator
+	app.window = SDL_CreateWindow("Shoot'em up", 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, 0);
+	
+	// "create a 2D rendering context for a window"
+	app.renderer = SDL_CreateRenderer(app.window, -1, SDL_RENDERER_ACCELERATED);
+	
+	// image quality (0. linear; 1. nearest; 2. best)
+	SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "nearest");
+}
+
+static void lock60fps(long *then, float *remainder){
+	// time to wait
+	long wait = 16 * *remainder;
+	
+	// "remove" integer values of remainder
 	*remainder -= (int)*remainder;
 	
-	wait -= frameTime;
+	// time to wait = itself - (time after then last frame)
+	wait -= (SDL_GetTicks() - *then);
 	
+	// minimum value of wait
 	if(wait < 1) wait = 1;
 	
+	// loop delay
 	SDL_Delay(wait);
 	
+	// update time not use in last frames
 	*remainder += 0.667;
+	
+	// to find the time after last frame
 	*then = SDL_GetTicks();
 }
+

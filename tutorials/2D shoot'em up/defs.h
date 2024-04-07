@@ -3,36 +3,73 @@
 
 #include "struct.h"
 
+///// GLOBAL /////
 #define SCREEN_WIDTH  1080
 #define SCREEN_HEIGHT 640
 
-// main.c
-extern SDL_Texture *playerBulletSpt;
+
+
+///// MAIN.C /////
+static void initSDL(void);
 static void lock60fps(long *then, float *remainder);
 
-// draw.c
-void lastScene(void);
-void currentScene(void);
+
+
+///// DRAW.C /////
+// "back buffer"
+void backScene(void);
+void frontScene(void);
+
+// get/generator
 SDL_Texture *loadImage(char *file);
-void getDimensions(struct Entity *obj, int scale);
+void getDimensions(struct Entity *obj, short scale);
+
+// draw
 void sprite(struct Entity *obj);
 
-// init.c and input.c
-void initSDL(void);
+
+
+///// input.c /////
 void doInput(void);
+static void keyboard(SDL_KeyboardEvent *event, short down);
 
-// match.c
-void initMatch(void);
+
+
+///// MATCH.C /////
+
+// texture
+extern SDL_Texture *enemySpt;
+extern SDL_Texture *enemyBulletSpt;
+extern SDL_Texture *playerBulletSpt;
+
+// timers
+extern unsigned int enemyCooldown;
+
+// call all
 static void update(void);
-static void draw();
+static void draw(void);
 
+// start/spawn
+void initMatch(void);
 static void initPlayer(void);
-static int movePlayer(int nPos, int dir, int mm);
-static void doPlayer(void);
+static void enemiesSpawn(void);
 static void shootPlayer(void);
-static void drawPlayer();
 
+// save memory
+static int movePlayer(int nPos, int dir, int mm);
+static void memAlloc(struct Entity **obj, short isShip);
+
+// update
+static void doPlayer(void);
+static void doEnemies(void);
 static void doBullets(void);
-static void drawBullets();
+
+// draw
+static void drawShips(void);
+static void drawBullets(void);
+
+
+
+///// END /////
 
 #endif

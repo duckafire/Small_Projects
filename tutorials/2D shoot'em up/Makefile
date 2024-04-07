@@ -1,6 +1,6 @@
 CC = @gcc
 
-FILES_C = main.c init.c input.c draw.c match.c
+FILES_C = main.c input.c draw.c match.c
 
 P4TH = -I../!SDL2/include -L../!SDL2/lib
 LIBS = -lmingw32 -lSDL2_image -lSDL2main -lSDL2
