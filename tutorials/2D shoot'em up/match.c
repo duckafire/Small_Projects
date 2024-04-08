@@ -52,6 +52,26 @@ static void draw(void){
 }
 
 
+static int aabb(struct Entity *bul, struct Entity *ship){
+	return MAX(bul->x, ship->x) < MIN(bul->x + bul->dim, ship->x + ship->dim) &&
+		   MAX(bul->y, ship->y) < MIN(bul->y + bul->dim, ship->y + ship->dim);
+}
+
+static int hitShip(struct Entity *bul){
+	struct Entity *ene;
+	
+	for(ene = app.shipHead.next; ene != NULL; ene = ene->next){
+		if(ene->isEnemy != bul->isEnemy && aabb(bul, ene)){
+			bul->hp = 0;
+			ene->hp = (ene->hp - 1 > 0 ? ene->hp - 1 : 0);
+			return 1;
+		}
+	}
+	
+	return 0;
+}
+
+
 static void memAlloc(struct Entity **obj, short isShip){
 	// alloc space in memory to the adress of the pointer used like argument
 	*obj = malloc(sizeof(struct Entity));
@@ -93,6 +113,7 @@ static void initPlayer(void){
 	player->x = (int)SCREEN_WIDTH  * 0.1;
 	player->y = ((int)SCREEN_HEIGHT / 2) - player->dim / 2;
 	player->spd = 4.0;
+	player->isEnemy = 0;
 }
 
 static void doPlayer(void){
@@ -124,6 +145,7 @@ static void enemiesSpawn(void){
 		enemy->y   = rand() % (SCREEN_HEIGHT - enemy->dim);
 		enemy->spd = 3 + rand() % 5;
 		enemy->hp  = rand() % 3 + 1;
+		enemy->isEnemy = 1;
 		
 		// reboot enemy cooldown
 		enemyCooldown = 61 + rand() % 180;
@@ -142,7 +164,7 @@ static void doEnemies(void){
 			e->x -= e->spd;
 		
 			// out of screen (width: <0), destroy enemy
-			if(e->x < (signed)-e->dim){		
+			if(e->x < (signed)-e->dim || e->hp == 0){		
 				if(e == app.shipTail) app.shipTail = prev;
 				
 				// enemy: last, curr, futu
@@ -182,6 +204,7 @@ static void shootPlayer(void){
 	bullet->y  = player->y + (player->dim - bullet->dim) / 2 + adjMoveY;
 	bullet->spd = 15;
 	bullet->hp = 1;
+	bullet->isEnemy = 0;
 	
 	// reboot player shoot cooldown
 	player->cooldown = 10;
@@ -196,7 +219,7 @@ static void doBullets(void){
 		b->x += b->spd;
 		
 		// out of screen (width: max>), destroy enemy
-		if(b->x + b->dim > SCREEN_WIDTH){
+		if(hitShip(b) || b->x + b->dim > SCREEN_WIDTH){
 			if(b == app.projTail) app.projTail = prev;
 			
 			// bullet: last, curr, futu

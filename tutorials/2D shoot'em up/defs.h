@@ -7,6 +7,17 @@
 #define SCREEN_WIDTH  1080
 #define SCREEN_HEIGHT 640
 
+#define MIN(a, b) ({ \
+	__typeof__ (a) _a = (a); \
+	__typeof__ (b) _b = (b); \
+	_a < _b ? _a : _b; \
+})
+
+#define MAX(a, b) ({ \
+	__typeof__ (a) _a = (a); \
+	__typeof__ (b) _b = (b); \
+	_a > _b ? _a : _b; \
+})
 
 
 ///// MAIN.C /////
@@ -39,6 +50,10 @@ extern SDL_Texture *playerBulletSpt;
 
 // timers
 extern unsigned int enemyCooldown;
+
+// collision
+static int aabb(struct Entity *bul, struct Entity *ship);
+static int hitShip(struct Entity *bul);
 
 // call all
 static void update(void);

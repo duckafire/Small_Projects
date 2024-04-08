@@ -10,6 +10,7 @@ struct Entity{
 	SDL_Texture *spt;
 	float x, y, spd;
 	unsigned int dim, hp, cooldown; // dim = width and height; shoot cooldown
+	unsigned short isEnemy;
 	struct Entity *next; // chain of entities (one to bullets and one to ships)
 };
 
