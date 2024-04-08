@@ -5,6 +5,8 @@
 #include "defs.h"
 #include "struct.h"
 
+// "RENDERER BUFFER" (backbuffer) -> its store all pixels of the window.
+
 int main(int argc, char *argv[]){
 	// define a struct and clear (to 0) all spaces
 	memset(&app, 0, sizeof(App));
@@ -16,14 +18,16 @@ int main(int argc, char *argv[]){
 	float remainder = 0;        // accrued time between tics
 	
 	while(1){
-		backScene();
+		// color to fill "renderer buffer"; restart the "renderer buffer" filling it with the color above (clear it)
+		SDL_SetRenderDrawColor(app.renderer, 50, 50, 50, 255);
+		SDL_RenderClear(app.renderer);
 		
 		doInput();
-		
 		app.update();
 		app.draw();
 		
-		frontScene();
+		// show the "renderer buffer", after add the elements to screen
+		SDL_RenderPresent(app.renderer);
 		
 		lock60fps(&then, &remainder);
 	}
@@ -37,7 +41,7 @@ static void initSDL(void){
 	IMG_Init(IMG_INIT_PNG);
 	
 	// window renderizator
-	app.window = SDL_CreateWindow("Shoot'em up", 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, 0);
+	app.window = SDL_CreateWindow("Shoot'em up", 25, 25, SCREEN_WIDTH, SCREEN_HEIGHT, 0);
 	
 	// "create a 2D rendering context for a window"
 	app.renderer = SDL_CreateRenderer(app.window, -1, SDL_RENDERER_ACCELERATED);

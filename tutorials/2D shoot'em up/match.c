@@ -31,8 +31,8 @@ void initMatch(void){
 	initPlayer();
 	
 	// load sprite to entities that will spawn in bigger quantity, to save memory (ram) and cpu
-	playerBulletSpt = loadImage("enemy");
-	playerBulletSpt = loadImage("enemy_bullet");
+	enemySpt        = loadImage("enemy");
+	enemyBulletSpt  = loadImage("enemy_bullet");
 	playerBulletSpt = loadImage("player_bullet");
 	
 	// timer to create the first enemy
@@ -84,7 +84,7 @@ static int movePlayer(int nPos, int dir, int mm){
 
 
 static void initPlayer(void){
-	memAlloc(player, 1);
+	memAlloc(&player, 1);
 	
 	// basic
 	player->spt = loadImage("player");
@@ -112,10 +112,9 @@ static void enemiesSpawn(void){
 	// less enemy cooldown
 	if(enemyCooldown > 0) enemyCooldown--;
 	
-	struct Entity *enemy;
-	
 	if(enemyCooldown == 0){
-		memAlloc(Enemy);
+		struct Entity *enemy;
+		memAlloc(&enemy, 1);
 		
 		// basic
 		enemy->spt = enemySpt;
@@ -123,7 +122,8 @@ static void enemiesSpawn(void){
 		
 		enemy->x   = SCREEN_WIDTH + rand() % 50;
 		enemy->y   = rand() % (SCREEN_HEIGHT - enemy->dim);
-		enemy->spd = 3 + rand() % 10;
+		enemy->spd = 3 + rand() % 5;
+		enemy->hp  = rand() % 3 + 1;
 		
 		// reboot enemy cooldown
 		enemyCooldown = 61 + rand() % 180;
@@ -135,14 +135,14 @@ static void doEnemies(void){
 	
 	// load all ships (pointer addition)
 	for(e = app.shipHead.next; e != NULL; e = e->next){
-		
 		// only enemies
 		if(e != player){
+			
 			// moviment (horizontal)
 			e->x -= e->spd;
 		
 			// out of screen (width: <0), destroy enemy
-			if(e->x < -e->dim){		
+			if(e->x < (signed)-e->dim){		
 				if(e == app.shipTail) app.shipTail = prev;
 				
 				// enemy: last, curr, futu
@@ -152,10 +152,10 @@ static void doEnemies(void){
 				e = prev;
 			}
 			
-			// next object
-			prev = e;
-			// it will not changed if the condition in top happen
 		}
+		// next object
+		prev = e;
+		// it will not changed if the condition in top happen
 	}
 }
 
@@ -163,7 +163,7 @@ static void doEnemies(void){
 static void shootPlayer(void){
 	struct Entity *bullet;
 	
-	memAlloc(bullet);
+	memAlloc(&bullet, 0);
 	
 	// basic
 	bullet->spt = playerBulletSpt;
@@ -207,7 +207,7 @@ static void doBullets(void){
 		}
 		
 		// next object
-		prev = e;
+		prev = b;
 		// it will not changed if the condition in top happen
 	}
 }

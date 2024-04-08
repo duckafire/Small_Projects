@@ -50,7 +50,7 @@ typedef struct{
 
 
 // global
-struct Entity player;
+struct Entity *player;
 Control control;
 App app;
 

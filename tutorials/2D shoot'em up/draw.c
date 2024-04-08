@@ -5,21 +5,6 @@
 #include "struct.h"
 #include "defs.h"
 
-// "RENDERER BUFFER" (backbuffer) -> its store all pixels of the window.
-
-void backScene(void){
-	// color to fill "renderer buffer"
-	SDL_SetRenderDrawColor(app.renderer, 50, 50, 50, 255);
-
-	// restart the "renderer buffer" filling it with the color above (clear it)
-	SDL_RenderClear(app.renderer);
-}
-
-void frontScene(void){
-	// show the "renderer buffer", after add the elements to screen
-	SDL_RenderPresent(app.renderer);
-}
-
 SDL_Texture *loadImage(char *file){
 	char path[30]; // 17 = reservad size; 12 = maximum file name
 	memset(path, '\0', 30);

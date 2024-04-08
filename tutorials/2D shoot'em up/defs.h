@@ -16,10 +16,6 @@ static void lock60fps(long *then, float *remainder);
 
 
 ///// DRAW.C /////
-// "back buffer"
-void backScene(void);
-void frontScene(void);
-
 // get/generator
 SDL_Texture *loadImage(char *file);
 void getDimensions(struct Entity *obj, short scale);
@@ -29,14 +25,13 @@ void sprite(struct Entity *obj);
 
 
 
-///// input.c /////
+///// INPUT.C /////
 void doInput(void);
 static void keyboard(SDL_KeyboardEvent *event, short down);
 
 
 
 ///// MATCH.C /////
-
 // texture
 extern SDL_Texture *enemySpt;
 extern SDL_Texture *enemyBulletSpt;
