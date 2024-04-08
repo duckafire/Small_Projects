@@ -4,6 +4,7 @@
 #include "struct.h"
 
 ///// GLOBAL /////
+#define FPS 60
 #define SCREEN_WIDTH  1080
 #define SCREEN_HEIGHT 640
 
@@ -42,18 +43,26 @@ static void keyboard(SDL_KeyboardEvent *event, short down);
 
 
 
+///// TOOLS.H /////
+// collision
+int aabb(struct Entity *bul, struct Entity *ship);
+int hitShip(struct Entity *bul);
+
+// save memory and code size
+int movePlayer(int nPos, int dir, int mm);
+void memAlloc(struct Entity **obj, short isShip);
+
+
+
 ///// MATCH.C /////
 // texture
+extern SDL_Texture *playerSpt;
 extern SDL_Texture *enemySpt;
 extern SDL_Texture *enemyBulletSpt;
 extern SDL_Texture *playerBulletSpt;
 
 // timers
 extern unsigned int enemyCooldown;
-
-// collision
-static int aabb(struct Entity *bul, struct Entity *ship);
-static int hitShip(struct Entity *bul);
 
 // call all
 static void update(void);
@@ -64,10 +73,6 @@ void initMatch(void);
 static void initPlayer(void);
 static void enemiesSpawn(void);
 static void shootPlayer(void);
-
-// save memory
-static int movePlayer(int nPos, int dir, int mm);
-static void memAlloc(struct Entity **obj, short isShip);
 
 // update
 static void doPlayer(void);

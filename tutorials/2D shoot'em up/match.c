@@ -2,12 +2,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-#include <string.h>
 
 #include "defs.h"
 #include "struct.h"
 
 // texture (from: defs.h)
+SDL_Texture *playerSpt;
 SDL_Texture *enemySpt;
 SDL_Texture *enemyBulletSpt;
 SDL_Texture *playerBulletSpt;
@@ -26,14 +26,15 @@ void initMatch(void){
 	// start TAIL in same point of HEAD
 	app.shipTail = &app.shipHead;
 	app.projTail = &app.projHead;
-	
-	// load all player informations
-	initPlayer();
-	
+
 	// load sprite to entities that will spawn in bigger quantity, to save memory (ram) and cpu
+	playerSpt       = loadImage("player");
 	enemySpt        = loadImage("enemy");
 	enemyBulletSpt  = loadImage("enemy_bullet");
 	playerBulletSpt = loadImage("player_bullet");
+	
+	// load all player informations
+	initPlayer();
 	
 	// timer to create the first enemy
 	enemyCooldown = 151 + rand() % 150;
@@ -51,63 +52,11 @@ static void draw(void){
 	drawShips();
 }
 
-
-static int aabb(struct Entity *bul, struct Entity *ship){
-	return MAX(bul->x, ship->x) < MIN(bul->x + bul->dim, ship->x + ship->dim) &&
-		   MAX(bul->y, ship->y) < MIN(bul->y + bul->dim, ship->y + ship->dim);
-}
-
-static int hitShip(struct Entity *bul){
-	struct Entity *ene;
-	
-	for(ene = app.shipHead.next; ene != NULL; ene = ene->next){
-		if(ene->isEnemy != bul->isEnemy && aabb(bul, ene)){
-			bul->hp = 0;
-			ene->hp = (ene->hp - 1 > 0 ? ene->hp - 1 : 0);
-			return 1;
-		}
-	}
-	
-	return 0;
-}
-
-
-static void memAlloc(struct Entity **obj, short isShip){
-	// alloc space in memory to the adress of the pointer used like argument
-	*obj = malloc(sizeof(struct Entity));
-	
-	// clear memory trash in space allocated
-	memset(*obj, 0, sizeof(struct Entity));
-	
-	// update the last object pointed by TAIL (1th is HEAD)
-	// update TAIL value (adress)
-	if(isShip){
-		app.shipTail->next = *obj;
-		app.shipTail = *obj;
-		
-	}else{
-		app.projTail->next = *obj;
-		app.projTail = *obj;	
-	}
-}
-
-static int movePlayer(int nPos, int dir, int mm){
-	// update parameter value
-	nPos += player->spd * dir;
-	
-	// lessing position (top or left)
-	if(mm != 0) return (nPos + player->dim <= mm ? nPos : mm - player->dim);
-	
-	// adding position (below or right)
-	return (nPos >= mm ? nPos : mm);
-}
-
-
 static void initPlayer(void){
 	memAlloc(&player, 1);
 	
 	// basic
-	player->spt = loadImage("player");
+	player->spt = playerSpt;
 	getDimensions(player, 2);
 	
 	player->x = (int)SCREEN_WIDTH  * 0.1;
