@@ -9,8 +9,9 @@
 struct Entity{
 	SDL_Texture *spt;
 	float x, y, spd;
-	unsigned int dim, hp, cooldown; // dim = width and height; shoot cooldown
-	unsigned short isEnemy;
+	unsigned int dim, cooldown; // dim = width and height; shoot cooldown
+	unsigned short isEnemy, hp, maxHp;
+	SDL_Rect lifebar;
 	struct Entity *next; // chain of entities (one to bullets and one to ships)
 };
 
@@ -44,6 +45,11 @@ typedef struct{
 	// entities control (HEAD is the beinning and TAIL is the final)
 	struct Entity shipHead, *shipTail; // player and enemies
 	struct Entity projHead, *projTail; // bullets of player and enemies
+	
+	// draw shapes (colors)
+	SDL_Renderer *shapeRed;
+	SDL_Renderer *shapeGreen;
+	SDL_Renderer *shapeGrey;
 } App;
 
 

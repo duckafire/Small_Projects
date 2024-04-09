@@ -53,3 +53,9 @@ int movePlayer(int nPos, int dir, int mm){
 	return (nPos >= mm ? nPos : mm);
 }
 
+void setLifebar(struct Entity *obj){
+	obj->lifebar.x = obj->x;
+	obj->lifebar.y = obj->y - 15;
+	obj->lifebar.w = obj->dim;
+	obj->lifebar.h = 8;
+}

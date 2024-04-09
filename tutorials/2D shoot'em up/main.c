@@ -8,7 +8,6 @@
 // "RENDERER BUFFER" (backbuffer) -> its store all pixels of the window.
 
 int main(int argc, char *argv[]){
-	// define a struct and clear (to 0) all spaces
 	memset(&app, 0, sizeof(App));
 	
 	initSDL();
@@ -48,6 +47,10 @@ static void initSDL(void){
 	
 	// image quality (0. linear; 1. nearest; 2. best)
 	SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "nearest");
+	
+	SDL_SetRenderDrawColor(app.shapeRed, 150, 0, 0, 255);
+	SDL_SetRenderDrawColor(app.shapeGreen, 0, 150, 0, 255);
+	SDL_SetRenderDrawColor(app.shapeGrey, 20, 20, 20, 255);
 }
 
 static void lock60fps(long *then, float *remainder){

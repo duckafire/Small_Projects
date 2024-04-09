@@ -63,6 +63,10 @@ static void initPlayer(void){
 	player->y = ((int)SCREEN_HEIGHT / 2) - player->dim / 2;
 	player->spd = 4.0;
 	player->isEnemy = 0;
+	player->maxHp = 5;
+	player->hp = player->maxHp;
+		
+	setLifebar(player);
 }
 
 static void doPlayer(void){
@@ -90,11 +94,14 @@ static void enemiesSpawn(void){
 		enemy->spt = enemySpt;
 		getDimensions(enemy, 2);
 		
-		enemy->x   = SCREEN_WIDTH + rand() % 50;
-		enemy->y   = rand() % (SCREEN_HEIGHT - enemy->dim);
-		enemy->spd = 3 + rand() % 5;
-		enemy->hp  = rand() % 3 + 1;
+		enemy->x       = SCREEN_WIDTH + rand() % 50;
+		enemy->y       = rand() % (SCREEN_HEIGHT - enemy->dim);
+		enemy->spd     = 3 + rand() % 5;
+		enemy->maxHp   = rand() % 3 + 1;
+		enemy->hp      = enemy->maxHp;
 		enemy->isEnemy = 1;
+		
+		setLifebar(enemy);
 		
 		// reboot enemy cooldown
 		enemyCooldown = 61 + rand() % 180;
@@ -188,7 +195,16 @@ static void doBullets(void){
 static void drawShips(){
 	// draw all player and enemies
 	struct Entity *e;
-	for(e = app.shipHead.next; e != NULL; e = e->next) sprite(e);
+	for(e = app.shipHead.next; e != NULL; e = e->next){
+		// lifebar
+		e->lifebar.w = e->dim;
+		SDL_RenderFillRect(app.shapeRed, &(e->lifebar));
+		// e->lifebar.w = e->hp * (e->lifebar.w / e->maxHp);
+		// SDL_RenderFillRect((e == player ? app.shapeGreen : app.shapeRed), &(e->lifebar));
+		
+		// ship sprite
+		sprite(e);
+	}
 }
 
 static void drawBullets(){

@@ -51,7 +51,7 @@ int hitShip(struct Entity *bul);
 // save memory and code size
 int movePlayer(int nPos, int dir, int mm);
 void memAlloc(struct Entity **obj, short isShip);
-
+void setLifebar(struct Entity *obj);
 
 
 ///// MATCH.C /////
