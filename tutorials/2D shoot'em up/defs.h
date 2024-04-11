@@ -30,10 +30,10 @@ static void lock60fps(long *then, float *remainder);
 ///// DRAW.C /////
 // get/generator
 SDL_Texture *loadImage(char *file);
-void getDimensions(struct Entity *obj, short scale);
+void getDimensions(Ship *ship, Bull *bull, short scale);
 
 // draw
-void sprite(struct Entity *obj);
+void sprite(Ship *ship, Bull *bull);
 
 
 
@@ -45,13 +45,13 @@ static void keyboard(SDL_KeyboardEvent *event, short down);
 
 ///// TOOLS.H /////
 // collision
-int aabb(struct Entity *bul, struct Entity *ship);
-int hitShip(struct Entity *bul);
+int aabb(Bull *bul, Ship *ship);
+int hitShip(Bull *bul);
 
 // save memory and code size
 int movePlayer(int nPos, int dir, int mm);
-void memAlloc(struct Entity **obj, short isShip);
-void setLifebar(struct Entity *obj);
+void memAlloc(Ship **ship, Bull **bull);
+void setLifebar(Ship *ship);
 
 
 ///// MATCH.C /////
@@ -65,8 +65,8 @@ extern SDL_Texture *playerBulletSpt;
 extern unsigned int enemyCooldown;
 
 // call all
-static void update(void);
-static void draw(void);
+void updateMatch(void);
+void drawMatch(void);
 
 // start/spawn
 void initMatch(void);

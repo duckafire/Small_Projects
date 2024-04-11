@@ -19,13 +19,9 @@ void initMatch(void){
 	// random seed
 	srand(time(NULL));
 	
-	// references
-	app.update = update;
-	app.draw = draw;
-	
 	// start TAIL in same point of HEAD
-	app.shipTail = &app.shipHead;
-	app.projTail = &app.projHead;
+	tail.ship = &head.ship;
+	tail.bull = &head.bull;
 
 	// load sprite to entities that will spawn in bigger quantity, to save memory (ram) and cpu
 	playerSpt       = loadImage("player");
@@ -40,24 +36,25 @@ void initMatch(void){
 	enemyCooldown = 151 + rand() % 150;
 }
 
-static void update(void){
+void updateMatch(void){
 	doBullets();
 	doEnemies();
 	doPlayer();
 	enemiesSpawn();
 }
 
-static void draw(void){
+void drawMatch(void){
 	drawBullets();
 	drawShips();
 }
 
+
 static void initPlayer(void){
-	memAlloc(&player, 1);
+	memAlloc(&player, NULL);
 	
 	// basic
 	player->spt = playerSpt;
-	getDimensions(player, 2);
+	getDimensions(player, NULL, 2);
 	
 	player->x = (int)SCREEN_WIDTH  * 0.1;
 	player->y = ((int)SCREEN_HEIGHT / 2) - player->dim / 2;
@@ -87,12 +84,12 @@ static void enemiesSpawn(void){
 	if(enemyCooldown > 0) enemyCooldown--;
 	
 	if(enemyCooldown == 0){
-		struct Entity *enemy;
-		memAlloc(&enemy, 1);
+		Ship *enemy;
+		memAlloc(&enemy, NULL);
 		
 		// basic
 		enemy->spt = enemySpt;
-		getDimensions(enemy, 2);
+		getDimensions(enemy, NULL, 2);
 		
 		enemy->x       = SCREEN_WIDTH + rand() % 50;
 		enemy->y       = rand() % (SCREEN_HEIGHT - enemy->dim);
@@ -109,10 +106,10 @@ static void enemiesSpawn(void){
 }
 
 static void doEnemies(void){
-	struct Entity *e, *prev = &app.shipHead;
+	Ship *e, *prev = &head.ship;
 	
 	// load all ships (pointer addition)
-	for(e = app.shipHead.next; e != NULL; e = e->next){
+	for(e = head.ship.next; e != NULL; e = e->next){
 		// only enemies
 		if(e != player){
 			
@@ -121,7 +118,7 @@ static void doEnemies(void){
 		
 			// out of screen (width: <0), destroy enemy
 			if(e->x < (signed)-e->dim || e->hp == 0){		
-				if(e == app.shipTail) app.shipTail = prev;
+				if(e == tail.ship) tail.ship = prev;
 				
 				// enemy: last, curr, futu
 				// last.nest = curr.next (futu)
@@ -139,13 +136,13 @@ static void doEnemies(void){
 
 
 static void shootPlayer(void){
-	struct Entity *bullet;
+	Bull *bullet;
 	
-	memAlloc(&bullet, 0);
+	memAlloc(NULL, &bullet);
 	
 	// basic
 	bullet->spt = playerBulletSpt;
-	getDimensions(bullet, 2);
+	getDimensions(NULL, bullet, 2);
 	
 	// adjust the bullet origin based in if the player is moving
 	short adjMoveX = 0, adjMoveY = 0;
@@ -159,7 +156,6 @@ static void shootPlayer(void){
 	bullet->x  = player->x + (player->dim - bullet->dim) / 2 + adjMoveX;
 	bullet->y  = player->y + (player->dim - bullet->dim) / 2 + adjMoveY;
 	bullet->spd = 15;
-	bullet->hp = 1;
 	bullet->isEnemy = 0;
 	
 	// reboot player shoot cooldown
@@ -167,16 +163,16 @@ static void shootPlayer(void){
 }
 
 static void doBullets(void){
-	struct Entity *b, *prev = &app.projHead;
+	Bull *b, *prev = &head.bull;
 	
 	// load all ships (pointer addition)
-	for(b = app.projHead.next; b != NULL; b = b->next){
+	for(b = head.bull.next; b != NULL; b = b->next){
 		// moviment (horizontal)
 		b->x += b->spd;
 		
 		// out of screen (width: max>), destroy enemy
 		if(hitShip(b) || b->x + b->dim > SCREEN_WIDTH){
-			if(b == app.projTail) app.projTail = prev;
+			if(b == tail.bull) tail.bull = prev;
 			
 			// bullet: last, curr, futu
 			// last.nest = curr.next (futu)
@@ -194,8 +190,8 @@ static void doBullets(void){
 
 static void drawShips(){
 	// draw all player and enemies
-	struct Entity *e;
-	for(e = app.shipHead.next; e != NULL; e = e->next){
+	Ship *e;
+	for(e = head.ship.next; e != NULL; e = e->next){
 		// lifebar
 		e->lifebar.w = e->dim;
 		SDL_RenderFillRect(app.shapeRed, &(e->lifebar));
@@ -203,13 +199,13 @@ static void drawShips(){
 		// SDL_RenderFillRect((e == player ? app.shapeGreen : app.shapeRed), &(e->lifebar));
 		
 		// ship sprite
-		sprite(e);
+		sprite(e, NULL);
 	}
 }
 
 static void drawBullets(){
 	// draw player and enemies bullet
-	struct Entity *b;
-	for(b = app.projHead.next; b != NULL; b = b->next) sprite(b);
+	Bull *b;
+	for(b = head.bull.next; b != NULL; b = b->next) sprite(NULL, b);
 }
 

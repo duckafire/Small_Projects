@@ -18,19 +18,31 @@ SDL_Texture *loadImage(char *file){
 	return IMG_LoadTexture(app.renderer, path);
 }
 
-void getDimensions(struct Entity *obj, short scale){
+void getDimensions(Ship *ship, Bull *bull, short scale){
 	// get information about sprite (image)
-	SDL_QueryTexture(obj->spt, NULL, NULL, &(obj->dim), NULL);
-	
 	// resize sprite
-	obj->dim *= scale;
+	
+	if(ship != NULL){
+		SDL_QueryTexture(ship->spt, NULL, NULL, &(ship->dim), NULL);
+		ship->dim *= scale;
+	
+	}else{
+		SDL_QueryTexture(bull->spt, NULL, NULL, &(bull->dim), NULL);
+		bull->dim *= scale;
+	}
 }
 
-void sprite(struct Entity *obj){
-	// type of 4th parameter of "SDL_RenderCoyp"
-	SDL_Rect body = {obj->x, obj->y, obj->dim, obj->dim};
-	
+void sprite(Ship *ship, Bull *bull){
+	// SDLRect: type of 4th parameter of "SDL_RenderCoyp"
 	// add image to "renderer buffer"
-	SDL_RenderCopy(app.renderer, obj->spt, NULL, &body);
+	
+	if(ship != NULL){
+		SDL_Rect body = {ship->x, ship->y, ship->dim, ship->dim};
+		SDL_RenderCopy(app.renderer, ship->spt, NULL, &body);
+	
+	}else{
+		SDL_Rect body = {bull->x, bull->y, bull->dim, bull->dim};
+		SDL_RenderCopy(app.renderer, bull->spt, NULL, &body);
+	}
 }
 

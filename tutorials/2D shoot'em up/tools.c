@@ -4,17 +4,16 @@
 #include "defs.h"
 #include "struct.h"
 
-int aabb(struct Entity *bul, struct Entity *ship){
+int aabb(Bull *bul, Ship *ship){
 	return MAX(bul->x, ship->x) < MIN(bul->x + bul->dim, ship->x + ship->dim) &&
 		   MAX(bul->y, ship->y) < MIN(bul->y + bul->dim, ship->y + ship->dim);
 }
 
-int hitShip(struct Entity *bul){
-	struct Entity *ene;
+int hitShip(Bull *bul){
+	Ship *ene;
 	
-	for(ene = app.shipHead.next; ene != NULL; ene = ene->next){
+	for(ene = head.ship.next; ene != NULL; ene = ene->next){
 		if(ene->isEnemy != bul->isEnemy && aabb(bul, ene)){
-			bul->hp = 0;
 			ene->hp = (ene->hp - 1 > 0 ? ene->hp - 1 : 0);
 			return 1;
 		}
@@ -23,22 +22,23 @@ int hitShip(struct Entity *bul){
 	return 0;
 }
 
-void memAlloc(struct Entity **obj, short isShip){
+void memAlloc(Ship **ship, Bull **bull){
 	// alloc space in memory to the adress of the pointer used like argument
-	*obj = malloc(sizeof(struct Entity));
-	
-	// clear memory trash in space allocated
-	memset(*obj, 0, sizeof(struct Entity));
-	
 	// update the last object pointed by TAIL (1th is HEAD)
 	// update TAIL value (adress)
-	if(isShip){
-		app.shipTail->next = *obj;
-		app.shipTail = *obj;
+	// clear memory trash in space allocated
+	
+	if(ship != NULL){
+		*ship = malloc(sizeof(Ship));
+		memset(*ship, 0, sizeof(Ship));
+		tail.ship->next = *ship;
+		tail.ship = *ship;
 		
 	}else{
-		app.projTail->next = *obj;
-		app.projTail = *obj;	
+		*bull = malloc(sizeof(Bull));
+		memset(*bull, 0, sizeof(Bull));
+		tail.bull->next = *bull;
+		tail.bull = *bull;
 	}
 }
 
@@ -53,9 +53,9 @@ int movePlayer(int nPos, int dir, int mm){
 	return (nPos >= mm ? nPos : mm);
 }
 
-void setLifebar(struct Entity *obj){
-	obj->lifebar.x = obj->x;
-	obj->lifebar.y = obj->y - 15;
-	obj->lifebar.w = obj->dim;
-	obj->lifebar.h = 8;
+void setLifebar(Ship *ship){
+	ship->lifebar.x = ship->x;
+	ship->lifebar.y = ship->y - 15;
+	ship->lifebar.w = ship->dim;
+	ship->lifebar.h = 8;
 }

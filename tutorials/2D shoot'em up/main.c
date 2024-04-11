@@ -8,7 +8,10 @@
 // "RENDERER BUFFER" (backbuffer) -> its store all pixels of the window.
 
 int main(int argc, char *argv[]){
-	memset(&app, 0, sizeof(App));
+	memset(&app, 0, sizeof(struct _App));
+	memset(&control, 0, sizeof(struct _Control));
+	memset(&head, 0, sizeof(Head));
+	memset(&tail, 0, sizeof(Tail));
 	
 	initSDL();
 	initMatch();
@@ -22,8 +25,8 @@ int main(int argc, char *argv[]){
 		SDL_RenderClear(app.renderer);
 		
 		doInput();
-		app.update();
-		app.draw();
+		updateMatch();
+		drawMatch();
 		
 		// show the "renderer buffer", after add the elements to screen
 		SDL_RenderPresent(app.renderer);
