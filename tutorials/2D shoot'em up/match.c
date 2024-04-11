@@ -1,6 +1,7 @@
 #include <SDL.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <time.h>
 
 #include "defs.h"
@@ -15,25 +16,49 @@ SDL_Texture *playerBulletSpt;
 // timers (from: defs.h)
 unsigned int enemyCooldown;
 
-void initMatch(void){
+void initMatch(short loadImg){
 	// random seed
 	srand(time(NULL));
 	
 	// start TAIL in same point of HEAD
+	memset(&head, 0, sizeof(Head));
+	memset(&tail, 0, sizeof(Tail));
 	tail.ship = &head.ship;
 	tail.bull = &head.bull;
-
-	// load sprite to entities that will spawn in bigger quantity, to save memory (ram) and cpu
-	playerSpt       = loadImage("player");
-	enemySpt        = loadImage("enemy");
-	enemyBulletSpt  = loadImage("enemy_bullet");
-	playerBulletSpt = loadImage("player_bullet");
+	
+	if(loadImg == 1){
+		// texture (from: defs.h)
+		playerSpt       = loadImage("player");
+		enemySpt        = loadImage("enemy");
+		enemyBulletSpt  = loadImage("enemy_bullet");
+		playerBulletSpt = loadImage("player_bullet");
+	}
 	
 	// load all player informations
 	initPlayer();
 	
 	// timer to create the first enemy
 	enemyCooldown = 151 + rand() % 150;
+}
+
+void restartMatch(void){
+	Ship *s;
+	while(head.ship.next){
+		s = head.ship.next;
+		head.ship.next = s->next;
+		free(s);
+	}
+	
+	
+	Bull *b;
+	while(head.bull.next){
+		b = head.bull.next;
+		head.bull.next = b->next;
+		free(b);
+	}
+	
+	SDL_Delay(500); // 0.5s
+	initMatch(0);
 }
 
 void updateMatch(void){
@@ -62,7 +87,7 @@ static void initPlayer(void){
 	player->isEnemy = 0;
 	player->maxHp = 5;
 	player->hp = player->maxHp;
-		
+	
 	setLifebar(player);
 }
 
@@ -75,7 +100,10 @@ static void doPlayer(void){
 	
 	// shoot cooldown and shoot
 	if(player->cooldown > 0) player->cooldown--;
-	if(control.sht && player->cooldown == 0) shootPlayer();
+	if(control.sht && player->cooldown == 0) shootShip(player);
+	
+	// dead
+	if(player->hp == 0) restartMatch();
 }
 
 
@@ -91,12 +119,13 @@ static void enemiesSpawn(void){
 		enemy->spt = enemySpt;
 		getDimensions(enemy, NULL, 2);
 		
-		enemy->x       = SCREEN_WIDTH + rand() % 50;
-		enemy->y       = rand() % (SCREEN_HEIGHT - enemy->dim);
-		enemy->spd     = 3 + rand() % 5;
-		enemy->maxHp   = rand() % 3 + 1;
-		enemy->hp      = enemy->maxHp;
-		enemy->isEnemy = 1;
+		enemy->x        = SCREEN_WIDTH + rand() % 50;
+		enemy->y        = rand() % (SCREEN_HEIGHT - enemy->dim);
+		enemy->spd      = 3 + rand() % 5;
+		enemy->maxHp    = rand() % 3 + 1;
+		enemy->hp       = enemy->maxHp;
+		enemy->isEnemy  = 1;
+		enemy->cooldown = 15 + rand() % 30;
 		
 		setLifebar(enemy);
 		
@@ -112,6 +141,9 @@ static void doEnemies(void){
 	for(e = head.ship.next; e != NULL; e = e->next){
 		// only enemies
 		if(e != player){
+			
+			// FIRE!
+			if(--e->cooldown == 0) shootShip(e);
 			
 			// moviment (horizontal)
 			e->x -= e->spd;
@@ -135,31 +167,34 @@ static void doEnemies(void){
 }
 
 
-static void shootPlayer(void){
+static void shootShip(Ship *ship){
 	Bull *bullet;
 	
 	memAlloc(NULL, &bullet);
 	
 	// basic
-	bullet->spt = playerBulletSpt;
+	bullet->spt = (ship->isEnemy ? enemyBulletSpt : playerBulletSpt);
 	getDimensions(NULL, bullet, 2);
 	
 	// adjust the bullet origin based in if the player is moving
 	short adjMoveX = 0, adjMoveY = 0;
-	short key[4] = {control.top, control.bel, control.lef, control.rig};
 	
-	if(key[0] && !key[1]) adjMoveY = -player->spd;
-	if(key[1] && !key[0]) adjMoveY =  player->spd;
-	if(key[3] && !key[2]) adjMoveX =  player->spd;
-	if(key[2] && !key[3]) adjMoveX = -player->spd;
+	if(!ship->isEnemy){
+		short key[4] = {control.top, control.bel, control.lef, control.rig};
 	
-	bullet->x  = player->x + (player->dim - bullet->dim) / 2 + adjMoveX;
-	bullet->y  = player->y + (player->dim - bullet->dim) / 2 + adjMoveY;
-	bullet->spd = 15;
-	bullet->isEnemy = 0;
+		if(key[0] && !key[1]) adjMoveY = -player->spd;
+		if(key[1] && !key[0]) adjMoveY =  player->spd;
+		if(key[3] && !key[2]) adjMoveX =  player->spd;
+		if(key[2] && !key[3]) adjMoveX = -player->spd;
+	}
 	
-	// reboot player shoot cooldown
-	player->cooldown = 10;
+	bullet->x  = ship->x + (ship->dim - bullet->dim) / 2 + adjMoveX;
+	bullet->y  = ship->y + (ship->dim - bullet->dim) / 2 + adjMoveY;
+	bullet->spd = (ship->isEnemy ? -16 : 16);
+	bullet->isEnemy = ship->isEnemy;
+	
+	// reboot ship shoot cooldown
+	ship->cooldown = (ship->isEnemy ? 15 + rand() % 30 : 10);
 }
 
 static void doBullets(void){

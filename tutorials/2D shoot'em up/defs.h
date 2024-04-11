@@ -69,10 +69,11 @@ void updateMatch(void);
 void drawMatch(void);
 
 // start/spawn
-void initMatch(void);
+void initMatch(short loadImg);
+void restartMatch(void);
 static void initPlayer(void);
 static void enemiesSpawn(void);
-static void shootPlayer(void);
+static void shootShip(Ship *ship);
 
 // update
 static void doPlayer(void);

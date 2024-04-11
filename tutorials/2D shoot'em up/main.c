@@ -14,7 +14,7 @@ int main(int argc, char *argv[]){
 	memset(&tail, 0, sizeof(Tail));
 	
 	initSDL();
-	initMatch();
+	initMatch(1);
 	
 	long then = SDL_GetTicks(); // return the milliseconds after start sdl2 library
 	float remainder = 0;        // accrued time between tics
