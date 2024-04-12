@@ -5,7 +5,7 @@
 /////////////////////////////////////////////////////////////////
 
 
-// for all entities
+// entities
 struct _Ship{
 	SDL_Texture *spt;
 	float x, y, spd;
@@ -23,11 +23,59 @@ struct _Bull{
 	struct _Bull *next;
 };
 
+struct _Star{
+	float x, y, spd;
+};
+
+struct _Expl{
+	float x, y, sx, sy;
+	int r, g, b, a;
+	struct _Expl *next;
+};
+
+struct _Debr{
+	float x, y, sx, sy;
+	unsigned short destroyed;
+	SDL_Rect rect;
+	SDL_Texture *spt;
+	struct _Debr *next;
+};
+
 
 /////////////////////////////////////////////////////////////////
 
 
-// for player control
+// entities chain
+struct _Head{
+	struct _Ship ship;
+	struct _Bull bull;
+	struct _Expl expl;
+	struct _Debr debr;
+};
+
+struct _Tail{
+	struct _Ship *ship;
+	struct _Bull *bull;
+	struct _Expl *expl;
+	struct _Debr *debr;
+};
+
+
+/////////////////////////////////////////////////////////////////
+
+
+// input and output
+struct _App{
+	// about window
+	SDL_Renderer *renderer; // pointer to "back buffer"
+	SDL_Window   *window;   // poniter to the own window
+	
+	// draw shapes (colors)
+	SDL_Renderer *shapeRed;
+	SDL_Renderer *shapeGreen;
+	SDL_Renderer *shapeGrey;
+};
+
 struct _Control{
 	unsigned short top;
 	unsigned short bel;
@@ -40,42 +88,13 @@ struct _Control{
 /////////////////////////////////////////////////////////////////
 
 
-// first entity in a chain
-struct _Head{
-	struct _Ship ship;
-	struct _Bull bull;
-};
-
-// last entity in a chain
-struct _Tail{
-	struct _Ship *ship;
-	struct _Bull *bull;
-};
-
-
-/////////////////////////////////////////////////////////////////
-
-
-// for general control of program
-struct _App{
-	// about window
-	SDL_Renderer *renderer; // pointer to "back buffer"
-	SDL_Window   *window;   // poniter to the own window
-	
-	// draw shapes (colors)
-	SDL_Renderer *shapeRed;
-	SDL_Renderer *shapeGreen;
-	SDL_Renderer *shapeGrey;
-};
-
-
-/////////////////////////////////////////////////////////////////
-
-
 typedef struct _Ship Ship;
 typedef struct _Bull Bull;
 typedef struct _Head Head;
 typedef struct _Tail Tail;
+typedef struct _Star Star;
+typedef struct _Expl Expl;
+typedef struct _Debr Debr;
 
 struct _Control control;
 struct _App app;

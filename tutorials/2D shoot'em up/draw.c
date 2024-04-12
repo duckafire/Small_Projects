@@ -46,3 +46,7 @@ void sprite(Ship *ship, Bull *bull){
 	}
 }
 
+void explSprite(float x, float y, SDL_Texture *spt, SDL_Rect *rect){
+	SDL_Rect body = {x, y, rect->w, rect->h};
+	SDL_RenderCopy(app.renderer, spt, rect, &body); // draw a image piece
+}

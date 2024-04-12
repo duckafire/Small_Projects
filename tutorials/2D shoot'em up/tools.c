@@ -59,3 +59,4 @@ void setLifebar(Ship *ship){
 	ship->lifebar.w = ship->dim;
 	ship->lifebar.h = 8;
 }
+

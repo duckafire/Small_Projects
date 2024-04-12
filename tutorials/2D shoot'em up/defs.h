@@ -34,6 +34,7 @@ void getDimensions(Ship *ship, Bull *bull, short scale);
 
 // draw
 void sprite(Ship *ship, Bull *bull);
+void explSprite(float x, float y, SDL_Texture *spt, SDL_Rect *rect)
 
 
 
@@ -55,23 +56,15 @@ void setLifebar(Ship *ship);
 
 
 ///// MATCH.C /////
-// texture
-extern SDL_Texture *playerSpt;
-extern SDL_Texture *enemySpt;
-extern SDL_Texture *enemyBulletSpt;
-extern SDL_Texture *playerBulletSpt;
-
-// timers
-extern unsigned int enemyCooldown;
-
 // call all
 void updateMatch(void);
 void drawMatch(void);
 
 // start/spawn
-void initMatch(short loadImg);
+void initMatch(void);
 void restartMatch(void);
 static void initPlayer(void);
+static void initStar(void);
 static void enemiesSpawn(void);
 static void shootShip(Ship *ship);
 
@@ -79,10 +72,16 @@ static void shootShip(Ship *ship);
 static void doPlayer(void);
 static void doEnemies(void);
 static void doBullets(void);
+static void doStars(void);
+static void doExplosion(void);
+static void doDebris(void);
 
 // draw
 static void drawShips(void);
 static void drawBullets(void);
+static void drawStars(void);
+static void drawExplosions(void);
+static void drawDrebis(void);
 
 
 

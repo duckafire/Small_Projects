@@ -8,34 +8,39 @@
 #include "struct.h"
 
 // texture (from: defs.h)
-SDL_Texture *playerSpt;
-SDL_Texture *enemySpt;
-SDL_Texture *enemyBulletSpt;
-SDL_Texture *playerBulletSpt;
+SDL_Texture* playerSpt       = loadImage("player");
+SDL_Texture* enemySpt        = loadImage("enemy");
+SDL_Texture* enemyBulletSpt  = loadImage("player_bullet");
+SDL_Texture* playerBulletSpt = loadImage("enemy_bullet");
+SDL_Texture* starSpt         = loadImage("star");
+SDL_Texture* explosionSpt    = loadImage("explosion");
 
 // timers (from: defs.h)
 unsigned int enemyCooldown;
 
-void initMatch(short loadImg){
+Star stars[500];
+
+void initMatch(void){
 	// random seed
 	srand(time(NULL));
 	
-	// start TAIL in same point of HEAD
+	// clear trash
 	memset(&head, 0, sizeof(Head));
 	memset(&tail, 0, sizeof(Tail));
+	memset(&expl, 0, sizeof(Expl));
+	memset(&debr, 0, sizeof(Debr));
+	
+	// add value to tails
 	tail.ship = &head.ship;
 	tail.bull = &head.bull;
-	
-	if(loadImg == 1){
-		// texture (from: defs.h)
-		playerSpt       = loadImage("player");
-		enemySpt        = loadImage("enemy");
-		enemyBulletSpt  = loadImage("enemy_bullet");
-		playerBulletSpt = loadImage("player_bullet");
-	}
+	tail.expl = &head.expl;
+	tail.debr = &head.debr;
 	
 	// load all player informations
 	initPlayer();
+	
+	// create (new) stars
+	initStar();
 	
 	// timer to create the first enemy
 	enemyCooldown = 151 + rand() % 150;
@@ -49,7 +54,6 @@ void restartMatch(void){
 		free(s);
 	}
 	
-	
 	Bull *b;
 	while(head.bull.next){
 		b = head.bull.next;
@@ -57,8 +61,22 @@ void restartMatch(void){
 		free(b);
 	}
 	
+	Expl *e;
+	while(head.expl.next){
+		e = head.expl.next;
+		head.expl.next = e->next;
+		free(e);
+	}
+	
+	Debr *d;
+	while(head.debr.next){
+		d = head.debr.next;
+		head.debr.next = d->next;
+		free(d);
+	}
+	
 	SDL_Delay(500); // 0.5s
-	initMatch(0);
+	initMatch();
 }
 
 void updateMatch(void){
@@ -222,6 +240,26 @@ static void doBullets(void){
 	}
 }
 
+static void doStars(void){
+	for(int i = 0; i < 500; i++){
+		stars[i].x -= stars[i].spd;
+		if(stars[i].x == 0) stars[i].x = SCREEN_WIDTH;
+	}
+}
+
+
+static void doExplosion(void);
+static void doDebris(void);
+
+
+static void initStar(void){
+	for(int i = 0; i < 500; i++){
+		stars[i].x = rand() % SCREEN_WIDTH + 1;
+		stars[i].y = rand() % SCREEN_HEIGHT + 1;
+		start[i].spd = 1 + rand() % 10;
+	}
+}
+
 
 static void drawShips(){
 	// draw all player and enemies
@@ -244,3 +282,6 @@ static void drawBullets(){
 	for(b = head.bull.next; b != NULL; b = b->next) sprite(NULL, b);
 }
 
+static void drawStars(void);
+static void drawExplosion(void);
+static void drawDebris(void);
