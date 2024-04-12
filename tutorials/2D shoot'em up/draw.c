@@ -32,21 +32,15 @@ void getDimensions(Ship *ship, Bull *bull, short scale){
 	}
 }
 
-void sprite(Ship *ship, Bull *bull){
+void sprite(SDL_Texture *spt, float x, float y, unsigned int dim){
 	// SDLRect: type of 4th parameter of "SDL_RenderCoyp"
+	SDL_Rect body = {x, y, dim, dim};
+	
 	// add image to "renderer buffer"
-	
-	if(ship != NULL){
-		SDL_Rect body = {ship->x, ship->y, ship->dim, ship->dim};
-		SDL_RenderCopy(app.renderer, ship->spt, NULL, &body);
-	
-	}else{
-		SDL_Rect body = {bull->x, bull->y, bull->dim, bull->dim};
-		SDL_RenderCopy(app.renderer, bull->spt, NULL, &body);
-	}
+	SDL_RenderCopy(app.renderer, spt, NULL, &body);
 }
 
-void explSprite(float x, float y, SDL_Texture *spt, SDL_Rect *rect){
-	SDL_Rect body = {x, y, rect->w, rect->h};
-	SDL_RenderCopy(app.renderer, spt, rect, &body); // draw a image piece
+void debrSprite(Debr *debr){
+	SDL_Rect body = {debr->x, debr->y, debr->rect.w, debr->rect.h};
+	SDL_RenderCopy(app.renderer, debr->spt, &debr->rect, &body); // draw a image piece
 }

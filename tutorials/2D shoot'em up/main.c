@@ -14,7 +14,7 @@ int main(int argc, char *argv[]){
 	memset(&tail, 0, sizeof(Tail));
 	
 	initSDL();
-	initMatch();
+	initMatch(1);
 	
 	long then = SDL_GetTicks(); // return the milliseconds after start sdl2 library
 	float remainder = 0;        // accrued time between tics
@@ -41,6 +41,9 @@ static void initSDL(void){
 	// starts libs
 	SDL_Init(SDL_INIT_VIDEO);
 	IMG_Init(IMG_INIT_PNG);
+	
+	// hide cursor
+	SDL_ShowCursor(0);
 	
 	// window renderizator
 	app.window = SDL_CreateWindow("Shoot'em up", 25, 25, SCREEN_WIDTH, SCREEN_HEIGHT, 0);

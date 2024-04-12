@@ -10,36 +10,20 @@ int aabb(Bull *bul, Ship *ship){
 }
 
 int hitShip(Bull *bul){
-	Ship *ene;
+	Ship *ship;
 	
-	for(ene = head.ship.next; ene != NULL; ene = ene->next){
-		if(ene->isEnemy != bul->isEnemy && aabb(bul, ene)){
-			ene->hp = (ene->hp - 1 > 0 ? ene->hp - 1 : 0);
+	for(ship = head.ship.next; ship != NULL; ship = ship->next){
+		if(ship->isEnemy != bul->isEnemy && aabb(bul, ship)){
+			
+			ship->hp = (ship->hp - 1 > 0 ? ship->hp - 1 : 0);
+			
+			if(ship != player) newExplosion(ship->x, ship->y, rand() % 3 + 1);
+			
 			return 1;
 		}
 	}
 	
 	return 0;
-}
-
-void memAlloc(Ship **ship, Bull **bull){
-	// alloc space in memory to the adress of the pointer used like argument
-	// update the last object pointed by TAIL (1th is HEAD)
-	// update TAIL value (adress)
-	// clear memory trash in space allocated
-	
-	if(ship != NULL){
-		*ship = malloc(sizeof(Ship));
-		memset(*ship, 0, sizeof(Ship));
-		tail.ship->next = *ship;
-		tail.ship = *ship;
-		
-	}else{
-		*bull = malloc(sizeof(Bull));
-		memset(*bull, 0, sizeof(Bull));
-		tail.bull->next = *bull;
-		tail.bull = *bull;
-	}
 }
 
 int movePlayer(int nPos, int dir, int mm){

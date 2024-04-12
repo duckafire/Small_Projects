@@ -29,6 +29,7 @@ struct _Star{
 
 struct _Expl{
 	float x, y, sx, sy;
+	unsigned int dim;
 	int r, g, b, a;
 	struct _Expl *next;
 };

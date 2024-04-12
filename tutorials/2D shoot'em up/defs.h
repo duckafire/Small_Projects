@@ -33,8 +33,8 @@ SDL_Texture *loadImage(char *file);
 void getDimensions(Ship *ship, Bull *bull, short scale);
 
 // draw
-void sprite(Ship *ship, Bull *bull);
-void explSprite(float x, float y, SDL_Texture *spt, SDL_Rect *rect)
+void sprite(SDL_Texture *spt, float x, float y, unsigned int dim);
+void debrSprite(Debr *debr);
 
 
 
@@ -51,7 +51,6 @@ int hitShip(Bull *bul);
 
 // save memory and code size
 int movePlayer(int nPos, int dir, int mm);
-void memAlloc(Ship **ship, Bull **bull);
 void setLifebar(Ship *ship);
 
 
@@ -61,12 +60,14 @@ void updateMatch(void);
 void drawMatch(void);
 
 // start/spawn
-void initMatch(void);
+void initMatch(short loadImg);
 void restartMatch(void);
 static void initPlayer(void);
 static void initStar(void);
 static void enemiesSpawn(void);
 static void shootShip(Ship *ship);
+void newExplosion(int x, int y, int max);
+void newDebris(Ship *e);
 
 // update
 static void doPlayer(void);
@@ -81,7 +82,7 @@ static void drawShips(void);
 static void drawBullets(void);
 static void drawStars(void);
 static void drawExplosions(void);
-static void drawDrebis(void);
+static void drawDebris(void);
 
 
 

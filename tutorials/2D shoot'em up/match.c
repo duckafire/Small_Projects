@@ -8,33 +8,38 @@
 #include "struct.h"
 
 // texture (from: defs.h)
-SDL_Texture* playerSpt       = loadImage("player");
-SDL_Texture* enemySpt        = loadImage("enemy");
-SDL_Texture* enemyBulletSpt  = loadImage("player_bullet");
-SDL_Texture* playerBulletSpt = loadImage("enemy_bullet");
-SDL_Texture* starSpt         = loadImage("star");
-SDL_Texture* explosionSpt    = loadImage("explosion");
+SDL_Texture *playerSpt;
+SDL_Texture *enemySpt;
+SDL_Texture *playerBulletSpt;
+SDL_Texture *enemyBulletSpt;
+SDL_Texture *explosionSpt;
 
 // timers (from: defs.h)
 unsigned int enemyCooldown;
 
 Star stars[500];
 
-void initMatch(void){
+void initMatch(short loadImg){
 	// random seed
 	srand(time(NULL));
 	
 	// clear trash
 	memset(&head, 0, sizeof(Head));
 	memset(&tail, 0, sizeof(Tail));
-	memset(&expl, 0, sizeof(Expl));
-	memset(&debr, 0, sizeof(Debr));
 	
 	// add value to tails
 	tail.ship = &head.ship;
 	tail.bull = &head.bull;
 	tail.expl = &head.expl;
 	tail.debr = &head.debr;
+	
+	if(loadImg == 1){
+		playerSpt       = loadImage("player");
+		enemySpt        = loadImage("enemy");
+		playerBulletSpt = loadImage("player_bullet");
+		enemyBulletSpt  = loadImage("enemy_bullet");
+		explosionSpt    = loadImage("explosion");
+	}
 	
 	// load all player informations
 	initPlayer();
@@ -76,24 +81,33 @@ void restartMatch(void){
 	}
 	
 	SDL_Delay(500); // 0.5s
-	initMatch();
+	initMatch(0);
 }
 
 void updateMatch(void){
+	doStars();
 	doBullets();
 	doEnemies();
 	doPlayer();
 	enemiesSpawn();
+	doExplosion();
+	doDebris();
 }
 
 void drawMatch(void){
 	drawBullets();
 	drawShips();
+	drawDebris();
+	drawExplosions();
 }
 
 
 static void initPlayer(void){
-	memAlloc(&player, NULL);
+	player = malloc(sizeof(Ship));
+	memset(player, 0, sizeof(Ship));
+	tail.ship->next = player;
+	tail.ship = player;
+
 	
 	// basic
 	player->spt = playerSpt;
@@ -131,8 +145,11 @@ static void enemiesSpawn(void){
 	
 	if(enemyCooldown == 0){
 		Ship *enemy;
-		memAlloc(&enemy, NULL);
-		
+		enemy = malloc(sizeof(Ship));
+		memset(enemy, 0, sizeof(Ship));
+		tail.ship->next = enemy;
+		tail.ship = enemy;
+
 		// basic
 		enemy->spt = enemySpt;
 		getDimensions(enemy, NULL, 2);
@@ -168,6 +185,11 @@ static void doEnemies(void){
 		
 			// out of screen (width: <0), destroy enemy
 			if(e->x < (signed)-e->dim || e->hp == 0){		
+				if(e->hp == 0){
+					// newDebris(ship);
+					newExplosion(e->x, e->y, rand() % 5 + 4);
+				}
+				
 				if(e == tail.ship) tail.ship = prev;
 				
 				// enemy: last, curr, futu
@@ -185,10 +207,86 @@ static void doEnemies(void){
 }
 
 
+static void initStar(void){
+	for(int i = 0; i < 500; i++){
+		stars[i].x = rand() % SCREEN_WIDTH + 1;
+		stars[i].y = rand() % SCREEN_HEIGHT + 1;
+		stars[i].spd = 1 + rand() % 10;
+	}
+}
+
+void newExplosion(int x, int y, int max){
+	Expl *explosion;
+	
+	for(int i = 0; i < max; i++){
+		explosion = malloc(sizeof(Expl));
+		memset(explosion, 0, sizeof(Expl));
+		tail.expl->next = explosion;
+		tail.expl = explosion;
+
+		explosion->x   = x + (rand() % 32) - (rand() % 32);
+		explosion->y   = y + (rand() % 32) - (rand() % 32);
+		explosion->sx  = ((rand() % 10) - (rand() % 10)) / 10;
+		explosion->sy  = ((rand() % 10) - (rand() % 10)) / 10;
+		explosion->dim = 32;
+		explosion->a   = rand() % FPS * 3; // ---A
+		
+		// RBG-
+		switch(rand() % 4){
+			case 1:
+				explosion->r = 255;
+				break;
+			case 2:
+				explosion->r = 255;
+				explosion->g = 128;
+				break;
+			case 3:
+				explosion->r = 255;
+				explosion->g = 255;
+				break;
+			default:
+				explosion->r = 255;
+				explosion->g = 255;
+				explosion->b = 255;
+				break;
+		}
+	}
+}
+
+void newDebris(Ship *e){
+	Debr *debris;
+	int w = e->dim / 2, h = e->dim / 2;
+
+	for(int y = 0; y <= h; y += h){
+		for(int x = 0; x <= w; x += w){
+			debris = malloc(sizeof(Debr));
+			memset(debris, 0, sizeof(Debr));
+			tail.debr->next = debris;
+			tail.debr = debris;
+			
+			debris->x   = e->x + w;
+			debris->y   = e->y + h;
+			debris->sx  = (rand() % 5) - (rand() % 5);
+			debris->sy  = (rand() % 5) - (rand() % 5);
+			debris->spt = explosionSpt;
+			debris->destroyed = FPS * 2;
+			
+			debris->rect.x = x;
+			debris->rect.y = y;
+			debris->rect.w = w;
+			debris->rect.h = h;
+		}
+	}
+}
+
+
 static void shootShip(Ship *ship){
 	Bull *bullet;
-	
-	memAlloc(NULL, &bullet);
+	bullet = malloc(sizeof(Bull));
+	memset(bullet, 0, sizeof(Bull));
+	tail.bull->next = bullet;
+	tail.bull = bullet;
+
 	
 	// basic
 	bullet->spt = (ship->isEnemy ? enemyBulletSpt : playerBulletSpt);
@@ -243,20 +341,48 @@ static void doBullets(void){
 static void doStars(void){
 	for(int i = 0; i < 500; i++){
 		stars[i].x -= stars[i].spd;
-		if(stars[i].x == 0) stars[i].x = SCREEN_WIDTH;
+		if(stars[i].x < -5) stars[i].x = SCREEN_WIDTH;
 	}
 }
 
 
-static void doExplosion(void);
-static void doDebris(void);
+static void doExplosion(void){
+	Expl *e, *prev = &head.expl;
+	
+	for(e = head.expl.next; e != NULL; e = e->next){
+		e->x += e->sx;
+		e->y += e->sy;
+		
+		// opacity/alpha
+		if(--e->a == 0){
+			if(e == tail.expl) tail.expl = prev;
+			prev->next = e->next;
+			free(e);
+			e = prev;
+		}
+		
+		prev = e;
+	}
+}
 
-
-static void initStar(void){
-	for(int i = 0; i < 500; i++){
-		stars[i].x = rand() % SCREEN_WIDTH + 1;
-		stars[i].y = rand() % SCREEN_HEIGHT + 1;
-		start[i].spd = 1 + rand() % 10;
+static void doDebris(void){
+	Debr *d, *prev = &head.debr;
+	
+	for(d = head.debr.next; d != NULL; d = d->next){
+		d->x  += d->sx;
+		d->y  += d->sy;
+		
+		if(d->sx > 0.5) d->sx -= 0.5;
+		if(d->sy > 0.5) d->sy -= 0.5;
+		
+		if(--d->destroyed){
+			if(d == tail.debr) tail.debr = prev;
+			prev->next = d->next;
+			free(d);
+			d = prev;
+		}
+		
+		prev = d;
 	}
 }
 
@@ -272,16 +398,42 @@ static void drawShips(){
 		// SDL_RenderFillRect((e == player ? app.shapeGreen : app.shapeRed), &(e->lifebar));
 		
 		// ship sprite
-		sprite(e, NULL);
+		sprite(e->spt, e->x, e->y, e->dim);
 	}
 }
 
 static void drawBullets(){
 	// draw player and enemies bullet
 	Bull *b;
-	for(b = head.bull.next; b != NULL; b = b->next) sprite(NULL, b);
+	for(b = head.bull.next; b != NULL; b = b->next) sprite(b->spt, b->x, b->y, b->dim);
 }
 
-static void drawStars(void);
-static void drawExplosion(void);
-static void drawDebris(void);
+static void drawStars(void){
+	int c;
+	for(int i = 0; i < 500; i++){
+		c = 32 * stars[i].spd;
+		SDL_SetRenderDrawColor(app.renderer, c, c, c, 255);
+		SDL_RenderDrawLine(app.renderer, stars[i].x, stars[i].y, stars[i].x + 3, stars[i].y);
+	}
+}
+
+static void drawExplosions(void){
+	Expl *e;
+	
+	SDL_SetRenderDrawBlendMode(app.renderer, SDL_BLENDMODE_ADD);
+	SDL_SetTextureBlendMode(explosionSpt, SDL_BLENDMODE_ADD);
+
+	for(e = head.expl.next; e != NULL; e = e->next){
+		SDL_SetTextureColorMod(explosionSpt, e->r, e->g, e->b);
+		SDL_SetTextureAlphaMod(explosionSpt, e->a);
+		sprite(explosionSpt, e->x, e->y, e->dim);
+	}
+	
+	SDL_SetRenderDrawBlendMode(app.renderer, SDL_BLENDMODE_NONE);
+}
+
+static void drawDebris(void){
+	Debr *d;
+	for(d = head.debr.next; d != NULL; d = d->next) debrSprite(d);
+}
+
