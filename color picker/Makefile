@@ -2,7 +2,7 @@
 
 CC = @gcc -o
 
-P4TH = -I./include -L./lib
+P4TH = -I../SDL2-core/include -L../SDL2-core/lib
 
 LIBS = -lmingw32 -lSDL2main -lSDL2
 
