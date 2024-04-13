@@ -1,3 +1,5 @@
+# 2D SHOOT'EM UP
+
 CC = @gcc
 
 FILES_C = main.c input.c draw.c match.c tools.c
