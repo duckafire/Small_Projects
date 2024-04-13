@@ -37,7 +37,6 @@ void sprite(SDL_Texture *spt, float x, float y, unsigned int dim);
 void debrSprite(Debr *debr);
 
 
-
 ///// INPUT.C /////
 void doInput(void);
 static void keyboard(SDL_KeyboardEvent *event, short down);

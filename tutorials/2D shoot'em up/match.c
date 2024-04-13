@@ -17,7 +17,9 @@ SDL_Texture *explosionSpt;
 // timers (from: defs.h)
 unsigned int enemyCooldown;
 
+// background stars
 Star stars[500];
+unsigned short explosionScale[6] = {4, 8, 16, 24, 32, 40};
 
 void initMatch(short loadImg){
 	// random seed
@@ -156,7 +158,7 @@ static void enemiesSpawn(void){
 		
 		enemy->x        = SCREEN_WIDTH + rand() % 50;
 		enemy->y        = rand() % (SCREEN_HEIGHT - enemy->dim);
-		enemy->spd      = 3 + rand() % 5;
+		enemy->spd      = 1 + rand() % 6;
 		enemy->maxHp    = rand() % 3 + 1;
 		enemy->hp       = enemy->maxHp;
 		enemy->isEnemy  = 1;
@@ -185,15 +187,12 @@ static void doEnemies(void){
 		
 			// out of screen (width: <0), destroy enemy
 			if(e->x < (signed)-e->dim || e->hp == 0){		
-				if(e->hp == 0){
-					// newDebris(ship);
-					newExplosion(e->x, e->y, rand() % 5 + 4);
-				}
+				if(e->hp == 0) newExplosion(e->x, e->y, rand() % 5 + 4);
 				
 				if(e == tail.ship) tail.ship = prev;
 				
-				// enemy: last, curr, futu
-				// last.nest = curr.next (futu)
+				// enemy: past, curr, futu
+				// past.next = curr.next (-> futu)
 				prev->next = e->next;
 				free(e);
 				e = prev;
@@ -224,32 +223,21 @@ void newExplosion(int x, int y, int max){
 		tail.expl->next = explosion;
 		tail.expl = explosion;
 
-		explosion->x   = x + (rand() % 32) - (rand() % 32);
-		explosion->y   = y + (rand() % 32) - (rand() % 32);
-		explosion->sx  = ((rand() % 10) - (rand() % 10)) / 10;
-		explosion->sy  = ((rand() % 10) - (rand() % 10)) / 10;
-		explosion->dim = 32;
-		explosion->a   = rand() % FPS * 3; // ---A
+		explosion->x   = x + 5 + rand() % 22;
+		explosion->y   = y + 5 + rand() % 22;
+		explosion->sx  = ((rand() % 5 + 7) / 10) * (rand() % 2 == 1 ? 1 : -1);
+		explosion->sy  = ((rand() % 5 + 7) / 10) * (rand() % 2 == 1 ? 1 : -1);
+		explosion->dim = explosionScale[rand() % 5];
 		
-		// RBG-
-		switch(rand() % 4){
-			case 1:
-				explosion->r = 255;
-				break;
-			case 2:
-				explosion->r = 255;
-				explosion->g = 128;
-				break;
-			case 3:
-				explosion->r = 255;
-				explosion->g = 255;
-				break;
-			default:
-				explosion->r = 255;
-				explosion->g = 255;
-				explosion->b = 255;
-				break;
+		// RBGA
+		switch(rand() % 3){
+			case 0: explosion->g = 0;   break;
+			case 1: explosion->g = 117; break;
+			case 2: explosion->g = 234; break;
 		}
+		explosion->r = 234;
+		explosion->b = 0;
+		explosion->a = FPS * (rand() % 3 + 1);
 	}
 }
 
@@ -310,7 +298,7 @@ static void shootShip(Ship *ship){
 	bullet->isEnemy = ship->isEnemy;
 	
 	// reboot ship shoot cooldown
-	ship->cooldown = (ship->isEnemy ? 15 + rand() % 30 : 10);
+	ship->cooldown = (ship->isEnemy ? 30 + rand() % 90 : 10);
 }
 
 static void doBullets(void){
@@ -345,16 +333,16 @@ static void doStars(void){
 	}
 }
 
-
 static void doExplosion(void){
 	Expl *e, *prev = &head.expl;
 	
 	for(e = head.expl.next; e != NULL; e = e->next){
 		e->x += e->sx;
 		e->y += e->sy;
+		e->a -= 4;
 		
 		// opacity/alpha
-		if(--e->a == 0){
+		if(e->a <= 0){
 			if(e == tail.expl) tail.expl = prev;
 			prev->next = e->next;
 			free(e);
@@ -391,11 +379,18 @@ static void drawShips(){
 	// draw all player and enemies
 	Ship *e;
 	for(e = head.ship.next; e != NULL; e = e->next){
-		// lifebar
-		e->lifebar.w = e->dim;
-		SDL_RenderFillRect(app.shapeRed, &(e->lifebar));
-		// e->lifebar.w = e->hp * (e->lifebar.w / e->maxHp);
-		// SDL_RenderFillRect((e == player ? app.shapeGreen : app.shapeRed), &(e->lifebar));
+		e->lifebar.x = e->x;
+		e->lifebar.y = e->y - 8;
+		
+		// lifebar backgound
+		e->lifebar.w = e->maxHp * (e->dim / e->maxHp);
+		SDL_SetRenderDrawColor(app.renderer, 0, 0, 0, 255);
+		SDL_RenderFillRect(app.renderer, &(e->lifebar));
+	
+		// lifebar health
+		e->lifebar.w = e->hp * (e->dim / e->maxHp);
+		SDL_SetRenderDrawColor(app.renderer, 199, 0, 0, 255);
+		SDL_RenderFillRect(app.renderer, &(e->lifebar));
 		
 		// ship sprite
 		sprite(e->spt, e->x, e->y, e->dim);

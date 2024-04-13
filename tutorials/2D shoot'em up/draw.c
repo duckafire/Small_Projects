@@ -44,3 +44,4 @@ void debrSprite(Debr *debr){
 	SDL_Rect body = {debr->x, debr->y, debr->rect.w, debr->rect.h};
 	SDL_RenderCopy(app.renderer, debr->spt, &debr->rect, &body); // draw a image piece
 }
+

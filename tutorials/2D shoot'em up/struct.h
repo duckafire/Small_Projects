@@ -70,11 +70,6 @@ struct _App{
 	// about window
 	SDL_Renderer *renderer; // pointer to "back buffer"
 	SDL_Window   *window;   // poniter to the own window
-	
-	// draw shapes (colors)
-	SDL_Renderer *shapeRed;
-	SDL_Renderer *shapeGreen;
-	SDL_Renderer *shapeGrey;
 };
 
 struct _Control{

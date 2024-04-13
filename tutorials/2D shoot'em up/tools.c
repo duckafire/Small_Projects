@@ -17,7 +17,7 @@ int hitShip(Bull *bul){
 			
 			ship->hp = (ship->hp - 1 > 0 ? ship->hp - 1 : 0);
 			
-			if(ship != player) newExplosion(ship->x, ship->y, rand() % 3 + 1);
+			newExplosion(ship->x, ship->y, rand() % 3 + 1);
 			
 			return 1;
 		}
@@ -39,8 +39,8 @@ int movePlayer(int nPos, int dir, int mm){
 
 void setLifebar(Ship *ship){
 	ship->lifebar.x = ship->x;
-	ship->lifebar.y = ship->y - 15;
+	ship->lifebar.y = ship->y - 8;
 	ship->lifebar.w = ship->dim;
-	ship->lifebar.h = 8;
+	ship->lifebar.h = 5;
 }
 
