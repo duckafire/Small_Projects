@@ -1,5 +1,5 @@
 #include <SDL.h>
-#include <stdio.h>
+#include <math.h>
 #include "main.h"
 
 SDL_Window     *window;
@@ -57,9 +57,24 @@ void square(float r, float g, float b){
 void bar(){
 	boards(290, 4, 38, 268, 293, 7, 32, 262);
 	
+	float red   = 255.0;
+	float green = -1.0;
+	float blue  = -1.0;
+	
 	for(int y = 10; y < 266; y++){
-		SDL_SetRenderDrawColor(renderer, 216, 100, 100, 255);
+		SDL_SetRenderDrawColor(renderer, abs(red), abs(green), abs(blue), 255);
 		SDL_RenderDrawLine(renderer, 296, y, 321, y);
+	
+		if     (red   == 255.0 && green < 255.0 && blue <= 0.0) green += 6.0;
+		else if(green == 255.0 && red   > 0.0  ) red   -= 6.0;
+		else if(red   <= 0.0   && blue  < 255.0) blue  += 6.0;
+		else if(blue  == 255.0 && green > 0.0  ) green -= 6.0;
+		else if(blue  == 255.0 && red   < 255.0) red   += 6.0;
+		else if(red   == 255.0 && blue  > 0.0  ) blue  -= 6.0;
+		
+		if(red   > 255.0) red   = 255.0;
+		if(green > 255.0) green = 255.0;
+		if(blue  > 255.0) blue  = 255.0;
 	}
 }
 
