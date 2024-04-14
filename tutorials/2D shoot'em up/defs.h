@@ -65,8 +65,8 @@ static void initPlayer(void);
 static void initStar(void);
 static void enemiesSpawn(void);
 static void shootShip(Ship *ship);
-void newExplosion(int x, int y, int max);
-void newDebris(Ship *e);
+void newExplosion(int x, int y, int max); // called in tools.c
+static void newDebris(Ship *e);
 
 // update
 static void doPlayer(void);

@@ -97,6 +97,7 @@ void updateMatch(void){
 }
 
 void drawMatch(void){
+	drawStars();
 	drawBullets();
 	drawShips();
 	drawDebris();
@@ -187,7 +188,10 @@ static void doEnemies(void){
 		
 			// out of screen (width: <0), destroy enemy
 			if(e->x < (signed)-e->dim || e->hp == 0){		
-				if(e->hp == 0) newExplosion(e->x, e->y, rand() % 5 + 4);
+				if(e->hp <= 0){
+					newDebris(e);
+					newExplosion(e->x, e->y, rand() % 5 + 4);
+				}
 				
 				if(e == tail.ship) tail.ship = prev;
 				
@@ -208,9 +212,10 @@ static void doEnemies(void){
 
 static void initStar(void){
 	for(int i = 0; i < 500; i++){
-		stars[i].x = rand() % SCREEN_WIDTH + 1;
-		stars[i].y = rand() % SCREEN_HEIGHT + 1;
-		stars[i].spd = 1 + rand() % 10;
+		stars[i].x     = rand() % SCREEN_WIDTH + 1;
+		stars[i].y     = rand() % SCREEN_HEIGHT + 1;
+		stars[i].spd   = (float)(3 + rand() % 8) / 10;
+		stars[i].color = 51 + rand() % 200;
 	}
 }
 
@@ -241,23 +246,29 @@ void newExplosion(int x, int y, int max){
 	}
 }
 
-void newDebris(Ship *e){
+static void newDebris(Ship *e){
 	Debr *debris;
-	int w = e->dim / 2, h = e->dim / 2;
+	
+	short qtt[4] = {4, 8, 16, 32};
+	short rar = qtt[rand() % 4]; 
+	
+	int w = e->dim / rar, h = e->dim / rar;
 
-	for(int y = 0; y <= h; y += h){
-		for(int x = 0; x <= w; x += w){
+	for(int y = 0; y <= e->dim; y += h){
+		for(int x = 0; x <= e->dim; x += w){
 			debris = malloc(sizeof(Debr));
 			memset(debris, 0, sizeof(Debr));
 			tail.debr->next = debris;
 			tail.debr = debris;
 			
-			debris->x   = e->x + w;
-			debris->y   = e->y + h;
+			debris->x   = e->x + e->dim / 2;
+			debris->y   = e->y + e->dim / 2;
 			debris->sx  = (rand() % 5) - (rand() % 5);
 			debris->sy  = (rand() % 5) - (rand() % 5);
-			debris->spt = explosionSpt;
-			debris->destroyed = FPS * 2;
+			
+			debris->spt = e->spt;
+			debris->dim = e->dim;
+			debris->alpha = 255.0;
 			
 			debris->rect.x = x;
 			debris->rect.y = y;
@@ -329,7 +340,10 @@ static void doBullets(void){
 static void doStars(void){
 	for(int i = 0; i < 500; i++){
 		stars[i].x -= stars[i].spd;
-		if(stars[i].x < -5) stars[i].x = SCREEN_WIDTH;
+		if(stars[i].x < -5){
+			stars[i].x = SCREEN_WIDTH;
+			stars[i].y = rand() % SCREEN_HEIGHT;
+		}
 	}
 }
 
@@ -357,13 +371,15 @@ static void doDebris(void){
 	Debr *d, *prev = &head.debr;
 	
 	for(d = head.debr.next; d != NULL; d = d->next){
-		d->x  += d->sx;
-		d->y  += d->sy;
+		d->x += d->sx;
+		d->y += d->sy;
 		
 		if(d->sx > 0.5) d->sx -= 0.5;
 		if(d->sy > 0.5) d->sy -= 0.5;
 		
-		if(--d->destroyed){
+		if(d->alpha > 247.0) d->alpha -= 0.25; else d->alpha -= 8.0;
+		
+		if((d->alpha) <= 0.0){
 			if(d == tail.debr) tail.debr = prev;
 			prev->next = d->next;
 			free(d);
@@ -372,6 +388,7 @@ static void doDebris(void){
 		
 		prev = d;
 	}
+	
 }
 
 
@@ -404,10 +421,8 @@ static void drawBullets(){
 }
 
 static void drawStars(void){
-	int c;
 	for(int i = 0; i < 500; i++){
-		c = 32 * stars[i].spd;
-		SDL_SetRenderDrawColor(app.renderer, c, c, c, 255);
+		SDL_SetRenderDrawColor(app.renderer, stars[i].color, stars[i].color, stars[i].color, 255);
 		SDL_RenderDrawLine(app.renderer, stars[i].x, stars[i].y, stars[i].x + 3, stars[i].y);
 	}
 }
@@ -429,6 +444,14 @@ static void drawExplosions(void){
 
 static void drawDebris(void){
 	Debr *d;
-	for(d = head.debr.next; d != NULL; d = d->next) debrSprite(d);
+	SDL_SetRenderDrawBlendMode(app.renderer, SDL_BLENDMODE_BLEND);
+	
+	for(d = head.debr.next; d != NULL; d = d->next){
+		SDL_SetTextureAlphaMod(d->spt, d->alpha);
+		debrSprite(d);
+	}
+	
+	SDL_SetTextureAlphaMod(enemySpt, 255);
+	SDL_SetRenderDrawBlendMode(app.renderer, SDL_BLENDMODE_NONE);
 }
 

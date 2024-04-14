@@ -17,7 +17,7 @@ int hitShip(Bull *bul){
 			
 			ship->hp = (ship->hp - 1 > 0 ? ship->hp - 1 : 0);
 			
-			newExplosion(ship->x, ship->y, rand() % 3 + 1);
+			if(ship->hp > 0) newExplosion(ship->x, ship->y, rand() % 3 + 1);
 			
 			return 1;
 		}

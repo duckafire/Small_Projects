@@ -21,7 +21,7 @@ int main(int argc, char *argv[]){
 	
 	while(1){
 		// color to fill "renderer buffer"; restart the "renderer buffer" filling it with the color above (clear it)
-		SDL_SetRenderDrawColor(app.renderer, 50, 50, 50, 255);
+		SDL_SetRenderDrawColor(app.renderer, 0, 0, 0, 255);
 		SDL_RenderClear(app.renderer);
 		
 		doInput();

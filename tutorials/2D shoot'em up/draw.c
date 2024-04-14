@@ -42,6 +42,8 @@ void sprite(SDL_Texture *spt, float x, float y, unsigned int dim){
 
 void debrSprite(Debr *debr){
 	SDL_Rect body = {debr->x, debr->y, debr->rect.w, debr->rect.h};
+	
+	// buffer, texture, texture piece (NULL = full), local in window to render the texture
 	SDL_RenderCopy(app.renderer, debr->spt, &debr->rect, &body); // draw a image piece
 }
 

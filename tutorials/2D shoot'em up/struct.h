@@ -10,7 +10,7 @@ struct _Ship{
 	SDL_Texture *spt;
 	float x, y, spd;
 	unsigned int dim, cooldown;
-	unsigned short isEnemy, hp, maxHp;
+	short isEnemy, hp, maxHp;
 	SDL_Rect lifebar;
 	struct _Ship *next;
 };
@@ -25,6 +25,7 @@ struct _Bull{
 
 struct _Star{
 	float x, y, spd;
+	Uint8 color;
 };
 
 struct _Expl{
@@ -35,8 +36,8 @@ struct _Expl{
 };
 
 struct _Debr{
-	float x, y, sx, sy;
-	unsigned short destroyed;
+	float x, y, sx, sy, alpha;
+	short dim;
 	SDL_Rect rect;
 	SDL_Texture *spt;
 	struct _Debr *next;
