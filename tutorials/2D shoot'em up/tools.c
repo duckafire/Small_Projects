@@ -4,16 +4,20 @@
 #include "defs.h"
 #include "struct.h"
 
-int aabb(Bull *bul, Ship *ship){
-	return MAX(bul->x, ship->x) < MIN(bul->x + bul->dim, ship->x + ship->dim) &&
-		   MAX(bul->y, ship->y) < MIN(bul->y + bul->dim, ship->y + ship->dim);
+int aabb(Bull *bul, Ship *ship, Ship *ene){
+	if(bul != NULL){
+		return MAX(bul->x, ship->x) < MIN(bul->x + bul->dim, ship->x + ship->dim) &&
+			   MAX(bul->y, ship->y) < MIN(bul->y + bul->dim, ship->y + ship->dim);
+	}
+	return MAX(ene->x, ship->x) < MIN(ene->x + ene->dim, ship->x + ship->dim) &&
+		   MAX(ene->y, ship->y) < MIN(ene->y + ene->dim, ship->y + ship->dim);
 }
 
 int hitShip(Bull *bul){
 	Ship *ship;
 	
 	for(ship = head.ship.next; ship != NULL; ship = ship->next){
-		if(ship->isEnemy != bul->isEnemy && aabb(bul, ship)){
+		if(ship->isEnemy != bul->isEnemy && aabb(bul, ship, NULL)){
 			
 			ship->hp = (ship->hp - 1 > 0 ? ship->hp - 1 : 0);
 			
@@ -31,7 +35,7 @@ int movePlayer(int nPos, int dir, int mm){
 	nPos += player->spd * dir;
 	
 	// lessing position (top or left)
-	if(mm != 0) return (nPos + player->dim <= mm ? nPos : mm - player->dim);
+	if(mm != 0 && mm != GAME_UI_HEIGHT) return (nPos + player->dim <= mm ? nPos : mm - player->dim);
 	
 	// adding position (below or right)
 	return (nPos >= mm ? nPos : mm);

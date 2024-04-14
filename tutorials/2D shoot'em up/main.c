@@ -15,6 +15,7 @@ int main(int argc, char *argv[]){
 	
 	initSDL();
 	initMatch(1);
+	initUI();
 	
 	long then = SDL_GetTicks(); // return the milliseconds after start sdl2 library
 	float remainder = 0;        // accrued time between tics
@@ -27,6 +28,7 @@ int main(int argc, char *argv[]){
 		doInput();
 		updateMatch();
 		drawMatch();
+		showUI();
 		
 		// show the "renderer buffer", after add the elements to screen
 		SDL_RenderPresent(app.renderer);

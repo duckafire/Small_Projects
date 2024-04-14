@@ -2,7 +2,7 @@
 
 CC = @gcc
 
-FILES_C = main.c input.c draw.c match.c tools.c
+FILES_C = main.c input.c draw.c match.c tools.c ui.c
 
 P4TH = -I../../SDL2-core/include -L../../SDL2-core/lib
 LIBS = -lmingw32 -lSDL2_image -lSDL2main -lSDL2

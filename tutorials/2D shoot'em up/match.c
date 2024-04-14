@@ -18,7 +18,7 @@ SDL_Texture *explosionSpt;
 unsigned int enemyCooldown;
 
 // background stars
-Star stars[500];
+Star stars[400];
 unsigned short explosionScale[6] = {4, 8, 16, 24, 32, 40};
 
 void initMatch(short loadImg){
@@ -111,13 +111,12 @@ static void initPlayer(void){
 	tail.ship->next = player;
 	tail.ship = player;
 
-	
 	// basic
 	player->spt = playerSpt;
 	getDimensions(player, NULL, 2);
 	
-	player->x = (int)SCREEN_WIDTH  * 0.1;
-	player->y = ((int)SCREEN_HEIGHT / 2) - player->dim / 2;
+	player->x = SCREEN_WIDTH  * 0.1;
+	player->y = GAME_UI_HEIGHT + ((SCREEN_HEIGHT - GAME_UI_HEIGHT) / 2) - player->dim / 2;
 	player->spd = 4.0;
 	player->isEnemy = 0;
 	player->maxHp = 5;
@@ -128,7 +127,7 @@ static void initPlayer(void){
 
 static void doPlayer(void){
 	// moviment
-	if(control.top) player->y = movePlayer(player->y, -1, 0);
+	if(control.top) player->y = movePlayer(player->y, -1, GAME_UI_HEIGHT);
 	if(control.bel) player->y = movePlayer(player->y,  1, SCREEN_HEIGHT);
 	if(control.lef) player->x = movePlayer(player->x, -1, 0);
 	if(control.rig) player->x = movePlayer(player->x,  1, SCREEN_WIDTH);
@@ -158,7 +157,7 @@ static void enemiesSpawn(void){
 		getDimensions(enemy, NULL, 2);
 		
 		enemy->x        = SCREEN_WIDTH + rand() % 50;
-		enemy->y        = rand() % (SCREEN_HEIGHT - enemy->dim);
+		enemy->y        = GAME_UI_HEIGHT + rand() % (SCREEN_HEIGHT - GAME_UI_HEIGHT - enemy->dim);
 		enemy->spd      = 1 + rand() % 6;
 		enemy->maxHp    = rand() % 3 + 1;
 		enemy->hp       = enemy->maxHp;
@@ -174,6 +173,7 @@ static void enemiesSpawn(void){
 
 static void doEnemies(void){
 	Ship *e, *prev = &head.ship;
+	int playerCollision;
 	
 	// load all ships (pointer addition)
 	for(e = head.ship.next; e != NULL; e = e->next){
@@ -185,9 +185,17 @@ static void doEnemies(void){
 			
 			// moviment (horizontal)
 			e->x -= e->spd;
-		
+			
+			// collision with player
+			playerCollision = aabb(NULL, player, e);
+			
 			// out of screen (width: <0), destroy enemy
-			if(e->x < (signed)-e->dim || e->hp == 0){		
+			if(e->x < (signed)-e->dim || e->hp == 0 || playerCollision){
+				if(playerCollision){
+					e->hp = 0;
+					player->hp = 0;
+				}
+				
 				if(e->hp <= 0){
 					newDebris(e);
 					newExplosion(e->x, e->y, rand() % 5 + 4);
@@ -211,9 +219,9 @@ static void doEnemies(void){
 
 
 static void initStar(void){
-	for(int i = 0; i < 500; i++){
+	for(int i = 0; i < 400; i++){
 		stars[i].x     = rand() % SCREEN_WIDTH + 1;
-		stars[i].y     = rand() % SCREEN_HEIGHT + 1;
+		stars[i].y     = GAME_UI_HEIGHT + rand() % (SCREEN_HEIGHT - GAME_UI_HEIGHT) + 1;
 		stars[i].spd   = (float)(3 + rand() % 8) / 10;
 		stars[i].color = 51 + rand() % 200;
 	}
@@ -342,7 +350,7 @@ static void doStars(void){
 		stars[i].x -= stars[i].spd;
 		if(stars[i].x < -5){
 			stars[i].x = SCREEN_WIDTH;
-			stars[i].y = rand() % SCREEN_HEIGHT;
+			stars[i].y = GAME_UI_HEIGHT + rand() % (SCREEN_HEIGHT - GAME_UI_HEIGHT) + 1;
 		}
 	}
 }
@@ -398,6 +406,7 @@ static void drawShips(){
 	for(e = head.ship.next; e != NULL; e = e->next){
 		e->lifebar.x = e->x;
 		e->lifebar.y = e->y - 8;
+		if(e->y < GAME_UI_HEIGHT + 25) e->lifebar.y = e->y + e->dim + 3;
 		
 		// lifebar backgound
 		e->lifebar.w = e->maxHp * (e->dim / e->maxHp);

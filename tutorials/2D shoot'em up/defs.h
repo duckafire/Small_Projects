@@ -7,6 +7,7 @@
 #define FPS 60
 #define SCREEN_WIDTH  1080
 #define SCREEN_HEIGHT 640
+#define GAME_UI_HEIGHT 162
 
 #define MIN(a, b) ({ \
 	__typeof__ (a) _a = (a); \
@@ -42,10 +43,15 @@ void doInput(void);
 static void keyboard(SDL_KeyboardEvent *event, short down);
 
 
+///// UI.C /////
+void initUI(void);
+void showUI(void);
+
+
 
 ///// TOOLS.H /////
 // collision
-int aabb(Bull *bul, Ship *ship);
+int aabb(Bull *bul, Ship *ship, Ship *ene);
 int hitShip(Bull *bul);
 
 // save memory and code size
