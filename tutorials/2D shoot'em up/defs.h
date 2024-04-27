@@ -46,6 +46,7 @@ static void keyboard(SDL_KeyboardEvent *event, short down);
 ///// UI.C /////
 void initUI(void);
 void showUI(void);
+static void showText(short x, short y, char *text);
 
 
 
@@ -65,14 +66,14 @@ void updateMatch(void);
 void drawMatch(void);
 
 // start/spawn
-void initMatch(short loadImg);
+extern void initMatch(short loadImg);
 void restartMatch(void);
 static void initPlayer(void);
 static void initStar(void);
 static void enemiesSpawn(void);
 static void shootShip(Ship *ship);
 void newExplosion(int x, int y, int max); // called in tools.c
-static void newDebris(Ship *e);
+extern void newDebris(Ship *e);
 
 // update
 static void doPlayer(void);

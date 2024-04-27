@@ -119,6 +119,7 @@ static void initPlayer(void){
 	player->y = GAME_UI_HEIGHT + ((SCREEN_HEIGHT - GAME_UI_HEIGHT) / 2) - player->dim / 2;
 	player->spd = 4.0;
 	player->isEnemy = 0;
+	
 	player->maxHp = 5;
 	player->hp = player->maxHp;
 	
@@ -160,8 +161,10 @@ static void enemiesSpawn(void){
 		enemy->y        = GAME_UI_HEIGHT + rand() % (SCREEN_HEIGHT - GAME_UI_HEIGHT - enemy->dim);
 		enemy->spd      = 1 + rand() % 6;
 		enemy->maxHp    = rand() % 3 + 1;
+		
 		enemy->hp       = enemy->maxHp;
 		enemy->isEnemy  = 1;
+		
 		enemy->cooldown = 15 + rand() % 30;
 		
 		setLifebar(enemy);
@@ -190,15 +193,10 @@ static void doEnemies(void){
 			playerCollision = aabb(NULL, player, e);
 			
 			// out of screen (width: <0), destroy enemy
-			if(e->x < (signed)-e->dim || e->hp == 0 || playerCollision){
+			if(e->x < (signed)-e->dim || e->hp <= 0 || playerCollision){
 				if(playerCollision){
 					e->hp = 0;
 					player->hp = 0;
-				}
-				
-				if(e->hp <= 0){
-					newDebris(e);
-					newExplosion(e->x, e->y, rand() % 5 + 4);
 				}
 				
 				if(e == tail.ship) tail.ship = prev;
@@ -235,11 +233,11 @@ void newExplosion(int x, int y, int max){
 		memset(explosion, 0, sizeof(Expl));
 		tail.expl->next = explosion;
 		tail.expl = explosion;
-
-		explosion->x   = x + 5 + rand() % 22;
-		explosion->y   = y + 5 + rand() % 22;
-		explosion->sx  = ((rand() % 5 + 7) / 10) * (rand() % 2 == 1 ? 1 : -1);
-		explosion->sy  = ((rand() % 5 + 7) / 10) * (rand() % 2 == 1 ? 1 : -1);
+		
+		explosion->x   = x + 10 + rand() % 17;
+		explosion->y   = y + 10 + rand() % 17;
+		explosion->sx  = ((float)(rand() % 5 + 6) / 10) * (rand() % 2 == 1 ? 1 : -1);
+		explosion->sy  = ((float)(rand() % 5 + 6) / 10) * (rand() % 2 == 1 ? 1 : -1);
 		explosion->dim = explosionScale[rand() % 5];
 		
 		// RBGA
@@ -250,11 +248,11 @@ void newExplosion(int x, int y, int max){
 		}
 		explosion->r = 234;
 		explosion->b = 0;
-		explosion->a = FPS * (rand() % 3 + 1);
+		explosion->a = 128 + FPS * (rand() % 3 + 1);
 	}
 }
 
-static void newDebris(Ship *e){
+void newDebris(Ship *e){
 	Debr *debris;
 	
 	short qtt[4] = {4, 8, 16, 32};

@@ -17,12 +17,17 @@ int hitShip(Bull *bul){
 	Ship *ship;
 	
 	for(ship = head.ship.next; ship != NULL; ship = ship->next){
-		if(ship->isEnemy != bul->isEnemy && aabb(bul, ship, NULL)){
+		if(ship->isEnemy != bul->isEnemy && aabb(bul, ship, NULL) && ship->hp > 0){
 			
-			ship->hp = (ship->hp - 1 > 0 ? ship->hp - 1 : 0);
+			if(ship->hp - 1 > 0){
+				ship->hp -= 1;
+				newExplosion(ship->x, ship->y, rand() % 3 + 2);
+				return 1;
+			}
 			
-			if(ship->hp > 0) newExplosion(ship->x, ship->y, rand() % 3 + 1);
-			
+			ship->hp = 0;
+			newDebris(ship);
+			newExplosion(ship->x, ship->y, rand() % 10 + 6);
 			return 1;
 		}
 	}

@@ -1,6 +1,7 @@
 #ifndef __STRUCT
 #define __STRUCT
 
+#include <SDL_ttf.h>
 
 /////////////////////////////////////////////////////////////////
 
@@ -69,8 +70,13 @@ struct _Tail{
 // input and output
 struct _App{
 	// about window
-	SDL_Renderer *renderer; // pointer to "back buffer"
-	SDL_Window   *window;   // poniter to the own window
+	SDL_Renderer *renderer;
+	SDL_Window   *window;
+	
+	// about graphics
+	SDL_Surface  *textSurface;
+	TTF_Font     *normalFont;
+	SDL_Color     textColor;
 };
 
 struct _Control{

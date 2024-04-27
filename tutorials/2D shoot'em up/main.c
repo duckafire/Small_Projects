@@ -1,6 +1,7 @@
 #include <string.h>
 #include <SDL.h>
 #include <SDL_image.h>
+#include <SDL_ttf.h>
 
 #include "defs.h"
 #include "struct.h"
@@ -19,6 +20,10 @@ int main(int argc, char *argv[]){
 	
 	long then = SDL_GetTicks(); // return the milliseconds after start sdl2 library
 	float remainder = 0;        // accrued time between tics
+	
+	atexit(SDL_Quit); // 3th
+	atexit(IMG_Quit); // 2th
+	atexit(TTF_Quit); // 1th
 	
 	while(1){
 		// color to fill "renderer buffer"; restart the "renderer buffer" filling it with the color above (clear it)
@@ -43,6 +48,7 @@ static void initSDL(void){
 	// starts libs
 	SDL_Init(SDL_INIT_VIDEO);
 	IMG_Init(IMG_INIT_PNG);
+	TTF_Init();
 	
 	// hide cursor
 	SDL_ShowCursor(0);

@@ -2,10 +2,10 @@
 
 CC = @gcc
 
-FILES_C = main.c input.c draw.c match.c tools.c ui.c
+FILES_C = main.c tools.c input.c draw.c match.c ui.c
 
 P4TH = -I../../SDL2-core/include -L../../SDL2-core/lib
-LIBS = -lmingw32 -lSDL2_image -lSDL2main -lSDL2
+LIBS = -lmingw32 -lSDL2main -lSDL2 -lSDL2_image -lSDL2_ttf
 
 GAME = Shoot-em_up.exe
 
