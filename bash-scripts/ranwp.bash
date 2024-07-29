@@ -1,7 +1,7 @@
 #!/bin/bash
 
 
-# Random WallPaper to lxqt
+# Random WallPaper to lxqt (v0.1.1)
 # MIT License
 #
 # Copyright (c) 2024 DuckAfire <facebook.com/duckafire>
@@ -25,6 +25,13 @@
 # SOFTWARE.
 
 
+# error codes
+# 0 - operation sucessed
+# 1 - command not founded or there is not permission to execute it
+# 2 - no permission to write or read the save file
+# 3 - path (directory) or file (image) does not exist
+
+
 # arguments
 path="$1"
 img=("${@:2}")
@@ -39,53 +46,71 @@ _ECH="echo"
 # default
 name="[ ranwp ]"
 save="$HOME/.ranwp-sh"
-ran=-2
-last=-2
+ran=-1
+last=-1
 
-# based
+
+# based in
 len=${#img[@]}
 
 
-# check if valued specified are valid
+# functions
 error(){
-	$_ECH "$name $1"
-	exit 1
+	$_ECH "$name $2."
+	exit $1
+}
+canExec(){
+	if ! command -v "$1" &> /dev/null; then
+		error 1 "command not found (or you cannot have permission to execute it): $1"
+	fi
+}
+sfm(){ # Save File Message
+	error 2 "you do not have permission to $1 the save file ($save)"
 }
 
+
+# check permissions
+canExec $_CAT
+canExec $_PCM
+canExec $_ECH
+
+
+# check if valued specified are valid
 if [ ! -d "$path" ]; then
-	error "invalid path (#3)."
+	error 3 "invalid path (#3)"
 fi
 
 if [ $len -eq 0 ]; then
-	error "images not specified."
+	error 3 "images not specified"
 fi
 
 for cur in "${img[@]}"; do
 	if [ ! -f "$path$cur" ]; then
-		error "an nonexistent image was specified: $path$cur."
+		error 3 "a nonexistent image was specified: $path$cur"
 	fi
 done
-
-if ! command -v "$_PCM" > /dev/null 2>&1; then
-	error "\"pcmanfm(-qt)\" not found."
-fi
 
 
 # create/open save file
 if [ ! -e "$save" ]; then
-	$_ECH -1 > "$save"
+	$_ECH "-1" > "$save"
+elif [ ! -r "$save" ]; then
+	sfm "read"
+elif [ ! -w "$save" ]; then
+	sfm "write to"
 fi
 
 last=$($_CAT "$save")
 
-if ! [[ "$last" =~ ^⁻?[0-9]+$ ]]; then
+if ! [[ "$last" =~ ^-?[0-9]+$ ]]; then
 	last=-1
 fi
 
 
 # set wallpaper
 if [ $len -eq 1 ]; then
-	len=1
+	len=0
+	$_ECH "0" > "$save"
 else
 	while true; do
 		ran=$((RANDOM % $len))
@@ -103,3 +128,4 @@ unset path img
 unset _CAT _PCM _ECH
 unset name save ran last
 unset len
+unset -f error canExec sfm
