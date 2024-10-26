@@ -2,7 +2,18 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "queue.h"
+////////////////////////////
+struct Queue {
+	int value;
+	struct Queue *next;
+};
+
+typedef struct Queue Queue;
+
+void newItem(int value);
+void travelQueue(void);
+void clearQueue(void);
+////////////////////////////
 
 static Queue firstItem = {-1, NULL};
 
