@@ -9,7 +9,7 @@
 
 <h2 id="1">add_executable()</h2>
 
-### `add_executable(<name> <options ...> <source ...>)`
+#### `add_executable(<name> <options ...> <source ...>)`
 * \<name>: corresponde ao nome do alvo lógico, ele deve ser único em todo o projeto. Sua escrita está a mêrce das conveções da plataforma em questão (`<name>.exe`, `<name>`, `...`). Mais informações referentes ao executável:
 	* [RUNTIME\_OUTPUT\_DIRECTORY](https://cmake.org/cmake/help/latest/prop_tgt/RUNTIME_OUTPUT_DIRECTORY.html#prop_tgt:RUNTIME_OUTPUT_DIRECTORY)
 	* [OUTPUT\_NAME](https://cmake.org/cmake/help/latest/prop_tgt/OUTPUT_NAME.html#prop_tgt:OUTPUT_NAME)
@@ -24,19 +24,19 @@
 	* EXCLUDE\_FROM\_ALL: especifica que os demais arquivos presentes na chamada de `add_executable` não devem ser adicionados ao alvo `all`, assim, ao executar `make` (por exemplo), os arquivos presentes não serão usados na construção do executável. Isso é útil para evitar a compilação de arquivos de exemplo. Ainda será possível compilá-los, mas um alvo especifico deverá ser convocado.
 * \<source ...>: arquivos que serão usados para compilar o programa em questão.
 
-### `add_executable(<name> IMPORTED [GLOBAL])`
+#### `add_executable(<name> IMPORTED [GLOBAL])`
 * \<name>: [GOTO](#1)
 * IMPORTED: importa um arquivo executável localizado fora do diretório do projeto. Ele pode ser referenciado como qualquer outro nome de alvo, exceto que, por padrão, ele ficará visível apenas para o diretório no qual foi criado e abaixo.
 * [GLOBAL]: torna o nome do alvo visualmente global.
 
-### `add_executable(<name> ALIAS <target>)`
+#### `add_executable(<name> ALIAS <target>)`
 * \<name>: [GOTO](#1)
 * ALIAS: especifica um apelido para \<name>, que será usado em seu lugar, em todos os casos.
 * \<target>: referência para \<name>. Ele não pode ser um `ALIAS`.
 
 <h2 id="2">cmake_minimum_required()</h2>
 
-### `cmake_minimum_required(VERSION <min>[...<policy_max>] [FATAL_ERROR])`
+#### `cmake_minimum_required(VERSION <min>[...<policy_max>] [FATAL_ERROR])`
 * VERSION: indica que a verão mínima será especificada.
 * \<min>: versão miníma, do Cmake, exigida para executar o _script_ em questão.
 * `...`: "conecção" entre \<min> e \<policy-max>.
@@ -52,12 +52,12 @@
 
 <h2 id="3">project()</h2>
 
-### `project(<name> <languages ...>)`
+#### `project(<name> <languages ...>)`
 * \<name>: nome do projeto.
 * \<languages ...> linguagens de programação usadas nos arquivos do projeto.
 
 
-### `project(<name> [VERSION <major>[.<minor>[.<patch>[.<tweak>]]]] [DESCRIPTION <text>] [HOMEPAGE_URL <url>] [LANGUAGES <languages...>]`
+#### `project(<name> [VERSION <major>[.<minor>[.<patch>[.<tweak>]]]] [DESCRIPTION <text>] [HOMEPAGE_URL <url>] [LANGUAGES <languages...>]`
 * \<name>: [GOTO](#3)
 * [VERSION: indica que a versão do projeto será especificada.
 * \<major>[.\<minor>[.\<patch>[.\<tweak>]]]]: Versão do projeto.
@@ -71,12 +71,12 @@
 
 <h2 id="4">set()</h2>
 
-### `set(<variable> <value ...> [PARENT_SCOPE])`
+#### `set(<variable> <value ...> [PARENT_SCOPE])`
 * \<variable>: **variável normal** que será criada ou que receberá um novo valor.
 * \<value ...>: valor que será atribuído a variável.
 * [PARENT\_SCOPE]: especifica que \<variable> deve ser definida no topo do escopo atual.
 
-### `set(<variable> <value ...> CACHE <type> <docstring> [FORCE])`
+#### `set(<variable> <value ...> CACHE <type> <docstring> [FORCE])`
 * \<variable>: **variável de cache** [GOTO](#4)
 * \<value ...>: [GOTO](#4)
 * CACHE: indica que o tipo de variável de cache será especificado.
@@ -84,7 +84,7 @@
 * \<docstring>: descrição da função/uso da variável em questão.
 * [FORCE]: especifica que o valor deve ser atribuído a variável mesmo que ela já possua um valor.
 
-### `set(ENV{<variable>} [<value>])`
+#### `set(ENV{<variable>} [<value>])`
 * ENV{: prefixo usado para ler variáveis de ambiente (`$ENV{var}`).
 * \<variable>}: **variável de ambiente** [GOTO](#4)
 * \<value>: [GOTO](#4)
@@ -98,18 +98,18 @@
 
 <h2 id="5">unset()</h2>
 
-### `unset(<variable> [CACHE | PARENT_SCOPE)`
+#### `unset(<variable> [CACHE | PARENT_SCOPE)`
 * \<variable>: variável que será removida do escopo atual, assim tornando-se indefinida.
 * [CACHE |: especifica que a _versão cache_ de \<variable> deve ser removida, ao invés da _versão normal_.
 * PARENT\_SCOPE]: especifica que a variável deve ser removida do topo do escopo atual.
 
-### `unset(ENV{<variable>})`
+#### `unset(ENV{<variable>})`
 * ENV{: [GOTO](#4)
 * \<variable>}: variável que será removida do grupo das *Variáveis de Ambiente*.
 
 <h2 id="6">configure_file()</h2>
 
-### `configure_file(<input> <output> [NO_SOURCE_PERMISSIONS | USE_SOURCE_PERMISSIONS | FILE_PERMISSIONS <permissions ...>] [COPYONLY] [ESCAPE_QUOTES] [@ONLY] [NEWLINE_STYLE [UNIX|DOS|WIN32|LF|CRLF]])`
+#### `configure_file(<input> <output> [NO_SOURCE_PERMISSIONS | USE_SOURCE_PERMISSIONS | FILE_PERMISSIONS <permissions ...>] [COPYONLY] [ESCAPE_QUOTES] [@ONLY] [NEWLINE_STYLE [UNIX|DOS|WIN32|LF|CRLF]])`
 * \<input>: arquivo base cujos códigos presentes baseiam-se nas instruções presentes em `CMakeLists.txt`.
 * \<output>: arquivo que será criado e conterá o *conteúdo modificado* de \<input>. Caso em seu caminho hajam pastas inexistente, estas serão criadas durante a execução.
 * [NO\_SOURCE\_PERMISSIONS |: especifica que \<output> **NÃO** deve herdar as permissões (`rwx`) de \<input>.
@@ -124,7 +124,7 @@
 
 <h2 id="7">target_include_directories()</h2>
 
-### `target_include_directories(<target> [SYSTEM] [AFTER | BEFORE] <INTERFACE | PUBLIC | PRIVATE> [items0...] [<INTERFACE | PUBLIC | PRIVATE> [items1...] ...])`
+#### `target_include_directories(<target> [SYSTEM] [AFTER | BEFORE] <INTERFACE | PUBLIC | PRIVATE> [items0...] [<INTERFACE | PUBLIC | PRIVATE> [items1...] ...])`
 * \<target>: um identificador criado por `add_executable()` ou `add_library()`, que deve ser diferente de qualquer alvo ALIAS.
 * [SYSTEM]: especifica que os diretório são destinados como diretórios de inclusão do sistema em algumas plataformas.
 * [BEFORE |: prefixa os itens.
