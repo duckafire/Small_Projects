@@ -78,25 +78,25 @@ void dstr_end(dstring *dstr){
 }
 
 // TEST
-// int main(){
-// 	dstring test = dstr_init();
-//
-// 	for(char c = 'A'; c < 'D'; c++){
-// 		dstr_addc(&test, c);
-// 		printf("%s\n", test);
-// 	}
-//
-// 	putchar('\n');
-//
-// 	dstr_copy(test, "Hello world");
-// 	printf("%s\n", test);
-//
-// 	dstr_addc(&test, '!');
-// 	printf("%s\n", test);
-//
-// 	dstr_merge(&test, " Parte II");
-// 	printf("%s\n", test);
-//
-// 	dstr_end(&test);
-// 	return 0;
-// }
+int main(){
+	dstring test = dstr_init();
+
+	for(char c = 'A'; c < 'D'; c++){
+		dstr_addc(&test, c);
+		printf("%s\n", test);
+	}
+
+	putchar('\n');
+
+	dstr_copy(test, "Hello world");
+	printf("%s\n", test);
+
+	dstr_addc(&test, '!');
+	printf("%s\n", test);
+
+	dstr_merge(&test, " Parte II");
+	printf("%s\n", test);
+
+	dstr_end(&test);
+	return 0;
+}

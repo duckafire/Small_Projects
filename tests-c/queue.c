@@ -47,10 +47,10 @@ void clearQueue(void){
 }
 
 // TEST
-// int main(){
-// 	for(int i = 0; i < 10; i++)
-// 		newItem(i);
-// 	travelQueue();
-// 	clearQueue();
-// 	return 0;
-// }
+int main(){
+	for(int i = 0; i < 10; i++)
+		newItem(i);
+	travelQueue();
+	clearQueue();
+	return 0;
+}
