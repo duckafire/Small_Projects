@@ -12,14 +12,14 @@ Oferece duas variáveis globais e uma série de funções báscias para usos div
 
 || Funções ||
 |:-:|:-:|:-:|
-|[assert](#1)        |[next](#9)     |[select](#17)      |
-|[collectgarbage](#2)|[pairs](#10)   |[setmetatable](#18)|
-|[dofile](#3)        |[pcall](#11)   |[tonumber](#19)    |
-|[error](#4)         |[print](#12)   |[tostring](#20)    |
-|[getmetatable](#5)  |[rawequal](#13)|[type](#21)        |
-|[ipairs](#6)        |[rawget](#14)  |[xpcall](#22)      |
-|[load](#7)          |[rawlen](#15)  | |
-|[loadfile](#8)      |[rawse](#16)   | |
+|<a href="#1">assert</a>        |<a href="#9">next</a>     |<a href="#17">select</a>      |
+|<a href="#2">collectgarbage</a>|<a href="#10">pairs</a>   |<a href="#18">setmetatable</a>|
+|<a href="#3">dofile</a>        |<a href="#11">pcall</a>   |<a href="#19">tonumber</a>    |
+|<a href="#4">error</a>         |<a href="#12">print</a>   |<a href="#20">tostring</a>    |
+|<a href="#5">getmetatable</a>  |<a href="#13">rawequal</a>|<a href="#21">type</a>        |
+|<a href="#6">ipairs</a>        |<a href="#14">rawget</a>  |<a href="#22">xpcall</a>      |
+|<a href="#7">load</a>          |<a href="#15">rawlen</a>  | |
+|<a href="#8">loadfile</a>      |<a href="#16">rawse</a>   | |
 
 <br>
 <hr>
