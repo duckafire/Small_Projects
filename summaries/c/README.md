@@ -1,0 +1,29 @@
+# **C** *default* libraries
+
+* [assert](https://github.com/duckafire/Small_Projects/blob/main/libs-wiki/c/assert.md)
+* complex
+* [ctype](https://github.com/duckafire/Small_Projects/blob/main/libs-wiki/c/ctype.md)
+* [errno](https://github.com/duckafire/Small_Projects/blob/main/libs-wiki/c/errno.md)
+* fenv
+* float
+* inttypes
+* iso646
+* [limits](https://github.com/duckafire/Small_Projects/blob/main/libs-wiki/c/limits.md)
+* locale
+* math
+* [setjmp](https://github.com/duckafire/Small_Projects/blob/main/libs-wiki/c/setjmp.md)
+* signal
+* [stdarg](https://github.com/duckafire/Small_Projects/blob/main/libs-wiki/c/stdarg.md)
+* stdalign
+* stdatomic
+* [stdbool](https://github.com/duckafire/Small_Projects/blob/main/libs-wiki/c/stdbool.md)
+* [stddef](https://github.com/duckafire/Small_Projects/blob/main/libs-wiki/c/stddef.md)
+* stdint
+* stdio
+* stdlib
+* stdnoreturn
+* [string](https://github.com/duckafire/Small_Projects/blob/main/libs-wiki/c/string.md)
+* tgmath
+* threads
+* time
+* wchar

@@ -116,11 +116,18 @@
 * USE\_SOURCE\_PERMISSIONS |: especifica que \<output> não deve herdar as permissões (`rwx`) de \<input>.
 * [FILE\_PERMISSIONS: indica que as permissões de \<output> serão especificadas.
 * \<permissions...>]]: as permissões (`rwx`) de \<output>.
-* [COPYONLY]: especifica que o conteúdo de \<input> deve ser copiado para \<output> sem sofrer nenhum tipo de alteração (**não** pode ser usado em conjunto com NEWLINE\_STYLE).
+* [COPYONLY]: especifica que o conteúdo de \<input> deve ser copiado para \<output> sem sofrer nenhum tipo de alteração.
 * [ESCAPE\_QUOTES]: converte os caracteres de escape para a convensão de C.
 * [@ONLY]: Restringe a substituição de variáveis para apenas aqueles entre `@` (`@var@`), assim não alterando variável entre `${}` (`${var}`).
-* [NEWLINE\_STYLE: indica que o *estilo* da quebra de linha para \<output> será especificado (**não** pode ser usado em conjunto com COPYONLY).
+* [NEWLINE\_STYLE: indica que o *estilo* da quebra de linha para \<output> será especificado.
 * [UNIX|DOS|WIN32|LF|CRLF]]: estilo da quebra de linha: `\n` (UNIX/LF) ou `/r/n` (DOS/WIN32/CRLF).
+
+<br>
+
+> [!IMPORTANT]
+> COPYONLY **não** pode ser usado em conjunto com NEWLINE\_STYLE.
+
+<br>
 
 <h2 id="7">target_include_directories()</h2>
 
