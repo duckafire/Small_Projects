@@ -12,14 +12,14 @@ Oferece duas variáveis globais e uma série de funções báscias para usos div
 
 || Funções ||
 |:-:|:-:|:-:|
-|<a href="#1">assert</a>        |<a href="#9">next</a>     |<a href="#17">select</a>      |
-|<a href="#2">collectgarbage</a>|<a href="#10">pairs</a>   |<a href="#18">setmetatable</a>|
-|<a href="#3">dofile</a>        |<a href="#11">pcall</a>   |<a href="#19">tonumber</a>    |
-|<a href="#4">error</a>         |<a href="#12">print</a>   |<a href="#20">tostring</a>    |
-|<a href="#5">getmetatable</a>  |<a href="#13">rawequal</a>|<a href="#21">type</a>        |
-|<a href="#6">ipairs</a>        |<a href="#14">rawget</a>  |<a href="#22">xpcall</a>      |
-|<a href="#7">load</a>          |<a href="#15">rawlen</a>  | |
-|<a href="#8">loadfile</a>      |<a href="#16">rawse</a>   | |
+|<a href="#1">assert</a>        |<a href="#9">next</a>     |<a href="#17">require</a>
+|<a href="#2">collectgarbage</a>|<a href="#10">pairs</a>   |<a href="#18">select</a>      |
+|<a href="#3">dofile</a>        |<a href="#11">pcall</a>   |<a href="#19">setmetatable</a>|
+|<a href="#4">error</a>         |<a href="#12">print</a>   |<a href="#20">tonumber</a>    |
+|<a href="#5">getmetatable</a>  |<a href="#13">rawequal</a>|<a href="#21">tostring</a>    |
+|<a href="#6">ipairs</a>        |<a href="#14">rawget</a>  |<a href="#22">type</a>        |
+|<a href="#7">load</a>          |<a href="#15">rawlen</a>  |<a href="#23">xpcall</a>      |
+|<a href="#8">loadfile</a>      |<a href="#16">rawset</a>  | |
 
 <br>
 <hr>
@@ -35,14 +35,6 @@ Oferece duas variáveis globais e uma série de funções báscias para usos div
 * Comportamento: interrompe o programa, e imprime `msg`, caso `exp == false`.
 * Retorno: nenhum.
 
-``` lua
-local n1, n2 = 1, 2
-
-assert(n1 < n2, ">>> Program end <<<") -- not stop the program
-
-assert(n1 > n2, ">>> Program end <<<") -- stop the program
-```
-
 <br>
 <hr>
 <ul><li><a href="#0">Voltar ao topo</a></li></ul>
@@ -56,6 +48,8 @@ assert(n1 > n2, ">>> Program end <<<") -- stop the program
 	* arg: número; usado apenas por: `"setpause"` e `"step"`.
 * Comportamento: ordenar que o coletor de lixo execute uma deteminada ação.
 * Retorno: os retornos variam de acordo com o valor de `action`. Ambos está listados abaixo. Alguns não têm retorno.
+
+<br>
 
 | Ação          | Descrição                                                                             |
 | :-:           | :--                                                                                   |
@@ -80,31 +74,6 @@ assert(n1 > n2, ">>> Program end <<<") -- stop the program
 * Comportamento: executa o conteúdo de `file` como se fosse parte do arquivo em questão.
 * Retorno: todos os valores retornados pelo trecho.
 
-``` lua
--- FILE ONE (main)
-
-print("[ CONSOLE ]\n")
-
-local txt, txt2 = dofile("call.lua")
-print(txt..txt2)
-```
-
-``` lua
--- FILE TWO (call)
-
-print("Hello World!")
-return "\n:", "D"
-
-```
-
-```
-[ CONSOLE ]
-
-Hello World!
-
-:D
-```
-
 <br>
 <hr>
 <ul><li><a href="#0">Voltar ao topo</a></li></ul>
@@ -125,16 +94,6 @@ Hello World!
 | 1     | Especifica a posição do erro.                      |
 | 2     | Especifica a posição da função que chamou `error`. |
 
-``` lua
-local function transform(n)
-	if n < 0 then
-		error('"n" is not positive', 2)
-	end
-	
-	return n * -1
-end
-```
-
 <br>
 <hr>
 <ul><li><a href="#0">Voltar ao topo</a></li></ul>
@@ -146,17 +105,7 @@ end
 * Argumentos:
 	* tbl: tabela.
 * Comportamento: verifica se o objeto possui algum metamétodo.
-* Retorno: caso haja um metámetodo, seu endereço, do contrário, o endereço de `tbl`. `nil` caso `tbl` não seja uma tabela.
-
-``` lua
-local a = {}
-a.__index = a
-local b = {}
-local c = setmetatable(b, a) -- "a" is the metatable of "c"
-
-print(a)               -- table: "a address"
-print(getmetatable(c)) -- table: "a address"
-```
+* Retorno: caso haja um metámetodo em `tbl`, seu endereço, do contrário, o endereço de `tbl`. `nil` caso `tbl` não seja uma tabela. Caso `tbl` possua o metamétodo `__metatable`, o valor dele será retornado.
 
 <br>
 <hr>
@@ -170,32 +119,6 @@ print(getmetatable(c)) -- table: "a address"
 	* tbl: tabela.
 * Comportamento: intera, em pares (índice e valor), `tbl` até o primeiro índice ausente (`==nil`).
 * Retorno: uma função interadora, `tbl` e `0`.
-
-``` lua
-print("[ CONSOLE ]")
-
-local tbl = {5, 4, nil, 2, 1}
-local func, _tbl, zero = ipairs(tbl)
-
-print(func)
-print(_tbl)
-print(zero)
-
-for i, v do ipairs(tbl) do
-	print(i..". "..v)
-end
-```
-
-```
-[ CONSOLE ]
-
-function "func address"
-table "_tbl address"
-0
-
-1 - 5
-2 - 4
-```
 
 <br>
 <hr>
@@ -211,24 +134,7 @@ table "_tbl address"
 	* mode: cadeia de caracteres; `"t"` texto; `"bt"` texto e binários.
 	* env: tabela; ambiente customizado.
 * Comportamento: executa o código Lua presente em `chuck`.
-* Retorno: uma função ou `nil` caso contrário, em caso de falha.
-
-``` lua
-local txt = "return 'Hello World!'"
-local lTxt = load(txt)
-local nTxt = lTxt() -- nTxt = "Hello World!"
-
-local global = {
-	add = 12,
-	sub = -26,
-	mlt = 3,
-	div = 5,
-}
-
-local code = "return ((18 + add) // div + (sub - (sub * mlt)) / div) * mlt"
-local calculation = load(code, nil, nil, global)
-calculation() -- 49.2
-```
+* Retorno: uma função ou `nil`, em caso de falha.
 
 <br>
 <hr>
@@ -243,21 +149,7 @@ calculation() -- 49.2
 	* mode: cadeia de caracteres; `"t"` texto; `"bt"` texto e binários.
 	* env: tabela; ambiente customizado.
 * Comportamento: executa o código Lua presente em `file`.
-* Retorno: uma função ou `nil` caso contrário, em caso de falha.
-
-``` lua
--- FILE ONE (main)
-
-local file = loadfile("example.lua")
-local txt = file() -- txt = "Hello World!"
-```
-
-``` lua
--- FILE TWO (example)
-
-local txt = "Hello World!"
-return txt
-```
+* Retorno: uma função ou `nil`, em caso de falha.
 
 <br>
 <hr>
@@ -273,15 +165,6 @@ return txt
 * Comportamento: percorre os índices de `tbl`.
 * Retorno: caso `id~=nil`, o próximo índice e seu valor, caso contrário, o primeiro índice e seu valor; caso `id==#tbl`, retornará `nil`.
 
-``` lua
-local tbl = {9, 8, 7, 6}
-
-local i, v = next(tbl, 2)
-
--- i = 3
--- v = 7
-```
-
 <br>
 <hr>
 <ul><li><a href="#0">Voltar ao topo</a></li></ul>
@@ -294,15 +177,6 @@ local i, v = next(tbl, 2)
 	* tbl: tabela.
 * Comportamento: executa `__pairs`, com `tbl` como argumento, mas apenas caso `tbl` o possua, do contrário, gerar apenas um retorno.
 * Retorno: [`next`](#9), `tbl` e `nil` ou o retorno de `__pairs`.
-
-``` lua
-local tbl = {[4] = 9, [7] = 8, [13] = 7}
-
-for i, v in pairs(tbl) do print(i.." "..v) end -- 4 9 |-| 13 7 |-| 7 8
-
-setmetatable(tbl, {__pairs = function(t) print("Hello World!") end})
-pairs(tbl) -- Hello World!
-```
 
 <br>
 <hr>
@@ -318,21 +192,6 @@ pairs(tbl) -- Hello World!
 * Comportamento: chama a `func` em "modo protegido", ou seja, caso haja algum erro em `func` ele não parará o programa e nem será imprimido no console.
 * Retorno: caso não hajam erros, retornará `true` e os possíveis retornos de `func`, do contrário, retornará `false` e uma cadeia de caracteres contendo o erro em questão.
 
-``` lua
-local function add(a, b)
-	return a + b, a - b
-end
-
-local func, erro = pcall(add, 1, false)
--- func = false
--- erro = main.lua:2: attempt to perform arithmetic on a boolean value (local 'b')
-
-local fun2, rtn1, rtn2 = pcall(add, 2, 3)
--- fun2 = true
--- rtn1 = 5
--- rtn2 = -1
-```
-
 <br>
 <hr>
 <ul><li><a href="#0">Voltar ao topo</a></li></ul>
@@ -343,13 +202,8 @@ local fun2, rtn1, rtn2 = pcall(add, 2, 3)
 
 * Argumentos:
 	* (...): qualquer.
-* Comportamento: imprime todos os seus argumentos no console. Ambos são separados por uma tabulação. Uma quebra de linha é posta no final.
+* Comportamento: imprime todos os seus argumentos no console. Ambos são comvertidos para cadeias de caracteres e separados por uma tabulação. Uma quebra de linha é posta no final.
 * Retorno: nenhum.
-
-``` lua
-print("Hello World!") -- Hello World!
-print(1, 2, 3, 4, 5)  -- 1    2    3    4    5
-```
 
 <br>
 <hr>
@@ -365,11 +219,6 @@ print(1, 2, 3, 4, 5)  -- 1    2    3    4    5
 * Comportamento: verifica `v1` e `v2`, sem chamar o metamétodo `__eq`.
 * Retorno: o resultado da comparação, em booleano.
 
-``` lua
-rawequal(1,   1) -- true
-rawequal(1, "1") -- false
-```
-
 <br>
 <hr>
 <ul><li><a href="#0">Voltar ao topo</a></li></ul>
@@ -384,12 +233,6 @@ rawequal(1, "1") -- false
 * Comportamento: obtém o valor armazenado em `tbl[id]`, sem chamar o metamétodo `__index`.
 * Retorno: o valor obtido ou `nil`, caso ele não exista.
 
-``` lua
-local tbl = {9, 8, 7, 6, 5}
-rawget(tbl, 2) -- 8
-rawget(tbl, 6) -- nil
-```
-
 <br>
 <hr>
 <ul><li><a href="#0">Voltar ao topo</a></li></ul>
@@ -402,11 +245,6 @@ rawget(tbl, 6) -- nil
 	* tbl\_str: tabela ou cadeia de caracteres.
 * Comportamento: retorno o comprimento de `tbl_str`, sem chama o metamétodo `__leg`.
 * Retorno: o comprimento de `tbl_str`.
-
-``` lua
-rawlen("Hello World!") -- 12
-rawlen({9, 8, 7, 6})   -- 4
-```
 
 <br>
 <hr>
@@ -423,10 +261,18 @@ rawlen({9, 8, 7, 6})   -- 4
 * Comportamento: atribui `newValue` a `tbl[id]`, sem chamar o metamétodo `__newindex`.
 * Retorno: `tbl`.
 
-``` lua
-local tbl = {9, 8, 7, 6, 5}
-rawset(tbl, 2, 12) -- tbl[2] = 12
-```
+<br>
+<hr>
+<ul><li><a href="#0">Voltar ao topo</a></li></ul>
+<hr>
+<br>
+
+<h3 id="17">require(file)</h3>
+
+* Argumentos:
+	* file: cadeia de caracteres; separado por `.` ao invés de `/`; sem a extensão `.lua`.
+* Comportamento: carrega o conteúdo de `file` para uso no arquivo que o chamou, mas apenas caso ele não tenha sido carregado anteriormente.
+* Retorno: o possível retorno de `file` ou, em caso de sucesso no carregamento, `true`.
 
 <br>
 <hr>
@@ -434,7 +280,7 @@ rawset(tbl, 2, 12) -- tbl[2] = 12
 <hr>
 <br>
 
-<h3 id="17">select(id, ...)</h3>
+<h3 id="18">select(id, ...)</h3>
 
 * Argumentos:
 	* id: número ou `"#"`.
@@ -442,21 +288,13 @@ rawset(tbl, 2, 12) -- tbl[2] = 12
 * Comportamento: baseada em retorno.
 * Retorno: todos os argumentos (`...`) a partir da posição `id`; caso `id<0` a indexação ocorrerá a partir do final; caso `id=="#"`, retornará a quantidade de argumentos presentes em `...`.
 
-``` lua
-local a, b, c
-
-a, b, c = select("#", 9, "8", true) -- 3, nil, nil
-a, b, c = select( 1,  9, "8", true) -- 9, "8", true
-a, b, c = select(-2,  9, "8", true) -- true, 8, nil
-```
-
 <br>
 <hr>
 <ul><li><a href="#0">Voltar ao topo</a></li></ul>
 <hr>
 <br>
 
-<h3 id="18">setmetatable(tbl, mtbl)</h3>
+<h3 id="19">setmetatable(tbl, mtbl)</h3>
 
 * Argumentos:
 	* tbl: tabela.
@@ -464,20 +302,73 @@ a, b, c = select(-2,  9, "8", true) -- true, 8, nil
 * Comportamento: atribui `mtbl` a `tbl`. Caso `mtbl==nil`, removerá o metamétodo de `tbl`, caso haja algum. Caso `tbl` tenha uma campo `__metatable`, gerará um erro.
 * Retorno: `tbl`.
 
+<br>
+
+| Metamétodo    | Argumentos | Comportamento |
+| :-:           | :-:        |:--            |
+| `__index`     | index      | disparado ao tentar acessar um índice indefinido (`nil`) na tabela. Caso sele seja uma função, a mesma será chamada, caso seja uma tabela, o índice `index` dela será acessado |
+| `__newindex`  | id, v      | disparado ao tentar atribuir algum valor a um índice indefinido (`nil`) na tabela. Caso ele seja uma função, a mesma será chamada, caso seja uma tabela, a atribuíção será feita nela |
+| `__call`      | ...        | disparado ao tentar chamar a tabela como uma função (`tbl()`) |
+| `__concat`    | value      | disparado ao tentar concatenar a tabela com outro valor `..`, mas apenas para o primeiro valor |
+| `__unm`       | -          | disparado ao usar `-` para tornar um valor negativo (`-var`) |
+| `__add`       | value      | disparado ao usar `+`, mas apenas para o primeiro item |
+| `__sub`       | value      | disparado ao usar `-`, mas apenas para o primeiro item |
+| `__mul`       | value      | disparado ao usar `*`, mas apenas para o primeiro item |
+| `__div`       | value      | disparado ao usar `/`, mas apenas para o primeiro item |
+| `__idiv`      | value      | disparado ao usar `//`, mas apenas para o primeiro item |
+| `__mod`       | value      | disparado ao usar `%`, mas apenas para o primeiro item |
+| `__pow`       | value      | disparado ao usar `^`, mas apenas para o primeiro item |
+| `__tostring`  | -          | disparado quando a tabela é usada em [`tostring`](#21) |
+| `__metatable` | -          | altera o retorno de [`getmetatable`](#5) |
+| `__eq`        | value      | disparado ao usar `==`, mas apenas para o primeiro item |
+| `__lt`        | value      | disparado ao usar `<`, mas apenas para o primeiro item |
+| `__le`        | value      | disparado ao usar `<=`, mas apenas para o primeiro item |
+| `__mode`      | -          | define o modo de uma [*tabela fraca*](https://www.lua.org/pil/17.html) |
+| `__gc`        | -          | disparado quando a tabela é coletada como lixo |
+| `__len`       | -          | disparado quando "#" é usado na tabela |
+| `__iter`      | -          | interador personalizado para interação genérica (`for`) |
+
+* Todos os metamétodos possuem, pelo menos, um parâmetro (exceto `__metatable` e `__mode`): a tabela que o recebeu.
+
+<br>
+
+#### Resumo de tabelas fracas
+são aquelas cujos seus índices e/ou valores podem, eventualmente, serem deletados pelo coletor de lixo. Por exemplo:
+
 ``` lua
-local tbl = {}
+local tbl, id = {}, nil
 
-setmetatable(tbl, {__call = function() return "Hello World!" end})-- add '__call'
-local txt = tbl() -- txt = "Hello World!"
+-- as chaves de "tbl" foram definidas como fracas
+-- opçõespara "__mode":
+---- "k": índices (chaves) fracas
+---- "v": valores fracos
+---- "kv": índices (chaves) e valores fracos
+---- "s": chaves de cadeias de caracteres
+setmetatable(tbl, {__mode = "k"})
 
-setmetatable(tbl, {__add  = function(...) local temp = {...} return 20 + temp[2] end}) -- remove '__call' and add '__add'
-local add = tbl + 5 -- add = 20 + 5
+-- "id" recebe uma tabela e ela é usada como índice
+-- para "1" em "tbl"
+id = {}
+tbl[id] = 1
 
-setmetatable(tbl, nil) -- remove: __add
+-- "id" recebe uma nova tabela, assim perdendo a
+-- tabela anterior, que era a única forma de acessar
+-- o valor "1" em "tbl", logo "1" passou a ser
+-- inacessível, assim, eventualmente, ele será
+-- removido pelo coletor de lixo e sua memória será
+-- liberada
+id = {}
+tbl[id] = 2
 
-setmetatable(tbl, {__metatable = function() return "__metatable" end}) -- add '__call'
-setmetatable(tbl, {__call = function() return "Hello World!" end}) -- generates an error
+-- forcação da coleta de lixo, para que a memória
+-- do índice perdido seja liberada
+collectgarbage()
 ```
+
+<br>
+
+* [Fonte](https://create.roblox.com/docs/en-us/luau/metatables)
+* Veja também: [Guia completo para iniciantes sobre metatabelas](https://devforum.roblox.com/t/full-beginner-guide-to-metatables-what-are-they-every-metamethod-explained/2505946)
 
 <br>
 <hr>
@@ -485,7 +376,7 @@ setmetatable(tbl, {__call = function() return "Hello World!" end}) -- generates 
 <hr>
 <br>
 
-<h3 id="19">tonumber(value, [base=10])</h3>
+<h3 id="20">tonumber(value, [base=10])</h3>
 
 * Argumentos:
 	* value: cadeia de caracteres.
@@ -493,67 +384,39 @@ setmetatable(tbl, {__call = function() return "Hello World!" end}) -- generates 
 * Comportamento: converte `value` para número, caso ele seja válido, de acordo com `base`.
 * Retorno: o valor convertido, ou `nil`, caso `value` seja inválido.
 
-``` lua
-tonumber("1")  -- 1
-tonumber("a")  -- nil
-tonumber(0xda) -- 218
-tonumber("88", 15) -- 128
-```
-
 <br>
 <hr>
 <ul><li><a href="#0">Voltar ao topo</a></li></ul>
 <hr>
 <br>
 
-<h3 id="20">tostring(value)</h3>
+<h3 id="21">tostring(value)</h3>
 
 * Argumentos:
 	* value: número.
 * Comportamento: converte `value` em uma cadeia de caracteres. Caso `value` possua o metamétodo `__tostring`, ele será chamado com `value` como argumento.
 * Retorno: uma cadeia de caracteres convertida ou o retorno de `__tostring`.
 
-``` lua
-tostring(true) -- "true"
-tostring(1234) -- "1234"
-
-local value = {}
-setmetatable(value, {__tostring = function(Self) return #Self end})
-
-local qtt = tostring(value) -- qtt = 0
-for i = 1, 5 do value[i] = i end
-qtt = tostring(value) -- qtt = 5
-```
-
 <br>
 <hr>
 <ul><li><a href="#0">Voltar ao topo</a></li></ul>
 <hr>
 <br>
 
-<h3 id="21">type(item)</h3>
+<h3 id="22">type(item)</h3>
 
 * Argumentos:
 	* item: qualquer.
 * Comportamento: obtem o tipo de `value`.
 * Retorno: `"nil"`, `"number"`, `"string"`, `"boolean"`, `"table"`, `"function"`, `"thread`" ou `"userdata"`.
 
-``` lua
-local str, num, boo = 1, "a", false
-local tStr, tNum, tBoo
-
-tStr = type(str) -- "number"
-tNum = type(num) -- "string"
-tBoo = type(boo) -- "boolean"
-```
-
 <br>
 <hr>
 <ul><li><a href="#0">Voltar ao topo</a></li></ul>
 <hr>
 <br>
 
-<h3 id="22">xpcall(func, err, [arg=nil])</h3>
+<h3 id="23">xpcall(func, err, [arg=nil])</h3>
 
 * Argumentos:
 	* func: função.
@@ -567,25 +430,6 @@ tBoo = type(boo) -- "boolean"
 	* arg: qualquer.
 * Comportamento: chama a `func` em "modo protegido". Caso ocorra algum erro, `err` é chamada, com o erro como argumento.
 * Retorno: caso não hajam erros, `true` e os possíveis retornos de `func`, do contrário, `false` e os possíveis retornos de `err`.
-
-``` lua
-local function add(a, b)
-	return a + b, a - b
-end
-
-local function ifErrror(msg)
-	return "AN ERROR WAS HAPPEN: "..msg)
-end
-
-local func, erro = xpcall(add, ifErrror, 1, false)
--- func = false
--- erro = AN ERROR WAS HAPPEN: main.lua:2: attempt to perform arithmetic on a boolean value (local 'b')
-
-local fun2, rtn1, rtn2 = xpcall(add, 2, 3)
--- fun2 = true
--- rtn1 = 5
--- rtn2 = -1
-```
 
 <br>
 <hr>
