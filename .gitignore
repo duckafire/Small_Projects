@@ -1,3 +1,8 @@
-tests-c/test*
+libs/main.c
+libs/test
+
 summaries/struct-base.md
 summaries/c/tests/*
+
+tests/*/main.c
+tests/*/test
