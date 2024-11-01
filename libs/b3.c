@@ -18,7 +18,7 @@ static b3_Node* newNode(int id, void *content){
 	return node;
 }
 
-static short addNode(b3_Root *root, int id, void *content){
+static short addNewNode(b3_Root *root, int id, void *content){
 	if(root->id == id) return 0;
 
 	if(id < root->id){
@@ -26,7 +26,7 @@ static short addNode(b3_Root *root, int id, void *content){
 			root->left = newNode(id, content);
 			return 1;
 		}
-		return addNode(root->left, id, content);
+		return addNewNode(root->left, id, content);
 	}
 
 	if(root->right == NULL){
@@ -34,15 +34,15 @@ static short addNode(b3_Root *root, int id, void *content){
 		return 1;
 	}
 
-	return addNode(root->right, id, content);
+	return addNewNode(root->right, id, content);
 }
 
-static short listIds(b3_Root *root){
+static short buildIdList(b3_Root *root){
 	if(root == NULL) return 0;
 
-	listIds(root->left);
+	buildIdList(root->left);
 	printf("%d  ", root->id);
-	listIds(root->right);
+	buildIdList(root->right);
 
 	return 1;
 }
@@ -111,7 +111,7 @@ short b3_addNode(b3_Root *root, int id, void *content){
 	// i did this function
 	if(root == NULL) return 0;
 
-	return addNode(root, id, content);
+	return addNewNode(root, id, content);
 }
 
 b3_Node* b3_getNode(b3_Root *root, int id){
@@ -188,7 +188,7 @@ void b3_listIds(b3_Root *root){
 	// for print the values in horizontal and
 	// to put a line feed in chain end, and
 	// verify root value, i did this function
-	if(!listIds(root))
+	if(!buildIdList(root))
 		puts("b3_listId: Empty root");
 	
 	putchar('\n');

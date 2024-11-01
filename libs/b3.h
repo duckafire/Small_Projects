@@ -11,8 +11,8 @@ struct __b3__node__{
 #define b3_Root struct __b3__node__
 
 static b3_Node* newNode(int id, void *content);
-static short addNode(b3_Root *root, int id, void *content);
-static short listIds(b3_Root *root);
+static short addNewNode(b3_Root *root, int id, void *content);
+static short buildIdList(b3_Root *root);
 static short simpleRemotion(b3_Node *mom, b3_Node *son, int id);
 static short removeAndRealoc(b3_Node *mom, b3_Node *son, short leftNull, short rightNull);
 
