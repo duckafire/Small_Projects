@@ -3,17 +3,14 @@
 
 #include "b3.h"
 
-// functions prefixed by "b3_" are global,
-// the other are for internal use
-
 static b3_Node* newNode(int id, void *content){
 	b3_Node *node;
 
 	node = malloc(sizeof(b3_Node));
-	node->left = NULL;
-	node->right = NULL;
 	node->id = id;
 	node->content = content;
+	node->left = NULL;
+	node->right = NULL;
 
 	return node;
 }
@@ -35,6 +32,24 @@ static short addNewNode(b3_Root *root, int id, void *content){
 	}
 
 	return addNewNode(root->right, id, content);
+}
+
+static void moveNode(b3_Node *node, b3_Node *orphan){
+	if(orphan->id < node->id){
+		if(node->left == NULL){
+			node->left = orphan;
+			return;
+		}
+
+		moveNode(node->left, orphan);
+	}
+
+	if(node->right == NULL){
+		node->right = orphan;
+		return;
+	}
+
+	moveNode(node->right, orphan);
 }
 
 static short buildIdList(b3_Root *root){
@@ -78,11 +93,29 @@ static short simpleRemotion(b3_Node *mom, b3_Node *son, int id){
 	return removeAndRealoc(mom, son, leftNull, rightNull);
 }
 
-static short removeAndRealoc(b3_Node *mom, b3_Node *son,
-							short leftNull, short rightNull){
+static short removeAndRealoc(b3_Node *mom, b3_Node *son, short leftNull, short rightNull){
 	// two sons
-	if(!leftNull && !rightNull)
-		return 0; // TODO
+	if(!leftNull && !rightNull){
+		b3_Node *heritor, *orphan;
+
+		if(abs(son->id - son->left->id) <= abs(son->id - son->right->id)){
+			heritor = son->left;
+			orphan = son->right;
+		}else{
+			heritor = son->right;
+			orphan = son->left;
+		}
+
+		if(mom->left == son)
+			mom->left = heritor;
+		else
+			mom->right = heritor;
+
+		free(son);
+		moveNode(heritor, orphan);
+		
+		return 1;
+	}
 
 	// one son
 	b3_Node *node;
@@ -128,6 +161,18 @@ void* b3_getCont(b3_Root *root, int id){
 	return (b3_getNode(root, id))->content;
 }
 
+b3_Root* b3_copyAll(b3_Root *src){
+	if(src == NULL) return NULL;
+
+	b3_Root *dest;
+	dest = newNode(src->id, src->content);
+
+	dest->left = b3_copyAll(src->left);
+	dest->right = b3_copyAll(src->right);
+
+	return dest;
+}
+
 short b3_rmvNode(b3_Root **p_root, int id){
 	// treatment to root
 	if(*p_root == NULL) return 0;
@@ -155,8 +200,23 @@ short b3_rmvNode(b3_Root **p_root, int id){
 	}
 
 	// two sons
-	if(!leftNull && !rightNull)
-		return 0; // TODO
+	if(!leftNull && !rightNull){
+		b3_Node *heritor, *orphan;
+
+		if(abs(root->id - root->left->id) <= abs(root->id - root->right->id)){
+			heritor = root->left;
+			orphan = root->right;
+		}else{
+			heritor = root->right;
+			orphan = root->left;
+		}
+
+		free(*p_root);
+		*p_root = heritor;
+		moveNode(*p_root, orphan);
+
+		return 1;
+	}
 
 	// one son
 	b3_Node *node;
