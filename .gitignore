@@ -6,3 +6,5 @@ summaries/c/tests/*
 
 tests/*/main.c
 tests/*/test
+tests/"c -> c++"/test
+tests/"c++ -> c"/test
