@@ -103,7 +103,7 @@ Oferece duas variáveis globais e uma série de funções báscias para usos div
 
 <h3 id="6">ipairs(table)</h3>
 
-* Comportamento: intera, em pares (índice e valor), `table` até o primeiro índice ausente (`==nil`).
+* Comportamento: permite acessar uma função interadora, que retorna chave e valor.
 * Retorno: uma função interadora, `table` e `0`.
 
 <br>

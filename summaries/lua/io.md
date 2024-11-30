@@ -12,8 +12,8 @@ Fornece uma API para a manipulação de entradas e saídas.
 
 <br>
 
-||Funções||
-|:-:|:-:|:-:|
+|Funções||
+|:-:|:-:
 |<a href="#1">io.close</a> |<a href="#7">io.popen</a>  |
 |<a href="#2">io.flush</a> |<a href="#8">io.read</a>   |
 |<a href="#3">io.input</a> |<a href="#9">io.tmpfile</a>|
@@ -27,8 +27,8 @@ Além de funções, a biblioteca `io` também disponibiliza uma série de métod
 
 <br>
 
-||Métodos||
-|:-:|:-:|:-:|
+|Métodos|
+|:-:|
 |<a href="#12">file:close</a>  |
 |<a href="#13">file:flush</a>  |
 |<a href="#14">file:lines</a>  |
@@ -80,7 +80,7 @@ Além de funções, a biblioteca `io` também disponibiliza uma série de métod
 
 <h3 id="4">io.lines([string=io.stdout, [...="l"]])</h3>
 
-* Comportamento: abre `string` em modo de leitura e intera
+* Comportamento: abre `string` em modo de leitura.
 * Retorno: uma função interadora, que executa e retorna valores de acordo com os argumentos presentes em `...`.
 
 <br>
@@ -91,7 +91,7 @@ Além de funções, a biblioteca `io` também disponibiliza uma série de métod
 | "a" | Lê o arquivo inteiro, partindo da posição atual. |
 | "l" | Lê a linha atual e descarta o caractere de fim da linha. |
 | "L" | Lê a linha atual e mantém o caractere de fim da linha. |
-|`number`| Lê um cadeia de caracteres com no máximo `number` *bytes* e a retorna. |
+|`number`| Lê um cadeia de caracteres com no máximo `number` *`bytes`* e a retorna. |
 
 <br>
 <hr>
@@ -216,7 +216,7 @@ Além de funções, a biblioteca `io` também disponibiliza uma série de métod
 
 <h3 id="14">file:lines(...)</h3>
 
-* Comportamento: abre `file` em modo de leitura e intera
+* Comportamento: abre `file` em modo de leitura.
 * Retorno: uma função interadora, que executa e retorna valores de acordo com os argumentos presentes em `...` ([que pode ser...](#reads)).
 
 <br>
@@ -240,7 +240,7 @@ Além de funções, a biblioteca `io` também disponibiliza uma série de métod
 
 <h3 id="16">file:seek([string="cur", [number=0]]</h3>
 
-* Comportamento: movimenta o "cursor" do arquivo em `number` bytes a partir de `"set"`, `"cur"` ou `"end"`.
+* Comportamento: movimenta o "cursor" do arquivo em `number` `bytes` a partir de `"set"`, `"cur"` ou `"end"`.
 * Retorno: a nova posição do "cursor" do arquivo ou `nil`, e uma mensagem de erro, em caso de falha.
 
 <br>

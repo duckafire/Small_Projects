@@ -4,10 +4,10 @@ Disponibiliza funções relativas a manipulação de tabelas com índices numér
 
 <br>
 
-||Funções||
-|:-:|:-:|:-:|
+|Funções||
+|:-:|:-:|
 |<a href="#1">concat</a>|<a href="#5">remove</a>|
-|<a href="#2">insert</a>|<a href="#6">sort</a>|
+|<a href="#2">insert</a>|<a href="#6">sort</a>  |
 |<a href="#3">move</a>  |<a href="#7">unpack</a>|
 |<a href="#4">pack</a>  ||
 
