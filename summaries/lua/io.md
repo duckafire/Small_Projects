@@ -1,570 +1,272 @@
-# io
-Oferece dois estilos diferentes de manipulação de arquivos:
-  * Descritores **imprícitos**: <br>
-&emsp; Executam suas ações com base nos arquivos de entrada e saída definidos pelo usuário. Eles são fornecidas por `io.`.
-  * Descritores **explícitos**: <br>
-&emsp; São métodos disponíveis para variáveis que armazenem identificadores dee arquivos (abertos). São eles: `close`, `flush`, `lines`, `read`, `seek`, `setvbuf` e `write`.
+<h1 id="0">io</h1>
+
+Fornece uma API para a manipulação de entradas e saídas.
 
 <br>
 
-> As funções [em](#funções) estão etiquetadas de acordo com o que foi dito acima.
+> io.stdin: arquivo de entrada padrão.
+
+> io.stdout: arquivo de saída padrão.
+
+> io.stderr: arquivo de saída responsável por armazenar as mensagens de erro.
 
 <br>
 
-### Descritores padrão
-A tabela `io` fornece três descritores (variáveis) de arquivos pré-definidos, derivados de C, os quais nunca são fechados.
-
-| Nomes     | Descrição                                                                       |
-| :-:       | :-:                                                                             |
-| io.stdin  | Armazena o fluxo de entrada, gerado, por exemplo, por um teclado.               |
-| io.stdout | Armazena determinados dados para uso em *dispositivos* de saída (console, ...). |
-| io.stderr | Armazena mensagens de erro fatais, as quais são exibidas no *console*           |
-
-> Em caso de falha, a maioria destas funções retornarão `nil`, uma mensagem de erro e um código de erro (que vária de acordo com o *OS*), já as demais gerarão um erro fatal. <br>
-> Em sistemas não [*Posix*](https://pt.wikipedia.org/wiki/POSIX "Wikipédia: O que é Posix?"), caso hajam muitos fluxos em execução, as mensagens de erro (em caso de falha) podem
-> não ser seguras, tendo em vista que tais mensagens dependem da variável global `errno`, de C.
+||Funções||
+|:-:|:-:|:-:|
+|<a href="#1">io.close</a> |<a href="#7">io.popen</a>  |
+|<a href="#2">io.flush</a> |<a href="#8">io.read</a>   |
+|<a href="#3">io.input</a> |<a href="#9">io.tmpfile</a>|
+|<a href="#4">io.lines</a> |<a href="#10">io.type</a>  |
+|<a href="#5">io.open</a>  |<a href="#11">io.write</a> |
+|<a href="#6">io.output</a>||
 
 <br>
 
-### Modos de leitura
-
-| Nomes | Função (descrição do modo)                                                                                     |
-| :-:   | :-:                                                                                                            |
-| "r"   | Leitura                                                                                                        |
-| "w"   | Escrita                                                                                                        |
-| "a"   | Adição                                                                                                         |
-| "r+"  | Atualização, todos os dados anteriores são preservados                                                         |
-| "w+"  | Atualização todos os dados anteriores são apagados                                                             |
-| "a+"  | Atualização de edição, todos os dados anteriores são presevados, a ecrita é permitida apenas no fim do arquivo |
-
-> Alguns sistemas exigem um `"b"`, no fim das cadeias, para a abertura de arquivos em binário.
+Além de funções, a biblioteca `io` também disponibiliza uma série de métodos, os quais pode ser usados por variáveis que armazenam arquivos abertos. Amobs estão listados abaixo:
 
 <br>
 
-### Formatos de leitura
-
-| Formatos | Descrição                                                                                                                                                                |
-| :-:      | :-:                                                                                                                                                                      |
-| "n"      | Lê um numeral e o retorna, seguindo as conveções lexicais de LUA. P ter espaços a esquerda e um sinal. Sempre lê a seguênca de entrada mais longa que é um profixo válido para um numeral; caso o prefixo não forme um numeral valído (ex: "", "0x", "3.4e-") ou seja muito longo (>200), será descartado e gerará uma falha para retorno. |
-| "a"      | Lê todo o arquivo, começando da posição atual. Ao fim, retorna uma cadeia vazia. Nunca falha.                                                                            |
-| "l"      | Lê a próxima linha pulando o fim da linha e retornando `nil` no final.                                                                                                   |
-| "L"      | Lê a próxima linha mantendo o fim da linha (se presente) e retornando `nil` no final.                                                                                    |
-| "number" | Lê uma cadeia com no máximo `number` (= qualquer número) *bytes* e retorna `nil` no fim. Caso `number == 0`, não lerá nada e retornará `""`, ou `nil` ao fim do arquivo. |
-
-> `"l"` e `"L"` devem ser usados apenas para arquivos de texto.
+||Métodos||
+|:-:|:-:|:-:|
+|<a href="#12">file:close</a>  |
+|<a href="#13">file:flush</a>  |
+|<a href="#14">file:lines</a>  |
+|<a href="#15">file:read</a>   |
+|<a href="#16">file:seek</a>   |
+|<a href="#17">file:setvbuf</a>|
+|<a href="#18">file:write</a>  |
 
 <br>
 
-## Funções
-* [close](#1 "Implícito")
-* [flush](#2 "Implícito")
-* [input](#3 "Implícito")
-* [lines](#4 "Implícito")
-* [open](#5 "Implícito")
-* [output](#6 "Implícito")
-* [popen](#7 "Implícito")
-* [read](#8 "Implícito")
-* [tmpfile](#9 "Implícito")
-* [type](#10 "Implícito")
-* [write](#11 "Implícito")
-* [file:close](#12 "Explícito")
-* [file:flush](#13 "Explícito")
-* [file:lines](#14 "Explícito")
-* [file:read](#15 "Explícito")
-* [file:seek](#16 "Explícito")
-* [file:setvbuf](#17 "Explícito")
-* [file:write](#18 "Explícito")
+<br>
+<hr>
+<ul><li><a href="#0">Voltar ao topo</a></li></ul>
+<hr>
+<br>
+
+<h3 id="1">io.close([string=io.stdout])</h3>
+
+* Comportamento: fecha um arquivo.
+* Retorno: nenhum.
+
+<br>
+<hr>
+<ul><li><a href="#0">Voltar ao topo</a></li></ul>
+<hr>
+<br>
+
+<h3 id="2">io.flush()</h3>
+
+* Comportamento: salva todos os dados gravados em `io.stdout`.
+* Retorno: nenhum.
+
+<br>
+<hr>
+<ul><li><a href="#0">Voltar ao topo</a></li></ul>
+<hr>
+<br>
+
+<h3 id="3">io.input([string])</h3>
+
+* Comportamento: define `string` como o arquivo de entrada padrão.
+* Retorno: caso `string` seja omitido, retornará o arquivo de entrada padrão, do contrário, não terá retorno.
+
+<br>
+<hr>
+<ul><li><a href="#0">Voltar ao topo</a></li></ul>
+<hr>
+<br>
+
+<h3 id="4">io.lines([string=io.stdout, [...="l"]])</h3>
+
+* Comportamento: abre `string` em modo de leitura e intera
+* Retorno: uma função interadora, que executa e retorna valores de acordo com os argumentos presentes em `...`.
 
 <br>
 
-> `file` é um exemplo de variável que armazena um retorno de `io.open`.
+| <span id="reads"><code>...</code></span> | Descrição |
+|:-:|:-:|
+| "n" | Lê e retorna números (podem haver espaços vazios à esquerda e um sinal) |
+| "a" | Lê o arquivo inteiro, partindo da posição atual. |
+| "l" | Lê a linha atual e descarta o caractere de fim da linha. |
+| "L" | Lê a linha atual e mantém o caractere de fim da linha. |
+|`number`| Lê um cadeia de caracteres com no máximo `number` *bytes* e a retorna. |
+
+<br>
+<hr>
+<ul><li><a href="#0">Voltar ao topo</a></li></ul>
+<hr>
+<br>
+
+<h3 id="5">io.open(string0, [string1="r"])</h3>
+
+* Comportamento: abre `string0` em modo `string1`.
+* Retorno: um "arquivo" ou, em caso de falha, `nil` e uma mensagem de erro.
 
 <br>
 
------
-* ###### [Para o topo](#io)
------
-<br>
-
-###### 1
-* io.close([file])
-	* file: Uma variável que armazene um arquivo.
-	* Usos: Fecha `file`, caso ele não seja especificado, fecha o arquivo de saída padrão (definida por `io.output`).
-	* Retorno: Sem retorno.
-
-> Arquivos também são fechados pelo Coletor de Lixo, mas isso leva um tempo imprevisível para ocorrer.
-
-``` lua
-local file = io.open("emxaple.txt", "r")
-io.close(file)
-
-local fil2 = io.open("emxaple.txt", "r")
-io.output(fil2) -- set fil2 like default output file
-io.close() -- close fil2
-```
+| <span id="modes">Modos</span> | Descrição |
+|:-:|:-:|
+| "r"  | leitura |
+| "w"  | escrita |
+| "a"  | acréscimo |
+| "r+" | atualização (dados anteriores são preservados) |
+| "w+" | atualização (dados anteriores são descartados) |
+| "a+" | atualização de acréscimo (dados anteriores são preservadores; a gravação só pode ocorrer no final do arquivo) |
 
 <br>
-
------
-* ###### [Para o topo](#io)
------
+<hr>
+<ul><li><a href="#0">Voltar ao topo</a></li></ul>
+<hr>
 <br>
 
-###### 2
-* io.flush()
-	* Sem parâmetros.
-	* Usos: Garante que as alterações presentes no *buffer* do arquivo de saída padrão (definido por `io.output`) sejam salvas.
-	* Retorno: Sem retorno.
+<h3 id="6">io.output([string])</h3>
 
-``` lua
-local file = io.open("example.txt", "w")
-io.output(file)
+* Comportamento: define `string` como o arquivo de saída padrão.
+* Retorno: O arquivo de saída padrão se `string` for omitido, caso contrário não terá retorno.
 
-io.write( io.read() )
+<br>
+<hr>
+<ul><li><a href="#0">Voltar ao topo</a></li></ul>
+<hr>
+<br>
 
-io.flush()
-io.close()
-```
+<h3 id="7">io.popen(string0, [string1="r"])</h3>
+
+* Comportamento: executa `string0`, que deve ser um comando do sistema operacional, e armazena sua saída em um arquivo, o qual tem seu [modo](#modes) definido por `string1`.
+* Retorno: o arquivo criado.
 
 <br>
 
------
-* ###### [Para o topo](#io)
------
-<br>
-
-###### 3
-* io.input([file])
-	* file: Indetificador de arquivo (variável).
-	* Usos: Define `file` como arquivo de entrada padrão.
-	* Retorno: O arquivo de entrada padrão se `file` for omitido, caso contrário não terá retorno.
-
-``` lua
-io.input("example.txt")
-
--- is equal:
-
-local any = io.open("example.txt", "r")
-```
+> [!IMPORTANT]
+> Alguns sistemas operacionais pode não permitir esse tipo de interação.
 
 <br>
-
------
-* ###### [Para o topo](#io)
------
+<hr>
+<ul><li><a href="#0">Voltar ao topo</a></li></ul>
+<hr>
 <br>
 
-###### 4
-* io.lines([filename], [...])
-	* filename: Nome de um arquivo. | (...): Formatos de leitura para cada chamada da função interadora (`"l"` por padrão).
-	* Usos: Abre `filename` e gera uma função interadora que funciona sobre ele, usando `...` como parâmetro(s) a cada chamada. O arquivo será fechado quando a função interadora não conseguir mais ler arquivos ou ao encontrar um `break` (com "`for` genérico").
-	* Retorno: Uma função interadora, dois valores `nil` com espaços reservados e o identificador do arquivo. Quando sua função interadora chega ao fim do arquivo, ela retorna `nil`.
+<h3 id="8">io.read(...)</h3>
 
-``` lua
--- MAIN
-
-for v in io.lines("example.txt") do
-	print(v)
-end 
-
--- io.lines()
--- is equal:
--- io.input():io.lines("l")
-```
-
-> Conteúdo de `example.txt` imprido no console:
-
-```
-[ CONSOLE ]
-
-example.txt
-End of file
-```
+* Comportamento: lê o arquivo de entrada padrão, de acordo com os [modos de leitura](#reads) fornecidos por `...`.
+* Retorno: uma cadeia de caracteres para cada argumento presente em `...`. Caso seja chamada sem argumentos, retornará qualquer cadeia de caracteres introduzida pela usuário.
 
 <br>
-
------
-* ###### [Para o topo](#io)
------
+<hr>
+<ul><li><a href="#0">Voltar ao topo</a></li></ul>
+<hr>
 <br>
 
-###### 5
-* io.open(filename, [mode])
-	* filename: Arquivo que será aberto. | mode: Modo de manipulação para `filename` (`"r"` por padrão).
-	* Usos: Abre `filename` no modo especificado por `mode`.
-	* Retorno: Um manipulador de arquivo ou `nil` e uma mensagem de erro, em caso de falha.
+<h3 id="9">io.tmpfile()</h3>
 
-> [Modos de leitura](#modosdeleitura)
-
-``` lua
-local fTxt = io.open("example_txt.txt")
-local fLua = io.open("example_lua.lua")
-
-local _nil, _error = io.open("file")
-```
+* Comportamento: cria um arquivo temporário, que é descartado ao fim do programa.
+* Retorno: o "arquivo", em caso de sucesso.
 
 <br>
-
------
-* ###### [Para o topo](#io)
------
+<hr>
+<ul><li><a href="#0">Voltar ao topo</a></li></ul>
+<hr>
 <br>
 
-###### 6
-* io.output(([file])
-	* file: Indetificador de arquivo (variável).
-	* Usos: Define `file` como arquivo de saída padrão.
-	* Retorno: O arquivo de saída padrão se `file` for omitido, caso contrário não terá retorno.
+<h3 id="10">io.type(variable)</h3>
 
-``` lua
-io.output("example.txt")
-
--- is equal:
-
-local any = io.open("example.txt", "r")
-```
+* Comportamento: verifica se `variable` armazena um arquivo.
+* Retorno: `"file"` caso seja um arquivo aberto, `"file closed"` caso seja um arquivo fechado ou `nil` caso não seja um arquivo.
 
 <br>
-
------
-* ###### [Para o topo](#io)
------
+<hr>
+<ul><li><a href="#0">Voltar ao topo</a></li></ul>
+<hr>
 <br>
 
-###### 7
-* io.popen(program, [mode])
-	* program: Um programa que será executado e lido | mode: Modo de manipulação para `filename` (`"r"` por padrão ou `"w"`).
-	* Usos: Inicia `program` em um processo separado.
-	* Retorno: Um manipulador de arquivo para ler dados de `program`.
+<h3 id="11">io.write(...)</h3>
 
-> Está função não está disponível em todas as plataformas, pois é dependente do sistema. <br>
-> [Modos de leitura](#modosdeleitura).
-
-``` lua
--- "echo" is a CMD and BASH command,
--- it print "Hello World!" (messange)
--- in the console.
-local file = io.popen("echo Hello World", "w")
-file:close()
-```
+* Comportamento: escreve `...` no arquivo de saída padrão.
+* Retorno: `io.stdout` ou `nil`, em caso de falha.
 
 <br>
-
------
-* ###### [Para o topo](#io)
------
+<hr>
+<ul><li><a href="#0">Voltar ao topo</a></li></ul>
+<hr>
 <br>
 
-###### 8
-* io.read(...)
-	* (...): Formatos de leitura, que especificam o que ler (`"l"` por padrão).
-	* Usos: Lê o arquivo de entrada padrão de acordo com as especificações dos formatos especificados em `...`.
-	* Retorno: Para cada formato dado por `...`, retornará uma cadeia de caracteres ou um número com os caracteres lidos. Caso chamada sem argumentos, retornará o que for escrito no console (pelo usuário).
+<h3 id="12">file:close()</h3>
 
-> [Formatos de leitura](#formatosdeleitura)
-
-``` lua
-local file = io.open("temp.txt", "r")
-io.input(file)
-
-io.read("a")
-
-io.close()
-```
-
-```
-[ CONSOLE ]
-
-12345
-abcde
-```
+* Comportamento: fecha `file`.
+* Retorno: caso feche um arquivo retornado por [`io.popen`](#7), retornará o mesmo que `os.execute`, do contrário não terá retorno.
 
 <br>
-
------
-* ###### [Para o topo](#io)
------
+<hr>
+<ul><li><a href="#0">Voltar ao topo</a></li></ul>
+<hr>
 <br>
 
-###### 9
-* io.tmpfile()
-	* Sem parâmetros.
-	* Usos: Cria um arquivo temporário, que é descartado com o termino do programa.
-	* Retorno: Em caso de sucesso, retornará um indentificador para o arquivo criado.
+<h3 id="13">file:flush()</h3>
 
-``` lua
-local tempFile = io.tmpfile()
-```
+* Comportamento: salva todos os dados gravados em `file`.
+* Retorno: nenhum
 
 <br>
-
------
-* ###### [Para o topo](#io)
------
+<hr>
+<ul><li><a href="#0">Voltar ao topo</a></li></ul>
+<hr>
 <br>
 
-###### 10
-* io.type(var)
-	* var: Uma variável contendo um indentificador de arquivo.
-	* Usos: Verifica se `var` é um arquivo e, caso seja, se ele está aberto ou fechado.
-	* Retorno: `"file"` caso `var` seja um arquivo aberto, `"closed file"` caso seja um arquivo fechado ou `nil` caso não seja um indetificado de arquivo.
+<h3 id="14">file:lines(...)</h3>
 
-``` lua
-local var = io.open("example.txt", "r")
-local num = 49
-
-io.type(var) -- "file"
-
-var:close()
-
-io.type(var) -- "closed file"
-
-io.type(num) -- nil
-```
+* Comportamento: abre `file` em modo de leitura e intera
+* Retorno: uma função interadora, que executa e retorna valores de acordo com os argumentos presentes em `...` ([que pode ser...](#reads)).
 
 <br>
-
------
-* ###### [Para o topo](#io)
------
+<hr>
+<ul><li><a href="#0">Voltar ao topo</a></li></ul>
+<hr>
 <br>
 
-###### 11
-* io.write(...)
-	* (...): Cadeias de caracteres (ou números).
-	* Usos: Escreve os argumentos presente em `...` no arquivo de saída padrão.
-	* Retorno: O arquivo de saída padrão ou, em caso de falha, retornará `file` e uma mensagem de erro.
+<h3 id="15">file:read([...="l"])</h3>
 
-``` lua
-local file = io.open("example.txt", "w")
-io.output(file)
-
-io.write("Hello World!")
-```
+* Comportamento: 
+* Retorno: 
+* Comportamento: lê `file` padrão, de acordo com os [modos de leitura](#reads) fornecidos por `...`.
+* Retorno: uma cadeia de caracteres para cada argumento presente em `...`.
 
 <br>
-
------
-* ###### [Para o topo](#io)
------
+<hr>
+<ul><li><a href="#0">Voltar ao topo</a></li></ul>
+<hr>
 <br>
 
-###### 12
-* file:close()
-	* Sem parâmetros.
-	* Usos: Fecha `file`.
-	* Retorno: Ao fechar um arquivo aberto com `io.popen`, retornará o mesmo que `os.execute`, caso contrário, não terá um retorno.
+<h3 id="16">file:seek([string="cur", [number=0]]</h3>
 
-> Arquivos também são fechados pelo Coletor de Lixo, mas isso leva um tempo imprevisível para ocorrer.
-
-``` lua
-local file = io.open("emxaple.txt", "r")
-file:close()
-
-local fil2 = io.open("emxaple.txt", "r")
-io.output(fil2)
-io.output():close()
-```
+* Comportamento: movimenta o "cursor" do arquivo em `number` bytes a partir de `"set"`, `"cur"` ou `"end"`.
+* Retorno: a nova posição do "cursor" do arquivo ou `nil`, e uma mensagem de erro, em caso de falha.
 
 <br>
-
------
-* ###### [Para o topo](#io)
------
+<hr>
+<ul><li><a href="#0">Voltar ao topo</a></li></ul>
+<hr>
 <br>
 
-###### 13
-* file:flush()
-	* Sem parâmetros.
-	* Usos: Garante que as alterações presentes no *buffer* de `file` sejam salvas.
-	* Retorno: Sem retorno.
+<h3 id="17">file:setvbuf(string, [number])</h3>
 
-``` lua
-local file = io.open("example.txt", "w")
-
-file:write( file:read() )
-
-file:flush()
-file:close()
-```
+* Comportamento: define o modo de *bufferrização* de `file` em `"no"` (nenhum), `"full"` (completo) ou `"line"` (por linha).
+* Retorno: nenhum.
 
 <br>
-
------
-* ###### [Para o topo](#io)
------
+<hr>
+<ul><li><a href="#0">Voltar ao topo</a></li></ul>
+<hr>
 <br>
 
-###### 14
-* file:lines([...])
-	* (...): Formatos de leitura para cada chamada da função interadora (`"l"` por padrão).
-	* Usos: Abre `file` e gera uma função interadora que funciona sobre ele.
-	* Retorno: Uma função interadora, dois valores `nil` com espaços reservados e o identificador do arquivo. Quando está função interadora chega ao fim do arquivo ela retorna `nil`.
+<h3 id="18">file:write(..)</h3>
 
-> Ao contrário de `io.lines`, a função interadora, retornada por esta função, não fecha `file` após o fim do *loop*.
-
-``` lua
--- MAIN
-
-local file = io.open("example.txt")
-
-for v in file:lines() do
-	print(v)
-end 
-
--- io.lines()
--- is equal:
--- io.input():io.lines("l")
-```
-
-> Conteúdo de `example.txt` imprido no console:
-
-```
-[ CONSOLE ]
-
-example.txt
-End of file
-```
+* Comportamento: escreve `...` em `file`.
+* Retorno: `file` ou `nil`, em caso de falha.
 
 <br>
-
------
-* ###### [Para o topo](#io)
------
+<hr>
+<ul><li><a href="#0">Voltar ao topo</a></li></ul>
+<hr>
 <br>
-
-###### 15
-* file:read(...)
-	* (...): Formatos de leitura, que especificam o que ler.
-	* Usos: Lê `file` de acordo com as especificações dadas em `...` (`"l"` por padrão).
-	* Retorno: Para cada formato, retornará uma cadeia de caracteres ou um número com os caracteres lidos. Caso chamada sem argumentos, retornará o que for escrito no console (pelo usuário).
-
-> [Formatos de leitura](#formatosdeleitura)
-
-``` lua
-local file = io.open("temp.txt", "r")
-
-file:read("a")
-
-file:close()
-```
-
-```
-[ CONSOLE ]
-
-12345
-abcde
-```
-
-<br>
-
------
-* ###### [Para o topo](#io)
------
-<br>
-
-###### 16
-* file:seek([whence], [[offset]])
-	* whence: Ponto incial da medida (`"cur"` por padrão). | offset: Ponto final da medida (`0` por padrão).
-	* Usos: Estabelece a **posição atual** de `file`, usada pelo formato de feitura [`"a"`](formatosdeleitura). Através da medida: **posição atual** (`whence`) + `offset`.
-	* Retorno: A posição definida como atual para `file` ou a posição atual (caso chamada sem parâmetros) ou, em caso de falha, `0` e uma mensagem de erro.
-
-> `whence` pode assumir os seguintes valores:
->> `"set"` -> Início do arquivo. <br>
->> `"cur"` -> Posição atual. <br>
->> `"end"` -> Fim do arquivo. <br>
-
-``` lua
-local file = io.open("example.txt", "a+")
-print("[ CONSOLE ]\n")
-
--- initial = 0; final = 
-print(file:read("a").."\n")
-
-file:seek("set", 12) -- 12 (10 + 2)
-print(file:read("a").."\n")
-
-file:seek("end", -5) -- 17 (15 + 2)
-print(file:read("a"))
-
-file:close()
-```
-
-```
-[ CONSOLE ]
-
-0
-0123456789
-0123456789
-
-12
-0123456789
-
-17
-56789
-```
-
-> Quebras de linha (`"\n"`) são interpretadas caracteres, logo cada quebra de linha acrescenta mais dois ao "comprimento" do arquivo.
-
-<br>
-
------
-* ###### [Para o topo](#io)
------
-<br>
-
-###### 17
-* file:setvbuf(mode, [size])
-	* mode: O modo que será usado | size: Especifica o tamanho do *buffer*, em *bytes* (um "tamanho apropriado" por padrão).
-	* Usos: Define o modo de *bufferização* de `file`.
-	* Retorno: Sem retorno.
-
-> `mode` pode assumir os seguintes valores:
->> `"no"`   -> Sem *bufferização* (resultados instatâneos para qualquer operação de saída). <br>
->> `"full"` -> *Bufferização* completa (a operação é realizada quando o *buffer* está cheio ou quando o usuário chamar `io.flush()`). <br>
->> `"line"` -> *Bufferização* de linha (a *bufferização* ocorre quando uma quebra de linha é produzida ou se ouver a entrada de arquivos especiais, como um "dispositivo" terminal). <br>
-
-``` lua
-local file = io.open("example.txt", "w")
-file:setvbuf("full")
-
-file:write("Hello World!")
-
-file:flush()
-file:close()
-```
-
-<br>
-
------
-* ###### [Para o topo](#io)
------
-<br>
-
-###### 18
-* file:write(...)
-	* (...): Cadeias de caracteres (ou números).
-	* Usos: Escreve os argumentos presente em `...` no *buffer* de `file`.
-	* Retorno: `file` ou, em caso de falha, retornará `file` e uma mensagem de erro.
-
-``` lua
-local file = io.open("example.txt", "w")
-
-file:write("Hello World!")
-```
-
-<br>
-
------
-* ###### [Para o topo](#io)
------
-<br>
-
-#### Fontes:
-* https://lua.org/manual/5.4/
-
-<br>
-
------
-* ###### [Para o topo](#io)
------
