@@ -1,14 +1,19 @@
-<h1 id="0">Package</h1>
+# Package
 
 Conjunto de majoritária de variáveis, utilizadas por [`require`](https://github.com/duckafire/Small_Projects/blob/main/summaries/lua/basic.md#17) para carregar "módulos".
 
 <br>
 
 > package.config: armazena uma série de caracteres usados em algumas configurações, os quais são separados por ponto e vírgula. Ambos encontram-se abaixo:
+
 > > separador de directórios: `/` (`\` no *Windows*).
+
 > > separador de templates (em um caminho): `;`.
+
 > > pontos de substituição em um template: `?`.
+
 > > caractere: `!` (no *Windows*, ele é substituído pelo caminho do executável).
+
 > > caractere usado para interromper a leitura desta cadeia: `-` (por padrão).
 
 > package.cpath: cadeia de caracteres, que armazena o caminho usado por [`require`](https://github.com/duckafire/Small_Projects/blob/main/summaries/lua/basic.md#17) para localizar um carregador C.
@@ -30,8 +35,6 @@ Conjunto de majoritária de variáveis, utilizadas por [`require`](https://githu
 
 <br>
 <hr>
-<ul><li><a href="#0">Voltar ao topo</a></li></ul>
-<hr>
 <br>
 
 <h3 id="1">package.loadlib(string0, string1)</h3>
@@ -46,11 +49,9 @@ Conjunto de majoritária de variáveis, utilizadas por [`require`](https://githu
 
 <br>
 <hr>
-<ul><li><a href="#0">Voltar ao topo</a></li></ul>
-<hr>
 <br>
 
-<h3 id="2">package.searchpath(string0, string1, [string2=".", [string3=...]])</h3>
+<h3 id="2">package.searchpath(string0, string1, [string2=".", [string3=IN!NOTE]])</h3>
 
 * Comportamento: procura pela biblioteca `string0`, em todos os caminhos fornecidos por `string1`.
 * Retorno: o caminho para `string0`.
@@ -73,10 +74,8 @@ Conjunto de majoritária de variáveis, utilizadas por [`require`](https://githu
 <br>
 
 > [!TIP]
-> Caso o caractere `?` seja encontrado em `string1`, ele será substituído por `string0`. Por exemple (dado que `string0="foo"`): `"./c/d/?.so;./?.so"` -> `"./c/d/foo.so;./foo.so"`.
+> Caso o caractere `?` seja encontrado em `string1`, ele será substituído por `string0`. Por exemplo (dado que `string0="foo"`): `"./c/d/?.so;./?.so"` -> `"./c/d/foo.so;./foo.so"`.
 
 <br>
-<hr>
-<ul><li><a href="#0">Voltar ao topo</a></li></ul>
 <hr>
 <br>

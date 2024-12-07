@@ -7,6 +7,6 @@
 * [math](https://github.com/duckafire/Small_Projects/blob/main/summaries/lua/math.md)
 * os
 * [package](https://github.com/duckafire/Small_Projects/blob/main/summaries/lua/package.md)
-* string
+* [string](https://github.com/duckafire/Small_Projects/blob/main/summaries/lua/string.md)
 * [table](https://github.com/duckafire/Small_Projects/blob/main/summaries/lua/table.md)
 * [utf8](https://github.com/duckafire/Small_Projects/blob/main/summaries/lua/utf8.md)

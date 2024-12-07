@@ -1,4 +1,4 @@
-<h1 id="0">string</h1>
+# string
 
 Fornece uma gama de funções destinadas a manipulação de cadeias de caracteres.
 
@@ -9,14 +9,14 @@ Fornece uma gama de funções destinadas a manipulação de cadeias de caractere
 
 <br>
 
-> [!IMPORTANT]
+> [!TIP]
 > Funções que solicitam índices de caracteres também aceitam valores negativos, os quais referenciam posições partidas do final da cadeia de caracteres em questão.
 
 <br>
 
 <h3 id="pattern-match"><em>Pattern matching</em></h3>
 
-Este é um conjunto de caracteres especiais, semelhante ao conjunto [_regex_](https://en.wikipedia.org/wiki/Regular_expression "Wikipédia") limitado, própria da linguagem Lua. Ambos são usados em correspondências de sintaxe pela funções: [`string.find`](#4), [`string.gmatch`](#6), [`string.gsub`](#7) e [`string.match`](#10).
+Este é um conjunto de caracteres especiais, semelhante ao conjunto [*regex*](https://en.wikipedia.org/wiki/Regular_expression "Wikipédia") (porém limitado), própria da linguagem Lua. Ambos são usados em correspondências de sintaxe pela funções: [`string.find`](#4), [`string.gmatch`](#6), [`string.gsub`](#7) e [`string.match`](#10).
 
 * Fontes:
 	* [Lua manual 5.3](https://lua.org/manual/5.3/manual.html#6.4.1)
@@ -24,7 +24,7 @@ Este é um conjunto de caracteres especiais, semelhante ao conjunto [_regex_](ht
 	* [Cheatography](https://cheatography.com/ambigious/cheat-sheets/lua-string-patterns/)
 
 | Classes de caracteres | Tipo de caractere representado |
-| :-:| :-:      |
+| :-:| :--      |
 | %a | a-z; A-Z |
 | %c | caracteres de controle           |
 | %d | 0-9      |
@@ -38,36 +38,39 @@ Este é um conjunto de caracteres especiais, semelhante ao conjunto [_regex_](ht
 | %z | zero     |
 | .  | qualquer caractere |
 
+<br>
+
 | Caractere | Modificação |
-| :-: | :-: |
+| :-: | :-- |
 | +   | `1=>` ocorrências |
 | *   | `0=>` ocorrências |
 | -   | `0>=` ocorrências |
 | ?   | 0-1 ocorrência (opcional) |
 
+<br>
+
 | Outros   | Descrição |
-| :-:      | :-: |
-| _A_      | um alfnumérico específico diferente de `^$()%.[]*+-?`  |
-| % _A_    | um caractere não alfanumérico (representa ele próprio) |
-| %b _A Z_ | qualquer cadeia de caracteres que comece com _A_ e termine com _Z_ (ambos são QUALQUER caractere) |
+| :-:      | :-- |
+| *A*      | um alfnumérico específico diferente de `^$()%.[]*+-?`  |
+| % *A*    | um caractere não alfanumérico (representa ele próprio) |
+| %b *A Z* | qualquer cadeia de caracteres que comece com *A* e termine com *Z* (ambos são QUALQUER caractere) |
 | %n       | quantidade de repetições |
 | [ _set _]   | conjunto de caracteres; a correspondência deve ser igual     |
-| [\^ _set_ ] | conjunto de caracteres; a correspondência deve ser diferente |
-| %f[ _set_ ] | uma fronteira, onde o caractere anterior a _set_ não deve pertencer a ele |
+| [\^ *set* ] | conjunto de caracteres; a correspondência deve ser diferente |
+| %f[ *set* ] | uma fronteira, onde o caractere anterior a *set* não deve pertencer a ele |
 
 <br>
 
-### Formato de (des)empacotamento
 <h3 id="pack-format"><em>Formato de (des)empacotamento</em></h3>
 
-As funções `string.pack`, `string.packsize` e `string.unpack` solicitam um dos seguintes formatos como primeiro argumento (os quais representam o formato de compactação binária de cada caractere da cadeia que uma (ou mais) função, dentre as citadas anteriormente, está tratando.
+As funções `string.pack`, `string.packsize` e `string.unpack` solicitam um dos seguintes formatos como primeiro argumento: 
 
 | Cadeias | Descrição |
-| :-: | :-: |
-| < | define a "ordem de _bytes_" como [_little endian_](https://en.m.wikipedia.org/wiki/Endianness) |
-| > | define a "ordem de _bytes_" como [_big endian_](https://en.m.wikipedia.org/wiki/Endianness) |
-| = | define a "ordem de _bytes_" como nativa da máquina cujo código está sendo executado |
-| ![ _n_ ] | define o alinhamento máximo para `n` (nativo por padrão) |
+| :-: | :-- |
+| < | define a "ordem de *bytes*" como [_little endian_](https://en.m.wikipedia.org/wiki/Endianness) |
+| > | define a "ordem de *bytes*" como [_big endian_](https://en.m.wikipedia.org/wiki/Endianness) |
+| = | define a "ordem de *bytes*" como nativa da máquina cujo código está sendo executado |
+| ![ *n* ] | define o alinhamento máximo para `n` (nativo por padrão) |
 | b | um `char` assinado |
 | B | um `char` sem sinal |
 | h | um `short` assinado (tamanho nativo) |
@@ -77,16 +80,16 @@ As funções `string.pack`, `string.packsize` e `string.unpack` solicitam um dos
 | j | um `lua_Integer` |
 | J | um `lua_Unsigned` |
 | T | um `size_t` (tamanho nativo) |
-| i[ _n_ ] | um `int` com `n` _bytes_ (tamanho nativo) |
-| I[ _n_ ] | um `unsigned int` com `n` _bytes_ (tamanho nativo) |
+| i[ *n* ] | um `int` com `n` *bytes* (tamanho nativo) |
+| I[ *n* ] | um `unsigned int` com `n` *bytes* (tamanho nativo) |
 | f | um `float` (tamanho nativo) |
 | d | um `double` (tamanho nativo) |
 | n | um `lua_Number` |
-| c _n_ | uma cadeia de caracteres, de tamanho fixo, com `n` _bytes_ |
+| c *n* | uma cadeia de caracteres, de tamanho fixo, com `n` *bytes* |
 | z | uma cadeia de caracteres terminada com `\0` |
-| s[ _n_ ] | uma cadeia de caracteres precedida por seu comprimento codificado como um inteiro sem sinal (`size_t` por padrão) |
-| x | um _byte_ de preenchimento |
-| X _op_ | um item vazio que se alinha de acordo com _op_ |
+| s[ *n* ] | uma cadeia de caracteres precedida por seu comprimento codificado como um inteiro sem sinal (`size_t` por padrão) |
+| x | um *byte* de preenchimento |
+| X *op* | um item vazio que se alinha de acordo com *op* |
 | "" | espaço vazio (ignorado) |
 
 <br>
@@ -102,8 +105,6 @@ As funções `string.pack`, `string.packsize` e `string.unpack` solicitam um dos
 
 <br>
 <hr>
-<ul><li><a href="#0">Voltar ao topo</a></li></ul>
-<hr>
 <br>
 
 <h3 id="1">string.byte(string, [number0=1, [number1=number0]])</h3>
@@ -117,8 +118,6 @@ As funções `string.pack`, `string.packsize` e `string.unpack` solicitam um dos
 > Tais códigos podem não ser portáveis entre plataformas.
 
 <br>
-<hr>
-<ul><li><a href="#0">Voltar ao topo</a></li></ul>
 <hr>
 <br>
 
@@ -134,18 +133,14 @@ As funções `string.pack`, `string.packsize` e `string.unpack` solicitam um dos
 
 <br>
 <hr>
-<ul><li><a href="#0">Voltar ao topo</a></li></ul>
-<hr>
 <br>
 
 <h3 id="3">string.dump(function_, [boolean=false])</h3>
 
 * Comportamento: converte uma função em código binário. Caso `boolean==true`, a versão binária de `function_` poderá não incluir todas as informações de depuração sobre a função, como forma de economizar espaço.
-* Retorno: uma cadeia de caracteres contend uma representação binária de `function_`.
+* Retorno: uma cadeia de caracteres contendo uma representação binária de `function_`.
 
 <br>
-<hr>
-<ul><li><a href="#0">Voltar ao topo</a></li></ul>
 <hr>
 <br>
 
@@ -156,14 +151,12 @@ As funções `string.pack`, `string.packsize` e `string.unpack` solicitam um dos
 
 <br>
 <hr>
-<ul><li><a href="#0">Voltar ao topo</a></li></ul>
-<hr>
 <br>
 
 <h3 id="5">string.format(string, ...)</h3>
 
-* Comportamento: formata `string`, substituindo os "caracteres mágicos" dela por um argumento respectivo, presente em `...`.
-* Retorno: uma cadeia de caracteres com as formatações.
+* Comportamento: formata `string`, substituindo os "caracteres mágicos" dela por um argumento respectivo presente em `...`.
+* Retorno: `string` com as formatações especificadas.
 
 <br>
 
@@ -171,8 +164,6 @@ As funções `string.pack`, `string.packsize` e `string.unpack` solicitam um dos
 >  Os "caracteres mágicos" seguem o [padrão C](https://cplusplus.com/reference/cstdio/printf/).
 
 <br>
-<hr>
-<ul><li><a href="#0">Voltar ao topo</a></li></ul>
 <hr>
 <br>
 
@@ -182,8 +173,6 @@ As funções `string.pack`, `string.packsize` e `string.unpack` solicitam um dos
 * Retorno: uma função interadora, que retora uma fração de `string`, equivalente ao <a href="#pattern-match"><em>Pattern Matching</em></a> fornecido em `pattern`.
 
 <br>
-<hr>
-<ul><li><a href="#0">Voltar ao topo</a></li></ul>
 <hr>
 <br>
 
@@ -204,18 +193,14 @@ As funções `string.pack`, `string.packsize` e `string.unpack` solicitam um dos
 
 <br>
 <hr>
-<ul><li><a href="#0">Voltar ao topo</a></li></ul>
-<hr>
 <br>
 
 <h3 id="8">string.len(string)</h3>
 
-* Comportamento: calcula o comprimento de `string`, considerando _zeros_.
+* Comportamento: calcula o comprimento de `string`, considerando *zeros* (`\0`, `\00`, `\000`).
 * Retorno: comprimento.
 
 <br>
-<hr>
-<ul><li><a href="#0">Voltar ao topo</a></li></ul>
 <hr>
 <br>
 
@@ -227,11 +212,9 @@ As funções `string.pack`, `string.packsize` e `string.unpack` solicitam um dos
 <br>
 
 > [!NOTE]
-> A definição de o que é um letra minúscula depende do local.
+> A definição do que é um letra minúscula e maiúscula depende do local.
 
 <br>
-<hr>
-<ul><li><a href="#0">Voltar ao topo</a></li></ul>
 <hr>
 <br>
 
@@ -242,8 +225,6 @@ As funções `string.pack`, `string.packsize` e `string.unpack` solicitam um dos
 
 <br>
 <hr>
-<ul><li><a href="#0">Voltar ao topo</a></li></ul>
-<hr>
 <br>
 
 <h3 id="11">string.pack(format, ...)</h3>
@@ -253,18 +234,14 @@ As funções `string.pack`, `string.packsize` e `string.unpack` solicitam um dos
 
 <br>
 <hr>
-<ul><li><a href="#0">Voltar ao topo</a></li></ul>
-<hr>
 <br>
 
 <h3 id="12">string.packsize(format)</h3>
 
-* Comportamento: obtém o tamanho de um <a href="#pattern-match">formato</a> de compactação binária de cadeias de caracteres.
-* Retorno: tamanho, em _bytes_.
+* Comportamento: obtém o tamanho de um <a href="#pattern-match">formato</a> de compactação binária.
+* Retorno: tamanho, em *bytes*.
 
 <br>
-<hr>
-<ul><li><a href="#0">Voltar ao topo</a></li></ul>
 <hr>
 <br>
 
@@ -275,18 +252,14 @@ As funções `string.pack`, `string.packsize` e `string.unpack` solicitam um dos
 
 <br>
 <hr>
-<ul><li><a href="#0">Voltar ao topo</a></li></ul>
-<hr>
 <br>
 
 <h3 id="14">string.reverse(string)</h3>
 
 * Comportamento: reverte `string`.
-* Retorno: `string` invertida.
+* Retorno: resultado.
 
 <br>
-<hr>
-<ul><li><a href="#0">Voltar ao topo</a></li></ul>
 <hr>
 <br>
 
@@ -297,18 +270,14 @@ As funções `string.pack`, `string.packsize` e `string.unpack` solicitam um dos
 
 <br>
 <hr>
-<ul><li><a href="#0">Voltar ao topo</a></li></ul>
-<hr>
 <br>
 
 <h3 id="16">string.unpack(format, string, [number=1])</h3>
 
 * Comportamento: descompacto os valores binários presentes em `string` (criada por [`string.pack`](#11)), a partir da posição `number` e baseado em `format`.
-* Retorno: os valores obtidos, mais a posição do primeiro _byte_ não lido.
+* Retorno: os valores obtidos, mais a posição do primeiro *byte* não lido.
 
 <br>
-<hr>
-<ul><li><a href="#0">Voltar ao topo</a></li></ul>
 <hr>
 <br>
 
@@ -320,10 +289,8 @@ As funções `string.pack`, `string.packsize` e `string.unpack` solicitam um dos
 <br>
 
 > [!NOTE]
-> A definição de o que é um letra maiúscula depende do local.
+> A definição do que é um letra minúscula e maiúscula depende do local.
 
 <br>
-<hr>
-<ul><li><a href="#0">Voltar ao topo</a></li></ul>
 <hr>
 <br>

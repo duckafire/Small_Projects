@@ -1,6 +1,6 @@
-<h1 id="0">math</h1>
+# math
 
-Biblioteca matemática, contendo funções capazes de realizar operações simples com números.
+Biblioteca matemática contendo funções capazes de realizar operações simples com números.
 
 <br>
 
@@ -40,95 +40,82 @@ Biblioteca matemática, contendo funções capazes de realizar operações simpl
 
 <br>
 <hr>
-<ul><li><a href="#0">Voltar ao topo</a></li></ul>
-<hr>
 <br>
 
 <h3 id="1">math.abs(n)</h3>
 
 * Comportamento: converte `n` para seu valor absoluto.
-* Retorno: o resultado da conversão.
+* Retorno: resultado da conversão.
 
 <br>
-<hr>
-<ul><li><a href="#0">Voltar ao topo</a></li></ul>
+
+> [!NOTE]
+> O valor absoluto de `-1` é `1` e o valor obsoluto de `1` é `1`.
+
+<br>
 <hr>
 <br>
 
 <h3 id="2">math.acos(n)</h3>
 
 * Comportamento: calcula o [arco cosseno](https://en.wikipedia.org/wiki/Inverse_trigonometric_functions "Wikipédia") de `n`.
-* Retorno: o resultado em radianos.
+* Retorno: resultado em radianos.
 
 <br>
-<hr>
-<ul><li><a href="#0">Voltar ao topo</a></li></ul>
 <hr>
 <br>
 
 <h3 id="3">math.asin(n)</h3>
 
 * Comportamento: calcula o [arco seno](https://en.wikipedia.org/wiki/Inverse_trigonometric_functions "Wikipédia") de `n`.
-* Retorno: o resultado em radianos.
+* Retorno: resultado em radianos.
 
 <br>
-<hr>
-<ul><li><a href="#0">Voltar ao topo</a></li></ul>
 <hr>
 <br>
 
 <h3 id="4">math.atan(n)</h3>
 
 * Comportamento: calcula a [arco tangente](https://en.wikipedia.org/wiki/Inverse_trigonometric_functions "Wikipédia") de `n`.
-* Retorno: o resultado em radianos.
+* Retorno: resultado em radianos.
 
 <br>
-<hr>
-<ul><li><a href="#0">Voltar ao topo</a></li></ul>
 <hr>
 <br>
 
 <h3 id="5">math.atan2(y, [x=1])</h3>
 
 * Comportamento: calcula a [arco tangente](https://en.wikipedia.org/wiki/Inverse_trigonometric_functions "Wikipédia") de `y` e `x`, usando seus sinais para encontrar o quadrante do resultado.
-* Retorno: o resultado em radianos.
+* Retorno: resultado em radianos.
 
 <br>
-<hr>
-<ul><li><a href="#0">Voltar ao topo</a></li></ul>
 <hr>
 <br>
 
 <h3 id="6">math.ceil(n)</h3>
 
-* Comportamento: converte `n` para um valor inteiro.
-* Retorno: o menor inteiro maior ou igual a `n`.
+* Comportamento: converte `n` em um valor inteiro.
+* Retorno: menor inteiro maior ou igual a `n`.
 
 <br>
-<hr>
-<ul><li><a href="#0">Voltar ao topo</a></li></ul>
 <hr>
 <br>
 
 <h3 id="7">math.cos(n)</h3>
 
 * Comportamento: calcula o [cosseno](https://en.wikipedia.org/wiki/Trigonometric_functions "Wikipédia") de `n`.
-* Retorno: o resultado em radianos.
+* Retorno: resultado em radianos.
 
 <br>
-<hr>
-<ul><li><a href="#0">Voltar ao topo</a></li></ul>
 <hr>
 <br>
 
 <h3 id="8">math.cosh(n)</h3>
 
 * Comportamento: calcula o [cosseno hiperbólico](https://en.wikipedia.org/wiki/Hyperbolic_functions "Wikipédia") de `n`.
-* Retorno: o resultado em radianos.
+* Retorno: resultado em radianos.
 
 <br>
-<hr>
-<ul><li><a href="#0">Voltar ao topo</a></li></ul>
 <hr>
 <br>
 
@@ -139,8 +126,6 @@ Biblioteca matemática, contendo funções capazes de realizar operações simpl
 
 <br>
 <hr>
-<ul><li><a href="#0">Voltar ao topo</a></li></ul>
-<hr>
 <br>
 
 <h3 id="10">math.exp(n)</h3>
@@ -150,18 +135,14 @@ Biblioteca matemática, contendo funções capazes de realizar operações simpl
 
 <br>
 <hr>
-<ul><li><a href="#0">Voltar ao topo</a></li></ul>
-<hr>
 <br>
 
 <h3 id="11">math.floor()</h3>
 
-* Comportamento: converte `n` para um valor inteiro.
-* Retorno: o maior inteiro menor ou igual a `n`.
+* Comportamento: converte `n` em um valor inteiro.
+* Retorno: maior inteiro menor ou igual a `n`.
 
 <br>
-<hr>
-<ul><li><a href="#0">Voltar ao topo</a></li></ul>
 <hr>
 <br>
 
@@ -171,8 +152,6 @@ Biblioteca matemática, contendo funções capazes de realizar operações simpl
 * Retorno: resultado (o sinal do valor retornado é igual ao sinal de `n0`).
 
 <br>
-<hr>
-<ul><li><a href="#0">Voltar ao topo</a></li></ul>
 <hr>
 <br>
 
@@ -188,14 +167,12 @@ Biblioteca matemática, contendo funções capazes de realizar operações simpl
 
 <br>
 <hr>
-<ul><li><a href="#0">Voltar ao topo</a></li></ul>
-<hr>
 <br>
 
 <h3 id="14">math.ldexp(n0, n1)</h3>
 
 * Comportamento: converte um valor de ponto flutuante em formato de [*mantissa*](https://en.wikipedia.org/wiki/Significand "Wikipédia") (`n0`) e *expoente* (`n1`).
-* Retorno: o valor em formato numérico.
+* Retorno: valor numérico de ponto flutuante.
 
 <br>
 
@@ -203,8 +180,6 @@ Biblioteca matemática, contendo funções capazes de realizar operações simpl
 > Veja também: <a href="#13">math.frexp</a>
 
 <br>
-<hr>
-<ul><li><a href="#0">Voltar ao topo</a></li></ul>
 <hr>
 <br>
 
@@ -215,8 +190,6 @@ Biblioteca matemática, contendo funções capazes de realizar operações simpl
 
 <br>
 <hr>
-<ul><li><a href="#0">Voltar ao topo</a></li></ul>
-<hr>
 <br>
 
 <h3 id="16">math.log10(n)</h3>
@@ -226,29 +199,23 @@ Biblioteca matemática, contendo funções capazes de realizar operações simpl
 
 <br>
 <hr>
-<ul><li><a href="#0">Voltar ao topo</a></li></ul>
-<hr>
 <br>
 
-<h3 id="17">math.max(n, ...)</h3>
+<h3 id="17">math.max(n, [...])</h3>
 
 * Comportamento: obtém o maior valor dentre os argumentos.
-* Retorno: o valor obtido.
+* Retorno: valor obtido.
 
 <br>
 <hr>
-<ul><li><a href="#0">Voltar ao topo</a></li></ul>
-<hr>
 <br>
 
-<h3 id="18">math.min(n, ...)</h3>
+<h3 id="18">math.min(n, [...])</h3>
 
 * Comportamento: obtém o menor valor dentre os argumentos.
-* Retorno: o valor obtido.
+* Retorno: valor obtido.
 
 <br>
-<hr>
-<ul><li><a href="#0">Voltar ao topo</a></li></ul>
 <hr>
 <br>
 
@@ -259,8 +226,6 @@ Biblioteca matemática, contendo funções capazes de realizar operações simpl
 
 <br>
 <hr>
-<ul><li><a href="#0">Voltar ao topo</a></li></ul>
-<hr>
 <br>
 
 <h3 id="20">math.pow(n0, n1)</h3>
@@ -269,8 +234,6 @@ Biblioteca matemática, contendo funções capazes de realizar operações simpl
 * Retorno: resultado.
 
 <br>
-<hr>
-<ul><li><a href="#0">Voltar ao topo</a></li></ul>
 <hr>
 <br>
 
@@ -281,8 +244,6 @@ Biblioteca matemática, contendo funções capazes de realizar operações simpl
 
 <br>
 <hr>
-<ul><li><a href="#0">Voltar ao topo</a></li></ul>
-<hr>
 <br>
 
 <h3 id="22">math.random([n0, [n1]])</h3>
@@ -291,8 +252,16 @@ Biblioteca matemática, contendo funções capazes de realizar operações simpl
 * Retorno: um valor entre `0.0` e `1.0` (caso chamada sem argumentos), um valor entre de `1` até `n0` (caso `n1` seja omitido) ou um valor de `n0` até `n1` (caso ambos sejam especificados).
 
 <br>
-<hr>
-<ul><li><a href="#0">Voltar ao topo</a></li></ul>
+
+> [!NOTE]
+> Números de ponto flutuante não são aceitos como argumentos.
+
+<br>
+
+> [!NOTE]
+> `n1` não pode ser menor que `n0`.
+
+<br>
 <hr>
 <br>
 
@@ -303,29 +272,23 @@ Biblioteca matemática, contendo funções capazes de realizar operações simpl
 
 <br>
 <hr>
-<ul><li><a href="#0">Voltar ao topo</a></li></ul>
-<hr>
 <br>
 
 <h3 id="24">math.sin(n)</h3>
 
 * Comportamento: calcula o [seno](https://en.wikipedia.org/wiki/Trigonometric_functions "Wikipédia") de `n`.
-* Retorno: o resultado em radianos.
+* Retorno: resultado em radianos.
 
 <br>
-<hr>
-<ul><li><a href="#0">Voltar ao topo</a></li></ul>
 <hr>
 <br>
 
 <h3 id="25">math.sinh(n)</h3>
 
 * Comportamento: calcula o [seno hiperbólico](https://en.wikipedia.org/wiki/Hyperbolic_functions "Wikipédia") de `n`.
-* Retorno: o resultado em radianos.
+* Retorno: resultado em radianos.
 
 <br>
-<hr>
-<ul><li><a href="#0">Voltar ao topo</a></li></ul>
 <hr>
 <br>
 
@@ -336,40 +299,32 @@ Biblioteca matemática, contendo funções capazes de realizar operações simpl
 
 <br>
 <hr>
-<ul><li><a href="#0">Voltar ao topo</a></li></ul>
-<hr>
 <br>
 
 <h3 id="27">math.tan(n)</h3>
 
 * Comportamento: calcula a [tangente](https://en.wikipedia.org/wiki/Trigonometric_functions "Wikipédia") de `n`.
-* Retorno: o resultado em radianos.
+* Retorno: resultado em radianos.
 
 <br>
-<hr>
-<ul><li><a href="#0">Voltar ao topo</a></li></ul>
 <hr>
 <br>
 
 <h3 id="28">math.tanh(n)</h3>
 
 * Comportamento: calcula a [tangente hiperbólica](https://en.wikipedia.org/wiki/Hyperbolic_functions "Wikipédia") de `n`.
-* Retorno: o resultado em radianos.
+* Retorno: resultado em radianos.
 
 <br>
-<hr>
-<ul><li><a href="#0">Voltar ao topo</a></li></ul>
 <hr>
 <br>
 
 <h3 id="29">math.tointeger(n)</h3>
 
-* Comportamento: converte `n` para um valor inteiro.
+* Comportamento: converte `n` em um valor inteiro.
 * Retorno: caso `n` não seja um valor inteiro (ou uma cadeia de caracteres válida), retornará `nil`, do contrário, retornará o valor convertido.
 
 <br>
-<hr>
-<ul><li><a href="#0">Voltar ao topo</a></li></ul>
 <hr>
 <br>
 
@@ -380,8 +335,6 @@ Biblioteca matemática, contendo funções capazes de realizar operações simpl
 
 <br>
 <hr>
-<ul><li><a href="#0">Voltar ao topo</a></li></ul>
-<hr>
 <br>
 
 <h3 id="31">math.ult(n0, n1)</h3>
@@ -390,7 +343,5 @@ Biblioteca matemática, contendo funções capazes de realizar operações simpl
 * Retorno: `true`, caso `n0` seja menor que o valor absoluto de `n1`, do contrário, `false`.
 
 <br>
-<hr>
-<ul><li><a href="#0">Voltar ao topo</a></li></ul>
 <hr>
 <br>

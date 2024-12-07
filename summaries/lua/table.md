@@ -1,4 +1,4 @@
-<h1 id="0">Table</h1>
+# Table
 
 Disponibiliza funções relativas a manipulação de tabelas com índices numéricos (os demais são ignorados).
 
@@ -13,8 +13,6 @@ Disponibiliza funções relativas a manipulação de tabelas com índices numér
 
 <br>
 <hr>
-<ul><li><a href="#0">Voltar ao topo</a></li></ul>
-<hr>
 <br>
 
 <h3 id="1">table.concat(table, [string="", [number0=1, [number1=#table]]])</h3>
@@ -24,8 +22,6 @@ Disponibiliza funções relativas a manipulação de tabelas com índices numér
 
 <br>
 <hr>
-<ul><li><a href="#0">Voltar ao topo</a></li></ul>
-<hr>
 <br>
 
 <h3 id="2">table.insert(table, [number=#table+1], some_type)</h3>
@@ -34,19 +30,20 @@ Disponibiliza funções relativas a manipulação de tabelas com índices numér
 * Retorno: nenhum.
 
 <br>
-<hr>
-<ul><li><a href="#0">Voltar ao topo</a></li></ul>
+
+> [!IMPORTANT]
+> Caso `table[number]` já possuia um valor, ele será movido um índice para frente (`table[number+1]`), assim como seus sucessores, e `some_type` será atribuído a sua posição original.
+
+<br>
 <hr>
 <br>
 
 <h3 id="3">table.move(table0, number0, number1, number2, table1)</h3>
 
-* Comportamento: copia os índices de `number0` até `number1` (de `table0`) para `table1`, a partir do índice `number2` (de `table1`).
+* Comportamento: copia os índices de `number0` até `number1` (de `table0`) para `table1`, a partir do índice `number2` (de `table1`), substituído valores já existente em `table1` durante o processo.
 * Retorno: uma tabela, resultante da operação.
 
 <br>
-<hr>
-<ul><li><a href="#0">Voltar ao topo</a></li></ul>
 <hr>
 <br>
 
@@ -57,8 +54,6 @@ Disponibiliza funções relativas a manipulação de tabelas com índices numér
 
 <br>
 <hr>
-<ul><li><a href="#0">Voltar ao topo</a></li></ul>
-<hr>
 <br>
 
 <h3 id="5">table.remove(table, [number=#table])</h3>
@@ -67,12 +62,15 @@ Disponibiliza funções relativas a manipulação de tabelas com índices numér
 * Retorno: o valor removido.
 
 <br>
-<hr>
-<ul><li><a href="#0">Voltar ao topo</a></li></ul>
+
+> [!IMPORTANT]
+> Caso hajam um (ou mais) valor acima do índice `number` de `table`, ele (e os demais) serão movidos um índice para baixo (`table[number-1]`), assim tapando o possível "buraco" deixado pela remoção.
+
+<br>
 <hr>
 <br>
 
-<h3 id="6">table.sort(table, [function_=...)</h3>
+<h3 id="6">table.sort(table, [function_=IN_BELOW)</h3>
 
 * Comportamento: ordena os valores presentes em `table`, através do uso de `function_`.
 * Retorno: nenhum.
@@ -87,8 +85,6 @@ end
 
 <br>
 <hr>
-<ul><li><a href="#0">Voltar ao topo</a></li></ul>
-<hr>
 <br>
 
 <h3 id="7">table.unpack(table, [number0=1, [number1=#table]])</h3>
@@ -97,7 +93,5 @@ end
 * Retorno: os valores que foram expandidos.
 
 <br>
-<hr>
-<ul><li><a href="#0">Voltar ao topo</a></li></ul>
 <hr>
 <br>
