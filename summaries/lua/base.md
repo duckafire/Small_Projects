@@ -4,9 +4,8 @@ Oferece duas variáveis globais e uma série de funções báscias para usos div
 
 <br>
 
-> \_G: **Tabela global** que armazena o ambiente global. LUA não usa essa variável em si. Alterar seu valor não afeta nenhum ambiente, e vice-versa.
-
-> \_VERSION: *Variável global* que armazena a versão do interpretador LUA em execução.
+* \_G: **Tabela global** que armazena o ambiente global. LUA não usa essa variável em si. Alterar seu valor não afeta nenhum ambiente, e vice-versa.
+* \_VERSION: *Variável global* que armazena a versão do interpretador LUA em execução.
 
 <br>
 
@@ -113,7 +112,7 @@ Oferece duas variáveis globais e uma série de funções báscias para usos div
 
 <br>
 
-> Use `string1="bt"` para ler textos binários.
+* Use `string1="bt"` para ler textos binários.
 
 <br>
 
@@ -200,7 +199,7 @@ Oferece duas variáveis globais e uma série de funções báscias para usos div
 
 <br>
 
-> Em `string`, aos diretórios devem ser separados por `.`, ao invés de `/`; a extensão `.lua` não é necessária.
+* Em `string`, aos diretórios devem ser separados por `.`, ao invés de `/`; a extensão `.lua` não é necessária.
 
 <br>
 <hr>
@@ -285,11 +284,11 @@ collectgarbage()
 
 <br>
 
-> [Fonte](https://create.roblox.com/docs/en-us/luau/metatables)
+* [Fonte](https://create.roblox.com/docs/en-us/luau/metatables)
 
 <br>
 
-> Veja também: [Guia completo para iniciantes sobre metatabelas](https://devforum.roblox.com/t/full-beginner-guide-to-metatables-what-are-they-every-metamethod-explained/2505946)
+* Veja também: [Guia completo para iniciantes sobre metatabelas](https://devforum.roblox.com/t/full-beginner-guide-to-metatables-what-are-they-every-metamethod-explained/2505946)
 
 <br>
 <hr>
@@ -302,7 +301,7 @@ collectgarbage()
 
 <br>
 
-> `number1` pode ser qualquer valor entre dois e trinta e seis.
+* `number1` pode ser qualquer valor entre dois e trinta e seis.
 
 <br>
 <hr>

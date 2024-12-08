@@ -4,27 +4,17 @@ Conjunto de majoritária de variáveis, utilizadas por [`require`](https://githu
 
 <br>
 
-> package.config: armazena uma série de caracteres usados em algumas configurações, os quais são separados por ponto e vírgula. Ambos encontram-se abaixo:
-
-> > separador de directórios: `/` (`\` no *Windows*).
-
-> > separador de templates (em um caminho): `;`.
-
-> > pontos de substituição em um template: `?`.
-
-> > caractere: `!` (no *Windows*, ele é substituído pelo caminho do executável).
-
-> > caractere usado para interromper a leitura desta cadeia: `-` (por padrão).
-
-> package.cpath: cadeia de caracteres, que armazena o caminho usado por [`require`](https://github.com/duckafire/Small_Projects/blob/main/summaries/lua/basic.md#17) para localizar um carregador C.
-
-> package.loaded: tabela usada por [`require`](https://github.com/duckafire/Small_Projects/blob/main/summaries/lua/basic.md#17) para controlar quais módulos foram carregados. Está é apenas uma referência, logo, sua manipulação não gera efeitos na tabela real.
-
-> package.path: cadeia de caracteres, que armazena o caminho usado por [`require`](https://github.com/duckafire/Small_Projects/blob/main/summaries/lua/basic.md#17) para localizar um carregador Lua.
-
-> package.preload: tabela responsável por armazenar carregadores para módulos específicos. Está é apenas uma referência, logo, sua manipulação não gera efeitos na tabela real.
-
-> package.searchers: tabela usada por [`require`](https://github.com/duckafire/Small_Projects/blob/main/summaries/lua/basic.md#17) para controlar como carregar módulos. Seus valores são funções buscadores que são chamadas em ordem crescente por [`require`](https://github.com/duckafire/Small_Projects/blob/main/summaries/lua/basic.md#17), usando o argumento passado para ele nelas.
+* package.config: armazena uma série de caracteres usados em algumas configurações, os quais são separados por ponto e vírgula. Ambos encontram-se abaixo:
+	* separador de directórios: `/` (`\` no *Windows*).
+	* separador de templates (em um caminho): `;`.
+	* pontos de substituição em um template: `?`.
+	* caractere: `!` (no *Windows*, ele é substituído pelo caminho do executável).
+	* caractere usado para interromper a leitura desta cadeia: `-` (por padrão).
+* package.cpath: cadeia de caracteres, que armazena o caminho usado por [`require`](https://github.com/duckafire/Small_Projects/blob/main/summaries/lua/basic.md#17) para localizar um carregador C.
+* package.loaded: tabela usada por [`require`](https://github.com/duckafire/Small_Projects/blob/main/summaries/lua/basic.md#17) para controlar quais módulos foram carregados. Está é apenas uma referência, logo, sua manipulação não gera efeitos na tabela real.
+* package.path: cadeia de caracteres, que armazena o caminho usado por [`require`](https://github.com/duckafire/Small_Projects/blob/main/summaries/lua/basic.md#17) para localizar um carregador Lua.
+* package.preload: tabela responsável por armazenar carregadores para módulos específicos. Está é apenas uma referência, logo, sua manipulação não gera efeitos na tabela real.
+* package.searchers: tabela usada por [`require`](https://github.com/duckafire/Small_Projects/blob/main/summaries/lua/basic.md#17) para controlar como carregar módulos. Seus valores são funções buscadores que são chamadas em ordem crescente por [`require`](https://github.com/duckafire/Small_Projects/blob/main/summaries/lua/basic.md#17), usando o argumento passado para ele nelas.
 
 <br>
 

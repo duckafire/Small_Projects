@@ -4,7 +4,7 @@ Fornece suporte para a manipulação de caracteres oriundos da [(tabela) UTF-8](
 
 <br>
 
-> utf8.charpattern: cadeia de caracteres que armazena o padrão referente a uma sequência de caracteres nativos da (tabela) UTF-8, especificamente `"[\0-\x7F\xC2-\xF4][\x80-\xBF]*"`.
+* utf8.charpattern: cadeia de caracteres que armazena o padrão referente a uma sequência de caracteres nativos da (tabela) UTF-8, especificamente `"[\0-\x7F\xC2-\xF4][\x80-\xBF]*"`.
 
 <br>
 

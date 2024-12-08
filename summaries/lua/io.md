@@ -4,11 +4,9 @@ Fornece uma API para a manipulação de entradas e saídas.
 
 <br>
 
-> io.stdin: arquivo de entrada padrão.
-
-> io.stdout: arquivo de saída padrão.
-
-> io.stderr: arquivo de saída responsável por armazenar as mensagens de erro.
+* io.stdin: arquivo de entrada padrão.
+* io.stdout: arquivo de saída padrão.
+* io.stderr: arquivo de saída responsável por armazenar as mensagens de erro.
 
 <br>
 
