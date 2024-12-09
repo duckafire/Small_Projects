@@ -3,32 +3,32 @@ Define constantes responsáveis por delimitar os valores mínimos e máximos que
 
 <br>
 
-| Mínimo    | Máximo     | Tipo                   |
-| :-:       | :-:        | :-:                    |
-| SCHAR_MIN | SCHAR_MAX  | signed                 |
-| ---       | UCHAR_MAX  | unsigned               |
-| CHAR_MIN  | CHAR_MAX   | char                   |
-| SHRT_MIN  | SHRT_MAX   | short int              |
-| ---       | USHRT_MAX  | unsigned short int     |
-| INT_MIN   | INT_MAX    | int                    |
-| ---       | UINT_MAX   | unsigned int           |
-| LONG_MIN  | LONG_MAX   | long int               |
-| LLONG_MIN | LLONG_MAX  | long long int          |
-| ---       | ULONG_MAX  | unsigned long int      |
-| ---       | ULLONG_MAX | unsigned long long int |
-
-> CHAR_BIT: Quantidade de bits necessários para se representar uma variável do tipo char.  
-> MB_LEN_MAX: Comprimento máximo de vários bytes de um caractere em todas as localidades.  
+| Tipo                   | Mínimo     | Máximo      |
+| :--                    | :--        | :--         |
+| signed                 | SCHAR\_MIN | SCHAR\_MAX  |
+| unsigned               | -          | UCHAR\_MAX  |
+| char                   | CHAR\_MIN  | CHAR\_MAX   |
+| short int              | SHRT\_MIN  | SHRT\_MAX   |
+| unsigned short int     | -          | USHRT\_MAX  |
+| int                    | INT\_MIN   | INT\_MAX    |
+| unsigned int           | -          | UINT\_MAX   |
+| long int               | LONG\_MIN  | LONG\_MAX   |
+| long long int          | LLONG\_MIN | LLONG\_MAX  |
+| unsigned long int      | -          | ULONG\_MAX  |
+| unsigned long long int | -          | ULLONG\_MAX |
 
 <br>
 
------
+* CHAR\_BIT: Quantidade de bits necessários para se representar uma variável do tipo char.  
+* MB\_LEN\_MAX: Comprimento máximo de vários bytes de um caractere em todas as localidades.  
+
+<br>
+<hr>
 <br>
 
 #### Fontes:
 * https://petbcc.ufscar.br/limits/
-* https://en.wikibooks.org/wiki/C_Programming/limits.h
+* https://en.wikibooks.org/wiki/C\_Programming/limits.h
 
 <br>
-
------
+<hr>

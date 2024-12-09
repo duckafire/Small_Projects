@@ -1,12 +1,14 @@
 # errno
-Fornece uma variável global chamada **errno**, cujo valor é alterado por diversas funções da biblioteca padrão, quando as mesmas passam por algum erro, seja ele fatal ou não.
+Fornece uma variável global chamada **errno**, cujo valor é alterado por algumas funções das bibliotecas padrão, quando as mesmas passam por algum erro, seja ele fatal ou não.
 
 <br>
 
 * extern int **errno** = 0;
+
+<br>
 	
 | Valores | Erro								      |
-| :-:     | :-:       							      |
+| :-:     | :--       							      |
 | 0       | Nenhum erro (valor incial)    		      |
 | 1       | Operação não permitida        		      |
 | 2       | Nenhum arquivo ou diretório encontrado    |
@@ -22,25 +24,10 @@ Fornece uma variável global chamada **errno**, cujo valor é alterado por diver
 | 12      | Sem memória        					      |
 | 13      | Permissão negada        			      |
 
-* ###### Bibliotecas distintas podem adicionar mais possibilidades de valores para *errno*.
+* Bibliotecas distintas podem adicionar mais possibilidades de valores para *errno*.
 
-``` c
-#include <stdio.h> // fopen
-#include <errno.h>
-
-int main(){
-
-	FILE* file = fopen("example.txt", "r");
-	// errno = 2
-	
-	return 0;
-}
-
-```
-
-<br>
-
------
+<br>
+<hr>
 <br>
 
 #### Fontes:
@@ -48,5 +35,4 @@ int main(){
 * https://www.geeksforgeeks.org/error-handling-in-c/
 
 <br>
-
------
+<hr>
