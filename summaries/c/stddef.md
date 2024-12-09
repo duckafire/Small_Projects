@@ -1,27 +1,28 @@
 # stddef
-Define algumas macros e variáveis, as quais estão presentes em outras bibliotecas *padrão* da linguagem C.
+Define um conjunto de tipos e macros comumente utilizados por outras bibliotecas padrão C.
 
-##### Variáveis
+<br>
 
-| Nome       | Especificação     | Valor                                         |
-| :-:        | :-:               | :-:                                           |
-| ptrdiff\_t | signed integral   | Resultado da subtração de dois ponteiros      |
-| size\_t    | unsigned integral | Retorno de `sizeof()`                         |
-| wchar\_t   | integral          | Tamanho de uma constante de caracteres largos |
+| Tipo       | Valor                                             |
+| :--        | :--                                               |
+| ptrdiff\_t | Armazena o resultado de um subtração de ponteiros |
+| size\_t    | Armazena o tamanho de objetos em áreas na memória |
+| wchar\_t   | Armazena o código de "caracteres largos"          |
 
-##### Macros
+<br>
+<hr>
+<br>
 
-* **NULL**
-	* Valor de uma constante de ponteiro zero/nulo.
-		* Especificamente: `0x0`
+* NULL: endereço nulo (`0x0`), usado para especificar que um dado ponteiro está "vazio".
+* offsetof(type, member\_designator): retorna o número de *bytes* de deslocamento antes de um elemento específico de uma `struct` ou `union`.
+	* type: nome da `struct` ou `union`.
+	* member\_designator: membro da `struct` ou `union`.
 
-* **offsetof(type, member\_designator)**
-	* Retorna o número de bytes de deslocamento antes de um elemento específico de uma `struct` ou `union`.
-		* *type*: Nome da `struct` ou `union`.
-		* *member\_designator*: Membro da `struct` ou `union`.
+<br>
 
-* ###### [Alguns dos usos de `offsetof` incluem o empacotamento de estruturas de dados e a descrição de como os dados `EEPROM` são armazenados.](https://www.embedded.com/learn-a-new-trick-with-the-offsetof-macro/ "Sobre 'offsetof'")
-		
+> [!IMPORTANTE]
+> Alguns dos usos de `offsetof` incluem o empacotamento de estruturas de dados e a descrição de como os dados `EEPROM` são armazenados. [Veja](https://www.embedded.com/learn-a-new-trick-with-the-offsetof-macro/ "Sobre 'offsetof'").
+
 <br>
 <hr>
 <br>

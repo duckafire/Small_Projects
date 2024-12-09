@@ -1,40 +1,59 @@
 # stdarg
-Fornece um conjunto de quatro macros e um tipo que podem ser usados, ordenadamente, para obter os argumentos de uma função, quando a quantidade de parâmetros dela
-é indefinida (`...`).
+Fornece um conjunto de quatro macros e um tipo que podem ser usados para acessar os argumentos indefinidos (`...`) de uma dada função.
 
 <br>
 
 * va\_list: Tipo dos parâmetros, argumentos e retorno dos macros abaixo.
 
 <br>
+<hr>
+<br>
 
-<h3>void va\_start(va\_list arg, last\_arg)</h3>
-	* Comportamento: Inicializa o argumento passado como `arg` para ser posteriormente usado por `va\_arg` e `va\_end`.
-	* Retorno: Sem retorno.
+<h3>va_start(va_list, last_func_arg)</h3>
+* Comportamento: inicializa a lista.
+* Retorno: nenhum.
+
+> [!IMPORTANT]
+> `last_func_arg` é referente ao último argumento da função, antes de `...` (`void example(int foo, ...)`).
 
 <br>
 <hr>
 <br>
 
-<h3>type va\_arg(va\_list arg, type)</h3>
-	* Comportamento: Obtém cada um dos valores armazenados em `arg`, um a um, em ordem, a cada chamada. Não consegue indetificar o fim da lista de argumentos, podendo gerar valores imprevisíveis (lixo).
-	* Retorno: Cada um dos valores presentes em `arg`, na ordem em que eles são obtidos. Atribuíndo o tipo especificado em `type` a eles.
+<h3>va_arg(va_list, type)</h3>
+* Comportamento: obtém cada um dos valores da lista, a cada chamada.
+* Retorno: cada um dos valores presentes na list, na ordem em que eles são obtidos.
+
+<br>
+
+> [!IMPORTANT]
+> `type` é o tipo do valor extraído da lista. Uma lista pode possuir valores de tipos diversos, mas o tipo correto deve ser informado a `var_arg`.
+
+<br>
+
+> [!IMPORTANT]
+> `va_arg` não consegue identificar o final da lista, o que pode levá-lo a retornar lixo.
+
+<br>
+
+> [!TIP]
+> Especifique o comprimento da lista como último parâmetro da função (`void foo(int len, ...)`), ou use um "valor de quebra" (`NULL`, `-1`, ...), para interromper a leitura da lista, assim evitando o lixo.
 
 <br>
 <hr>
 <br>
 
-<h3>void va\_end(va\_list arg)</h3>
-	* Comportamento: Finaliza à lista presente na variável passado para `arg`, tornando-a indefinida.
-	* Retorno: Sem retorno.
+<h3>va_end(va_list)</h3>
+* Comportamento: finaliza a lista.
+* Retorno: nenhum.
 
 <br>
 <hr>
 <br>
 	
-<h3>void va\_copy(va\_list arg1, va\_list arg2);</h3>
-	* Comportamento: Copia os valores armazenados em `arg2` para `arg1`.
-	* Retono: Sem retorno.
+<h3>va_copy(va_list0, va_list1);</h3>
+* Comportamento: copia a lista de argumentos de `va_list1` para `va_list0`.
+* Retono: nenhum.
 
 <br>
 <hr>
@@ -42,10 +61,7 @@ Fornece um conjunto de quatro macros e um tipo que podem ser usados, ordenadamen
 
 #### Fontes:
 * https://en.wikipedia.org/wiki/Stdarg.h#References
-* https://www.tutorialspoint.com/c\_standard\_library/stdarg\_h.htm
 * https://www.techonthenet.com/c\_language/standard\_library\_functions/stdarg\_h/va\_arg.php
-* https://isolution.pro/pt/t/c-standard-library/stdarg-h/biblioteca-c-stdarg-h
-* https://linux.die.net/man/3/va\_start
 
 <br>
 <hr>

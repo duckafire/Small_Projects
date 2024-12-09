@@ -1,6 +1,8 @@
 # stdbool
-Adiciona 4 macros relacionados a valores booleanos (tipo e valores), permitindo a declaração explicita destes.
+Adiciona 4 macros para explicitar o uso de valores booleanos, assim facilitando a leitura do código.
 
+<br>
+<hr>
 <br>
 
 | Macros | Valor |
@@ -15,8 +17,7 @@ Adiciona 4 macros relacionados a valores booleanos (tipo e valores), permitindo 
 <br>
 
 #### Fontes:
-* https://www.geeksforgeeks.org/bool-in-c/
-* https://pt.wikipedia.org/wiki/Stdbool.h
+* https://en.wikipedia.org/wiki/C\_data\_types#stdbool.h
 
 <br>
 <hr>
