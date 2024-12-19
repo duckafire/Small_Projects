@@ -41,7 +41,7 @@ function ENDL(){
 if [[ $# -eq 0 || $EXT = "help" ]]; then
 	[[ $# -gt 1 ]] && echo "Many arguments are specified. They were ignored." && ENDL
 
-	echo "> nscript <-|SH|sh|c|cpp|css|html|js|lua|py> <file-name0> [file-namen]" && ENDL
+	echo "> nscript <file-ext> <file-name0> [file-namen]" && ENDL && echo "Headers to: SH | sh | c | cpp | css | html | js | lua | py" && ENDL
 	exit 0
 fi
 
@@ -51,9 +51,10 @@ fi
 # "SH" create a file no extension
 declare EXT_TO_FILES=".$1"
 [[ $EXT_TO_FILES = ".SH" ]] && EXT_TO_FILES=""
-	
+
 declare -a files_name
 
+# add extension to files name
 for arg in $ARGV; do
 	files_name[${#files_name[@]}]=$arg$EXT_TO_FILES
 done
@@ -64,7 +65,7 @@ unset EXT_TO_FILES
 declare -r -a LANG_SUPPORTED=("sh" "c" "cpp" "css" "html" "js" "lua" "py")
 declare -r -a LANG_HEADERS=(
 '#!/usr/bin/env bash'
-'include <stdio.h>\n\nint main(int argc, char *argv[]){\n\tputs("Hello world");\n\n\treturn 0;\n}'
+'#include <stdio.h>\n\nint main(int argc, char *argv[]){\n\tputs("Hello world");\n\n\treturn 0;\n}'
 '#include <iostream>\n\nint main(int argc, char *argv[]){\n\tstd::cout << "Hello world!" << std::endl;\n\treturn;\n}'
 ':root{\n\t\n}\n\n*{\n\t\n}\n\nhtml{\n\t\n}\n\n\nhtml:before{\n\tcontent: "Hello world!";\n}\n\nbody{\n\t\n}'
 '<!DOCTYPE html>\n<html lang="en">\n<head>\n\t<metacharset="UTF-8">\n\t<meta name="viewport" content="width=device-width, initial-scale=1.0">\n\t<title>Hello world!</title>\n</head>\n<body>\n\t\n</body>\n</html>\n'
@@ -74,22 +75,21 @@ declare -r -a LANG_HEADERS=(
 )
 
 
-if [[ ! $EXT = "-" ]]; then
-	declare -i lang_supported_id=0
+# search header to file
+declare -i lang_supported_id=0
 
-	for lang in ${LANG_SUPPORTED[@]}; do
-		if [[ $EXT = $lang ]]; then
-			declare -r LANG_HEADER_SELECTED=${LANG_HEADERS[$lang_supported_id]}
-			break
-		fi
+for lang in ${LANG_SUPPORTED[@]}; do
+	if [[ $EXT = $lang ]]; then
+		declare -r LANG_HEADER_SELECTED=${LANG_HEADERS[$lang_supported_id]}
+		break
+	fi
 
-		lang_supported_id=$(( $lang_supported_id + 1 ))
-	done
+	lang_supported_id=$(( $lang_supported_id + 1 ))
+done
 
-	[[ -z $LANG_HEADER_SELECTED ]] && echo "None supported language was specified. The file(s) create is(are) empty." && ENDL
+[[ -z $LANG_HEADER_SELECTED ]] && echo "None supported language was specified. The file(s) create is(are) empty." && ENDL
 
-	unset lang_supported_id
-fi
+unset lang_supported_id
 
 
 declare -a success
@@ -107,7 +107,7 @@ done
 
 
 if [[ ${#success[@]} -ne 0 ]]; then
-	echo -e "File(s) do(es) create with success:\n${success[@]}" && ENDL
+	echo -e "File(s) created with success:\n${success[@]}" && ENDL
 fi
 
 if [[ ${#fail[@]} -ne 0 ]]; then
