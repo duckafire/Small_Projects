@@ -59,8 +59,6 @@ for arg in $ARGV; do
 	files_name[${#files_name[@]}]=$arg$EXT_TO_FILES
 done
 
-unset EXT_TO_FILES
-
 
 declare -r -a LANG_SUPPORTED=("sh" "c" "cpp" "css" "html" "js" "lua" "py")
 declare -r -a LANG_HEADERS=(
@@ -114,7 +112,7 @@ if [[ ${#fail[@]} -ne 0 ]]; then
 	echo -e "File(s) already exist:\n${fail[@]}" && ENDL
 fi
 
-[[ $EXT = "sh" ]] && chmod 700 ${success[@]}
+[[ ${#success[@]} -gt 0 ]] && [[ -z $EXT_TO_FILES ]] && chmod 700 ${success[@]}
 
 
 exit 0
