@@ -1,47 +1,230 @@
 #include <stdio.h>
+#include <stddef.h>
 #include <stdlib.h>
-
+#include <string.h>
 #include "b3.h"
 
-static b3_Node* newNode(int id, void *content){
-	b3_Node *node;
+static b3_Node *new_node;
+static b3_Node *tmp_node;
+static bool b3_add_node_status;
 
-	node = malloc(sizeof(b3_Node));
-	node->id = id;
-	node->content = content;
-	node->left = NULL;
-	node->right = NULL;
+b3_Node* b3_create(int id, void *content, bool copy_content){
+	new_node = malloc(sizeof(b3_Node));
+
+	new_node->id      = id;
+	new_node->height  = 0;
+	new_node->is_copy = copy_content;
+	new_node->left    = NULL;
+	new_node->right   = NULL;
+
+	if(new_node->is_copy){
+		size_t size = sizeof(content);
+
+		new_node->content = malloc(size);
+		memcpy(new_node->content, content, size);
+	}else{
+		new_node->content = content;
+	}
+
+	return new_node;
+}
+
+bool b3_add_node(b3_Node **root, int id, void *content, bool copy_content){
+	b3_create(id, content, copy_content);
+
+	b3_add_node_status = false;
+	*root = insert_node(*root);
+
+	return b3_add_node_status;
+}
+
+static b3_Node* insert_node(b3_Node *node){
+	if(node == NULL){
+		b3_add_node_status = true;
+		return new_node;
+	}
+
+
+	if(new_node->id < node->id){
+		node->left = insert_node(node->left);
+
+	}else if(new_node->id > node->id){
+		node->right = insert_node(node->right);
+
+	}else{
+		free_node(node);
+		return NULL;
+	}
+
+	if(b3_add_node_status)
+		node->height = update_node_height(node);
 
 	return node;
 }
 
-static short addNewNode(b3_Root *root, int id, void *content){
-	if(root->id == id) return 0;
+static short update_node_height(b3_Node *node){
+	if(node == NULL)
+		return -1;
 
-	if(id < root->id){
-		if(root->left == NULL){
-			root->left = newNode(id, content);
-			return 1;
-		}
-		return addNewNode(root->left, id, content);
-	}
+	short left  = update_node_height(node->left);
+	short right = update_node_height(node->right);
 
-	if(root->right == NULL){
-		root->right = newNode(id, content);
-		return 1;
-	}
+	if(left > right)
+		return left + 1;
 
-	return addNewNode(root->right, id, content);
+	return right + 1;
 }
 
-static void moveNode(b3_Node *node, b3_Node *orphan){
+b3_Node* b3_get_node(b3_Node *root, int id){
+	if(root == NULL)
+		return NULL;
+
+	if(id < root->id)
+		return b3_get_node(root->left, id);
+
+	if(id > root->id)
+		return b3_get_node(root->right, id);
+
+	return root;
+}
+
+b3_Node* b3_copy_tree(b3_Node *root, bool copy_content){
+	if(root == NULL)
+		return NULL;
+
+	b3_Node *_new_node;
+	_new_node = b3_create(root->id, root->content, copy_content);
+
+	_new_node->left  = b3_copy_tree(root->left,  copy_content);
+	_new_node->right = b3_copy_tree(root->right, copy_content);
+
+	return _new_node;
+}
+
+void b3_invert_tree(b3_Node *root){
+	if(root == NULL)
+		return;
+
+	b3_invert_tree(root->left);
+	b3_invert_tree(root->right);
+
+	tmp_node    = root->left;
+	root->left  = root->right;
+	root->right = tmp_node;
+}
+
+void b3_info_list(b3_Node *root){
+	if(root == NULL)
+		return;
+
+	b3_info_list(root->left);
+
+	printf("id:      %d\n", root->id);
+	printf("height:  %d\n", root->height);
+	printf("content: %p\n", root->content);
+	printf("is_copy: %d\n", root->is_copy);
+	printf("left:    %p\n", root->left);
+	printf("right:   %p\n", root->right);
+	putchar('\n');
+
+	b3_info_list(root->right);
+}
+
+void b3_free_tree(b3_Node *node){
+	if(node == NULL)
+		return;
+
+	b3_free_tree(node->left);
+	b3_free_tree(node->right);
+
+	free_node(node);
+}
+
+static void free_node(b3_Node *node){
+	if(node->is_copy)
+		free(node->content);
+
+	free(node);
+}
+
+bool b3_remove_node(b3_Node **root, int id){
+	if(*root == NULL)
+		return false;
+
+	if(id == (*root)->id)
+		return remove_root_child(root);
+
+	if(id < (*root)->id)
+		return remove_from_branch_node(*root, (*root)->left, id);
+
+	return remove_from_branch_node(*root, (*root)->right, id);
+}
+
+#define SET_HERITOR_AND_ORPHAN(n, h, o)                        \
+	if(abs(n->id - n->left->id) <= abs(n->id - n->right->id)){ \
+		h = n->left;                                           \
+		o = n->right;                                          \
+	}else{                                                     \
+		h = n->right;                                          \
+		o = n->left;                                           \
+	}
+//#enddef
+
+#define UPDATE_SON(m, s, ns) \
+	if(m->left == s)         \
+		m->left = ns;        \
+	else                     \
+		m->right = ns
+
+
+static bool remove_root_child(b3_Node **root){
+	const bool noleft  = ((*root)->left == NULL);
+	const bool noright = ((*root)->right == NULL);
+
+	// no children
+	if(noleft && noright){
+		free(*root);
+		*root = NULL;
+		
+		return true;
+	}
+
+	// two children
+	if(!noleft && !noright){
+		b3_Node *heritor, *orphan;
+
+		SET_HERITOR_AND_ORPHAN((*root), heritor, orphan)
+
+		free_node(*root);
+		*root = heritor;
+		set_new_position_to_orphan(*root, orphan);
+		return true;
+	}
+
+	// one children
+	b3_Node *buf;
+	
+	if(!noleft)
+		buf = (*root)->left;
+	else
+		buf = (*root)->right;
+
+	free_node(*root);
+	*root = buf;
+	return true;
+}
+
+// from "remove_root_child"
+static void set_new_position_to_orphan(b3_Node *node, b3_Node *orphan){
 	if(orphan->id < node->id){
+
 		if(node->left == NULL){
 			node->left = orphan;
 			return;
 		}
 
-		moveNode(node->left, orphan);
+		set_new_position_to_orphan(node->left, orphan);
+		return;
 	}
 
 	if(node->right == NULL){
@@ -49,215 +232,55 @@ static void moveNode(b3_Node *node, b3_Node *orphan){
 		return;
 	}
 
-	moveNode(node->right, orphan);
+	set_new_position_to_orphan(node->right, orphan);
 }
 
-static short buildIdList(b3_Root *root){
-	if(root == NULL) return 0;
+static bool remove_from_branch_node(b3_Node *mom, b3_Node *son, int id){
+	if(mom == NULL || son == NULL) return false;
 
-	buildIdList(root->left);
-	printf("%d  ", root->id);
-	buildIdList(root->right);
-
-	return 1;
-}
-
-static short simpleRemotion(b3_Node *mom, b3_Node *son, int id){
-	if(mom == NULL || son == NULL) return 0;
-
-	// it is not this...
 	if(id != son->id){
 		if(id < son->id)
-			return simpleRemotion(son, son->left, id);
+			return remove_from_branch_node(son, son->left, id);
 
-		return simpleRemotion(son, son->right, id);
+		return remove_from_branch_node(son, son->right, id);
 	}
 
-	short leftNull = (son->left == NULL);
-	short rightNull = (son->right == NULL);
+	const bool noleft  = (son->left == NULL);
+	const bool noright = (son->right == NULL);
 
-	// less sons
-	if(leftNull && rightNull){
-		b3_Node *oldSon;
-		oldSon = son;
+	if(noleft && noright)
+		return no_children_remotion(mom, son);
 
-		if(mom->left == son)
-			mom->left = NULL;
-		else
-			mom->right = NULL;
+	if(!noleft && !noright)
+		return double_children_remotion(mom, son);
 
-		free(oldSon);
-		return 1;
-	}
+	if(!noleft)
+		return single_child_remotion(mom, son, son->left);
 
-	return removeAndRealoc(mom, son, leftNull, rightNull);
+	return single_child_remotion(mom, son, son->right);
 }
 
-static short removeAndRealoc(b3_Node *mom, b3_Node *son, short leftNull, short rightNull){
-	// two sons
-	if(!leftNull && !rightNull){
-		b3_Node *heritor, *orphan;
+static bool no_children_remotion(b3_Node *mom, b3_Node *son){
+	UPDATE_SON(mom, son, NULL);
 
-		if(abs(son->id - son->left->id) <= abs(son->id - son->right->id)){
-			heritor = son->left;
-			orphan = son->right;
-		}else{
-			heritor = son->right;
-			orphan = son->left;
-		}
-
-		if(mom->left == son)
-			mom->left = heritor;
-		else
-			mom->right = heritor;
-
-		free(son);
-		moveNode(heritor, orphan);
-		
-		return 1;
-	}
-
-	// one son
-	b3_Node *node;
-
-	if(!leftNull)
-		node = son->left;
-	else
-		node = son->right;
-
-	if(mom->left == son)
-		mom->left = node;
-	else
-		mom->right = node;
-
-	free(son);
-	return 1;
+	free_node(son);
+	return true;
 }
 
-b3_Root* b3_setRoot(int id, void *content){
-	return newNode(id, content);
+static bool single_child_remotion(b3_Node *mom, b3_Node *son, b3_Node *niece){
+	UPDATE_SON(mom, son, niece);
+
+	free_node(son);
+	return true;
 }
 
-short b3_addNode(b3_Root *root, int id, void *content){
-	// it is not necessary verify "this" in
-	// tree nodes, only root, by cause this
-	// i did this function
-	if(root == NULL) return 0;
+static bool double_children_remotion(b3_Node *mom, b3_Node *son){
+	b3_Node *heritor, *orphan;
 
-	return addNewNode(root, id, content);
-}
+	SET_HERITOR_AND_ORPHAN(son, heritor, orphan)
+	UPDATE_SON(mom, son, heritor);
 
-b3_Node* b3_getNode(b3_Root *root, int id){
-	if(root == NULL) return NULL;
-	if(root->id == id) return root;
-
-	if(id < root->id)
-		return b3_getNode(root->left, id);
-
-	return b3_getNode(root->right, id);
-}
-
-void* b3_getCont(b3_Root *root, int id){
-	return (b3_getNode(root, id))->content;
-}
-
-b3_Root* b3_copyAll(b3_Root *src){
-	if(src == NULL) return NULL;
-
-	b3_Root *dest;
-	dest = newNode(src->id, src->content);
-
-	dest->left = b3_copyAll(src->left);
-	dest->right = b3_copyAll(src->right);
-
-	return dest;
-}
-
-short b3_rmvNode(b3_Root **p_root, int id){
-	// treatment to root
-	if(*p_root == NULL) return 0;
-
-	b3_Root *root;
-	root = *p_root;
-
-	// the node that will be removed
-	// is not the root
-	if(id != root->id){
-		if(id < root->id)
-			return simpleRemotion(root, root->left, id);
-
-		return simpleRemotion(root, root->right, id);
-	}
-
-	short leftNull = (root->left == NULL);
-	short rightNull = (root->right == NULL);
-
-	// less soons
-	if(leftNull && rightNull){
-		free(*p_root);
-		*p_root = NULL;
-		return 1;
-	}
-
-	// two sons
-	if(!leftNull && !rightNull){
-		b3_Node *heritor, *orphan;
-
-		if(abs(root->id - root->left->id) <= abs(root->id - root->right->id)){
-			heritor = root->left;
-			orphan = root->right;
-		}else{
-			heritor = root->right;
-			orphan = root->left;
-		}
-
-		free(*p_root);
-		*p_root = heritor;
-		moveNode(*p_root, orphan);
-
-		return 1;
-	}
-
-	// one son
-	b3_Node *node;
-	
-	if(!leftNull)
-		node = root->left;
-	else
-		node = root->right;
-
-	free(*p_root);
-	*p_root = node;
-	
-	return 1;
-}
-
-void b3_invTree(b3_Root *root){
-	if(root == NULL) return;
-
-	b3_Node *leftBackup;
-	leftBackup = root->left;
-	root->left = root->right;
-	root->right = leftBackup;
-
-	b3_invTree(root->left);
-	b3_invTree(root->right);
-}
-
-void b3_listIds(b3_Root *root){
-	// for print the values in horizontal and
-	// to put a line feed in chain end, and
-	// verify root value, i did this function
-	if(!buildIdList(root))
-		puts("b3_listId: Empty root");
-	
-	putchar('\n');
-}
-
-void b3_excTree(b3_Root *root){
-	if(root == NULL) return;
-
-	b3_excTree(root->left);
-	b3_excTree(root->right);
-	free(root);
+	free_node(son);
+	set_new_position_to_orphan(heritor, orphan);
+	return true;
 }
