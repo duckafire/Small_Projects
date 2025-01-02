@@ -4,9 +4,13 @@
 #include <string.h>
 #include "b3.h"
 
-static b3_Node *new_node;
-static b3_Node *tmp_node;
+static b3_Node* new_node;
+static b3_Node* tmp_node;
 static bool b3_add_node_status;
+static int max_a, max_b;
+
+#define MAX(a, b) (((max_a = a) > (max_b = b)) ? max_a : max_b)
+#define GET_SAFE_NODE_HEIGHT(n) ((n == NULL) ? 0 : n->height)
 
 b3_Node* b3_create(int id, void *content, bool copy_content){
 	new_node = malloc(sizeof(b3_Node));
@@ -44,7 +48,6 @@ static b3_Node* insert_node(b3_Node *node){
 		return new_node;
 	}
 
-
 	if(new_node->id < node->id){
 		node->left = insert_node(node->left);
 
@@ -52,12 +55,15 @@ static b3_Node* insert_node(b3_Node *node){
 		node->right = insert_node(node->right);
 
 	}else{
-		free_node(node);
+		free_node(new_node);
 		return NULL;
 	}
 
-	if(b3_add_node_status)
+	if(b3_add_node_status){
 		node->height = update_node_height(node);
+
+		node = avl_balance(node);
+	}
 
 	return node;
 }
@@ -66,13 +72,63 @@ static short update_node_height(b3_Node *node){
 	if(node == NULL)
 		return -1;
 
-	short left  = update_node_height(node->left);
-	short right = update_node_height(node->right);
+	return MAX(update_node_height(node->left), update_node_height(node->right)) + 1;
+}
 
-	if(left > right)
-		return left + 1;
+#define AVL_SINGLE_ROTATION(root, main_dir, dir_1)                                           \
+	b3_Node *son, *niece;                                                                    \
+	son   = root->dir_1;                                                                     \
+	niece = son->main_dir;                                                                   \
+	son->main_dir = root;                                                                    \
+	root->dir_1   = niece;                                                                   \
+	root->height = MAX(update_node_height(root->left), update_node_height(root->right)) + 1; \
+	son->height  = MAX(update_node_height(son->left),  update_node_height(son->right))  + 1; \
+	return son
 
-	return right + 1;
+static b3_Node* avl_balance(b3_Node *root){
+	// avl balancement status
+	short avl_root  = avl_balancement_factor(root);
+	short avl_left  = avl_balancement_factor(root->left);
+	short avl_right = avl_balancement_factor(root->right);
+
+	if(avl_root < -1 && avl_right <= 0)
+		return avl_rotation_left(root);
+
+	if(avl_root >  1 && avl_left >= 0)
+		return avl_rotation_right(root);
+
+	if(avl_root >  1 && avl_left < 0)
+		return avl_rotation_left_right(root);
+
+	if(avl_root < -1 && avl_right > 0)
+		return avl_rotation_right_left(root);
+
+	return root;
+}
+
+static short avl_balancement_factor(b3_Node *root){
+	if(root == NULL)
+		return 0;
+
+	return GET_SAFE_NODE_HEIGHT(root->left) - GET_SAFE_NODE_HEIGHT(root->right);
+}
+
+static b3_Node* avl_rotation_left(b3_Node *node){
+	AVL_SINGLE_ROTATION(node, left, right);
+}
+
+static b3_Node* avl_rotation_right(b3_Node *node){
+	AVL_SINGLE_ROTATION(node, right, left);
+}
+
+static b3_Node* avl_rotation_left_right(b3_Node *node){
+	node->left = avl_rotation_left(node->left);
+	return avl_rotation_right(node);
+}
+
+static b3_Node* avl_rotation_right_left(b3_Node *node){
+	node->right = avl_rotation_right(node->right);
+	return avl_rotation_left(node);
 }
 
 b3_Node* b3_get_node(b3_Node *root, int id){
