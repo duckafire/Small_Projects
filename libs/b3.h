@@ -18,6 +18,7 @@ bool b3_add_node(b3_Node **root, int id, void *content, bool copy_content);
 
 static b3_Node* insert_node(b3_Node *node);
 static short update_node_height(b3_Node *node);
+static short max(short a, short b);
 static b3_Node* avl_balance(b3_Node *root);
 static short avl_balancement_factor(b3_Node *root);
 static b3_Node* avl_rotation_left(b3_Node *node);
@@ -26,7 +27,7 @@ static b3_Node* avl_rotation_left_right(b3_Node *node);
 static b3_Node* avl_rotation_right_left(b3_Node *node);
 
 b3_Node* b3_get_node(b3_Node *root, int id);
-b3_Node* b3_copy_tree(b3_Node *root, bool copy_content);
+b3_Node* b3_copy_tree(b3_Node *root);
 void b3_invert_tree(b3_Node *root);
 void b3_info_list(b3_Node *root);
 void b3_free_tree(b3_Node *root);

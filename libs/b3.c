@@ -7,10 +7,11 @@
 static b3_Node* new_node;
 static b3_Node* tmp_node;
 static bool b3_add_node_status;
-static int max_a, max_b;
 
-#define MAX(a, b) (((max_a = a) > (max_b = b)) ? max_a : max_b)
 #define GET_SAFE_NODE_HEIGHT(n) ((n == NULL) ? 0 : n->height)
+#define UPDATE_AVL_DATA(n)             \
+	n->height = update_node_height(n); \
+	n = avl_balance(n)
 
 b3_Node* b3_create(int id, void *content, bool copy_content){
 	new_node = malloc(sizeof(b3_Node));
@@ -56,34 +57,40 @@ static b3_Node* insert_node(b3_Node *node){
 
 	}else{
 		free_node(new_node);
-		return NULL;
+		return node;
 	}
 
-	if(b3_add_node_status){
-		node->height = update_node_height(node);
-
-		node = avl_balance(node);
-	}
-
+	UPDATE_AVL_DATA(node);
 	return node;
+}
+
+static short max(short a, short b){
+	return ((a > b) ? a : b);
 }
 
 static short update_node_height(b3_Node *node){
 	if(node == NULL)
-		return -1;
+		return 0;
 
-	return MAX(update_node_height(node->left), update_node_height(node->right)) + 1;
+	return max(update_node_height(node->left), update_node_height(node->right)) + 1;
 }
 
-#define AVL_SINGLE_ROTATION(root, main_dir, dir_1)                                           \
-	b3_Node *son, *niece;                                                                    \
-	son   = root->dir_1;                                                                     \
-	niece = son->main_dir;                                                                   \
-	son->main_dir = root;                                                                    \
-	root->dir_1   = niece;                                                                   \
-	root->height = MAX(update_node_height(root->left), update_node_height(root->right)) + 1; \
-	son->height  = MAX(update_node_height(son->left),  update_node_height(son->right))  + 1; \
+#define AVL_SINGLE_ROTATION(root, main_dir, dir_1)                                       \
+	b3_Node *son, *niece;                                                                \
+	son   = root->dir_1;                                                                 \
+	niece = son->main_dir;                                                               \
+	son->main_dir = root;                                                                \
+	root->dir_1   = niece;                                                               \
+	root->height = max(update_node_height(root->left), update_node_height(root->right)); \
+	son->height  = max(update_node_height(son->left),  update_node_height(son->right));  \
 	return son
+
+static short avl_balancement_factor(b3_Node *root){
+	if(root == NULL)
+		return 0;
+
+	return GET_SAFE_NODE_HEIGHT(root->left) - GET_SAFE_NODE_HEIGHT(root->right);
+}
 
 static b3_Node* avl_balance(b3_Node *root){
 	// avl balancement status
@@ -104,13 +111,6 @@ static b3_Node* avl_balance(b3_Node *root){
 		return avl_rotation_right_left(root);
 
 	return root;
-}
-
-static short avl_balancement_factor(b3_Node *root){
-	if(root == NULL)
-		return 0;
-
-	return GET_SAFE_NODE_HEIGHT(root->left) - GET_SAFE_NODE_HEIGHT(root->right);
 }
 
 static b3_Node* avl_rotation_left(b3_Node *node){
@@ -144,15 +144,15 @@ b3_Node* b3_get_node(b3_Node *root, int id){
 	return root;
 }
 
-b3_Node* b3_copy_tree(b3_Node *root, bool copy_content){
+b3_Node* b3_copy_tree(b3_Node *root){
 	if(root == NULL)
 		return NULL;
 
 	b3_Node *_new_node;
-	_new_node = b3_create(root->id, root->content, copy_content);
+	_new_node = b3_create(root->id, root->content, root->is_copy);
 
-	_new_node->left  = b3_copy_tree(root->left,  copy_content);
-	_new_node->right = b3_copy_tree(root->right, copy_content);
+	_new_node->left  = b3_copy_tree(root->left);
+	_new_node->right = b3_copy_tree(root->right);
 
 	return _new_node;
 }
@@ -211,7 +211,7 @@ bool b3_remove_node(b3_Node **root, int id){
 		return remove_root_child(root);
 
 	if(id < (*root)->id)
-		return remove_from_branch_node(*root, (*root)->left, id);
+		remove_from_branch_node(*root, (*root)->left, id);
 
 	return remove_from_branch_node(*root, (*root)->right, id);
 }
@@ -254,6 +254,8 @@ static bool remove_root_child(b3_Node **root){
 		free_node(*root);
 		*root = heritor;
 		set_new_position_to_orphan(*root, orphan);
+
+		UPDATE_AVL_DATA((*root));
 		return true;
 	}
 
@@ -267,6 +269,8 @@ static bool remove_root_child(b3_Node **root){
 
 	free_node(*root);
 	*root = buf;
+
+	UPDATE_AVL_DATA((*root));
 	return true;
 }
 
