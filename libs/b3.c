@@ -211,7 +211,7 @@ bool b3_remove_node(b3_Node **root, int id){
 		return remove_root_child(root);
 
 	if(id < (*root)->id)
-		remove_from_branch_node(*root, (*root)->left, id);
+		return remove_from_branch_node(*root, (*root)->left, id);
 
 	return remove_from_branch_node(*root, (*root)->right, id);
 }
