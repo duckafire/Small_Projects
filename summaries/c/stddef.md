@@ -13,7 +13,7 @@ Define um conjunto de tipos e macros comumente utilizados por outras bibliotecas
 <hr>
 <br>
 
-* NULL: endereço nulo (`0x0`), usado para especificar que um dado ponteiro está "vazio".
+* NULL: endereço nulo (zero), usado para especificar que um dado ponteiro está "vazio".
 * offsetof(type, member\_designator): retorna o número de *bytes* de deslocamento antes de um elemento específico de uma `struct` ou `union`.
 	* type: nome da `struct` ou `union`.
 	* member\_designator: membro da `struct` ou `union`.

@@ -1,5 +1,5 @@
 # ctype
-Fornece funções para a manipulação e verificação de caracteres, usando/baseando-se na **Tabela ASCII**.
+Fornece macros para a manipulação e verificação de caracteres, usando/baseando-se na **Tabela ASCII**.
 
 <br>
 
@@ -21,15 +21,15 @@ Fornece funções para a manipulação e verificação de caracteres, usando/bas
 <br>
 
 <h3 id="1">int isalnum(int);</h3>
-* Comportamento: Verifica se `int` é um alfanumérico.
-* Retorno: Um valor diferente de zero caso verdadeiro ou `0` caso falso.
+* Comportamento: verifica se `int` é um alfanumérico.
+* Retorno: um valor diferente de zero caso verdadeiro ou `0` caso falso.
 
 <br>
 <hr>
 <br>
 
 <h3 id="2">int isalpha(int);</h3>
-* Comportamento: Verifica se `int` é uma letra (e se é maiúscula ou minúscula) ou não.
+* Comportamento: verifica se `int` é uma letra (e se é maiúscula ou minúscula) ou não.
 * Retorno: `1` caso seja uma letra maiúscula, `2` caso seja minúscula ou `0` caso não seja uma letra.
 	
 <br>
@@ -37,88 +37,88 @@ Fornece funções para a manipulação e verificação de caracteres, usando/bas
 <br>
 
 <h3 id="3">int iscntrl(int);</h3>
-* Comportamento: Verifica se `int` é um caractere de controle (0-31 em ASCII).
-* Retorno: Um valor diferente de zero caso verdadeiro ou `0` caso falso.
+* Comportamento: verifica se `int` é um caractere de controle (0-31 em ASCII).
+* Retorno: um valor diferente de zero caso verdadeiro ou `0` caso falso.
 
 <br>
 <hr>
 <br>
 
 <h3 id="4">int isdigit(int);</h3>
-* Comportamento: Verifica se `int` é um dígito numérico (0-9).
-* Retorno: Um valor diferente de zero caso verdadeiro ou `0` caso falso.
+* Comportamento: verifica se `int` é um dígito numérico (0-9).
+* Retorno: um valor diferente de zero caso verdadeiro ou `0` caso falso.
 
 <br>
 <hr>
 <br>
 
 <h3 id="5">int isgraph(int);</h3>
-* Comportamento: Verifica se `int` tem uma representação gráfica (exceto espaços; 33-126).
-* Retorno: Um valor diferente de zero caso verdadeiro ou `0` caso falso.
+* Comportamento: verifica se `int` tem uma representação gráfica (exceto espaços; 33-126).
+* Retorno: um valor diferente de zero caso verdadeiro ou `0` caso falso.
 	
 <br>
 <hr>
 <br>
 
 <h3 id="6">int islower(int);</h3>
-* Comportamento: Verifica se `int` é uma letra minúscula.
-* Retorno: Um valor diferente de zero caso verdadeiro ou `0` caso falso.
+* Comportamento: verifica se `int` é uma letra minúscula.
+* Retorno: um valor diferente de zero caso verdadeiro ou `0` caso falso.
 
 <br>
 <hr>
 <br>
 
 <h3 id="7">int isprint(int);</h3>
-* Comportamento: Verifica se `int` é imprímível (incluindo espaços; 32-126).
-* Retorno: Um valor diferente de zero caso verdadeiro ou `0` caso falso.
+* Comportamento: verifica se `int` é imprímível (incluindo espaços; 32-126).
+* Retorno: um valor diferente de zero caso verdadeiro ou `0` caso falso.
 
 <br>
 <hr>
 <br>
 
 <h3 id="8">int ispunct(int);</h3>
-* Comportamento: Verifica se `int` é um sinal de pontuação (qualquer caractere imprimível que não seja o espaço ou um alfanúmerico).
-* Retorno: Um valor diferente de zero caso verdadeiro ou `0` caso falso.
+* Comportamento: verifica se `int` é um sinal de pontuação (qualquer caractere imprimível que não seja o espaço ou um alfanúmerico).
+* Retorno: um valor diferente de zero caso verdadeiro ou `0` caso falso.
 	
 <br>
 <hr>
 <br>
 
 <h3 id="9">int isspace(int);</h3>
-* Comportamento: Verifica se `int` é um espaço, `\n` (quebra de linha), `\r` (retorno de transporte/carro), `\f` (mudança de página), `\t` (tabulação horizontal) ou `\v` (tabulação vertical).
-* Retorno: Um valor diferente de zero caso verdadeiro ou `0` caso falso.
+* Comportamento: verifica se `int` é um espaço, `\n` (quebra de linha), `\r` (retorno de transporte/carro), `\f` (mudança de página), `\t` (tabulação horizontal) ou `\v` (tabulação vertical).
+* Retorno: um valor diferente de zero caso verdadeiro ou `0` caso falso.
 
 <br>
 <hr>
 <br>
 
 <h3 id="10">int isupper(int);</h3>
-* Comportamento: Verifica se `int` seja uma letra maiúscula.
-* Retorno: Um valor diferente de zero caso verdadeiro ou `0` caso falso.
+* Comportamento: verifica se `int` seja uma letra maiúscula.
+* Retorno: um valor diferente de zero caso verdadeiro ou `0` caso falso.
 
 <br>
 <hr>
 <br>
 
 <h3 id="11">int isxdigit(int);</h3>
-* Comportamento: Verifica se `int` um dígito hexadecimal.
-* Retorno: Um valor diferente de zero caso verdadeiro ou `0` caso falso.
+* Comportamento: verifica se `int` um dígito hexadecimal.
+* Retorno: um valor diferente de zero caso verdadeiro ou `0` caso falso.
 
 <br>
 <hr>
 <br>
 
 <h3 id="12">int tolower(int);</h3>
-* Comportamento: Verifica se `int` é uma letra maiúscula.
-* Retorno: Caso verdadeiro, retornará sua versão minúsula, caso falso, retornará `int`.
+* Comportamento: verifica se `int` é uma letra maiúscula.
+* Retorno: caso verdadeiro, retornará sua versão minúsula, caso falso, retornará `int`.
 	
 <br>
 <hr>
 <br>
 
 <h3 id="13">int toupper(int);</h3>
-* Comportamento: Verifica se `int` é uma letra minúscula.
-* Retorno: Caso verdadeiro, retornará sua versão maiúsula, caso falso, retorna `int`.
+* Comportamento: verifica se `int` é uma letra minúscula.
+* Retorno: caso verdadeiro, retornará sua versão maiúsula, caso falso, retorna `int`.
 	
 <br>
 <hr>
