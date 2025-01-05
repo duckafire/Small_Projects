@@ -18,7 +18,7 @@
 * stdatomic
 * [stdbool](https://github.com/duckafire/Small_Projects/blob/main/summaries/c/stdbool.md)
 * [stddef](https://github.com/duckafire/Small_Projects/blob/main/summaries/c/stddef.md)
-* stdint
+* [stdint](https://github.com/duckafire/Small_Projects/blob/main/summaries/c/stdint.md)
 * stdio
 * stdlib
 * stdnoreturn
