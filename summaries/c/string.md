@@ -224,5 +224,4 @@ Simplifica a manipulação de cadeias de dados, com foco em cadeias de caractere
 * https://learn.microsoft.com/pt-br/cpp/c-runtime-library/reference/strxfrm-wcsxfrm-strxfrm-l-wcsxfrm-l?view=msvc-170
 
 <br>
-
-<br><hr>
+<hr>

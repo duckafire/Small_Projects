@@ -3,20 +3,20 @@ Define um conjunto de tipos e macros comumente utilizados por outras bibliotecas
 
 <br>
 
-| Tipo       | Valor                                             |
-| :--        | :--                                               |
-| ptrdiff\_t | Armazena o resultado de um subtração de ponteiros |
-| size\_t    | Armazena o tamanho de objetos em áreas na memória |
-| wchar\_t   | Armazena o código de "caracteres largos"          |
+| Tipo       | Valor                                              |
+| :--        | :--                                                |
+| ptrdiff\_t | Armazena o resultado de um subtração de ponteiros  |
+| size\_t    | Armazena o tamanho de objetos em áreas na memória  |
+| wchar\_t   | Armazena caracteres com tamanho acima de um *byte* |
 
 <br>
 <hr>
 <br>
 
 * NULL: endereço nulo (zero), usado para especificar que um dado ponteiro está "vazio".
-* offsetof(type, member\_designator): retorna o número de *bytes* de deslocamento antes de um elemento específico de uma `struct` ou `union`.
+* offsetof(type, member): retorna o número de *bytes* de deslocamento antes de um elemento específico de uma `struct` ou `union`.
 	* type: nome da `struct` ou `union`.
-	* member\_designator: membro da `struct` ou `union`.
+	* member: membro da `struct` ou `union`.
 
 <br>
 

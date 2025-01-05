@@ -3,7 +3,7 @@ Fornece um conjunto de quatro macros e um tipo que podem ser usados para acessar
 
 <br>
 
-* va\_list: Tipo dos parâmetros, argumentos e retorno dos macros abaixo.
+* va\_list: tipo dos parâmetros, argumentos e retorno dos macros abaixo.
 
 <br>
 <hr>
