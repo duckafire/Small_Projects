@@ -6,7 +6,7 @@
 * [errno](https://github.com/duckafire/Small_Projects/blob/main/summaries/c/errno.md)
 * fenv
 * float
-* inttypes
+* [inttypes](https://github.com/duckafire/Small_Projects/blob/main/summaries/c/inttypes.md)
 * iso646
 * [limits](https://github.com/duckafire/Small_Projects/blob/main/summaries/c/limits.md)
 * locale
