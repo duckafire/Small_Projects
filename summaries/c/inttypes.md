@@ -48,68 +48,55 @@
 
 > Exemplos: `PRIx16`; `SCNuMAX`; `SCNoFAST64`.
 
-<br>
 <hr>
-<br>
 
 <h3 id="2">imaxdiv_t</h3>
+
 * Intuito: armazenar o quociente e o resto da divisão de um `intmax_t`.
 * Membros: `intmax_t quocient`, `intmax_t remainder`.
 
-<br>
 <hr>
-<br>
 
 <h3 id="3">Funções</h3>
 
-<h4 id="3-1">intmax_t imaxabs(intmax_t)</h3>
+<h4 id="3-1">intmax_t imaxabs(intmax_t)</h4>
 * Comportamento: obtém o valor absoluto do `intmax_t`.
 * Retorno: valor obtido.
 
-<br>
 <hr>
-<br>
 
-<h4 id="3-2">imaxdiv_t imaxdiv(intmax_t-0, intmax_t-1)</h3>
+<h4 id="3-2">imaxdiv_t imaxdiv(intmax_t-0, intmax_t-1)</h4>
 * Comportamento: calcula a divisão de `intmax_t-0` por `intmax_t-1`.
 * Retorno: uma estrutura contento o quociente e o resto da divisão.
 
-<br>
 <hr>
-<br>
 
-<h4 id="3-3">intmax_t strtoimax(const char*, char**, int)</h3>
+<h4 id="3-3">intmax_t strtoimax(const char*, char**, int)</h4>
 * Comportamento: converte `const char*` em um inteiro de base `int` (`0` para detecção automática ou valores de `2` até `36`).
 * Retorno: o valor inteiro obtido.
 
-<br>
 <hr>
-<br>
 
-<h4 id="3-4">uintmax_t strtoumax(const char *, char **, int)</h3>
+<h4 id="3-4">uintmax_t strtoumax(const char *, char **, int)</h4>
 * Comportamento: converte `const char*` em um **inteiro não assinado** de base `int` (`0` para detecção automática ou valores de `2` até `36`).
 * Retorno: o valor **inteiro não assinado** obtido.
 
-<br>
 <hr>
-<br>
 
-<h4 id="3-5">intmax_t wcstoimax(const wchar_t *, wchar_t **, int)</h3>
+<h4 id="3-5">intmax_t wcstoimax(const wchar_t *, wchar_t **, int)</h4>
 * Comportamento: converte `const wchar_t*` em um **inteiro não assinado** de base `int` (`0` para detecção automática ou valores de `2` até `36`).
 * Retorno: o valor **inteiro não assinado** obtido.
 
-<br>
 <hr>
-<br>
 
-<h4 id="3-6">uintmax_t wcstoumax(const wchar_t *restrict, wchar_t **restrict, int)</h3>
+<h4 id="3-6">uintmax_t wcstoumax(const wchar_t *restrict, wchar_t **restrict, int)</h4>
 * Comportamento: converte `const wchar_t*` em um **inteiro não assinado** de base `int` (`0` para detecção automática ou valores de `2` até `36`).
 * Retorno: o valor **inteiro não assinado** obtido.
 
 <br>
 
 > [!NOTE]
-> `char**` (e `wchar_t**) receberá o endereço do primeiro caractere inválido (que não pode ser convertido para inteiro) de `const char *` (`const wchar_t`).
+> `char**` (e `wchar_t**`) receberá o endereço do primeiro caractere inválido (que não pode ser convertido para inteiro) de `const char *` (`const wchar_t`).
 
 <br>
 
@@ -121,14 +108,11 @@
 > [!TIP]
 > Veja também: [cppreference: strtoimax x strutomax](https://en.cppreference.com/w/c/string/byte/strtoimax); [cppreference: wcstoimax x wcstoumax](https://en.cppreference.com/w/c/string/wide/wcstoimax).
 
-<br>
 <hr>
-<br>
 
 #### Fontes:
-* https://en.wikibooks.org/wiki/C\_Programming/inttypes.h
-* https://cplusplus.com/reference/cinttypes/
-* https://pubs.opengroup.org/onlinepubs/009695399/basedefs/inttypes.h.html
+* [wikibooks](https://en.wikibooks.org/wiki/c_programming/inttypes.h)
+* [cplusplus](https://cplusplus.com/reference/cinttypes/)
+* [pubs.openground](https://pubs.opengroup.org/onlinepubs/009695399/basedefs/inttypes.h.html)
 
-<br>
 <hr>

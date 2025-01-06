@@ -14,6 +14,8 @@ Fornece uma gama de funções destinadas a manipulação de cadeias de caractere
 
 <br>
 
+<hr>
+
 <h3 id="pattern-match"><em>Pattern matching</em></h3>
 
 Este é um conjunto de caracteres especiais, semelhante ao conjunto [*regex*](https://en.wikipedia.org/wiki/Regular_expression "Wikipédia") (porém limitado), própria da linguagem Lua. Ambos são usados em correspondências de sintaxe pela funções: [`string.find`](#4), [`string.gmatch`](#6), [`string.gsub`](#7) e [`string.match`](#10).
@@ -38,7 +40,7 @@ Este é um conjunto de caracteres especiais, semelhante ao conjunto [*regex*](ht
 | %z | zero     |
 | .  | qualquer caractere |
 
-<br>
+<hr>
 
 | Caractere | Modificação |
 | :-: | :-- |
@@ -47,7 +49,7 @@ Este é um conjunto de caracteres especiais, semelhante ao conjunto [*regex*](ht
 | -   | `0>=` ocorrências |
 | ?   | 0-1 ocorrência (opcional) |
 
-<br>
+<hr>
 
 | Outros   | Descrição |
 | :-:      | :-- |
@@ -59,7 +61,7 @@ Este é um conjunto de caracteres especiais, semelhante ao conjunto [*regex*](ht
 | [\^ *set* ] | conjunto de caracteres; a correspondência deve ser diferente |
 | %f[ *set* ] | uma fronteira, onde o caractere anterior a *set* não deve pertencer a ele |
 
-<br>
+<hr>
 
 <h3 id="pack-format"><em>Formato de (des)empacotamento</em></h3>
 
@@ -92,7 +94,7 @@ As funções `string.pack`, `string.packsize` e `string.unpack` solicitam um dos
 | X *op* | um item vazio que se alinha de acordo com *op* |
 | "" | espaço vazio (ignorado) |
 
-<br>
+<hr>
 
 ||Funções||
 |:-:|:-:|:-:|
@@ -103,9 +105,7 @@ As funções `string.pack`, `string.packsize` e `string.unpack` solicitam um dos
 |<a href="#5">string.format</a>|<a href="#11">string.pack</a>    |<a href="#17">string.upper</a>  |
 |<a href="#6">string.gmatch</a>|<a href="#12">string.packsize</a>||
 
-<br>
 <hr>
-<br>
 
 <h3 id="1">string.byte(string, [number0=1, [number1=number0]])</h3>
 
@@ -118,8 +118,8 @@ As funções `string.pack`, `string.packsize` e `string.unpack` solicitam um dos
 > Tais códigos podem não ser portáveis entre plataformas.
 
 <br>
+
 <hr>
-<br>
 
 <h3 id="2">string.char(...)</h3>
 
@@ -132,26 +132,22 @@ As funções `string.pack`, `string.packsize` e `string.unpack` solicitam um dos
 > Tais códigos podem não ser portáveis entre plataformas.
 
 <br>
+
 <hr>
-<br>
 
 <h3 id="3">string.dump(function_, [boolean=false])</h3>
 
 * Comportamento: converte uma função em código binário. Caso `boolean==true`, a versão binária de `function_` poderá não incluir todas as informações de depuração sobre a função, como forma de economizar espaço.
 * Retorno: uma cadeia de caracteres contendo uma representação binária de `function_`.
 
-<br>
 <hr>
-<br>
 
 <h3 id="4">string.find(string, substring, [number=1, [boolean=false]])</h3>
 
 * Comportamento: procura pela primeira ocorrência de `substring` em `string`, a partir do caractere de índice `number`. `boolean==true` especifica que o <a href="#pattern-match"><em>Pattern Matching</em></a> não deve ser usado.
 * Retorno: o índice da primeira e da última ocorrência ocorrência de `substring`.
 
-<br>
 <hr>
-<br>
 
 <h3 id="5">string.format(string, ...)</h3>
 
@@ -164,17 +160,15 @@ As funções `string.pack`, `string.packsize` e `string.unpack` solicitam um dos
 >  Os "caracteres mágicos" seguem o [padrão C](https://cplusplus.com/reference/cstdio/printf/).
 
 <br>
+
 <hr>
-<br>
 
 <h3 id="6">string.gmatch(string, pattern)</h3>
 
 * Comportamento: obtém uma função interadora, que intera sobre os caracteres de `string`.
 * Retorno: uma função interadora, que retora uma fração de `string`, equivalente ao <a href="#pattern-match"><em>Pattern Matching</em></a> fornecido em `pattern`.
 
-<br>
 <hr>
-<br>
 
 <h3 id="7">string.gsub(string, pattern, str_tab_func, [number=nil])</h3>
 
@@ -192,17 +186,15 @@ As funções `string.pack`, `string.packsize` e `string.unpack` solicitam um dos
 > `gsub` significa: _"Global SUBstituition"_.
 
 <br>
+
 <hr>
-<br>
 
 <h3 id="8">string.len(string)</h3>
 
 * Comportamento: calcula o comprimento de `string`, considerando *zeros* (`\0`, `\00`, `\000`).
 * Retorno: comprimento.
 
-<br>
 <hr>
-<br>
 
 <h3 id="9">string.lower(string)</h3>
 
@@ -215,71 +207,57 @@ As funções `string.pack`, `string.packsize` e `string.unpack` solicitam um dos
 > A definição do que é um letra minúscula e maiúscula depende do local.
 
 <br>
+
 <hr>
-<br>
 
 <h3 id="10">string.match(string, pattern, [number=1])</h3>
 
 * Comportamento: obtém a primeira ocorrência de um trecho de `string`, equivalente a `pattern`, a partir do caractere de índice `number`.
 * Retorno: o trecho ou `nil`, caso ele não seja encontrado.
 
-<br>
 <hr>
-<br>
 
 <h3 id="11">string.pack(format, ...)</h3>
 
 * Comportamento: compacta, em formato binário (especificado por `format`), o conteúdo de `...`.
 * Retorno: a cadeia de caracteres resultante em formato binário.
 
-<br>
 <hr>
-<br>
 
 <h3 id="12">string.packsize(format)</h3>
 
 * Comportamento: obtém o tamanho de um <a href="#pattern-match">formato</a> de compactação binária.
 * Retorno: tamanho, em *bytes*.
 
-<br>
 <hr>
-<br>
 
 <h3 id="13">string.rep(string0, number, [string1=""])</h3>
 
 * Comportamento: cria uma cadeia de caracteres resultante da concatenação de `string0` `number` vezes consigo mesma, com cada cópia de `string0` sendo separado por `string1`.
 * Retorno: a cadeia de caracteres criada.
 
-<br>
 <hr>
-<br>
 
 <h3 id="14">string.reverse(string)</h3>
 
 * Comportamento: reverte `string`.
 * Retorno: resultado.
 
-<br>
 <hr>
-<br>
 
 <h3 id="15">string.sub(string, number0, [number1=-1])</h3>
 
 * Comportamento: obtém um trecho de `string`, partindo do caractere de índice `number0` até `number1`.
 * Retorno: trecho.
 
-<br>
 <hr>
-<br>
 
 <h3 id="16">string.unpack(format, string, [number=1])</h3>
 
 * Comportamento: descompacto os valores binários presentes em `string` (criada por [`string.pack`](#11)), a partir da posição `number` e baseado em `format`.
 * Retorno: os valores obtidos, mais a posição do primeiro *byte* não lido.
 
-<br>
 <hr>
-<br>
 
 <h3 id="17">string.upper(string)</h3>
 
@@ -292,5 +270,5 @@ As funções `string.pack`, `string.packsize` e `string.unpack` solicitam um dos
 > A definição do que é um letra minúscula e maiúscula depende do local.
 
 <br>
+
 <hr>
-<br>

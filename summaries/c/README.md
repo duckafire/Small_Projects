@@ -1,4 +1,4 @@
-# **C** *default* libraries
+# **C** standard headers
 
 * [assert](https://github.com/duckafire/Small_Projects/blob/main/summaries/c/assert.md)
 * complex

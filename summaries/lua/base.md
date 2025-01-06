@@ -2,12 +2,12 @@
 
 Oferece duas variáveis globais e uma série de funções báscias para usos diversos e essenciais.
 
-<br>
+<hr>
 
 * \_G: **Tabela global** que armazena o ambiente global. LUA não usa essa variável em si. Alterar seu valor não afeta nenhum ambiente, e vice-versa.
 * \_VERSION: *Variável global* que armazena a versão do interpretador LUA em execução.
 
-<br>
+<hr>
 
 || Funções ||
 |:-:|:-:|:-:|
@@ -20,25 +20,21 @@ Oferece duas variáveis globais e uma série de funções báscias para usos div
 |<a href="#7">load</a>          |<a href="#15">rawlen</a>  |<a href="#23">xpcall</a>      |
 |<a href="#8">loadfile</a>      |<a href="#16">rawset</a>  | |
 
-<br>
 <hr>
-<br>
 
 <h3 id="1">assert(boolean, [string="assertion failed!"])</h3>
 
 * Comportamento: interrompe o programa, e imprime `string`, caso `boolean == false`.
 * Retorno: nenhum.
 
-<br>
 <hr>
-<br>
 
 <h3 id="2">collectgarbage([string="collect", [number=nil] ])</h3>
 
 * Comportamento: ordenar que o coletor de lixo execute uma deteminada ação.
 * Retorno: os retornos variam de acordo com o valor de `string`. Ambos estão listados abaixo (alguns não têm retorno):
 
-<br>
+<hr>
 
 | Ação          | Descrição                                                                             |
 | :-:           | :--                                                                                   |
@@ -50,18 +46,14 @@ Oferece duas variáveis globais e uma série de funções báscias para usos div
 | `"setpause"`  | Define `arg` como novo valor para a _pausa do coletor_ e **retorna** o valor anterior |
 | `"step"`      | Executa uma etapa do coletor de lixo, usando `arg` para definir seu "tamanho". `==0`: etapa básica (indivisível); `>0`: o coletor tratará esse valor como se fosse uma quantidade de memória (em `Kbytes`) em uso. **Retorna** `true` se a etapa concluir um ciclo de coleta |
 
-<br>
 <hr>
-<br>
 
 <h3 id="3">dofile([string=stdin])</h3>
 
 * Comportamento: executa o conteúdo de `string` como se fosse parte do arquivo em questão. `string` deve conter a extensão `.lua`.
 * Retorno: todos os valores retornados pelo trecho.
 
-<br>
 <hr>
-<br>
 
 <h3 id="4">error(string, [number=1])</h3>
 
@@ -74,152 +66,120 @@ Oferece duas variáveis globais e uma série de funções báscias para usos div
 | 1     | Especifica a posição do erro.                      |
 | 2     | Especifica a posição da função que chamou `error`. |
 
-<br>
 <hr>
-<br>
 
 <h3 id="5">getmetatable(table)</h3>
 
 * Comportamento: verifica se o objeto possui algum metamétodo.
 * Retorno: caso haja um metámetodo em `table`, seu endereço, do contrário, o endereço de `table`. `nil` caso `table` não seja uma tabela. Caso `table` possua o metamétodo `__metatable`, o valor dele será retornado.
 
-<br>
 <hr>
-<br>
 
 <h3 id="6">ipairs(table)</h3>
 
 * Comportamento: permite acessar uma função interadora, que retorna chave e valor.
 * Retorno: uma função interadora, `table` e `0`.
 
-<br>
 <hr>
-<br>
 
 <h3 id="7">load(string0, [string1="=(load)", [string2="bt", [table=_G] ] ])</h3>
 
 * Comportamento: executa o código Lua presente em `string0`.
 * Retorno: uma função ou `nil`, em caso de falha.
 
-<br>
 <hr>
-<br>
 
 <h3 id="8">loadfile([string0=stdin, [string1="t", [table=_G] ] ])</h3>
 
 * Comportamento: executa o código Lua presente em `string0`.
 * Retorno: uma função ou `nil`, em caso de falha.
 
-<br>
+<hr>
 
 * Use `string1="bt"` para ler textos binários.
 
-<br>
-
-<br>
 <hr>
-<br>
 
 <h3 id="9">next(table, number)</h3>
 
 * Comportamento: percorre os índices de `table`.
 * Retorno: caso `number~=nil`, o próximo índice e seu valor, caso contrário, o primeiro índice e seu valor; caso `number==#tbl`, retornará `nil`.
 
-<br>
 <hr>
-<br>
 
 <h3 id="10">pairs(table)</h3>
 
 * Comportamento: executa `__pairs`, com `table` como argumento, mas apenas caso `table` o possua, do contrário, gerar apenas um retorno.
 * Retorno: [`next`](#9), `table` e `nil` ou o retorno de `__pairs`.
 
-<br>
 <hr>
-<br>
 
 <h3 id="11">pcall(function_, [argumentn=nil])</h3>
 
 * Comportamento: chama a `function_` em "modo protegido", ou seja, caso haja algum erro em `function_` ele não parará o programa e nem será imprimido no console.
 * Retorno: caso não hajam erros, retornará `true` e os possíveis retornos de `function_`, do contrário, retornará `false` e uma cadeia de caracteres contendo o erro em questão.
 
-<br>
 <hr>
-<br>
 
 <h3 id="12">print(...)</h3>
 
 * Comportamento: imprime todos os seus argumentos no console. Ambos são comvertidos para cadeias de caracteres e separados por uma tabulação. Uma quebra de linha é posta no final.
 * Retorno: nenhum.
 
-<br>
 <hr>
-<br>
 
 <h3 id="13">rawequal(number0, number1)</h3>
 
 * Comportamento: verifica se `number0` e `number1` são iguais, sem chamar o metamétodo `__eq`.
 * Retorno: o resultado da comparação, em booleano.
 
-<br>
 <hr>
-<br>
 
 <h3 id="14">rawget(table, number)</h3>
 
 * Comportamento: obtém o valor armazenado em `table[number]`, sem chamar o metamétodo `__index`.
 * Retorno: o valor obtido ou `nil`, caso ele não exista.
 
-<br>
 <hr>
-<br>
 
 <h3 id="15">rawlen(tab_str)</h3>
 
 * Comportamento: retorno o comprimento de `tab_str` (que pode ser uma tabela ou uma cadeia de caracteres), sem chama o metamétodo `__len`.
 * Retorno: o comprimento de `tbl_str`.
 
-<br>
 <hr>
-<br>
 
 <h3 id="16">rawset(table, number0, number1)</h3>
 
 * Comportamento: atribui `number1` a `table[number0]`, sem chamar o metamétodo `__newindex`.
 * Retorno: `tbl`.
 
-<br>
 <hr>
-<br>
 
 <h3 id="17">require(string)</h3>
 
 * Comportamento: carrega o conteúdo de `string` para uso no arquivo que o chamou, mas apenas caso ele não tenha sido carregado anteriormente.
 * Retorno: o possível retorno de `string` ou, em caso de sucesso no carregamento, `true`.
 
-<br>
+<hr>
 
 * Em `string`, aos diretórios devem ser separados por `.`, ao invés de `/`; a extensão `.lua` não é necessária.
 
-<br>
 <hr>
-<br>
 
 <h3 id="18">select(number|"#", ...)</h3>
 
 * Comportamento: repassa os argumentos passados em `...` ou conta sua quantidade, dependendo do valor de `number`.
 * Retorno: todos os argumentos de `...` a partir da posição `number`; caso `number<0` a indexação ocorrerá a partir do final; caso `number=="#"`, retornará a quantidade de argumentos presentes em `...`.
 
-<br>
 <hr>
-<br>
 
 <h3 id="19">setmetatable(table, metatable)</h3>
 
 * Comportamento: atribui `metatable` a `table`. Caso `metatable==nil`, removerá a metatabela de `table`, caso possua alguma. Caso `table` tenha uma campo `__metatable`, gerará um erro.
 * Retorno: `table`.
 
-<br>
+<hr>
 
 | Metamétodo    | Argumentos | Comportamento |
 | :-:           | :-:        |:--            |
@@ -247,7 +207,7 @@ Oferece duas variáveis globais e uma série de funções báscias para usos div
 
 * Todos os metamétodos possuem, pelo menos, um parâmetro (exceto `__metatable` e `__mode`): a tabela que o recebeu.
 
-<br>
+<hr>
 
 #### Resumo de tabelas fracas
 São aquelas cujos seus índices e/ou valores podem, eventualmente, serem deletados pelo coletor de lixo. Por exemplo:
@@ -261,7 +221,7 @@ local tbl, id = {}, nil
 ---- "v": valores fracos
 ---- "kv": índices (chaves) e valores fracos
 ---- "s": chaves de cadeias de caracteres
-setmetatable(tbl, {__mode = "k"})
+setmetatable(tbl, {\_\_mode = "k"})
 
 -- "id" recebe uma tabela e ela é usada como índice
 -- para "1" em "tbl"
@@ -282,54 +242,44 @@ tbl[id] = 2
 collectgarbage()
 ```
 
-<br>
+<hr>
 
 * [Fonte](https://create.roblox.com/docs/en-us/luau/metatables)
 
-<br>
+<hr>
 
 * Veja também: [Guia completo para iniciantes sobre metatabelas](https://devforum.roblox.com/t/full-beginner-guide-to-metatables-what-are-they-every-metamethod-explained/2505946)
 
-<br>
 <hr>
-<br>
 
 <h3 id="20">tonumber(number0, [number1=10])</h3>
 
 * Comportamento: converte `number0` para número, caso ele seja válido, de acordo com `number1`.
 * Retorno: o valor convertido, ou `nil`, caso `number0` seja inválido.
 
-<br>
+<hr>
 
 * `number1` pode ser qualquer valor entre dois e trinta e seis.
 
-<br>
 <hr>
-<br>
 
 <h3 id="21">tostring(some_type)</h3>
 
 * Comportamento: converte `some_type` em uma cadeia de caracteres. Caso `value` possua o metamétodo `__tostring`, ele será chamado com `some_type` como argumento.
 * Retorno: uma cadeia de caracteres ou o retorno de `__tostring`.
 
-<br>
 <hr>
-<br>
 
 <h3 id="22">type(some_type)</h3>
 
 * Comportamento: obtem o tipo de `some_type`.
 * Retorno: `"nil"`, `"number"`, `"string"`, `"boolean"`, `"table"`, `"function"`, `"thread`" ou `"userdata"`.
 
-<br>
 <hr>
-<br>
 
 <h3 id="23">xpcall(function_, string, [argumentn=nil])</h3>
 
 * Comportamento: chama a `function_` em "modo protegido". Caso ocorra algum stringo, `err` é chamada, com o erro como argumento.
 * Retorno: caso não hajam erros, `true` e os possíveis retornos de `function_`, do contrário, `false` e os possíveis retornos de `err`.
 
-<br>
 <hr>
-<br>

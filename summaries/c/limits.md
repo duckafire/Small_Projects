@@ -22,15 +22,12 @@ Define constantes responsáveis por delimitar os valores mínimos e máximos de 
 * CHAR\_BIT: Quantidade de bits necessários para se representar uma variável do tipo char.  
 * MB\_LEN\_MAX: Comprimento máximo de vários *bytes* de um caractere em todas as localidades.  
 
-<br>
 <hr>
-<br>
 
 #### Fontes:
-* https://petbcc.ufscar.br/limits/
-* https://en.wikibooks.org/wiki/C\_Programming/limits.h
-* https://en.wikipedia.org/wiki/C\_data\_types#limits.h
-* https://cplusplus.com/reference/climits/
+* [petbccufscar](https://petbcc.ufscar.br/limits/)
+* [wikibooks](https://en.wikibooks.org/wiki/c_programming/limits.h)
+* [wikipedia](https://en.wikipedia.org/wiki/c_data_types#limits.h)
+* [cplusplus](https://cplusplus.com/reference/climits/)
 
-<br>
 <hr>
