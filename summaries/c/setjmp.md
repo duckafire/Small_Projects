@@ -41,7 +41,7 @@ Adiciona ferramentas capazes de manipular o fluxo de execução do código, seme
 <hr>
 
 #### Fontes:
-* [wikipedia](https://en.wikipedia.org/wiki/setjmp.h)
-* [technthenet](https://www.techonthenet.com/c_language/standard_library_functions/setjmp_h/longjmp.php)
+* [wikipedia: setjmp.h](https://en.wikipedia.org/wiki/setjmp.h)
+* [technthenet: example](https://www.techonthenet.com/c_language/standard_library_functions/setjmp_h/longjmp.php)
 
 <hr>

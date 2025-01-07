@@ -3,14 +3,14 @@ Simplifica a manipulação de cadeias de dados, com foco em cadeias de caractere
 
 || Funções ||
 |:-:|:-:|:-:|
-|<a href="1">memchr</a> |<a href="9">strcmp</a>   |<a href="17">strpbrk</a>|
-|<a href="2">memcmp</a> |<a href="10">strncmp</a> |<a href="18">strrchr</a>|
-|<a href="3">memcpy</a> |<a href="11">strcoll</a> |<a href="19">strspn</a> |
-|<a href="4">memmove</a>|<a href="12">strcpy</a>  |<a href="20">strstr</a> |
-|<a href="5">memset</a> |<a href="13">strncpy</a> |<a href="21">strtok</a> |
-|<a href="6">strcat</a> |<a href="14">strcspn</a> |<a href="22">strxfrm</a>|
-|<a href="7">strncat</a>|<a href="15">strerror</a>||
-|<a href="8">strchr</a> |<a href="16">strlen</a>  ||
+|<a href="#1">memchr</a> |<a href="#9">strcmp</a>   |<a href="#17">strpbrk</a>|
+|<a href="#2">memcmp</a> |<a href="#10">strncmp</a> |<a href="#18">strrchr</a>|
+|<a href="#3">memcpy</a> |<a href="#11">strcoll</a> |<a href="#19">strspn</a> |
+|<a href="#4">memmove</a>|<a href="#12">strcpy</a>  |<a href="#20">strstr</a> |
+|<a href="#5">memset</a> |<a href="#13">strncpy</a> |<a href="#21">strtok</a> |
+|<a href="#6">strcat</a> |<a href="#14">strcspn</a> |<a href="#22">strxfrm</a>|
+|<a href="#7">strncat</a>|<a href="#15">strerror</a>||
+|<a href="#8">strchr</a> |<a href="#16">strlen</a>  ||
 
 <br>
 
@@ -202,9 +202,9 @@ Simplifica a manipulação de cadeias de dados, com foco em cadeias de caractere
 <hr>
 
 #### Fontes:
-* [tutorialspoint](https://www.tutorialspoint.com/c_standard_library/string_h.htm)
-* [equestionanswers](https://www.equestionanswers.com/c/memcpy-vs-memmove.php)
-* [delfstack](https://www.delftstack.com/pt/howto/c/strtok-in-c/)
-* [microsoft](https://learn.microsoft.com/pt-br/cpp/c-runtime-library/reference/strxfrm-wcsxfrm-strxfrm-l-wcsxfrm-l?view=msvc-170)
+* [tutorialspoint: string.h](https://www.tutorialspoint.com/c_standard_library/string_h.htm)
+* [equestionanswers: memcpy vs mommove](https://www.equestionanswers.com/c/memcpy-vs-memmove.php)
+* [delfstack: strtok](https://www.delftstack.com/pt/howto/c/strtok-in-c/)
+* [microsoft: strxfrm](https://learn.microsoft.com/pt-br/cpp/c-runtime-library/reference/strxfrm-wcsxfrm-strxfrm-l-wcsxfrm-l?view=msvc-170)
 
 <hr>

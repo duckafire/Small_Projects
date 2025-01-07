@@ -26,9 +26,7 @@ Define um conjunto de tipos e macros comumente utilizados por outras bibliotecas
 <hr>
 
 #### Fontes:
-* [tutorialspoint](https://www.tutorialspoint.com/c_standard_library/stddef_h.htm)
-* [wikibooks](https://en.wikibooks.org/wiki/c_programming/stddef.h)
-* [plublications.gbdirect](https://publications.gbdirect.co.uk/c_book/chapter2/integral_types.html)
-* [embedded](https://www.embedded.com/learn-a-new-trick-with-the-offsetof-macro/)
+* [tutorialspoint: stddef.h](https://www.tutorialspoint.com/c_standard_library/stddef_h.htm)
+* [embedded: tips and trucks to offsetof](https://www.embedded.com/learn-a-new-trick-with-the-offsetof-macro/)
 
 <hr>

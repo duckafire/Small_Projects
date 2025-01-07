@@ -17,7 +17,6 @@ Fornece uma variável global.
 <hr>
 
 #### Fontes:
-* [wikipedia](https://en.wikipedia.org/wiki/errno.h)
-* [geekforgeek](https://www.geeksforgeeks.org/error-handling-in-c/)
+* [wikipedia: errno.h](https://en.wikipedia.org/wiki/errno.h)
 
 <hr>

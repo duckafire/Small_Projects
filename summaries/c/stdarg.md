@@ -60,7 +60,7 @@ Fornece um conjunto de quatro macros e um tipo que podem ser usados para acessar
 <hr>
 
 #### Fontes:
-* [wikipedia](https://en.wikipedia.org/wiki/stdarg.h#references)
-* [technthenet](https://www.techonthenet.com/c_language/standard_library_functions/stdarg_h/va_arg.php)
+* [wikipedia: stdarg.h](https://en.wikipedia.org/wiki/stdarg.h)
+* [technthenet: example](https://www.techonthenet.com/c_language/standard_library_functions/stdarg_h/va_arg.php)
 
 <hr>

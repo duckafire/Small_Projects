@@ -14,6 +14,7 @@
 <br>
 
 ## Índice
+
 * <a href="#1">Macros</a>
 * <a href="#2"><code>imaxdiv_t</code> (estrutura)</a>
 * <a href="#3">Funções</a>
@@ -53,7 +54,9 @@
 <h3 id="2">imaxdiv_t</h3>
 
 * Intuito: armazenar o quociente e o resto da divisão de um `intmax_t`.
-* Membros: `intmax_t quocient`, `intmax_t remainder`.
+* Membros:
+	* `intmax_t` quociente
+	* `intmax_t` resto.
 
 <hr>
 
@@ -111,8 +114,7 @@
 <hr>
 
 #### Fontes:
-* [wikibooks](https://en.wikibooks.org/wiki/c_programming/inttypes.h)
-* [cplusplus](https://cplusplus.com/reference/cinttypes/)
-* [pubs.openground](https://pubs.opengroup.org/onlinepubs/009695399/basedefs/inttypes.h.html)
+* [cplusplus: inttypes.h](https://cplusplus.com/reference/cinttypes/)
+* [pubs.openground: macros full list](https://pubs.opengroup.org/onlinepubs/009695399/basedefs/inttypes.h.html)
 
 <hr>

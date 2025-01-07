@@ -10,11 +10,11 @@ Fornece macros para a manipulação e verificação de caracteres, usando/basean
 
 ||Funções||
 |:-:|:-:|:-:|
-|<a href="1">isalnum</a>| <a href="6">islower</a>|<a href="11">isxdigit</a>|
-|<a href="2">isalpha</a>| <a href="7">isprint</a>|<a href="12">toupper</a> |
-|<a href="3">iscntrl</a>| <a href="8">ispunct</a>|<a href="13">tolower</a> |
-|<a href="4">isdigit</a>| <a href="9">isspace</a>||
-|<a href="5">isgraph</a>|<a href="10">isupper</a>||
+|<a href="#1">isalnum</a>|<a href="#6">islower</a> |<a href="#11">isxdigit</a>|
+|<a href="#2">isalpha</a>|<a href="#7">isprint</a> |<a href="#12">toupper</a> |
+|<a href="#3">iscntrl</a>|<a href="#8">ispunct</a> |<a href="#13">tolower</a> |
+|<a href="#4">isdigit</a>|<a href="#9">isspace</a> ||
+|<a href="#5">isgraph</a>|<a href="#10">isupper</a>||
 
 <hr>
 
@@ -110,8 +110,8 @@ Fornece macros para a manipulação e verificação de caracteres, usando/basean
 <hr>
 
 #### Fontes:
-* [petbccufscar](https://petbcc.ufscar.br/ctype/)
-* [wikipedia](https://en.m.wikipedia.org/wiki/ascii)
-* [ascii-code](https://www.ascii-code.com/)
+* [petbccufscar: ctype.h](https://petbcc.ufscar.br/ctype/)
+* [wikipedia: what is ascii table?](https://en.m.wikipedia.org/wiki/ascii)
+* [ascii-code: ascii-code full list](https://www.ascii-code.com/)
 
 <hr>
