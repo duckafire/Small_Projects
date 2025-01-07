@@ -63,31 +63,31 @@
 * Comportamento: obtém o valor absoluto do `intmax_t`.
 * Retorno: valor obtido.
 
-<hr>
+<br>
 
 <h4 id="3-2">imaxdiv_t imaxdiv(intmax_t-0, intmax_t-1)</h4>
 * Comportamento: calcula a divisão de `intmax_t-0` por `intmax_t-1`.
 * Retorno: uma estrutura contento o quociente e o resto da divisão.
 
-<hr>
+<br>
 
 <h4 id="3-3">intmax_t strtoimax(const char*, char**, int)</h4>
 * Comportamento: converte `const char*` em um inteiro de base `int` (`0` para detecção automática ou valores de `2` até `36`).
 * Retorno: o valor inteiro obtido.
 
-<hr>
+<br>
 
 <h4 id="3-4">uintmax_t strtoumax(const char *, char **, int)</h4>
 * Comportamento: converte `const char*` em um **inteiro não assinado** de base `int` (`0` para detecção automática ou valores de `2` até `36`).
 * Retorno: o valor **inteiro não assinado** obtido.
 
-<hr>
+<br>
 
 <h4 id="3-5">intmax_t wcstoimax(const wchar_t *, wchar_t **, int)</h4>
 * Comportamento: converte `const wchar_t*` em um **inteiro não assinado** de base `int` (`0` para detecção automática ou valores de `2` até `36`).
 * Retorno: o valor **inteiro não assinado** obtido.
 
-<hr>
+<br>
 
 <h4 id="3-6">uintmax_t wcstoumax(const wchar_t *restrict, wchar_t **restrict, int)</h4>
 * Comportamento: converte `const wchar_t*` em um **inteiro não assinado** de base `int` (`0` para detecção automática ou valores de `2` até `36`).
@@ -106,7 +106,7 @@
 <br>
 
 > [!TIP]
-> Veja também: [cppreference: strtoimax x strutomax](https://en.cppreference.com/w/c/string/byte/strtoimax); [cppreference: wcstoimax x wcstoumax](https://en.cppreference.com/w/c/string/wide/wcstoimax).
+> Veja também: <a href="https://en.cppreference.com/w/c/string/byte/strtoimax"><u>strtoimax x strutomax</u></a>; <a href="https://en.cppreference.com/w/c/string/wide/wcstoimax"><u>wcstoimax x wcstoumax</u></a>.
 
 <hr>
 

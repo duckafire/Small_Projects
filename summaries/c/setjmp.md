@@ -7,7 +7,7 @@ Adiciona ferramentas capazes de manipular o fluxo de execução do código, seme
 
 <hr>
 
-<h3>setjmp(jmp_buf)/</h3>
+<h3>setjmp(jmp_buf)</h3>
 
 * Comportamento: salva dados do "estado do programa" em `jmp_bug`.
 * Retorno: `0`, caso seja chamada diretamente, ou o segundo argumento de `longjmp` (`int`), caso ele tenha executado um salto com o mesmo *buffer*.

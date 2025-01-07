@@ -72,6 +72,7 @@ Fornece diversas definições de tipos de inteiros, as quais possuem tamanho var
 ##### Macros
 
 | Mínimo                | Máximo                | Valor **estimado**                  |
+| :-:                   | :-:                   | :-:                                 |
 | INTMAX\_MIN           | INTMAX\_MAX           | (-)9.223.372.036.854.775.807        |
 | -                     | UINTMAX\_MAX          | 18.446.744.073.709.551.615          |
 | INT**N**\_MIN         | INT**N**\_MAX         | exatamente (-)(2 ^ (**N** - 1)) - 1 |

@@ -5,10 +5,15 @@ Adiciona 4 macros para explicitar o uso de valores booleanos, assim facilitando 
 
 | Macros | Valor |
 | :-:    | :-:   |
-| bool   | Tipo booleano (`int`) |
-| true   | 1     |
-| false  | 0     |
-| \_\_bool\_true\_false\_are\_defined | 1 |
+| bool   | `int` |
+| true   | `1`   |
+| false  | `0`   |
+
+<br>
+
+> A macro `__bool_true_false_are_defined` também está inclusa neste cabeçalho.
+
+<br>
 
 <hr>
 
