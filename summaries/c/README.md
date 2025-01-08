@@ -25,5 +25,5 @@
 * [string](https://github.com/duckafire/Small_Projects/blob/main/summaries/c/string.md)
 * tgmath
 * threads
-* time
+* [time](https://github.com/duckafire/Small_Projects/blob/main/summaries/c/time.md)
 * wchar
