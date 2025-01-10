@@ -110,8 +110,8 @@ Fornece macros para a manipulação e verificação de caracteres, usando/basean
 <hr>
 
 #### Fontes:
-* [petbccufscar: ctype.h](https://petbcc.ufscar.br/ctype/)
-* [wikipedia: what is ascii table?](https://en.m.wikipedia.org/wiki/ascii)
-* [ascii-code: ascii-code full list](https://www.ascii-code.com/)
+* [petbccufscar: ctype.h](https://petbcc.ufscar.br/ctype/ )
+* [wikipedia: what is ascii table?](https://en.m.wikipedia.org/wiki/ascii )
+* [ascii-code: ascii-code full list](https://www.ascii-code.com/ )
 
 <hr>

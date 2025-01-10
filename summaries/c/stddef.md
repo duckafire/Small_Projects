@@ -26,7 +26,7 @@ Define um conjunto de tipos e macros comumente utilizados por outras bibliotecas
 <hr>
 
 #### Fontes:
-* [tutorialspoint: stddef.h](https://www.tutorialspoint.com/c_standard_library/stddef_h.htm)
-* [embedded: tips and trucks to offsetof](https://www.embedded.com/learn-a-new-trick-with-the-offsetof-macro/)
+* [tutorialspoint: stddef.h](https://www.tutorialspoint.com/c_standard_library/stddef_h.htm )
+* [embedded: tips and trucks to offsetof](https://www.embedded.com/learn-a-new-trick-with-the-offsetof-macro/ )
 
 <hr>

@@ -202,9 +202,9 @@ Simplifica a manipulação de cadeias de dados, com foco em cadeias de caractere
 <hr>
 
 #### Fontes:
-* [tutorialspoint: string.h](https://www.tutorialspoint.com/c_standard_library/string_h.htm)
-* [equestionanswers: memcpy vs mommove](https://www.equestionanswers.com/c/memcpy-vs-memmove.php)
-* [delfstack: strtok](https://www.delftstack.com/pt/howto/c/strtok-in-c/)
-* [microsoft: strxfrm](https://learn.microsoft.com/pt-br/cpp/c-runtime-library/reference/strxfrm-wcsxfrm-strxfrm-l-wcsxfrm-l?view=msvc-170)
+* [tutorialspoint: string.h](https://www.tutorialspoint.com/c_standard_library/string_h.htm )
+* [equestionanswers: memcpy vs mommove](https://www.equestionanswers.com/c/memcpy-vs-memmove.php )
+* [delfstack: strtok](https://www.delftstack.com/pt/howto/c/strtok-in-c/ )
+* [microsoft: strxfrm](https://learn.microsoft.com/pt-br/cpp/c-runtime-library/reference/strxfrm-wcsxfrm-strxfrm-l-wcsxfrm-l?view=msvc-170 )
 
 <hr>

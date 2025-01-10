@@ -101,10 +101,10 @@ Disponibiliza ferramentas para o controle da localização da aplicação.
 <hr>
 
 ### Fontes:
-* [wikibooks: locale.h](https://en.wikibooks.org/wiki/C_Programming/locale.h)
-* [cppreference: struct lconv](https://en.cppreference.com/w/c/locale/lconv)
-* [tutorialspoint: macros](https://www.tutorialspoint.com/c_standard_library/c_function_setlocale.htm)
-* [cppreference: localeconv](https://en.cppreference.com/w/c/locale/localeconv)
-* [microsoft: setlocale](https://learn.microsoft.com/pt-br/cpp/c-runtime-library/reference/setlocale-wsetlocale?view=msvc-170)
+* [wikibooks: locale.h](https://en.wikibooks.org/wiki/C_Programming/locale.h )
+* [cppreference: struct lconv](https://en.cppreference.com/w/c/locale/lconv )
+* [tutorialspoint: macros](https://www.tutorialspoint.com/c_standard_library/c_function_setlocale.htm )
+* [cppreference: localeconv](https://en.cppreference.com/w/c/locale/localeconv )
+* [microsoft: setlocale](https://learn.microsoft.com/pt-br/cpp/c-runtime-library/reference/setlocale-wsetlocale?view=msvc-170 )
 
 <hr>

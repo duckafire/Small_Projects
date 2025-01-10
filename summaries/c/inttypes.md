@@ -114,7 +114,7 @@
 <hr>
 
 #### Fontes:
-* [cplusplus: inttypes.h](https://cplusplus.com/reference/cinttypes/)
-* [pubs.openground: macros full list](https://pubs.opengroup.org/onlinepubs/009695399/basedefs/inttypes.h.html)
+* [cplusplus: inttypes.h](https://cplusplus.com/reference/cinttypes/ )
+* [pubs.openground: macros full list](https://pubs.opengroup.org/onlinepubs/009695399/basedefs/inttypes.h.html )
 
 <hr>

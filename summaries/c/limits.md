@@ -25,6 +25,6 @@ Define constantes responsáveis por delimitar os valores mínimos e máximos de 
 <hr>
 
 #### Fontes:
-* [cplusplus: limits.h](https://cplusplus.com/reference/climits/)
+* [cplusplus: limits.h](https://cplusplus.com/reference/climits/ )
 
 <hr>

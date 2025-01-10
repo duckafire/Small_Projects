@@ -18,7 +18,7 @@ Fornece duas macros destinadas a depuração.
 <hr>
 
 #### Fontes:
-* [wikipedia: assert.h](https://en.wikipedia.org/wiki/assert.h)
-* [tutotialspoint: static\_assert](https://www.tutorialspoint.com/c_standard_library/assert_h.htm)
+* [wikipedia: assert.h](https://en.wikipedia.org/wiki/assert.h )
+* [tutotialspoint: static\_assert](https://www.tutorialspoint.com/c_standard_library/assert_h.htm )
 
 <hr>

@@ -147,9 +147,9 @@ Este arquivo de cabeçalho declara uma macro, dois tipos, uma estrutura e divers
 <hr>
 
 ### Fontes:
-* [wikipedia: time.h](https://pt.wikipedia.org/wiki/Time.h)
-* [geekforgeeks: struct tm members](https://www.geeksforgeeks.org/time-h-header-file-in-c-with-examples/)
-* [cppreference: clock\_t](https://en.cppreference.com/w/c/chrono/clock_t)
-* [wikipedia: time\_t](https://en.wikipedia.org/w/index.php?title=Time_t&oldid=450752800)
+* [wikipedia: time.h](https://pt.wikipedia.org/wiki/Time.h )
+* [geekforgeeks: struct tm members](https://www.geeksforgeeks.org/time-h-header-file-in-c-with-examples/ )
+* [cppreference: clock\_t](https://en.cppreference.com/w/c/chrono/clock_t )
+* [wikipedia: time\_t](https://en.wikipedia.org/w/index.php?title=Time_t&oldid=450752800 )
 
 <hr>

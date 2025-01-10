@@ -17,6 +17,6 @@ Fornece uma variável global.
 <hr>
 
 #### Fontes:
-* [wikipedia: errno.h](https://en.wikipedia.org/wiki/errno.h)
+* [wikipedia: errno.h](https://en.wikipedia.org/wiki/errno.h )
 
 <hr>

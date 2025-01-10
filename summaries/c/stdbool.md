@@ -18,6 +18,6 @@ Adiciona 4 macros para explicitar o uso de valores booleanos, assim facilitando 
 <hr>
 
 #### Fontes:
-* [wikipedia: stdbool.h](https://en.wikipedia.org/wiki/c_data_types#stdbool.h)
+* [wikipedia: stdbool.h](https://en.wikipedia.org/wiki/c_data_types#stdbool.h )
 
 <hr>

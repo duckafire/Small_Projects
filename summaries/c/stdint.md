@@ -126,8 +126,8 @@ Fornece diversas definições de tipos de inteiros, as quais possuem tamanho var
 <br>
 
 #### Fontes:
-* [wikibooks: stdint.h](https://en.wikibooks.org/wiki/c_programming/stdint.h)
-* [cplusplus: types and macros list](https://cplusplus.com/reference/cstdint/)
-* [cppreference: full types and macros list](https://en.cppreference.com/w/cpp/types/integer)
+* [wikibooks: stdint.h](https://en.wikibooks.org/wiki/c_programming/stdint.h )
+* [cplusplus: types and macros list](https://cplusplus.com/reference/cstdint/ )
+* [cppreference: full types and macros list](https://en.cppreference.com/w/cpp/types/integer )
 
 <hr>
