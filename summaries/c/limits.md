@@ -9,13 +9,13 @@ Define constantes responsáveis por delimitar os valores mínimos e máximos de 
 | char                   | CHAR\_MIN  | CHAR\_MAX   | (SCHAR\_MIN ou 0)  SCHAR\_MAX ou UCHAR\_MAX |
 | unsigned char          | -          | UCHAR\_MAX  | 255                  |
 | short int              | SHRT\_MIN  | SHRT\_MAX   | (-)32.767            |
-| unsigned short int     | -          | USHRT\_MAX  | 65535                |
+| unsigned short int     | -          | USHRT\_MAX  | 65.535                |
 | int                    | INT\_MIN   | INT\_MAX    | (-)32.767            |
-| unsigned int           | -          | UINT\_MAX   | 65535                |
+| unsigned int           | -          | UINT\_MAX   | 65.535                |
 | long int               | LONG\_MIN  | LONG\_MAX   | (-)2.147.483.647     |
-| unsigned long int      | -          | ULONG\_MAX  | 4294967295           |
+| unsigned long int      | -          | ULONG\_MAX  | 4.294.967.295           |
 | long long int          | LLONG\_MIN | LLONG\_MAX  | (-)9.223.372.036.854.775.807 |
-| unsigned long long int | -          | ULLONG\_MAX | 18446744073709551615 |
+| unsigned long long int | -          | ULLONG\_MAX | 18.446.744.073.709.551.615 |
 
 <br>
 
