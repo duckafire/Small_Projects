@@ -52,7 +52,7 @@ Fornece um conjunto de quatro macros e um tipo que podem ser usados para acessar
 
 <hr>
 	
-<h3>va_copy(va_list0, va_list1);</h3>
+<h3>va_copy(va_list0, va_list1)</h3>
 
 * Comportamento: copia a lista de argumentos de `va_list1` para `va_list0`.
 * Retono: nenhum.

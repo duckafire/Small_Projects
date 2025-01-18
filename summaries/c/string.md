@@ -19,21 +19,21 @@ Simplifica a manipulação de cadeias de dados, com foco em cadeias de caractere
 
 <br>
 
-<h3 id="1">void* memchr(const void*, int, size_t);</h3>
+<h3 id="1">void* memchr(const void*, int, size_t)</h3>
 
 * Comportamento: compara os primeiros `size_t` valores de `const void*` com `int`.
 * Retorno: caso seja encontrado um valor igual a `int`, retornará um ponteiro para uma cadeia que irá da primeira ocorrência dele até o final de `const void*`, do contrário `NULL`.
 
 <hr>
 
-<h3 id="2">int memcmp(const void 0*, const void 1*, size_t);</h3>
+<h3 id="2">int memcmp(const void 0*, const void 1*, size_t)</h3>
 
 * Comportamento: compara o valor em *byte* dos primeiros `size_t` caracteres de `const void 0*` e `const void 1*`.
 * Retorno: `0` se forem iguais, valor negativo se `const void 0*` for menor que `const void 1*`, ou valor positivo se `const void 0*` for maior que `const void 1*`.
 
 <hr>
 
-<h3 id="3">void* memcpy(void*, const void*, size_t);</h3>
+<h3 id="3">void* memcpy(void*, const void*, size_t)</h3>
 
 * Comportamento: copia os primeira `size_t` caracteres de `void*` pelos primeiros `size_t` caracteres de `const void*`
 * Retorno: `void*`
@@ -47,7 +47,7 @@ Simplifica a manipulação de cadeias de dados, com foco em cadeias de caractere
 
 <hr>
 
-<h3 id="4">void* memmove(void*, const void*, size_t);</h3>
+<h3 id="4">void* memmove(void*, const void*, size_t)</h3>
 
 * Comportamento: copia os primeira `size_t` caracteres de `void*` pelos primeiros `size_t` caracteres de `const void*`
 * Retorno: `void*`
@@ -61,14 +61,14 @@ Simplifica a manipulação de cadeias de dados, com foco em cadeias de caractere
 
 <hr>
 
-<h3 id="5">void* memset(void*, int, size_t);</h3>
+<h3 id="5">void* memset(void*, int, size_t)</h3>
 
 * Comportamento: substitui os primeiros `size_t` caracteres de `void*` por `int`.
 * Retorno: `void*`.
 
 <hr>
 
-<h3 id="6">char* strcat(char*, const char*);</h3>
+<h3 id="6">char* strcat(char*, const char*)</h3>
 
 * Comportamento: concatena `char*` com `const char*`.
 * Retorno: `char*`.
@@ -82,35 +82,35 @@ Simplifica a manipulação de cadeias de dados, com foco em cadeias de caractere
 
 <hr>
 
-<h3 id="8">char* strchr(const char*, int);</h3>
+<h3 id="8">char* strchr(const char*, int)</h3>
 
 * Comportamento: compara todos os caracteres dentro de `const char*` com `int`.
 * Retorno: caso seja encontrado um caracter igual a `int`, retornará um ponteiro para uma cadeia de caracteres que irá da primeira ocorrência deste caracter até o final da cadeia de caracteres, caso não seja, retornará `NULL`.
 
 <hr>
 
-<h3 id="9">int strcmp(const char 0*, const char 1*);</h3>
+<h3 id="9">int strcmp(const char 0*, const char 1*)</h3>
 
 * Comportamento: compara o valor **ASCII** de duas cadeiras de caracteres.
 * Retorno: `0` se forem iguais, valor negativo se `const char 0*` for menor que `const char 1*`, ou valor positivo se `const char 0*` for maior que `const char 1*`.
 
 <hr>
 
-<h3 id="10">int strncmp(const char 0*, const char 1*, size_t);</h3>
+<h3 id="10">int strncmp(const char 0*, const char 1*, size_t)</h3>
 
 * Comportamento: compara o valor **ASCII** dos primeiros `size_t` caracteres de duas cadeiras de caracteres.
 * Retorno: `0` se forem iguais, valor negativo se `const char 0*` for menor que `const char 1*`, ou valor positivo se `const char 0*` for maior que `const char 1*`.
 
 <hr>
 
-<h3 id="11">int strcoll(const char 0*, const char 1*);</h3>
+<h3 id="11">int strcoll(const char 0*, const char 1*)</h3>
 
 * Comportamento: compara o valor **ASCII** de duas cadeiras de caracteres. Seu resultado depende da configuração `LC_COLLATE` do local.
 * Retorno: `0` se forem iguais, valor negativo se `const char 0*` for menor que `const char 1*`, ou valor positivo se `const char 0*` for maior que `const char 1*`.
 
 <hr>
 
-<h3 id="12">char* strcpy(char*, const char*);</h3>
+<h3 id="12">char* strcpy(char*, const char*)</h3>
 
 * Comportamento: copia todo o conteúdo de `char*` para `const char*`.
 * Retorno: `char*`.
@@ -124,63 +124,63 @@ Simplifica a manipulação de cadeias de dados, com foco em cadeias de caractere
 
 <hr>
 
-<h3 id="13">char* strncpy(char*, const char*, size_t);</h3>
+<h3 id="13">char* strncpy(char*, const char*, size_t)</h3>
 
 * Comportamento: copia os primeira `size_t` caracteres de `char*` pelos primeiros `size_t` caracteres de `const char*`.
 * Retorno: `char*`.
 
 <hr>
 
-<h3 id="14">size_t strcspn(const char 0*, const char 1*);</h3>
+<h3 id="14">size_t strcspn(const char 0*, const char 1*)</h3>
 
 * Comportamento: compara todos os caracteres presentes em `const char 0*` com os caracteres presentes em `const char 1*`, um a um.
 * Retorno: caso um caractere igual seja encontrado, todos os caracteres anteriores a ele serão retornados, caso contrário, todos os caracteres serão retornados.
 
 <hr>
 
-<h3 id="15">char* strerror(int);</h3>
+<h3 id="15">char* strerror(int)</h3>
 
 * Comportamento: busca, em uma matriz interna, o valor numérico fornecido em `int`. As mensagens de erro podem variar de acordo com o OS e o compilador.
 * Retorno: um ponteiro para uma cadeia de caracteres com infomações sobre o erro.
 
 <hr>
 
-<h3 id="16">size_t strlen(const char*);</h3>
+<h3 id="16">size_t strlen(const char*)</h3>
 
 * Comportamento: calcula comprimento de `const char*`.
 * Retorna: comprimento.
 
 <hr>
 
-<h3 id="17">char* strpbrk(const char 0*, const char 1*);</h3>
+<h3 id="17">char* strpbrk(const char 0*, const char 1*)</h3>
 
 * Comportamento: compara todos os caracteres dentro de `const char 0*` com todos os caracteres dentro de `const char 1*`. Irá para ao encontrar `\0` em `const char 0*`; ignorará `\0` caso encontre-o em `const char 1*`, assim não comparando-o e não interrompendo a operação.
 * Retorno: caso seja encontrado um valor igual a `int`, retornará um ponteiro para uma cadeia que irá da primeira ocorrência dele até o final de `const char 0*`, do contrário `NULL`.
 
 <hr>
 
-<h3 id="18">char* strrchr(const char*, int);</h3>
+<h3 id="18">char* strrchr(const char*, int)</h3>
 
 * Comportamento: compara todos os caracteres dentro de `const char*` com `int`.
 * Retorno: caso seja encontrado um valor igual a `int`, retornará um ponteiro para uma cadeia que irá da primeira ocorrência dele até o final de `const char*`, do contrário `NULL`.
 
 <hr>
 
-<h3 id="19">size_t strspn(const char 0*, const char 1*);</h3>
+<h3 id="19">size_t strspn(const char 0*, const char 1*)</h3>
 
 * Comportamento: compara (da esquerda para a direita) cada um dos caracteres de `const char 0*` e `const char 1*` (0-0, 1-1, ..., n-n), parando ao encontrar um par diferente.
 * Retorno: a quantidade de caracteres iguais.
 
 <hr>
 
-<h3 id="20">char* strstr(const char 0*, const char 1*);</h3>
+<h3 id="20">char* strstr(const char 0*, const char 1*)</h3>
 
 * Comportamento: busca por `const char 1*` (sub-cadeia de caracteres) em `const char 0*`.
-* Retorno: caso `const char 1` seja encontrada, retornará um ponteiro para uma cadeia que irá de sua primeira ocorrência até o final de `const char 0*`, do contrário `NULL`.
+* Retorno: caso `const char 1*` seja encontrada, retornará um ponteiro para uma cadeia que irá de sua primeira ocorrência até o final de `const char 0*`, do contrário `NULL`.
 
 <hr>
 
-<h3 id="21">char* strtok(char*, const char*);</h3>
+<h3 id="21">char* strtok(char*, const char*)</h3>
 
 * Comportamento: divide `char*` sempre que um caracter presente em `const char*` é encontrado nela.
 * Retorno: um ponteiro para o primeiro trecho ou `NULL` caso nenhum delimitador de `const char*` seja encontrado.
@@ -194,7 +194,7 @@ Simplifica a manipulação de cadeias de dados, com foco em cadeias de caractere
 
 <hr>
 
-<h3 id="22">size_t strxfrm(char*, const char*, size_t);</h3>
+<h3 id="22">size_t strxfrm(char*, const char*, size_t)</h3>
 
 * Comportamento: copia os primeiros `size_t` caracteres de `char*` para `const char*`, convertendo-os para o formato definido para `LC_COLLATE` durante o processo.
 * Retorno: comprimento de `char*`.

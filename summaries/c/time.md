@@ -141,8 +141,59 @@ Este arquivo de cabeçalho declara uma macro, dois tipos, uma estrutura e divers
 
 <h3 id="9">size_t strftime(char*, size_t, const char*, const struct tm*)</h3>
 
-* Comportamento: constrói uma cadeia de caracteres com formato `const char*`, usando os valores presente em `const struct tm*`, e armazena-a em caracteres de `char*`, que possui `size_t` de comprimento total.
+* Comportamento: constrói uma cadeia de caracteres com formato `const char*`, usando os valores presente em `const struct tm*`, e armazena-a em caracteres de `char*`, que possui `size_t` de comprimento total (com `'\0'` incluso na contagem).
 * Retorno: a quantidade de caracteres que foram escritos em `char*` menor um (`'\0'`).
+
+<br>
+
+##### Formatos (para `const char*`)
+
+| Código | Descrição                                      | Exemplo |
+| :-:    | :--                                            | :-:     |
+| a      | Nome do dia da semana abreviado                | Thu |
+| A      | Nome do dia da semana                          | Thursday |
+| b      | Nome do mês abreriado                          | Aug |
+| B      | Nome do mês                                    | August |
+| c      | Data e hora                                    | Thu Aug 18 13:58:09 2025 |
+| C      | Ano dividido por 100 e convertido para inteiro | 56 |
+| d      | Dia do mês (`01-31`)`                          | 04 |
+| D      | Mês/Dia/Ano                                    | 07/29/2025 |
+| e      | Dia do mês (`1-31`)                            | 22 |
+| F      | Ano-Mês-Dia                                    | 07-29-2025 |
+| g      | Ano baseado em semanas, últimos dois digitos   | 23 |
+| G      | Ano baseado em semanas                         | 2023 |
+| h      | Nome do mês abreviado (o mesmo que `"%b"`)     | Aug |
+| H      | Horas em formato de 24h                        | 13 |
+| I      | Horas em formato de 12h                        | 01 |
+| j      | Dias do ano (`001-365`)                        | 271 |
+| m      | *Índice* dos meses do ano (`01-12`)            | 11 |
+| M      | Minutos (`00-59`)                              | 34 |
+| n      | Quebra de linha (`'\n'`)                       |  |
+| p      | Indicador *AM* ou *PM*                         | AM |
+| r      | Horário em formato de 12h                      | 01:58:09 pm |
+| R      | Horário em formato de 24h                      | 13:58 |
+| s      | Segundos (`00-61`)                             | 19 |
+| t      | Tabulação horizontal (`'\t'`)                  |  |
+| T      | Hora:Minutos:Segundos (baseado na [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601 ))               | 13:58:09 |
+| u      | *Índices* dos dias da semana (baseado na [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601 ); `1-7`) | 2 |
+| U      | *Índices* das semanas cujo primeiro dia é o Domingo (`00-53`))                                       | 52 |
+| V      | *Índices* das semanas (baseado na [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601 ); `01-53`)      | 35 |
+| w      | *Índices* dos dias da semana (`0-6`)                                                                 | 5 |
+| W      | *Índices* das semandas cujo primeiro dia é Segunda-Feira (`00-53`)                                   | 17 |
+| x      | Mês/Dia/Dois últimos digitos do ano                                                                  | 07/29/25 |
+| X      | Hora:Minutos:Segundos                                                                                | 13:58:09 |
+| y      | Últimos dois digitos do ano                                                                          | 25 |
+| Y      | Ano                                                                                                  | 2025 |
+| z      | Deslocamento (baseado na [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601 )) do fuso-horário do [Coordinated Universal Time (UTC)](https://en.wikipedia.org/wiki/UTC "Wikipédia")) (`1min = 1`; `1h = 100`). Se o fuso-horário não puder ser determinado, nada será imprimido | +100 |
+| Z      | Nome do fuso-horário abreviado. Se o fuso-horário não puder ser determinado, nada será imprimido | CDT |
+| %      | O caractere `%`                                                                                  | "%" |
+
+<br>
+
+> [!NOTE]
+> Todos devem ser prefixados por `"%"` (`"%a"`; `"%A"`; ...).
+
+<br>
 
 <hr>
 
@@ -151,5 +202,6 @@ Este arquivo de cabeçalho declara uma macro, dois tipos, uma estrutura e divers
 * [geekforgeeks: struct tm members](https://www.geeksforgeeks.org/time-h-header-file-in-c-with-examples/ )
 * [cppreference: clock\_t](https://en.cppreference.com/w/c/chrono/clock_t )
 * [wikipedia: time\_t](https://en.wikipedia.org/w/index.php?title=Time_t&oldid=450752800 )
+* [cplusplus: strftime formats](https://cplusplus.com/reference/ctime/strftime/ )
 
 <hr>
