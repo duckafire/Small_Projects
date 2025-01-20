@@ -90,12 +90,26 @@ Fornece várias funções para a manipulação de fluxos de entrada e saída (E/
 * Comportamento: deleta um arquivo, ou um directório vazio, de nome `const char*`.
 * Retorno: `0` em caso de sucesso ou um valor diferentes de `0`, caso contrário.
 
+<br>
+
+> [!NOTE]
+> Em muitas implementações dessa biblioteca, erros ocorridos durante a execução desta função alterarão o valor de [`errno`](https://github.com/duckafire/small_projects/blob/main/summaries/c/errno.md "Resumo da errno.h") para um código específico do sistema onde o mesmo está sendo executado.
+
+<br>
+
 <hr>
 
 <h4 id="2">int rename(const char 0*, const char 1*)</h4>
 
 * Comportamento: renomeia um arquivo, ou um directório, de nome `const char 0*` para `const char 1*`.
 * Retorno: `0` em caso de sucesso ou um valor diferentes de `0`, caso contrário.
+
+<br>
+
+> [!NOTE]
+> Em muitas implementações dessa biblioteca, erros ocorridos durante a execução desta função alterarão o valor de [`errno`](https://github.com/duckafire/small_projects/blob/main/summaries/c/errno.md "Resumo da errno.h") para um código específico do sistema onde o mesmo está sendo executado.
+
+<br>
 
 <hr>
 
@@ -158,7 +172,7 @@ Fornece várias funções para a manipulação de fluxos de entrada e saída (E/
 <h4 id="6">int fflush(FILE*)</h4>
 
 * Comportamento: força a gravação dos dados presentes no *buffer* de saída  (de `FILE*`) no arquivo sob sua custodia, mas apenas caso `FILE*` esteja em <a href="#file-mode">modo</a> `"w"` ou `"a"` (e sua última operação de E/S tenha sido de entrada), caso contrário, nada ocorrerá. Se `FILE*==NULL`, sua chamada afetará todos os *buffers* abertos, em todos os fluxos, que sejam compatíveis com as exigências antes citadas.
-* Retorno: `0` caso a operação seja bem sucedida,' `FILE*` não se encaixe nas exigências ou caso `FILE*` não possua nenhum *buffer*. Em caso de falha, retornará `EOF`.
+* Retorno: `0` caso a operação seja bem sucedida,' `FILE*` não se encaixe nas exigências ou caso `FILE*` não possua nenhum *buffer*. Em caso de falha, retornará `EOF` e seu *indicador de erro* (veja <a href="#45"><code>ferror</code></a>) será definido.
 
 <hr>
 
@@ -188,6 +202,11 @@ Fornece várias funções para a manipulação de fluxos de entrada e saída (E/
 <br>
 
 > [!NOTE]
+> Em muitas implementações dessa biblioteca, erros ocorridos durante a execução desta função alterarão o valor de [`errno`](https://github.com/duckafire/small_projects/blob/main/summaries/c/errno.md "Resumo da errno.h") para um código específico do sistema onde o mesmo está sendo executado.
+
+<br>
+
+> [!NOTE]
 > Caso o arquivo em questão não refira-se a um dispositivo interativo, o *fluxo* será, por padrão, __*full buffering*__ (veja <a href="#10"><code>setvbuf</code></a>).
 
 <br>
@@ -203,6 +222,11 @@ Fornece várias funções para a manipulação de fluxos de entrada e saída (E/
 
 > [!IMPORTANT]
 > Diferentes implementações desta biblioteca podem adicionar restrições e condições para a troca de <a href="#file-mode">modo</a> do *fluxo* (`FILE*`).
+
+<br>
+
+> [!NOTE]
+> Em muitas implementações dessa biblioteca, erros ocorridos durante a execução desta função alterarão o valor de [`errno`](https://github.com/duckafire/small_projects/blob/main/summaries/c/errno.md "Resumo da errno.h") para um código específico do sistema onde o mesmo está sendo executado.
 
 <br>
 
@@ -292,7 +316,7 @@ Fornece várias funções para a manipulação de fluxos de entrada e saída (E/
 
 <h5 id="print-format">Formatos de impressão</h5>
 
-* Estas são combinações de caracteres estruturadas da seguinte maneira: `%[bandeira][largura][.[precisão]][comprimento]especificador`
+* Usadas por "funcões *print*", estas são combinações de caracteres estruturadas da seguinte maneira: `%[bandeira][largura][.[precisão]][comprimento]especificador`
 
 | Especificador | Descrição                                 | Exemplo      |
 | :-:           | :--                                       | :-:          |
@@ -303,7 +327,7 @@ Fornece várias funções para a manipulação de fluxos de entrada e saída (E/
 | e/E           | Notação científica (mantissa/expoente)    | 3.9265e+2    |
 | f/F           | Decimais de ponto flutuante               | 28.1         |
 | g/G           | Representação curta de um valor           | 13.18        |
-| n             | Não imprime nada, mas escreve o número de caracteres escritos, até o momento, em "seus" argumento respectivo, que deve ser um inteiro assinado |  |
+| n             | Não imprime nada, mas escreve o número de caracteres escritos, até o momento, em "seu" argumento respectivo, que deve ser um inteiro assinado |  |
 | o             | Inteiros octais não assinados             | 7            |
 | p             | Endereço de um ponteiro                   | 0xa50b5a37   |
 | s             | Cadeia de caracteres terminada com `'\0'` | exemplo      |
@@ -314,11 +338,6 @@ Fornece várias funções para a manipulação de fluxos de entrada e saída (E/
 
 > [!IMPORTANT]
 > Diferença entre os caracteres maiúsculos e minúsculos: maiúsculos imprimem apenas letras maiúsculos (`0xA`); minúsculos imprimem apenas letra minúsculas (`0xa`). Para `f/F` a diferença entre ambos evidencia-se ao tentar imprimir `INF`, `INFINITY` e/ou `NAN`.
-
-<br>
-
-> [!IMPORTANT]
-> Para saída `d` e `i` são sinônimos, mas para entrada, por exemplo com <a href="#14"><code>scanf</code></a>, diferenciam-se no fato de que `i` interpetará valores iniciados com `0x` como hexadecimais, valores iniciados com `0` como obtais e os demais como decimais, já `d` irá intepretar todos como sendo decimais. **Ambos inteiros**.
 
 <br>
 
@@ -337,22 +356,28 @@ Fornece várias funções para a manipulação de fluxos de entrada e saída (E/
 
 <br>
 
-| Largura | Descrição                                                                                                                  |
-| :-:     | :--                                                                                                                        |
-| n       | Inteiro contendo a largura, em quatidade de digitos, do valor a ser imprimido. Não quebra valores que ultrapassam o limite.|
-| *       | Indica que a largura será especificada por um argumento que prefixará o valor a ser imprimido.                             |
+* Largura: `n`, ou `*` (indica que a largura será especificada por um argumento que prefixará o valor a ser imprimido)
+	* Quatidade de digitos que compõem o valor a ser imprimido. Não quebra valores que ultrapassam o limite.
 
 
 <br>
 
-| Precisão | Descrição                                 |
-| :-:      | :--                                       |
-| n        | Para `d/i/o/u/x/X` é equivalente a *largura n*; para `a/A/e/E/f/F` indica quantos números devem ser escritos após a vírgula (`6` por padrão); para `g/G` é a quatidade máxima de digitos significativos para impressão; para `s` é o número de caracteres a ser imprimido (por padrão imprimirá até `'\0'` ser encontrado); se apenas o `'.'` for especificado, `0` será usado para padrão. |
-| *        | Indica que a largura será especificada por um argumento que prefixará o valor a ser imprimido. |
+* Precisão: `n`, ou `*` (indica que a largura será especificada por um argumento que prefixará o valor a ser imprimido)
+	* `d/i/o/u/x/X`: equivalente a *largura n*.
+	* `a/A/e/E/f/F`: indica quantos números devem ser escritos após a vírgula (`6` por padrão).
+	* `g/G`: quatidade máxima de digitos significativos para impressão.
+	* `s`: número de caracteres a ser imprimido (por padrão imprimirá até `'\0'` ser encontrado).
 
 <br>
 
-> Responsável por modificar o comprimento de um tipo de dado.
+> [!NOTE]
+> Se apenas o `'.'` for especificado, `0` será usado para padrão.
+
+<br>
+
+<h6 id="length">Comprimento</h6>
+
+> Indica o comprimento do tipo de dado que será imprimido.
 
 | Comprimento |               |                        |                 |         |            |        |                 |
 | :-:         | :--           | :--                    | :--             | :--     | :--        | :--    | :--             |
@@ -374,101 +399,173 @@ Fornece várias funções para a manipulação de fluxos de entrada e saída (E/
 
 <br>
 
-<h4 id="11">fprintf</h4>
+<h5 id="scanf-format">Formatos de impressão</h5>
 
-* Comportamento:
-* Retorno:
+* Usadas por "funcões *scanf*", estas são combinações de caracteres estruturadas da seguinte maneira: `%[*][largura][comprimento]especificador`
 
-<hr>
 
-<h4 id="12">fscanf</h4>
-
-* Comportamento:
-* Retorno:
-
-<hr>
-
-<h4 id="13">printf</h4>
-
-* Comportamento:
-* Retorno:
-
-<hr>
-
-<h4 id="14">scanf</h4>
-
-* Comportamento:
-* Retorno:
+| Especificador | Descrição                                 |
+| :-:           | :--                                       |
+| %             | O caractere `'%'`                         |
+| a/e/f/g       | Digitos decimais contendo opcionalmente: um ponto flutuante; `+` ou `-` como prefixos; `e` ou `E`, junto a um inteiro decimal, como sufixo |
+| c             | O próximo caractere. Se a *largura* for diferente de `1`, uma quantidade igual de caracteres será capturada                                |
+| d             | Qualquer digitos decimal, opcionalmente prefixado por `+` ou `-`                                                                           | 
+| i/u           | Inteiros octais (prefixados por `0`), hexadecimais (prefixados por `0x`) ou decimais (*opcionalmente* prefixados por `+` ou <u><code>-</code></u>) assinados/não assinados |
+| n             | Não imprime nada, mas escreve o número de caracteres escritos, até o momento, em "seus" argumento respectivo, que deve ser um inteiro assinado |
+| o             | Qualquer digito octal, opcionalmente prefixado por `+` ou `-`                                                                                  |
+| p             | Uma cadeia de caracteres que representa um ponteiro. O modelo do endereço depende do sistema operacional e da implementação da biblioteca (mas será o mesmo de <a href="#11"><code>fprintf</code></a>) |
+| s             | Todos os caracteres que não são *espaços em branco*                                   |
+| x             | Qualquer digito hexadecimal, opcionalmente prefixado por `0x` ou `0X` e/ou `+` ou `-` |
 
 <hr>
 
-<h4 id="15">snprintf</h4>
+* Outros:
+	* \*: indica que os caracteres lidos **não** devem ser armazenados no destino.
+	* largura: indica quantos caracteres serão lidos e capturados.
+	* comprimento: indica o comprimento do tipo de dado que será capturado (<a href="#length">Veja</a>).
 
-* Comportamento:
-* Retorno:
+<br>
 
-<hr>
+> [!IMPORTANT]
+> *Espaços em branco* são caracteres que não possuem representação gráfica, como espaços, tabulações e quebras de linha.
 
-<h4 id="16">sprintf</h4>
+<br>
 
-* Comportamento:
-* Retorno:
+> [!IMPORTANT]
+> *Espaços em branco* serão ignorados, exceto aqueles presentes na cadeia de formatação.
 
-<hr>
+<br>
 
-<h4 id="17">sscanf</h4>
+> [!IMPORTANT]
+> Caracteres que não forem *espaços em branco* e não fizerem parte de um *formato* serão comparados a um respectivo caractere capturado, caso sejam iguais o caractere lido será descartado e a leitura continuará, caso contrário, a leitura será interrompida por uma falha.
 
-* Comportamento:
-* Retorno:
-
-<hr>
-
-<h4 id="18">vfprintf</h4>
-
-* Comportamento:
-* Retorno:
+<br>
 
 <hr>
 
-<h4 id="19">vfscanf</h4>
+<h4 id="11">int fprintf(FILE*, const char*, ...)</h4>
 
-* Comportamento:
-* Retorno:
-
-<hr>
-
-<h4 id="20">vprintf</h4>
-
-* Comportamento:
-* Retorno:
+* Comportamento: formata `const char*` com os valores de `...` e a imprime em `FILE*`.
+* Retorno: total de caracteres que foram imprimido ou, se um erro de escrita ocorrer, alterará o *indicador de erro* (veja <a href="#45">ferror</a>) e retornará um negativo; se ocorrer um erro de codificação de caracteres *multibyte* ao imprimir, [`errno`](https://github.com/duckafire/small_projects/blob/main/summaries/c/errno.md "Resumo da errno.h") terá seu valor alterado para `EILSEQ` e um valor negativo será retornado.
 
 <hr>
 
-<h4 id="21">vscanf</h4>
+<h4 id="12">int fscanf(FILE*, const char*, ...)</h4>
 
-* Comportamento:
-* Retorno:
+* Comportamento: lê e formata, baseado em `const char*`, o conteúdo de `FILE*`, para ser armazenado em algum endereço presente em `...`.
+* Retorno: em caso de sucesso, retornará a quatidade de itens de `...` que foram preenchidos com sucesso, caso um erro ocorra ou o fim do arquivo seja atingido, definirá o *indicador de erro* de <a href="#45"><code>ferror</code></a> ou <a href="#44"><code>feof</code></a> e, caso nenhum dado tenha sido gravado, retornará `EOF`.
 
-<hr>
+<br>
 
-<h4 id="22">vsnprintf</h4>
+> [!NOTE]
+> Se ocorrer um erro de codificação de caracteres *multibyte* ao ler, [`errno`](https://github.com/duckafire/small_projects/blob/main/summaries/c/errno.md "Resumo da errno.h") terá seu valor alterado para `EILSEQ`.
 
-* Comportamento:
-* Retorno:
-
-<hr>
-
-<h4 id="23">vsprintf</h4>
-
-* Comportamento:
-* Retorno:
+<br>
 
 <hr>
 
-<h4 id="24">vsscanf</h4>
+<h4 id="13">int printf(const char*, ...)</h4>
 
-* Comportamento:
-* Retorno:
+* Comportamento: formata `const char*` com os valores de `...` e a imprime em `stdout`.
+* Retorno: total de caracteres que foram imprimido ou, se um erro de escrita ocorrer, alterará o *indicador de erro* (veja <a href="#45">ferror</a>) e retornará um negativo; se ocorrer um erro de codificação de caracteres *multibyte* ao imprimir, [`errno`](https://github.com/duckafire/small_projects/blob/main/summaries/c/errno.md "Resumo da errno.h") terá seu valor alterado para `EILSEQ` e um valor negativo será retornado.
+
+<hr>
+
+<h4 id="14">int scanf(const char*, ...)</h4>
+
+* Comportamento: lê e formata, baseado em `const char*`, o conteúdo de `stdin`, para ser armazenado em algum endereço presente em `...`.
+* Retorno: em caso de sucesso, retornará a quatidade de itens de `...` que foram preenchidos com sucesso, caso um erro ocorra ou o fim do arquivo seja atingido, definirá o *indicador de erro* de <a href="#45"><code>ferror</code></a> ou <a href="#44"><code>feof</code></a> e, caso nenhum dado tenha sido gravado, retornará `EOF`.
+
+<br>
+
+> [!NOTE]
+> Se ocorrer um erro de codificação de caracteres *multibyte* ao ler, [`errno`](https://github.com/duckafire/small_projects/blob/main/summaries/c/errno.md "Resumo da errno.h") terá seu valor alterado para `EILSEQ`.
+
+<br>
+
+<hr>
+
+<h4 id="15">int snprintf(char*, size_t, const char*, ...)</h4>
+
+* Comportamento: formata `const char*` com os valores de `...` e a imprime em `char*`, que deve ter até `size_t` de largura.
+* Retorno: total de caracteres que seriam imprimidos, menos um (`'\0'`), caso `char*` fosse grande o suficiente ou, em caso de falha, um valor negativo.
+
+<hr>
+
+<h4 id="16">int sprintf(char*, const char*, ...)</h4>
+
+* Comportamento: formata `const char*` com os valores de `...` e a imprime em `char*`.
+* Retorno: total de caracteres que foram imprimido menos um (`'\0'`) ou, em caso de falha, um valor negativo.
+
+<hr>
+
+<h4 id="17">int sscanf(const char 0*, const char 1*, ...)</h4>
+
+* Comportamento: lê e formata, baseado em `const char 1*`, o conteúdo de `const char 0*`, para ser armazenado em algum endereço presente em `...`.
+* Retorno: em caso de sucesso, retornará a quatidade de itens de `...` que foram preenchidos com sucesso, caso um erro ocorra e nenhum dado tenha sido gravado, retornará `EOF`.
+
+<hr>
+
+<h4 id="18">int vfprintf(FILE*, const char*, va_list)</h4>
+
+* Comportamento: formata `const char*` com os valores de `va_lis` e a imprime em `FILE*`.
+* Retorno: total de caracteres que foram imprimido ou, se um erro de escrita ocorrer, alterará o *indicador de erro* (veja <a href="#45">ferror</a>) e retornará um negativo; se ocorrer um erro de codificação de caracteres *multibyte* ao imprimir, [`errno`](https://github.com/duckafire/small_projects/blob/main/summaries/c/errno.md "Resumo da errno.h") terá seu valor alterado para `EILSEQ` e um valor negativo será retornado.
+
+<hr>
+
+<h4 id="19">int vfscanf(FILE*, const char*, va_list)</h4>
+
+* Comportamento: lê e formata, baseado em `const char*`, o conteúdo de `FILE*`, para ser armazenado em algum endereço presente em `...`.
+* Retorno: em caso de sucesso, retornará a quatidade de itens de `...` que foram preenchidos com sucesso, caso um erro ocorra ou o fim do arquivo seja atingido, definirá o *indicador de erro* de <a href="#45"><code>ferror</code></a> ou <a href="#44"><code>feof</code></a> e, caso nenhum dado tenha sido gravado, retornará `EOF`.
+
+<br>
+
+> [!NOTE]
+> Se ocorrer um erro de codificação de caracteres *multibyte* ao ler, [`errno`](https://github.com/duckafire/small_projects/blob/main/summaries/c/errno.md "Resumo da errno.h") terá seu valor alterado para `EILSEQ`.
+
+<br>
+
+<hr>
+
+<h4 id="20">int vprintf(FILE*, const char*, va_list)</h4>
+
+* Comportamento: formata `const char*` com os valores de `va_lis` e a imprime em `stdout`.
+* Retorno: total de caracteres que foram imprimido ou, se um erro de escrita ocorrer, alterará o *indicador de erro* (veja <a href="#45">ferror</a>) e retornará um negativo; se ocorrer um erro de codificação de caracteres *multibyte* ao imprimir, [`errno`](https://github.com/duckafire/small_projects/blob/main/summaries/c/errno.md "Resumo da errno.h") terá seu valor alterado para `EILSEQ` e um valor negativo será retornado.
+
+<hr>
+
+<h4 id="21">int vscanf(FILE*, const char*, va_list)</h4>
+
+* Comportamento: lê e formata, baseado em `const char*`, o conteúdo de `stdin`, para ser armazenado em algum endereço presente em `...`.
+* Retorno: em caso de sucesso, retornará a quatidade de itens de `...` que foram preenchidos com sucesso, caso um erro ocorra ou o fim do arquivo seja atingido, definirá o *indicador de erro* de <a href="#45"><code>ferror</code></a> ou <a href="#44"><code>feof</code></a> e, caso nenhum dado tenha sido gravado, retornará `EOF`.
+
+<br>
+
+> [!NOTE]
+> Se ocorrer um erro de codificação de caracteres *multibyte* ao ler, [`errno`](https://github.com/duckafire/small_projects/blob/main/summaries/c/errno.md "Resumo da errno.h") terá seu valor alterado para `EILSEQ`.
+
+<br>
+
+<hr>
+
+<h4 id="22">int vsnprintf(char*, size_t, const char*, va_list)</h4>
+
+* Comportamento: formata `const char*` com os valores de `va_list` e a imprime em `char*`, que deve ter até `size_t` de largura.
+* Retorno: total de caracteres que seriam imprimidos, menos um (`'\0'`), caso `char*` fosse grande o suficiente ou, em caso de falha, um valor negativo.
+
+<hr>
+
+<h4 id="23">int vsprintf(char*, const char*, va_list)</h4>
+
+* Comportamento: formata `const char*` com os valores de `va_list` e a imprime em `char*`.
+* Retorno: total de caracteres que foram imprimido menos um (`'\0'`) ou, em caso de falha, um valor negativo.
+
+<hr>
+
+<h4 id="24">int vsscanf(const char 0*, const char 1*, va_list)</h4>
+
+* Comportamento: lê e formata, baseado em `const char 1*`, o conteúdo de `const char 0*`, para ser armazenado em algum endereço presente em `va_list`.
+* Retorno: em caso de sucesso, retornará a quatidade de itens de `va_list` que foram preenchidos com sucesso, caso um erro ocorra e nenhum dado tenha sido gravado, retornará `EOF`.
 
 <hr>
 
@@ -476,77 +573,77 @@ Fornece várias funções para a manipulação de fluxos de entrada e saída (E/
 
 ### E/S de caracteres
 
-<h4 id="25">fgetc</h4>
+<h4 id="25">int fgetc(FILE*)</h4>
 
 * Comportamento:
 * Retorno:
 
 <hr>
 
-<h4 id="26">fgets</h4>
+<h4 id="26">int fgets(char*, int, FILE*)</h4>
 
 * Comportamento:
 * Retorno:
 
 <hr>
 
-<h4 id="27">fputc</h4>
+<h4 id="27">int fputc(int, FILE*)</h4>
 
 * Comportamento:
 * Retorno:
 
 <hr>
 
-<h4 id="28">fputs</h4>
+<h4 id="28">char* fputs(const char*, FILE*)</h4>
 
 * Comportamento:
 * Retorno:
 
 <hr>
 
-<h4 id="29">getc</h4>
+<h4 id="29">int getc(FILE*)</h4>
 
 * Comportamento:
 * Retorno:
 
 <hr>
 
-<h4 id="30">getchar</h4>
+<h4 id="30">int getchar(void)</h4>
 
 * Comportamento:
 * Retorno:
 
 <hr>
 
-<h4 id="31">gets</h4>
+<h4 id="31">char* gets(char*)</h4>
 
 * Comportamento:
 * Retorno:
 
 <hr>
 
-<h4 id="32">putc</h4>
+<h4 id="32">int putc(int, FILE*)</h4>
 
 * Comportamento:
 * Retorno:
 
 <hr>
 
-<h4 id="33">putchar</h4>
+<h4 id="33">int putchar(int)</h4>
 
 * Comportamento:
 * Retorno:
 
 <hr>
 
-<h4 id="34">puts</h4>
+<h4 id="34">int puts(const char*)</h4>
 
 * Comportamento:
 * Retorno:
 
 <hr>
 
-<h4 id="35">ungetc</h4>
+<h4 id="35">int ungetc(int, FILE*)</h4>
 
 * Comportamento:
 * Retorno:
@@ -557,14 +654,14 @@ Fornece várias funções para a manipulação de fluxos de entrada e saída (E/
 
 ### E/S direta
 
-<h4 id="36">fread</h4>
+<h4 id="36">size_t fread(void*, size_t0, size_t1, FILE*)</h4>
 
 * Comportamento:
 * Retorno:
 
 <hr>
 
-<h4 id="37">fwrite</h4>
+<h4 id="37">size_t fwrite(void*, size_t0, size_t1, FILE*)</h4>
 
 * Comportamento:
 * Retorno:
@@ -575,35 +672,35 @@ Fornece várias funções para a manipulação de fluxos de entrada e saída (E/
 
 ### Posição do cursor
 
-<h4 id="38">fgetpos</h4>
+<h4 id="38">int fgetpos(FILE*, fpos_t*)</h4>
 
 * Comportamento:
 * Retorno:
 
 <hr>
 
-<h4 id="39">fseek</h4>
+<h4 id="39">int fseek(FILE*, long, int)</h4>
 
 * Comportamento:
 * Retorno:
 
 <hr>
 
-<h4 id="40">fsetpos</h4>
+<h4 id="40">int fsetpos(FILE*, const fpos_t*)</h4>
 
 * Comportamento:
 * Retorno:
 
 <hr>
 
-<h4 id="41">ftell</h4>
+<h4 id="41">long ftell(FILE*)</h4>
 
 * Comportamento:
 * Retorno:
 
 <hr>
 
-<h4 id="42">rewind</h4>
+<h4 id="42">void rewind(FILE*)</h4>
 
 * Comportamento:
 * Retorno:
@@ -614,28 +711,28 @@ Fornece várias funções para a manipulação de fluxos de entrada e saída (E/
 
 #### Manipulação de erros
 
-<h4 id="43">clearerr</h4>
+<h4 id="43">void clearerr(FILE*)</h4>
 
 * Comportamento:
 * Retorno:
 
 <hr>
 
-<h4 id="44">feof</h4>
+<h4 id="44">int feof(FILE*)</h4>
 
 * Comportamento:
 * Retorno:
 
 <hr>
 
-<h4 id="45">ferror</h4>
+<h4 id="45">int ferror(FILE*)</h4>
 
 * Comportamento:
 * Retorno:
 
 <hr>
 
-<h4 id="46">perror</h4>
+<h4 id="46">void perror(const char*)</h4>
 
 * Comportamento:
 * Retorno:
