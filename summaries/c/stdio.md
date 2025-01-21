@@ -575,78 +575,131 @@ Fornece várias funções para a manipulação de fluxos de entrada e saída (E/
 
 <h4 id="25">int fgetc(FILE*)</h4>
 
-* Comportamento:
-* Retorno:
+* Comportamento: obtém o caractere (um `char`) atualmente apontado pelo *cursor* de `FILE*`.
+* Retorno: o caractere obtido (como `int`) ou `EOF`, caso um erro de leitura ocorra (atualiza <a href="#45"><code>ferror</code></a>) ou o fim do arquivo seja encontrado (atualiza <a href="#44"><code>feof</code></a>).
+
+<br>
+
+> [!NOTE]
+> <a href="#25"><code>fgetc</code></a> e <a href="#29"><code>getc</code></a> são equivalente, exceto que, em algumas implementações desta biblioteca, <a href="#29"><code>getc</code></a> pode estar definida como uma macro.
+
+<br>
 
 <hr>
 
 <h4 id="26">int fgets(char*, int, FILE*)</h4>
 
-* Comportamento:
-* Retorno:
+* Comportamento: lê o conteúdo de `FILE*`, e o armazena em `char*`, até que: `int` caracteres sejam lidos; uma quebra de linha seja encontrada (ela será adicionada a `char*`); o fim do arquivo seja encontrado.
+* Retorno: `char*` caso algum caractere tenhado sido gravado na mesma, `NULL` caso o final do arquivo tenha sido encontrado e nenhum caractere tenha sido gravado em `char*` (atualizar <a href="#44"><code>feof</code></a>) ou um erro de leitura tenha ocorrido (atualiza <a href="#45"><code>ferror</code></a>; mesmo que algo tenha sido gravado em `char*`).
 
 <hr>
 
 <h4 id="27">int fputc(int, FILE*)</h4>
 
-* Comportamento:
-* Retorno:
+* Comportamento: escreve um caractere em `FILE*`, na posição de seu *cursor*.
+* Retorno: `int` ou, caso um erro ocorra, `EOF` (atualiza <a href="#45"><code>ferror</code></a>).
+
+<br>
+
+> [!NOTE]
+> <a href="#27"><code>fputc</code></a> e <a href="#32"><code>putc</code></a> são equivalente, exceto que, em algumas implementações desta biblioteca, <a href="#32"><code>putc</code></a> pode estar definida como uma macro.
+
+<br>
 
 <hr>
 
 <h4 id="28">char* fputs(const char*, FILE*)</h4>
 
-* Comportamento:
-* Retorno:
+* Comportamento: escreve o conteúdo de `const char*` em `FILE*`, a partir da posição de seu *cursor*.
+* Retorno: em caso de sucesso, um valor diferente de zero, do contrário `EOF` (atualiza <a href="#45"><code>ferror</code></a>).
 
 <hr>
 
 <h4 id="29">int getc(FILE*)</h4>
 
-* Comportamento:
-* Retorno:
+* Comportamento: obtém o caractere (um `char`) atualmente apontado pelo *cursor* de `FILE*`.
+* Retorno: o caractere obtido (como `int`) ou `EOF`, caso um erro de leitura ocorra (atualiza <a href="#45"><code>ferror</code></a>) ou o fim do arquivo seja encontrado (atualiza <a href="#44"><code>feof</code></a>).
+
+<br>
+
+> [!NOTE]
+> <a href="#25"><code>fgetc</code></a> e <a href="#29"><code>getc</code></a> são equivalente, exceto que, em algumas implementações desta biblioteca, <a href="#29"><code>getc</code></a> pode estar definida como uma macro.
+
+<br>
 
 <hr>
 
 <h4 id="30">int getchar(void)</h4>
 
-* Comportamento:
-* Retorno:
+* Comportamento: obtém o caractere (um `char`) atualmente apontado pelo *cursor* de `stdin`.
+* Retorno: o caractere obtido (como `int`) ou `EOF`, caso um erro de leitura ocorra (atualiza <a href="#45"><code>ferror</code></a>) ou o fim do arquivo seja encontrado (atualiza <a href="#44"><code>feof</code></a>).
 
 <hr>
 
 <h4 id="31">char* gets(char*)</h4>
 
-* Comportamento:
-* Retorno:
+* Comportamento: lê o conteúdo de `stdin`, e o armazena em `char*`, até que: uma quebra de linha seja encontrada (ela **não** será adicionada a `char*`); o fim do arquivo seja encontrado.
+* Retorno: `char*` caso algum caractere tenhado sido gravado na mesma, `NULL` caso o final do arquivo tenha sido encontrado e nenhum caractere tenha sido gravado em `char*` (atualizar <a href="#44"><code>feof</code></a>) ou um erro de leitura tenha ocorrido (atualiza <a href="#45"><code>ferror</code></a>; mesmo que algo tenha sido gravado em `char*`).
+
+> [!WARNING]
+> Essa função não está mais disponível a partir do `C11` e `C++14`
 
 <hr>
 
 <h4 id="32">int putc(int, FILE*)</h4>
 
-* Comportamento:
-* Retorno:
+* Comportamento: escreve um caractere em `FILE*`, na posição de seu *cursor*.
+* Retorno: `int` ou, caso um erro ocorra, `EOF` (atualiza <a href="#45"><code>ferror</code></a>).
+
+<br>
+
+> [!NOTE]
+> <a href="#27"><code>fputc</code></a> e <a href="#32"><code>putc</code></a> são equivalente, exceto que, em algumas implementações desta biblioteca, <a href="#32"><code>putc</code></a> pode estar definida como uma macro.
+
+<br>
 
 <hr>
 
 <h4 id="33">int putchar(int)</h4>
 
-* Comportamento:
-* Retorno:
+* Comportamento: escreve um caractere em `stdout`, na posição de seu *cursor*.
+* Retorno: `int` ou, caso um erro ocorra, `EOF` (atualiza <a href="#45"><code>ferror</code></a>).
 
 <hr>
 
 <h4 id="34">int puts(const char*)</h4>
 
-* Comportamento:
-* Retorno:
+* Comportamento: escreve o conteúdo de `const char*` em `stdout`, a partir da posição de seu *cursor*, e o sufixa com uma quebra de linha (`'\n'`).
+* Retorno: em caso de sucesso, um valor diferente de zero, do contrário `EOF` (atualiza <a href="#45"><code>ferror</code></a>).
 
 <hr>
 
 <h4 id="35">int ungetc(int, FILE*)</h4>
 
-* Comportamento:
-* Retorno:
+* Comportamento: "desfaz" a última leitura de `FILE*`, reposicionando o último caractere lido (`int`) de volta no *fluxo*.
+* Retorno: `int` ou `EOF` (se a operação falhar).
+
+<br>
+
+> [!WARNING]
+> Algumas implementações desta biblioteca não permitem multiplas chamadas desta função, o que gerará uma falha a partir do segundo uso.
+
+<br>
+
+> [!IMPORTANT]
+> Essa função é incapaz de alterar arquivos, apenas seu *fluxo*, logo chamá-la com `int` sendo diferente do último caractere lido de `FILE*` (com <a href="#25"><code>fgetc</code></a> por exemplo) não modificará o conteúdo do arquivo em questão, apenas de seu *fluxo* (modificação essa que será perdida ao chamar <a href="#39"><code>fseek</code></a>, <a href="#40"><code>fsetpos</code></a> ou <a href="#42"><code>rewind</code></a>).
+
+<br>
+
+> [!NOTE]
+> Chamar está função desativa o *indicador de final de arquivo* (se ele estiver ativado; veja <a href="#44"><code>feof</code></a>) e se: em <a href="#file-mode">modo</a> binário, move o *cursor* um *byte* para trás; em <a href="#file-mode">modo</a> texto, a posição do *cursor* será definida apenas após os caracteres *retornados* serem lidos ou descartados.
+
+<br>
+
+> [!TIP]
+> Qualquer "<a href="#file-mode">modo</a> de *fluxo*" pode ser afetado por está função.
+
+<br>
 
 <hr>
 
@@ -656,15 +709,49 @@ Fornece várias funções para a manipulação de fluxos de entrada e saída (E/
 
 <h4 id="36">size_t fread(void*, size_t0, size_t1, FILE*)</h4>
 
-* Comportamento:
-* Retorno:
+* Comportamento: lê um total de `size_t1` elementos (que devem ter `size_t0` de comprimento) vindos de `FILE*` e os armazena em `void*` (que deve ser um vetor caso `size_t1` seja maior que `1`).
+* Retorno: o total de elementos lidos com sucesso.
+
+<br>
+
+> [!NOTE]
+> Se `size_t0==0`, nada ocorrerá.
+
+<br>
+
+> [!NOTE]
+> Caso um erro ocorra ou o final do arquivo seja encontrado, seus respectivos indicadores (de `FILE*`) serão atualizados (veja <a href="#45"><code>ferror</code></a> e <a href="#44"><code>feof</code></a>).
+
+<br>
+
+> [!TIP]
+> Essa função pode ser usada para ler tipos e estruturas que foram gravados em um dado arquivo, através do uso de <a href="#37"><code>fwrite</code></a>.
+
+<br>
 
 <hr>
 
 <h4 id="37">size_t fwrite(void*, size_t0, size_t1, FILE*)</h4>
 
-* Comportamento:
-* Retorno:
+* Comportamento: grava um total de `size_t1` elementos (que devem ter `size_t0` de comprimento) em `FILE*`, vindos de `void*` (que deve ser um vetor caso `size_t1` seja maior que `1`).
+* Retorno: o total de elementos gravados com sucesso.
+
+<br>
+
+> [!NOTE]
+> Se `size_t0==0`, nada ocorrerá.
+
+<br>
+
+> [!NOTE]
+> Caso um erro ocorra o *indicador de erro* (de `FILE*`) será atualizado (veja <a href="#45"><code>ferror</code></a>).
+
+<br>
+
+> [!TIP]
+> Essa função pode ser usada para gravar tipos e estruturas em arquivos, para leitura posterior com <a href="#36"><code>fread</code></a>.
+
+<br>
 
 <hr>
 
@@ -674,36 +761,79 @@ Fornece várias funções para a manipulação de fluxos de entrada e saída (E/
 
 <h4 id="38">int fgetpos(FILE*, fpos_t*)</h4>
 
-* Comportamento:
-* Retorno:
+* Comportamento: obtém os dado sobre a posição atual do *cursor* de `FILE*` e o armazena-os em `fpos_t*`.
+* Retorno: `0`, em caso de sucesso, ou um valor diferente de `0`, caso contrário.
+
+<br>
+
+> [!NOTE]
+> Ao falhar, esssa função, também, define um valor para [`errno`](https://github.com/duckafire/small_projects/blob/main/summaries/c/errno.md "Resumo da errno.h"), o qual varia entre sistemas distintos.
+
+<br>
 
 <hr>
 
 <h4 id="39">int fseek(FILE*, long, int)</h4>
 
-* Comportamento:
-* Retorno:
+* Comportamento: altera a posição atual do *cursor* de `FILE*` para `int` (que deve ser algumas das macros abaixo) *mais* `long`.
+* Retorno: um valor diferente de `0` ou, em caso de falha, um valor diferente de `0` (mais a atualização do *indicador de erro*, veja <a href="#45"><code>ferror</code></a>).
+
+<br>
+
+| Macro     | Representação              |
+| :-:       | :--                        |
+| SEEK\_SET | Posição inicial do *fluxo* |
+| SEEK\_CUR | Posição atual do *cursor*  |
+| SEEK\_END | Posição final do *fluxo*   |
+
+<br>
+
+> [!NOTE]
+> Sua chamada reinicia o *indicador de final do arquivo* (veja <a href="#44"><code>feof</code></a>).
+
+<br>
 
 <hr>
 
 <h4 id="40">int fsetpos(FILE*, const fpos_t*)</h4>
 
-* Comportamento:
-* Retorno:
+* Comportamento: define a posição atual do *cursor* de `FILE*`, com base nas informações contidas em `fpos_t*`.
+* Retorno: `0`, em caso de sucesso, ou um valor diferente de `0`, caso contrário.
+
+<br>
+
+> [!NOTE]
+> Ao falhar, esssa função, também, define um valor para [`errno`](https://github.com/duckafire/small_projects/blob/main/summaries/c/errno.md "Resumo da errno.h"), o qual varia entre sistemas distintos.
+
+<br>
 
 <hr>
 
 <h4 id="41">long ftell(FILE*)</h4>
 
-* Comportamento:
-* Retorno:
+* Comportamento: obtém a posição atual do *cursor* de `FILE*`, em decimal.
+* Retorno: em caso de sucesso, o valor obtido, do contrário, `-1`.
+
+<br>
+
+> [!NOTE]
+> Para arquivos: binários, o valor obtido representa a quatidade de *bytes* do início do arquivo até a posição atual do *cursor*; texto, o valor obtido pode não ter significado, mas ainda pode ser usado para restaurar a posição do *cursor* com <a href="#39"><code>fseek</code></a>.
+
+<br>
 
 <hr>
 
 <h4 id="42">void rewind(FILE*)</h4>
 
-* Comportamento:
-* Retorno:
+* Comportamento: altera a posição do *cursor* de `FILE*` para o ponto inicial.
+* Retorno: nenhum.
+
+<br>
+
+> [!NOTE]
+> Em caso de sucesso, os *indicadores de erro e final do arquivo* de `FILE*` serão limpos (veja, respectivamente, <a href="#45"><code>ferror</code></a> e <a href="#44"><code>feof</code></a>).
+
+<br>
 
 <hr>
 
@@ -713,29 +843,67 @@ Fornece várias funções para a manipulação de fluxos de entrada e saída (E/
 
 <h4 id="43">void clearerr(FILE*)</h4>
 
-* Comportamento:
-* Retorno:
+* Comportamento: indefine os *indicadores de error e de final de arquivo* de `FILE*`.
+* Retorno: nenhum.
+
+<br>
+
+> [!TIP]
+> Veja <a href="#45"><code>ferror</code></a> e <a href="#44"><code>feof</code></a>.
+
+<br>
 
 <hr>
 
 <h4 id="44">int feof(FILE*)</h4>
 
-* Comportamento:
-* Retorno:
+* Comportamento: verifica se o *indicador de final de arquivo* de `FILE*` está definido.
+* Retorno: em caso de sucesso, um valor diferente de `0`, do contrário, `0`.
+
+<br>
+
+> [!NOTE]
+> Esse indicador é definido por qualquer função de leitura de *fluxo* (como <a href="#25"><code>fgetc</code></a>) que tente ler o final do arquivo ou além dele.
+
+<br>
+
+> [!TIP]
+> As seguinte funções indefinem esse indicador: <a href="#43"><code>clearerr</code></a>, <a href="#42">rewind<code></code></a>, <a href="#39"><code>fseek</code></a>, <a href="#40"><code>fsetpos</code></a> ou <a href="#8"><code>freopen</code></a>.
+
+<br>
 
 <hr>
 
 <h4 id="45">int ferror(FILE*)</h4>
 
-* Comportamento:
-* Retorno:
+* Comportamento: verifica se o *indicador de erro* de `FILE*` está definido.
+* Retorno: em caso de sucesso, um valor diferente de `0`, do contrário, `0`.
+
+<br>
+
+> [!NOTE]
+> Esse indicador é definido por qualquer função que seja afetada por alguma falha durante a manipulação de um dado *fluxo*.
+
+<br>
+
+> [!TIP]
+> As seguinte funções indefinem esse indicador: <a href="#43"><code>clearerr</code></a>, <a href="#42">rewind<code></code></a> ou <a href="#8"><code>freopen</code></a>.
+
+<br>
 
 <hr>
 
 <h4 id="46">void perror(const char*)</h4>
 
-* Comportamento:
-* Retorno:
+* Comportamento: converte o código de erro armazenado em [`errno`](https://github.com/duckafire/small_projects/blob/main/summaries/c/errno.md "Resumo da errno.h") em uma mensagem (cadeia de caracteres) e a imprime em `stderr`, com uma quebra de linha (`'\n'`) como sufixo. Caso `const char*` seja diferente de `NULL`, seu conteúdo será impresso como prefixo a mensagem, onde ambos serão separados por `": "`.
+* Retorno: nenhum.
+
+<br>
+
+> [!NOTE]
+> A mensagem gerada depende da plataforma.
+
+<br>
 
 <hr>
 
