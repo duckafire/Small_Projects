@@ -73,6 +73,13 @@ Esse cabeçalho disponibiliza algumas poucas macros, tipos e funções de conver
 | fscanf    | fwscanf   |   | ungetc    | ungetwc   |   |           |           |
 | getc      | getwc     |   | vfprintf  | vfwprintf |   |           |           |
 
+<br>
+
+> [!TIP]
+> Veja o resumo desta biblioteca [aqui](https://github.com/duckafire/Small_Projects/blob/main/summaries/c/stdio.md).
+
+<br>
+
 <details><summary>Retorno, identificador e parâmetros</summary>
 
 | stdio.h                                           | wchar.h                                                     |
@@ -125,6 +132,13 @@ Esse cabeçalho disponibiliza algumas poucas macros, tipos e funções de conver
 | wctomb   | wcrtomb   |
 | wcstombs | wcsrtombs |
 
+<br>
+
+> [!TIP]
+> Veja o resumo desta biblioteca [aqui](https://github.com/duckafire/Small_Projects/blob/main/summaries/c/stdlib.md).
+
+<br>
+
 <details><summary>Retorno, identificador e parâmetros</summary>
 
 | stdlib.h                                                 | wchar.h                                                          |
@@ -161,6 +175,13 @@ Esse cabeçalho disponibiliza algumas poucas macros, tipos e funções de conver
 | strcat   | wcscat  |   | strncpy  | wcsncpy |   | strtok   | wcstok  |
 | strncat  | wcsncat |   | strcspn  | wcscspn |   | strxfrm  | wcsxfrm |
 
+<br>
+
+> [!TIP]
+> Veja o resumo desta biblioteca [aqui](https://github.com/duckafire/Small_Projects/blob/main/summaries/c/string.md).
+
+<br>
+
 <details><summary>Retorno, identificador e parâmetros</summary>
 
 | string.h                                          | wchar.h                                                    |
@@ -196,6 +217,13 @@ Esse cabeçalho disponibiliza algumas poucas macros, tipos e funções de conver
 | time.h   | wchar.h  |
 | :-:      | :-:      |
 | strftime | wcsftime |
+
+<br>
+
+> [!TIP]
+> Veja o resumo desta biblioteca [aqui](https://github.com/duckafire/Small_Projects/blob/main/summaries/c/time.md).
+
+<br>
 
 <details><summary>Retorno, identificador e parâmetros</summary>
 

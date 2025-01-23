@@ -532,12 +532,24 @@ Fornece várias funções para a manipulação de fluxos de entrada e saída (E/
 * Comportamento: formata `const char*` com os valores de `va_lis` e a imprime em `stdout`.
 * Retorno: total de caracteres que foram imprimido ou, se um erro de escrita ocorrer, alterará o *indicador de erro* (veja <a href="#45">ferror</a>) e retornará um negativo; se ocorrer um erro de codificação de caracteres *multibyte* ao imprimir, [`errno`](https://github.com/duckafire/small_projects/blob/main/summaries/c/errno.md "Resumo da errno.h") terá seu valor alterado para `EILSEQ` e um valor negativo será retornado.
 
+<br>
+
+> [!IMPORTANT]
+> Antes e após usar essa função faz-se necessário, respectivamente, iniciar e finalizar `va-list`. Veja mais sobre [aqui](https://github.com/duckafire/small_projects/blob/main/summaries/c/stdarg.md "Resumo de stdarg.h").
+
+<br>
+
 <hr>
 
 <h4 id="21">int vscanf(FILE*, const char*, va_list)</h4>
 
 * Comportamento: lê e formata, baseado em `const char*`, o conteúdo de `stdin`, para ser armazenado em algum endereço presente em `...`.
 * Retorno: em caso de sucesso, retornará a quatidade de itens de `...` que foram preenchidos com sucesso, caso um erro ocorra ou o fim do arquivo seja atingido, definirá o *indicador de erro* de <a href="#45"><code>ferror</code></a> ou <a href="#44"><code>feof</code></a> e, caso nenhum dado tenha sido gravado, retornará `EOF`.
+
+<br>
+
+> [!IMPORTANT]
+> Antes e após usar essa função faz-se necessário, respectivamente, iniciar e finalizar `va-list`. Veja mais sobre [aqui](https://github.com/duckafire/small_projects/blob/main/summaries/c/stdarg.md "Resumo de stdarg.h").
 
 <br>
 
@@ -553,6 +565,13 @@ Fornece várias funções para a manipulação de fluxos de entrada e saída (E/
 * Comportamento: formata `const char*` com os valores de `va_list` e a imprime em `char*`, que deve ter até `size_t` de largura.
 * Retorno: total de caracteres que seriam imprimidos, menos um (`'\0'`), caso `char*` fosse grande o suficiente ou, em caso de falha, um valor negativo.
 
+<br>
+
+> [!IMPORTANT]
+> Antes e após usar essa função faz-se necessário, respectivamente, iniciar e finalizar `va-list`. Veja mais sobre [aqui](https://github.com/duckafire/small_projects/blob/main/summaries/c/stdarg.md "Resumo de stdarg.h").
+
+<br>
+
 <hr>
 
 <h4 id="23">int vsprintf(char*, const char*, va_list)</h4>
@@ -560,12 +579,26 @@ Fornece várias funções para a manipulação de fluxos de entrada e saída (E/
 * Comportamento: formata `const char*` com os valores de `va_list` e a imprime em `char*`.
 * Retorno: total de caracteres que foram imprimido menos um (`'\0'`) ou, em caso de falha, um valor negativo.
 
+<br>
+
+> [!IMPORTANT]
+> Antes e após usar essa função faz-se necessário, respectivamente, iniciar e finalizar `va-list`. Veja mais sobre [aqui](https://github.com/duckafire/small_projects/blob/main/summaries/c/stdarg.md "Resumo de stdarg.h").
+
+<br>
+
 <hr>
 
 <h4 id="24">int vsscanf(const char 0*, const char 1*, va_list)</h4>
 
 * Comportamento: lê e formata, baseado em `const char 1*`, o conteúdo de `const char 0*`, para ser armazenado em algum endereço presente em `va_list`.
 * Retorno: em caso de sucesso, retornará a quatidade de itens de `va_list` que foram preenchidos com sucesso, caso um erro ocorra e nenhum dado tenha sido gravado, retornará `EOF`.
+
+<br>
+
+> [!IMPORTANT]
+> Antes e após usar essa função faz-se necessário, respectivamente, iniciar e finalizar `va-list`. Veja mais sobre [aqui](https://github.com/duckafire/small_projects/blob/main/summaries/c/stdarg.md "Resumo de stdarg.h").
+
+<br>
 
 <hr>
 
@@ -906,8 +939,6 @@ Fornece várias funções para a manipulação de fluxos de entrada e saída (E/
 <br>
 
 <hr>
-
-<br>
 
 ### Fontes:
 * [cplusplus: stdio.h](https://cplusplus.com/reference/cstdio/ )

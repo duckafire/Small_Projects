@@ -20,7 +20,7 @@
 * [stddef](https://github.com/duckafire/Small_Projects/blob/main/summaries/c/stddef.md)
 * [stdint](https://github.com/duckafire/Small_Projects/blob/main/summaries/c/stdint.md)
 * [stdio](https://github.com/duckafire/Small_Projects/blob/main/summaries/c/stdio.md)
-* stdlib
+* [stdlib](https://github.com/duckafire/Small_Projects/blob/main/summaries/c/stdlib.md)
 * stdnoreturn
 * [string](https://github.com/duckafire/Small_Projects/blob/main/summaries/c/string.md)
 * tgmath
