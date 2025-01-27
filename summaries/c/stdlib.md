@@ -40,80 +40,109 @@ Disponibilizar uma série de funções de uso geral, incluindo tratamento de mem
 
 ### Conversção de cadeias
 
+<br>
+
+> [!NOTE]
+> Todas estas funções ignorarão espaço em branco posicionados no início de `const char*`, analizarão todos os caracteres válidos e pararão ao encontrar um caractere inválido.
+
+<br>
+
+> [!TIP]
+> Funções que possuem `char**` armazenarão nele o endereço do primeiro caractere inválido encontrado em `const char*`, a menos que `char**==NULL`.
+
+<br>
+
+> [!TIP]
+> A base (`int`) de um número pode ser qualquer valor entre dois e trinta e seis.
+
+<br>
+
 <h4 id="1">double atof(const char*)</h4>
 
-* Comportamento:
-* Retorno:
+* Comportamento: converte `const char*` em `double`.
+* Retorno: o valor convertido ou `0.0` em caso de erro.
+
+<br>
+
+> [!NOTE]
+> Se o resultado da conversão excerder o valor mínimo ou máximo suportado por um `double`, o comportamento será indefinido.
+
+<br>
+
+> [!TIP]
+> Use <a href="#5"><code>strtod</code></a> para uma abordagem multiplataforma mais robusta quando possível.
+
+<br>
 
 <hr>
 
 <h4 id="2">int atoi(const char*)</h4>
 
-* Comportamento:
-* Retorno:
+* Comportamento: converte `const char*` em `int`.
+* Retorno: o valor convertido ou `0` em caso de erro.
 
 <hr>
 
 <h4 id="3">long atol(const char*)</h4>
 
-* Comportamento:
-* Retorno:
+* Comportamento: converte `const char*` em `long`.
+* Retorno: o valor convertido ou `0` em caso de erro.
 
 <hr>
 
 <h4 id="4">long long atoll(const char*)</h4>
 
-* Comportamento:
-* Retorno:
+* Comportamento: converte `const char*` em `long long`.
+* Retorno: o valor convertido ou `0` em caso de erro.
 
 <hr>
 
 <h4 id="5">double strtod(const char*, char**)</h4>
 
-* Comportamento:
-* Retorno:
+* Comportamento: converte `const char*` em `double`.
+* Retorno: o valor convertido ou `0.0` em caso de erro.
 
 <hr>
 
 <h4 id="6">float strtof(const char*, char**)</h4>
 
-* Comportamento:
-* Retorno:
+* Comportamento: converte `const char*` em `float`.
+* Retorno: o valor convertido ou `0.0` em caso de erro.
 
 <hr>
 
 <h4 id="7">long strtol(const char*, char**, int)</h4>
 
-* Comportamento:
-* Retorno:
+* Comportamento: converte `const char*` em `long` de base numeral `int`.
+* Retorno: o valor convertido ou `0` em caso de erro.
 
 <hr>
 
 <h4 id="8">long double strtold(const char*, char**)</h4>
 
-* Comportamento:
-* Retorno:
+* Comportamento: converte `const char*` em `long float`.
+* Retorno: o valor convertido ou `0.0` em caso de erro.
 
 <hr>
 
 <h4 id="9">long long strtoll(const char*, char**, int)</h4>
 
-* Comportamento:
-* Retorno:
+* Comportamento: converte `const char*` em `long long` de base numeral `int`.
+* Retorno: o valor convertido ou `0` em caso de erro.
 
 <hr>
 
 <h4 id="10">unsigned long strtoul(const char*, char**, int)</h4>
 
-* Comportamento:
-* Retorno:
+* Comportamento: converte `const char*` em `unsigned long` de base numeral `int`.
+* Retorno: o valor convertido ou `0` em caso de erro.
 
 <hr>
 
 <h4 id="11">unsigned long long strtoull(const char*, char**, int)</h4>
 
-* Comportamento:
-* Retorno:
+* Comportamento: converte `const char*` em `unsigned long long` de base numeral `int`.
+* Retorno: o valor convertido ou `0` em caso de erro.
 
 <hr>
 
@@ -123,15 +152,39 @@ Disponibilizar uma série de funções de uso geral, incluindo tratamento de mem
 
 <h4 id="12">int rand(void)</h4>
 
-* Comportamento:
-* Retorno:
+* Comportamento: obtém um valor inteiro pseudo-aleatório, com base em um algoritmo cuja *semente* é definida por <a href="#14"><code>srand</code></a>.
+* Retorno: um valor entre `0` e `RAND_MAX`.
+
+<br>
+
+> [!TIP]
+> O operador `%` pode ser usado para reduzir o intervalo entre os valores retornados: `rand() % 100` gera um valor entre `0` e `99`; `50 + (rand() % 50)` gera um valor entre `50` e `99`.
+
+<br>
 
 <hr>
 
 <h4 id="13">void srand(unsigned int)</h4>
 
-* Comportamento:
-* Retorno:
+* Comportamento: define a *semente* que será usada pelo algoritmo de geração de número pseudo-aleatórios, o qual é utilizado pela função <a href="#13"><code>rand</code></a>.
+* Retorno: nenhum.
+
+<br>
+
+> [!IMPORTANT]
+> Uma mesma *semente* gerará a mesma sequência de valores.
+
+<br>
+
+> [!NOTE]
+> Redefinir a mesmo *semente* irá reiniciar a "sequência de valores" retornada pelo algoritmo.
+
+<br>
+
+> [!TIP]
+> Use <code>srand( <a href="https://github.com/duckafire/small_projects/blob/main/summaries/c/time.md#8" target="_blank">time</a>( NULL ) )</code> para garantir uma *semente* diferente a cada nova inicialização do programa.
+
+<br>
 
 <hr>
 
@@ -141,29 +194,87 @@ Disponibilizar uma série de funções de uso geral, incluindo tratamento de mem
 
 <h4 id="14">void* calloc(size_t0, size_t1)</h4>
 
-* Comportamento:
-* Retorno:
+* Comportamento: aloca um bloco de memória para um vetor com `size_t0` elementos, com `size_t1` de tamanho cada.
+* Retorno: o endereço do bloco de memória alocado ou `NULL`, em caso de falha.
+
+<br>
+
+> [!NOTE]
+> Se `size_t1` for igual a `0`, o retorno dependerá da implementação da biblioteca (geralmente é `NULL`).
+
+<br>
+
+> [!NOTE]
+> Esta função "limpa" o espaço alocado com zeros.
+
+<br>
 
 <hr>
 
 <h4 id="15">void free(void*)</h4>
 
-* Comportamento:
-* Retorno:
+* Comportamento: libera a memória alocada pelas funções <a href="#14"><code>calloc</code></a>, <a href="#16"><code>malloc</code></a> e <a href="#17"><code>realloc</code></a>.
+* Retorno: nenhum.
+
+<br>
+
+> [!CAUNTION]
+> Após o processo, recomenda-se fortemente que `NULL` seja atribuído ao ponteiro que guardava o endereço passado para `void*`, pois o uso deste enereço resultará em comportamentos indefinidos.
+
+<br>
+
+> [!WARNING]
+> Caso `void*` não seja um endereço alocado pelas funções antes listadas, o comportamento será indefinido.
+
+<br>
+
+> [!NOTE]
+> Caso `void*==NULL`, nada ocorrerá.
+
+<br>
 
 <hr>
 
 <h4 id="16">void* malloc(size_t)</h4>
 
-* Comportamento:
-* Retorno:
+* Comportamento: aloca um bloco de memória com `size_t` de tamanho.
+* Retorno: o endereço do bloco de memória alocado ou `NULL`, em caso de falha.
+
+<br>
+
+> [!IMPORTANT]
+> Está função não "limpa" o endereço de memória alocado, logo *lixo* pode estar presente no mesmo. A função <a href="https://github.com/duckafire/small_projects/blob/main/summaries/c/string.md#5"><code>memset</code></a> pode ser usada para limpar essa memória (`memset(pointer, 0, sizeof(struct Foo))`);
+
+<br>
+
+> [!TIP]
+> `sizeof` pode ser usado para obter o tamanho de uma estrutura e alocar memória para a mesma (`foo = malloc( sizeof( struct Foo ) )`).
+
+<br>
 
 <hr>
 
 <h4 id="17">void* realloc(void*, size_t)</h4>
 
-* Comportamento:
-* Retorno:
+* Comportamento: redimensiona o espaço de memória alocado em `void*` se: `size_t` for menor, `void*` é contraído e a memória desassociada é liberada (o endereço de `void*` será retornado); `size_t` for maior, `void*` será expandido, mas caso essa expansão não seja possível, o bloco será movido para outra localização que a possibilite (nesse caso, o ponteiro original é automaticamente liberado e outro será retornado).
+* Retorno: o endereço de memória da memória alocada (que pode ser `void*` ou outro) ou, em caso de falha, `NULL` (o endereço de `void*` permanecerá inalterado).
+
+<br>
+
+> [!IMPORTANT]
+> Está função não "limpa" o endereço de memória alocado, logo *lixo* pode estar presente no mesmo. A função <a href="https://github.com/duckafire/small_projects/blob/main/summaries/c/string.md#5"><code>memset</code></a> pode ser usada para limpar essa memória (`memset(pointer, 0, sizeof(struct Foo))`);
+
+<br>
+
+> [!NOTE]
+> Se `void*==NULL`, esta função comportará-se da mesma forma que <a href="#14"><code></code></a>.
+
+<br>
+
+> [!TIP]
+> `sizeof` pode ser usado para obter o tamanho de uma estrutura e alocar memória para a mesma (`foo = malloc( sizeof( struct Foo ) )`).
+
+<br>
 
 <hr>
 
