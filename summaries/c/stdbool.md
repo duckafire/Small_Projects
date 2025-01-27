@@ -3,15 +3,18 @@ Adiciona 4 macros para explicitar o uso de valores booleanos, assim facilitando 
 
 <hr>
 
+* bool: tipos encarregado de armazenar valores booleanos.
+
+<hr>
+
 | Macros | Valor |
 | :-:    | :-:   |
-| bool   | `int` |
 | true   | `1`   |
 | false  | `0`   |
 
 <br>
 
-> A macro `__bool_true_false_are_defined` também está inclusa neste cabeçalho.
+> A macro `__bool_true_false_are_defined` (`1`) também está inclusa neste cabeçalho.
 
 <br>
 

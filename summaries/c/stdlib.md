@@ -3,10 +3,10 @@ Disponibilizar uma série de funções de uso geral, incluindo tratamento de mem
 
 <hr>
 
-> EXIT\_FAILURE: valor, dependendo do sistema, que indica que o programa foi encerrado com falha. <br>
-> EXIT\_SUCCESS: valor, dependendo do sistema, que indica que o programa foi encerrado com sucesso. <br>
-> MB\_CUR\_MAX: número máximo de *bytes* que podem compor um caractere *multibyte* no "idioma" atual (veja [`locale.h`](https://github.com/duckafire/small_projects/blob/main/summaries/c/locale.md "Resumo de locale.h")). <br>
-> RAND\_MAX: valor máximo retornável pela função <a href="#12"><code>rand</code></a>. <br>
+* EXIT\_FAILURE: valor, dependendo do sistema, que indica que o programa foi encerrado com falha.
+* EXIT\_SUCCESS: valor, dependendo do sistema, que indica que o programa foi encerrado com sucesso.
+* MB\_CUR\_MAX: número máximo de *bytes* que podem compor um caractere *multibyte* no "idioma" atual (veja [`locale.h`](https://github.com/duckafire/small_projects/blob/main/summaries/c/locale.md "Resumo de locale.h")).
+* RAND\_MAX: valor máximo retornável pela função <a href="#12"><code>rand</code></a>.
 
 <br>
 
@@ -17,7 +17,7 @@ Disponibilizar uma série de funções de uso geral, incluindo tratamento de mem
 
 <hr>
 
-> `div\_t` - `ldiv\_t` - `lldiv\_t`: estruturas com dois membros destinados a armazenar o quociente e o resto de uma divisão. Seus membros possuem o mesmo tipo, porém este varia entre as estruturas, sendo respectivamente: `int` - `long` - `long long`.
+* `div\_t` - `ldiv\_t` - `lldiv\_t`: estruturas com dois membros destinados a armazenar o quociente e o resto de uma divisão. Seus membros possuem o mesmo tipo, porém este varia entre as estruturas, sendo respectivamente: `int` - `long` - `long long`.
 
 <hr>
 
@@ -218,7 +218,7 @@ Disponibilizar uma série de funções de uso geral, incluindo tratamento de mem
 
 <br>
 
-> [!CAUNTION]
+> [!CAUTION]
 > Após o processo, recomenda-se fortemente que `NULL` seja atribuído ao ponteiro que guardava o endereço passado para `void*`, pois o uso deste enereço resultará em comportamentos indefinidos.
 
 <br>
