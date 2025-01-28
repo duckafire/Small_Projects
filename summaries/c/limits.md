@@ -19,8 +19,8 @@ Define constantes responsáveis por delimitar os valores mínimos e máximos de 
 
 <br>
 
-* CHAR\_BIT: Quantidade de bits necessários para se representar uma variável do tipo char.  
-* MB\_LEN\_MAX: Comprimento máximo de vários *bytes* de um caractere em todas as localidades.  
+* `CHAR\_BIT`: Quantidade de bits necessários para se representar uma variável do tipo char.  
+* `MB\_LEN\_MAX`: Comprimento máximo de vários *bytes* de um caractere em todas as localidades.  
 
 <hr>
 

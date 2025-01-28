@@ -3,7 +3,7 @@ Adiciona ferramentas capazes de manipular o fluxo de execução do código, seme
 
 <hr>
 
-* jmp\_buf: tipo matriz responsável por armazenar dados referentes ao ambiente atual. Usado pela macro `setjmp` e pela função `longjmp`.
+* `jmp\_buf`: tipo matriz responsável por armazenar dados referentes ao ambiente atual. Usado pela macro `setjmp` e pela função `longjmp`.
 
 <hr>
 

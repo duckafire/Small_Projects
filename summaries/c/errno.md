@@ -3,9 +3,9 @@ Fornece uma variável global.
 
 <hr>
 
-* EDOM (*domain error*; erro de domínio): usado por funções de [`math.h`](https://github.com/duckafire/small_projects/blob/main/summaries/c/math.md), para indicar que um valor negativo foi utilizado como argumento para uma dada funções que "aceita" manipular apenas valores *reais positivos* (*domínio*).
-* ERANGE (*range error*; erro de alcance): valor atribuído a `errno` por funções cujo resultado extrapola o valor máximo representável por seu retorno.
-* EILSEQ (*Illegal sequence*; sequencia ilegal): recebido por `errno` quando funções de manipulação de caracteres *multibytes* encontram sequências inválidas.
+* `EDO`M (*domain error*; erro de domínio): usado por funções de [`math.h`](https://github.com/duckafire/small_projects/blob/main/summaries/c/math.md), para indicar que um valor negativo foi utilizado como argumento para uma dada funções que "aceita" manipular apenas valores *reais positivos* (*domínio*).
+* `ERANG`E (*range error*; erro de alcance): valor atribuído a `errno` por funções cujo resultado extrapola o valor máximo representável por seu retorno.
+* `EILSE`Q (*Illegal sequence*; sequencia ilegal): recebido por `errno` quando funções de manipulação de caracteres *multibytes* encontram sequências inválidas.
 
 <hr>
 

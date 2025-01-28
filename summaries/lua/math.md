@@ -1,13 +1,12 @@
 # math
-
 Biblioteca matemática contendo funções capazes de realizar operações simples com números.
 
 <hr>
 
-* math.huge: infinito.
-* math.maxinteger: maior número inteiro armazenável.
-* math.mininteger: menor número inteiro armazenável.
-* math.pi: valor de [*pi*](https://en.wikipedia.org/wiki/Pi "Wikipédia").
+* `math.huge`: infinito.
+* `math.maxinteger`: maior número inteiro armazenável.
+* `math.mininteger`: menor número inteiro armazenável.
+* `math.pi`: valor de [*pi*](https://en.wikipedia.org/wiki/Pi "Wikipédia").
 
 <br>
 

@@ -1,5 +1,4 @@
 # string
-
 Fornece uma gama de funções destinadas a manipulação de cadeias de caracteres.
 
 <br>

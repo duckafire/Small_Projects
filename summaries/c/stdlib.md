@@ -3,10 +3,10 @@ Disponibilizar uma série de funções de uso geral, incluindo tratamento de mem
 
 <hr>
 
-* EXIT\_FAILURE: valor, dependendo do sistema, que indica que o programa foi encerrado com falha.
-* EXIT\_SUCCESS: valor, dependendo do sistema, que indica que o programa foi encerrado com sucesso.
-* MB\_CUR\_MAX: número máximo de *bytes* que podem compor um caractere *multibyte* no "idioma" atual (veja [`locale.h`](https://github.com/duckafire/small_projects/blob/main/summaries/c/locale.md "Resumo de locale.h")).
-* RAND\_MAX: valor máximo retornável pela função <a href="#12"><code>rand</code></a>.
+* `EXIT\_FAILURE`: valor, dependendo do sistema, que indica que o programa foi encerrado com falha.
+* `EXIT\_SUCCESS`: valor, dependendo do sistema, que indica que o programa foi encerrado com sucesso.
+* `MB\_CUR\_MAX`: número máximo de *bytes* que podem compor um caractere *multibyte* no "idioma" atual (veja [`locale.h`](https://github.com/duckafire/small_projects/blob/main/summaries/c/locale.md "Resumo de locale.h")).
+* `RAND\_MAX`: valor máximo retornável pela função <a href="#12"><code>rand</code></a>.
 
 <br>
 

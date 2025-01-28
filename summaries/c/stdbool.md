@@ -3,7 +3,7 @@ Adiciona 4 macros para explicitar o uso de valores booleanos, assim facilitando 
 
 <hr>
 
-* bool: tipos encarregado de armazenar valores booleanos.
+* `bool`: tipos encarregado de armazenar valores booleanos.
 
 <hr>
 

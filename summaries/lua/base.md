@@ -1,11 +1,10 @@
 # Basic
-
 Oferece duas variáveis globais e uma série de funções báscias para usos diversos e essenciais.
 
 <hr>
 
-* \_G: **Tabela global** que armazena o ambiente global. LUA não usa essa variável em si. Alterar seu valor não afeta nenhum ambiente, e vice-versa.
-* \_VERSION: *Variável global* que armazena a versão do interpretador LUA em execução.
+* `\_G`: **Tabela global** que armazena o ambiente global. LUA não usa essa variável em si. Alterar seu valor não afeta nenhum ambiente, e vice-versa.
+* `\_VERSION`: *Variável global* que armazena a versão do interpretador LUA em execução.
 
 <hr>
 

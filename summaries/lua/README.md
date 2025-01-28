@@ -1,4 +1,4 @@
-# **LUA** *default* libraries
+# **LUA** standard libraries (7/10)
 
 * ["Base"](https://github.com/duckafire/Small_Projects/blob/main/summaries/lua/base.md)
 * courotine

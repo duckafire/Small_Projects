@@ -1,5 +1,4 @@
 # Table
-
 Disponibiliza funções relativas a manipulação de tabelas com índices numéricos (os demais são ignorados).
 
 <hr>

@@ -3,12 +3,12 @@ Fornece várias funções para a manipulação de fluxos de entrada e saída (E/
 
 <hr>
 
-* BUFSIZ: tamanho do *buffer* usado pela função <a href="9"><code>setbuf</code></a>.
-* EOF: caractere de fim de arquivo.
-* FILENAME\_MAX: largura máxima do nome de um arquivo.
-* FOPEN\_MAX: limite de arquivos abertos em simultâneo.
-* L\_tmpnam: largura mínima do nome de um arquivo temporário.
-* TMP\_MAX: limite de arquivos temporários abertos em simultâneo.
+* `BUFSIZ`: tamanho do *buffer* usado pela função <a href="9"><code>setbuf</code></a>.
+* `EOF`: caractere de fim de arquivo.
+* `FILENAME\_MAX`: largura máxima do nome de um arquivo.
+* `FOPEN\_MAX`: limite de arquivos abertos em simultâneo.
+* `L\_tmpnam`: largura mínima do nome de um arquivo temporário.
+* `TMP\_MAX`: limite de arquivos temporários abertos em simultâneo.
 
 <br>
 
@@ -19,8 +19,8 @@ Fornece várias funções para a manipulação de fluxos de entrada e saída (E/
 
 <hr>
 
-* fpos\_t: estrutura designada à armazenar informações sobre a posição atual do *cursor* de um arquivo.
-* FILE: estrutura responsável por armazenar o *fluxo* (*de dados*), vulgo *stream*, de um determinado arquivo. Estado do arquivo (aberto ou fechado), <a href="#file-mode">modo de interação</a>, posição do *cursor* de leitura e/ou escrita são algumas das informações armazenadas neste. Seus valores são iniciados por funções deste cabeçalho, como <a href="#7"><code>fopen</code></a>.
+* `fpos\_t`: estrutura designada à armazenar informações sobre a posição atual do *cursor* de um arquivo.
+* `FILE`: estrutura responsável por armazenar o *fluxo* (*de dados*), vulgo *stream*, de um determinado arquivo. Estado do arquivo (aberto ou fechado), <a href="#file-mode">modo de interação</a>, posição do *cursor* de leitura e/ou escrita são algumas das informações armazenadas neste. Seus valores são iniciados por funções deste cabeçalho, como <a href="#7"><code>fopen</code></a>.
 
 <br>
 

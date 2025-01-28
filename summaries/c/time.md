@@ -3,12 +3,12 @@ Este arquivo de cabeçalho declara uma macro, dois tipos, uma estrutura e divers
 
 <hr>
 
-* CLOCKS\_PER\_SEC: quatidade de *ticks* que ocorrem em um intervalo de um segundo.
+* `CLOCKS\_PER\_SEC`: quatidade de *ticks* que ocorrem em um intervalo de um segundo.
 
 <hr>
 
-* clock\_t: tipo responsável pelo armazenamento do tempo de processamento usado por um processo.
-* time\_t: "tipo" encarregado de armazenar o tempo decorrido, com base no calendário do sistema.
+* `clock\_t`: tipo responsável pelo armazenamento do tempo de processamento usado por um processo.
+* `time\_t`: "tipo" encarregado de armazenar o tempo decorrido, com base no calendário do sistema.
 
 <hr>
 
