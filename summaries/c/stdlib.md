@@ -284,57 +284,135 @@ Disponibilizar uma série de funções de uso geral, incluindo tratamento de mem
 
 <h4 id="18">void abort(void)</h4>
 
-* Comportamento:
-* Retorno:
+* Comportamento: encerra o programa de maneira abrupta.
+* Retorno: nenhum.
+
+<br>
+
+> [!WARNING]
+> <a href="#19"><code>atexit</code></a>, *destruidores de objetos (*__*apenas em C++*__*)* e *fluxos* retornados por <a href="https://github.com/duckafire/small_projects/blob/main/summaries/c/stdio.md#3" target="_blank"><code>tmpfile</code></a> não serão chamados e/ou liberados após essa função ser executada.
+
+<br>
+
+> [!NOTE]
+> O código que será retornado pelo programa dependerá da plataforma em questão.
+
+<br>
 
 <hr>
 
 <h4 id="19">int atexit(void (*foo)(void))</h4>
 
-* Comportamento:
-* Retorno:
+* Comportamento: adiciona `void (*foo)(void)` a uma **pilha** de funções, para execução **após uma saída normal** do programa.
+* Retorno: `0`, caso a função seja registrada com sucesso, ou um valor diferente de `0`, em caso de falha.
+
+<br>
+
+> [!WARNING]
+> As funções da **pilha** só serão executadas caso o programa encerre com êxito.
+
+<br>
+
+> [!IMPORTANT]
+> Diferentes implementações desta biblioteca impõem limites distintos para o número máximo de funções resgistráveis na **pilha**, com a quantidade mínima de `32` funções.
+
+<br>
+
+> [!TIP]
+> **É possível registrar um número ilimitado de funções**, basta adicionar todas a uma *função de contêiner* e registrá-la na **pilha**.
+
+<br>
+
+> [!TIP]
+> Alie essa função com <a href="#21"><code>exit</code></a> para efetuar saídas seguras a qualquer momento durante a execução do programa.
+
+<br>
 
 <hr>
 
 <h4 id="20">int at_quick_exit(void (*foo)(void))</h4>
 
-* Comportamento:
-* Retorno:
+* Comportamento: adiciona `void (*foo)(void)` a uma **pilha** de funções, para execução <strong>após <a href="#23"><code>quick_exit</code></a> ser chamada</strong>.
+* Retorno: `0`, caso a função seja registrada com sucesso, ou um valor diferente de `0`, em caso de falha.
+
+<br>
+
+> [!IMPORTANT]
+> Diferentes implementações desta biblioteca impõem limites distintos para o número máximo de funções resgistráveis na **pilha**, com a quantidade mínima de `32` funções.
+
+<br>
+
+> [!TIP]
+> **É possível registrar um número ilimitado de funções**, basta adicionar todas a uma *função de contêiner* e registrá-la na **pilha**.
+
+<br>
 
 <hr>
 
 <h4 id="21">void exit(int)</h4>
 
-* Comportamento:
-* Retorno:
+* Comportamento: encerra o programa **normalmente**, fazendo-o retornar `int`.
+* Retorno: nenhum.
 
 <hr>
 
 <h4 id="22">char* getenv(const char*)</h4>
 
-* Comportamento:
-* Retorno:
+* Comportamento: obtém o conteúdo de uma [*variável de ambiente*](https://superuser.com/questions/284342/what-are-path-and-other-environment-variables-and-how-can-i-set-or-use-them "O que é uma 'variável de ambiente'?"), cujo nome/identificador é igual a `const char*`.
+* Retorno: o conteúdo da [*variável de ambiente*](https://superuser.com/questions/284342/what-are-path-and-other-environment-variables-and-how-can-i-set-or-use-them "O que é uma 'variável de ambiente'?") ou `NULL`, caso ela não exista.
+
+<br>
+
+> [!NOTE]
+> Alguns sistemas e implementações desta biblioteca permitem alterar o conteúdo das [*variável de ambiente*](https://superuser.com/questions/284342/what-are-path-and-other-environment-variables-and-how-can-i-set-or-use-them "O que é uma 'variável de ambiente'?"), **entretanto** esse comportamento não é portável.
+
+<br>
 
 <hr>
 
-<h4 id="23">_Noreturn void quick_exit(void)</h4>
+<h4 id="23">_Noreturn void quick_exit(int)</h4>
 
-* Comportamento:
-* Retorno:
+* Comportamento: executa o **pilha** de funções definida por <a href="#20"><code>at_quick_exit</code></a> e encerra o programa com êxito (fazendo-o retornar `int`).
+* Retorno: nenhum.
+
+<br>
+
+> [!WARNING]
+> *Destuidores de objetos (*__*apenas em C++*__*)* não serão chamados após o uso desta função.
+
+<br>
+
+> [!IMPORTANT]
+> A "liberação" de *fluxos* abertos com <a href="https://github.com/duckafire/small_projects/blob/main/summaries/c/stdio.md#3" target="_blank"><code>tmpfile</code></a> dependerá do sistema e da implementação desta biblioteca.
+
+<br>
+
+> [!TIP]
+> Veja mais sobre [`_Noreturn`](https://github.com/duckafire/small_projects/blob/main/summaries/c/stdnoreturn.md "Resumo de 'stdnoreturn.h'").
+
+<br>
 
 <hr>
 
 <h4 id="24">int system(const char*)</h4>
 
-* Comportamento:
-* Retorno:
+* Comportamento: se `const char*==NULL`, verificará se há algum *processador de comandos* está disponível para a função, do contrário, tentará executar o *comando* de nome `const char*`.
+* Retorno: se `const char*==NULL`, retornará um valor diferente de zero (caso haja algum *processador de comandos* disponível) ou `0` (caso não), do contrário, seu retorno dependerá do sistem e da implementação da biblioteca.
 
 <hr>
 
 <h4 id="25">void _Exit(int)</h4>
 
-* Comportamento:
-* Retorno:
+* Comportamento: encerra o programa **normalmente**, fazendo-o retornar `int`, **sem** chamar os *destruidores de objetos (*__*apenas em C++*__*)* e as funções da **pilha** de <a href="#"><code>atexit</code></a>.
+* Retorno: nenhum.
+
+<br>
+
+> [!IMPORTANT]
+> A "liberação" de *fluxos* abertos com <a href="https://github.com/duckafire/small_projects/blob/main/summaries/c/stdio.md#3" target="_blank"><code>tmpfile</code></a> dependerá do sistema e da implementação desta biblioteca.
+<br>
+
+<br>
 
 <hr>
 
@@ -344,15 +422,39 @@ Disponibilizar uma série de funções de uso geral, incluindo tratamento de mem
 
 <h4 id="26">void* bsearch(const void 0*, const void 1*, size_t0, size_t1, int (*foo)(const void*, const void*))</h4>
 
-* Comportamento:
-* Retorno:
+* Comportamento: executa uma [*busca binária*](https://en.wikipedia.org/wiki/Binary_search "Wikipédia") no vetor `const void 1*` (que deve possuir `size_t0` elementos com `size_t1` de largura cada), em busca de `const void*`, usando `int (*foo)` para efetuar as comparações.
+* Retorno: caso `const void 0*` seja encontrado, um ponteiro para sua posição em `const void 1*`, do contrário, NULL.
+
+<br>
+
+> [!CAUTION]
+> Dado que está se trata de uma [*busca binária*](https://en.wikipedia.org/wiki/Binary_search "Wikipédia"), `const void 1*` deve estar ordenado. Veja <a href="#27"><code>qsort</code></a>.
+
+<br>
+
+> [!WARNING]
+> **Sobre `int (*foo)`**: seu primeiro argumento SEMPRE será `const void 0*`, já o segundo será o "item atual" do vetor. Seu retorno deve consistir em: um valor negativo caso o primeiro argumento seja menor que o segundo, `0` caso ambos seja iguais ou um valor positivo caso o primeiro argumento seja maior que o segundo argumento.
+
+<br>
+
+> [!IMPORTANT]
+> Caso multíplos elementos iguais a `const void 0*` sejam encontrados, qualquer um deles poderá ser retornado.
+
+<br>
 
 <hr>
 
 <h4 id="27">void qsort(const void*, size_t0, size_t1, int (*foo)(const void*, const void*)</h4>
 
-* Comportamento:
-* Retorno:
+* Comportamento: executa uma [*ordenação rápida (quick sort)*](https://en.wikipedia.org/wiki/Quicksort "Wikipédia") para o conteúdo de `const void*` (que deve possuir `size_t0` elementos com `size_t1` de largura cada).
+* Retorno: nenhum.
+
+<br>
+
+> [!WARNING]
+> **Sobre `int (*foo)`**: seu retorno deve consistir em: um valor negativo caso o primeiro argumento seja menor que o segundo, `0` caso ambos seja iguais ou um valor positivo caso o primeiro argumento seja maior que o segundo argumento.
+
+<br>
 
 <hr>
 
