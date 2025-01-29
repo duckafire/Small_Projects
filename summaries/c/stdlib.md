@@ -464,43 +464,43 @@ Disponibilizar uma série de funções de uso geral, incluindo tratamento de mem
 
 <h4 id="28">int abs(int)</h4>
 
-* Comportamento:
-* Retorno:
+* Comportamento: obtém o valor absoluto de `int`.
+* Retorno: o valor obtido.
 
 <hr>
 
 <h4 id="29">div_t div(int0, int1)</h4>
 
-* Comportamento:
-* Retorno:
+* Comportamento: calcula a divisão de `int0` por `int1`.
+* Retorno: uma estrutura contento o quociente e o resto da divisão.
 
 <hr>
 
 <h4 id="30">long labs(long)</h4>
 
-* Comportamento:
-* Retorno:
+* Comportamento: obtém o valor absoluto de `long`.
+* Retorno: o valor obtido.
 
 <hr>
 
 <h4 id="31">ldiv_t ldiv(long0, long1)</h4>
 
-* Comportamento:
-* Retorno:
+* Comportamento: calcula a divisão de `long0` por `long1`.
+* Retorno: uma estrutura contento o quociente e o resto da divisão.
 
 <hr>
 
 <h4 id="32">long long llabs(long long)</h4>
 
-* Comportamento:
-* Retorno:
+* Comportamento: obtém o valor absoluto de `long long`.
+* Retorno: o valor obtido.
 
 <hr>
 
 <h4 id="33">lldiv_t lldiv(long long0, long long1)</h4>
 
-* Comportamento:
-* Retorno:
+* Comportamento: calcula a divisão de `long long0` por `long long1`.
+* Retorno: uma estrutura contento o quociente e o resto da divisão.
 
 <hr>
 
@@ -508,24 +508,48 @@ Disponibilizar uma série de funções de uso geral, incluindo tratamento de mem
 
 ### Caracteres *multibyte*
 
+<br>
+
+> [!IMPORTANT]
+> Estas funções possuem seu próprio *estado de mudança* (*shift state*), responsável por armazenar informações relacionadas ao estados dos caracteres *multibyte* presente em uma cadeia. Chama-la com `const char*==NULL` redefinirá esse estado.
+
+<br>
+
+> [!NOTE]
+> O comportamento dessas funções depende da configuração de [`LC_CTYPE`]("Resumo de locale.h").
+
+<br>
+
+> [!TIP]
+> Antes de utilizar estas funções, chame-as com `const char*==NULL`, para que seu *estado de mudança* seja corretamente reiniciado.
+
+<br>
+
 <h4 id="34">int mblen(const char*, size_t)</h4>
 
-* Comportamento:
-* Retorno:
+* Comportamento: calcula o tamanho de `const char*`, que deve ser **um** caractere *multibyte* com no máximo `size_t` de comprimento.
+* Retorno: se `const char*!=NULL` retornará o comprimento do caractere; se `const char*==NULL` retornará `0`; se o caractere for inválido retornará `-1`.
 
 <hr>
 
 <h4 id="35">int mbtowc(wchar_t*, const char*, size_t)</h4>
 
-* Comportamento:
-* Retorno:
+* Comportamento: converte um caractere *multibyte*, armazenado em `const char*` (com no máximo `size_t` de comprimento), em um *caractere largo* e o armazena em `wchar_t*`.
+* Retorno: se `const char*!=NULL` retornará o comprimento do caractere; se `const char*==NULL` retornará `0`; se o caractere for inválido retornará `-1`.
+
+<br>
+
+> [!NOTE]
+> `wchar_t*` **não** deve ser o endereço de uma *cadeias de caracteres largos*.
+
+<br>
 
 <hr>
 
 <h4 id="36">int wctomb(char*, wchar_t)</h4>
 
-* Comportamento:
-* Retorno:
+* Comportamento: converte um *caractere largo*, armazenado em `wchar_t`, em um caractere *multibyte* e o armazena em `char*`.
+* Retorno: se `const char*!=NULL` retornará o comprimento do caracteres ou `-1`, se o caractere for inválido; se `const char*==NULL` retornará um valor diferente de `0`, caso as codificações de caracteres *multibyte* forem dependentes do *estado de mudança*, ou `0`, caso contrário.
 
 <hr>
 
@@ -533,17 +557,29 @@ Disponibilizar uma série de funções de uso geral, incluindo tratamento de mem
 
 ### Cadeias de caracteres *multibyte*
 
+<br>
+
+> [WARNING]
+> Se o total de caracteres escritos for igual a `size_t`, `wchat_t*` não contará com um caractere de terminação (`'\0'`).
+
+<br>
+
+> [!NOTE]
+> O comportamento dessas funções depende da configuração de [`LC_CTYPE`]("Resumo de locale.h").
+
+<br>
+
 <h4 id="37">size_t mbstowcs(wchar_t*, const char*, size_t)</h4>
 
-* Comportamento:
-* Retorno:
+* Comportamento: converte uma cadeia de caracteres *multibyte* em uma *cadeia de caracteres largos*, que tenha, no máximo, `size_t` de comprimento.
+* Retorno: o número total de *caracteres largos* escritos em `wchar_t` ou `-1`, caso algum caractere inválido seja encontrado.
 
 <hr>
 
 <h4 id="38">size_t wcstombs(char*, wchar_t*, size_t)</h4>
 
-* Comportamento:
-* Retorno:
+* Comportamento: converte uma *cadeia de caracteres largos* em uma cadeia de caracteres *multibyte*, que tenha, no máximo, `size_t` de comprimento.
+* Retorno: o número total de *bytes* escritos em `char*` ou `-1`, caso algum caractere inválido seja encontrado.
 
 <hr>
 
