@@ -11,7 +11,7 @@ Esse cabeçalho disponibiliza algumas poucas macros, tipos e funções de conver
 
 * `wchar\_t`: tipo para armazenar *caracteres largos*
 * `wint\_t`: tipo inteiro para códigos de *caracteres largos* e *multibyte*.
-* `mbstate\_t`: estrutura encarregada de armazenar as informações necessárias para manter o estado dos caracteres de uma cadeia, durante converções de cadeias de caracteres *multibytes* para cadeias de *caracteres largos* (`mbstowcs`) ou o inverso (`wcsrtobms`).
+* `mbstate\_t`: estrutura encarregada de armazenar as informações necessárias para manter o estado dos caracteres de uma cadeia, durante converções de cadeias de caracteres *multibytes* para cadeias de *caracteres largos* (`mbstowcs`) ou o inverso (`wcsrtobms`), além de outras operações envolvendo caracteres *multibyte*.
 
 <hr>
 

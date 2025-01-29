@@ -12,7 +12,7 @@ Fornece duas macros destinadas a depuração.
 
 <h3>static_assert(int, string)</h3>
 
-* Comportamento: **durante a COMPILAÇÃO do programa**, caso `int` seja igual a `0`, interrompe a execução do programa e imprime `string`, do contrário nada é feito.
+* Comportamento: **durante a COMPILAÇÃO do programa**, caso `int` seja igual a `0`, interrompe o processo do compilador e imprime `string`, do contrário nada é feito.
 * Retorno: nenhum.
 	
 <hr>

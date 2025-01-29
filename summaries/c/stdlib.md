@@ -516,7 +516,7 @@ Disponibilizar uma série de funções de uso geral, incluindo tratamento de mem
 <br>
 
 > [!NOTE]
-> O comportamento dessas funções depende da configuração de [`LC_CTYPE`]("Resumo de locale.h").
+> O comportamento dessas funções depende da configuração de [`LC_CTYPE`](https://github.com/duckafire/small_projects/blob/main/summaries/c/locale.md "Resumo de locale.h").
 
 <br>
 
@@ -565,7 +565,7 @@ Disponibilizar uma série de funções de uso geral, incluindo tratamento de mem
 <br>
 
 > [!NOTE]
-> O comportamento dessas funções depende da configuração de [`LC_CTYPE`]("Resumo de locale.h").
+> O comportamento dessas funções depende da configuração de [`LC_CTYPE`](https://github.com/duckafire/small_projects/blob/main/summaries/c/locale.md "Resumo de locale.h").
 
 <br>
 

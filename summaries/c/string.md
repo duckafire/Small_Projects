@@ -105,7 +105,7 @@ Simplifica a manipulação de cadeias de dados, com foco em cadeias de caractere
 
 <h3 id="11">int strcoll(const char 0*, const char 1*)</h3>
 
-* Comportamento: compara o valor **ASCII** de duas cadeiras de caracteres. Seu resultado depende da configuração `LC_COLLATE` do local.
+* Comportamento: compara o valor **ASCII** de duas cadeiras de caracteres. Seu resultado depende da configuração [`LC_COLLATE`](https://github.com/duckafire/small_projects/blob/main/summaries/c/ "Resumo de locale.h") do local.
 * Retorno: `0` se forem iguais, valor negativo se `const char 0*` for menor que `const char 1*`, ou valor positivo se `const char 0*` for maior que `const char 1*`.
 
 <hr>
@@ -196,7 +196,7 @@ Simplifica a manipulação de cadeias de dados, com foco em cadeias de caractere
 
 <h3 id="22">size_t strxfrm(char*, const char*, size_t)</h3>
 
-* Comportamento: copia os primeiros `size_t` caracteres de `char*` para `const char*`, convertendo-os para o formato definido para `LC_COLLATE` durante o processo.
+* Comportamento: copia os primeiros `size_t` caracteres de `char*` para `const char*`, convertendo-os para o formato definido para [`LC_COLLATE`](https://github.com/duckafire/small_projects/blob/main/summaries/c/locale.md "Resumo de locale.h") durante o processo.
 * Retorno: comprimento de `char*`.
 
 <hr>

@@ -27,3 +27,10 @@
 * threads
 * [time](https://github.com/duckafire/Small_Projects/blob/main/summaries/c/time.md)
 * [wchar](https://github.com/duckafire/Small_Projects/blob/main/summaries/c/wchar.md)
+
+<br>
+
+> [!TIP]
+> Comece por [`stddef.h`](https://github.com/duckafire/small_projects/blob/main/summaries/c/stddef.md "Resumo de stddef.h")
+
+<br>
