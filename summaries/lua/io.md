@@ -1,186 +1,167 @@
 # io
-Fornece uma API para a manipulação de entradas e saídas.
+Fornece uma pequena *API* para a manipulação de entradas e saídas.
 
-<hr>
+---
 
 * `io.stdin`: arquivo de entrada padrão.
 * `io.stdout`: arquivo de saída padrão.
 * `io.stderr`: arquivo de saída responsável por armazenar as mensagens de erro.
 
-<hr>
+---
 
 ||Funções||
 |:-:|:-:|:-:
-|<a href="#1">io.close</a> |<a href="#5">io.open</a>  |<a href="#9">io.tmpfile</a>|
-|<a href="#2">io.flush</a> |<a href="#6">io.output</a>|<a href="#10">io.type</a>  |
-|<a href="#3">io.input</a> |<a href="#7">io.popen</a> |<a href="#11">io.write</a> |
-|<a href="#4">io.lines</a> |<a href="#8">io.read</a>  ||
+|[io.close](#1) |[io.open](#5)  |[io.tmpfile](#9)   |
+|[io.flush](#2) |[io.output](#6)|[io.type](#10)     |
+|[io.input](#3) |[io.popen](#7) |[io.write](#11)    |
+|[io.lines](#4) |[io.read](#8)  |[file:setvbuf(#12)]|
 
-<hr>
+> [!TIP]
+> *Fluxos de arquivo* recebem alguns métodos, estes estão destacados com `*`.
+> 
+> ``` lua
+> -- example
+> io.close(foo)
+> foo:close()
+> ```
 
-Além de funções, a biblioteca `io` também disponibiliza uma série de métodos, os quais pode ser usados por variáveis que armazenam arquivos abertos. Ambos estão listados abaixo:
+---
 
-<hr>
+### *io.close([string=io.stdout])
+###### 1
 
-|Métodos||
-|:-:|:-:|
-|<a href="#12">file:close</a>|<a href="#16">file:seek</a>   |
-|<a href="#13">file:flush</a>|<a href="#17">file:setvbuf</a>|
-|<a href="#14">file:lines</a>|<a href="#18">file:write</a>  |
-|<a href="#15">file:read</a> ||
-
-<hr>
-
-<h3 id="1">io.close([string=io.stdout])</h3>
-
-* Comportamento: fecha um arquivo.
+* Comportamento: fecha um *fluxo*.
 * Retorno: nenhum.
 
-<hr>
+---
 
-<h3 id="2">io.flush()</h3>
+### *io.flush()
+###### 2
 
-* Comportamento: salva todos os dados gravados em `io.stdout`.
+* Comportamento: força que os dados salvos nos *buffers* de `io.stdout` sejam impressos
+nele.
 * Retorno: nenhum.
 
-<hr>
+---
 
-<h3 id="3">io.input([string])</h3>
+### io.input([string])
+###### 3
 
 * Comportamento: define `string` como o arquivo de entrada padrão.
-* Retorno: caso `string` seja omitido, retornará o arquivo de entrada padrão, do contrário, não terá retorno.
+* Retorno: um valor booleano indicando se a operação foi bem sucedida ou `io.stdout`,
+caso `string==nil`.
 
-<hr>
+---
 
-<h3 id="4">io.lines([string=io.stdout, [...="l"]])</h3>
+### *io.lines([string=io.stdout, [...="l"]])
+###### 4
 
-* Comportamento: abre `string` em modo de leitura.
-* Retorno: uma função interadora, que executa e retorna valores de acordo com os argumentos presentes em `...`.
+* Comportamento: abre um arquivo, nomeado como `string`, em *modo de leitura*.
+* Retorno: uma função de interação, que executa e retorna valores de acordo com os argumentos presentes em `...` (na ordem em que eles aparecem).
 
-<hr>
+###### Ler
 
-| <span id="reads"><code>...</code></span> | Descrição |
-|:-:|:-:|
-| "n" | Lê e retorna números (podem haver espaços vazios à esquerda e um sinal) |
-| "a" | Lê o arquivo inteiro, partindo da posição atual. |
-| "l" | Lê a linha atual e descarta o caractere de fim da linha. |
-| "L" | Lê a linha atual e mantém o caractere de fim da linha. |
-|`number`| Lê um cadeia de caracteres com no máximo `number` *bytes* e a retorna. |
+| `...`  | Descrição |
+| :-:    |:-:        |
+| "n"    | Lê e retorna números (podem haver espaços vazios à esquerda e um sinal) |
+| "a"    | Lê o arquivo inteiro, partindo da posição atual.                        |
+| "l"    | Lê a linha atual e descarta o caractere de fim da linha.                |
+| "L"    | Lê a linha atual e mantém o caractere de fim da linha.                  |
+|`number`| Lê um cadeia de caracteres com no máximo `number` *bytes* e a retorna.  |
 
-<hr>
+---
 
-<h3 id="5">io.open(string0, [string1="r"])</h3>
+### io.open(string0, [string1="r"])
+###### 5
 
-* Comportamento: abre `string0` em modo `string1`.
-* Retorno: um "arquivo" ou, em caso de falha, `nil` e uma mensagem de erro.
+* Comportamento: abre um arquivo, nomeado como `string0`, em modo `string1`.
+* Retorno: um *fluxo* ou, em caso de falha, `nil` e uma mensagem de erro.
 
-<hr>
+###### Modos
 
-| <span id="modes">Modos</span> | Descrição |
-|:-:|:--|
-| "r"  | leitura |
-| "w"  | escrita |
-| "a"  | acréscimo |
-| "r+" | atualização (dados anteriores são preservados) |
-| "w+" | atualização (dados anteriores são descartados) |
-| "a+" | atualização de acréscimo (dados anteriores são preservadores; a gravação só pode ocorrer no final do arquivo) |
+| `string1` | Descrição |
+| :-:       | :--       |
+| "r"       | leitura   |
+| "w"       | escrita   |
+| "a"       | acréscimo |
+| "r+"      | atualização (dados anteriores são preservados) |
+| "w+"      | atualização (dados anteriores são descartados) |
+| "a+"      | atualização de acréscimo (dados anteriores são preservadores; a gravação só pode ocorrer no final do arquivo) |
 
-<hr>
+---
 
-<h3 id="6">io.output([string])</h3>
+### io.output([string])
+###### 6
 
 * Comportamento: define `string` como o arquivo de saída padrão.
-* Retorno: O arquivo de saída padrão se `string` for omitido, caso contrário não terá retorno.
+* Retorno: O `io.stdout` padrão se `string` for omitido, caso contrário não terá retorno.
 
-<hr>
+---
 
-<h3 id="7">io.popen(string0, [string1="r"])</h3>
+### io.popen(string0, [string1="r"])
+###### 7
 
-* Comportamento: executa `string0`, que deve ser um comando do sistema operacional, e armazena sua saída em um arquivo, o qual tem seu [modo](#modes) definido por `string1`.
-* Retorno: o arquivo criado.
-
-<br>
+* Comportamento: executa `string0`, que deve ser um comando do sistema operacional, e
+armazena sua saída em um *fluxo*, o qual tem seu [modo](#Modos) definido por `string1`.
+* Retorno: o *fluxo* criado.
 
 > [!IMPORTANT]
 > Alguns sistemas operacionais podem não permitir esse tipo de interação.
 
-<br>
+---
 
-<hr>
+### *io.read(...)
+###### 8
 
-<h3 id="8">io.read(...)</h3>
+* Comportamento: lê o arquivo de entrada padrão, de acordo com os [modos de leitura](#Ler)
+fornecidos por `...`.
+* Retorno: uma cadeia de caracteres para cada argumento presente em `...`. Caso seja
+chamada sem argumentos, retornará qualquer cadeia de caracteres introduzida pela usuário.
 
-* Comportamento: lê o arquivo de entrada padrão, de acordo com os [modos de leitura](#reads) fornecidos por `...`.
-* Retorno: uma cadeia de caracteres para cada argumento presente em `...`. Caso seja chamada sem argumentos, retornará qualquer cadeia de caracteres introduzida pela usuário.
+> [!TIP]
+> Utilize essa função para coletar dados do usuário.
+> 
+> ``` lua
+> local user_input
+> 
+> user_input = io.read()
+> ```
 
-<hr>
+---
 
-<h3 id="9">io.tmpfile()</h3>
+### io.tmpfile()
+###### 9
 
 * Comportamento: cria um arquivo temporário, que é descartado ao fim do programa.
-* Retorno: o "arquivo", em caso de sucesso.
+* Retorno: o *fluxo*, em caso de sucesso.
 
-<hr>
+---
 
-<h3 id="10">io.type(variable)</h3>
+### io.type(variable)
+###### 10
 
-* Comportamento: verifica se `variable` armazena um arquivo.
-* Retorno: `"file"` caso seja um arquivo aberto, `"file closed"` caso seja um arquivo fechado ou `nil` caso não seja um arquivo.
+* Comportamento: verifica se `variable` armazena um *fluxo*.
+* Retorno: `"file"` caso seja um *fluxo* aberto, `"closed file"` caso seja um *fluxo*
+fechado ou `nil` caso não seja um *fluxo*.
 
-<hr>
+---
 
-<h3 id="11">io.write(...)</h3>
+### *io.write(...)
+###### 11
 
 * Comportamento: escreve `...` no arquivo de saída padrão.
 * Retorno: `io.stdout` ou `nil`, em caso de falha.
 
-<hr>
+---
 
-<h3 id="12">file:close()</h3>
-
-* Comportamento: fecha `file`.
-* Retorno: caso feche um arquivo retornado por [`io.popen`](#7), retornará o mesmo que `os.execute`, do contrário não terá retorno.
-
-<hr>
-
-<h3 id="13">file:flush()</h3>
-
-* Comportamento: salva todos os dados gravados em `file`.
-* Retorno: nenhum
-
-<hr>
-
-<h3 id="14">file:lines(...)</h3>
-
-* Comportamento: abre `file` em modo de leitura.
-* Retorno: uma função interadora, que executa e retorna valores de acordo com os argumentos presentes em `...` ([que pode ser...](#reads)).
-
-<hr>
-
-<h3 id="15">file:read([...="l"])</h3>
-
-* Comportamento: lê `file`, de acordo com os [modos de leitura](#reads) fornecidos por `...`.
-* Retorno: uma cadeia de caracteres para cada argumento presente em `...`.
-
-<hr>
-
-<h3 id="16">file:seek([string="cur", [number=0]]</h3>
-
-* Comportamento: movimenta o "cursor" do arquivo em `number` *bytes* a partir de `"set"`, `"cur"` ou `"end"`.
-* Retorno: a nova posição do "cursor" do arquivo ou `nil`, e uma mensagem de erro, em caso de falha.
-
-<hr>
-
-<h3 id="17">file:setvbuf(string, [number])</h3>
+### file:setvbuf(string, [number])
+###### 12
 
 * Comportamento: define o modo de *bufferrização* de `file` em `"no"` (nenhum), `"full"` (completo) ou `"line"` (por linha).
 * Retorno: nenhum.
 
-<hr>
+> [!IMPORTANT]
+> Ao contrário dos demais métodos dos *fluxos de arquivo*, este não possui uma versão
+> equivalente.
 
-<h3 id="18">file:write(..)</h3>
-
-* Comportamento: escreve `...` em `file`.
-* Retorno: `file` ou `nil`, em caso de falha.
-
-<hr>
+---
