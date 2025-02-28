@@ -1,29 +1,39 @@
 # errno
-Fornece uma variável global.
+Fornece uma variável global, utilizada, por diversas funções do *Padrão C*, para deter
+códigos de erros não fatais.
 
-<hr>
+---
 
-* `EDO`M (*domain error*; erro de domínio): usado por funções de [`math.h`](https://github.com/duckafire/small_projects/blob/main/summaries/c/math.md), para indicar que um valor negativo foi utilizado como argumento para uma dada funções que "aceita" manipular apenas valores *reais positivos* (*domínio*).
-* `ERANG`E (*range error*; erro de alcance): valor atribuído a `errno` por funções cujo resultado extrapola o valor máximo representável por seu retorno.
-* `EILSE`Q (*Illegal sequence*; sequencia ilegal): recebido por `errno` quando funções de manipulação de caracteres *multibytes* encontram sequências inválidas.
+[math]: https://github.com/duckafire/small_projects/blob/main/summaries/c/math.md
 
-<hr>
+* `EDOM` (*DOMain error*): usada por funções, de [math.h][math], que "aceitam" apenas
+valores não negativos, para indicar que um valor negativo lhe foi dado.
 
-<h3>extern int errno;</h3>
+* `ERANG` (*RANGe error*): dado a `errno` por funções cujo valor calculado para retorno
+extrapola o limite de seu tipo.
 
-* Intuito: armazena códigos de erros que ocorreram durante a execução de dadas funções padrão da linguagem C.
+* `EILSE` (*ILlegal SEquence*): utilizado por funções destinadas a manipulação de
+caracteres *multibyte*, quando estas encontram sequências inválidas.
 
-<br>
+---
+
+### extern int errno;
+###### 
+
+* Intuito: armazena códigos de erros que ocorreram durante a execução de dadas funções do
+*Padrão C*
 
 > [!IMPORTANT]
-> O significado de seus códigos numéricos pode variar entre plataformas distintas, exceto para as macros vindas do Padrão C (que estão acima). Veja: [Windows](https://learn.microsoft.com/en-us/cpp/c-runtime-library/errno-constants?vi"+yew=msvc-170); [Linux](https://www.gnu.org/software/libc/manual/html_node/Error-Codes.html).
+> O valor de seus códigos numéricos varia entre plataformas (exceto para aquelas
+> apresentadas acima). Veja os código para:
+> 
+> * [Windows](https://learn.microsoft.com/en-us/cpp/c-runtime-library/errno-constants?vi"+yew=msvc-170)
+> * [Unix](https://www.gnu.org/software/libc/manual/html_node/Error-Codes.html).
 
-<br>
-
-<hr>
+---
 
 #### Fontes:
 * [wikipedia: errno.h](https://en.wikipedia.org/wiki/errno.h )
 * [cplusplus: standard macros](https://cplusplus.com/reference/cerrno/errno/ )
 
-<hr>
+---
