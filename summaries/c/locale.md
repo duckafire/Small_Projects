@@ -85,7 +85,7 @@ na localização (por [`setlocale`](#3-1)).
 ### Funções
 ###### 3
 
-#### char* setlocale(int, const char*)
+#### char\* setlocale(int, const char\*)
 ###### 3-1
 
 * Comportamento: define ou obtém a localização atual do programa.
@@ -98,7 +98,7 @@ Se `int` e/ou `const char*` forem inválidos, retornará `NULL`.
 
 ---
 
-#### struct lconv* localeconv(void)
+#### struct lconv\* localeconv(void)
 ###### 3-2
 
 * Comportamento: obtém o endereço da localização atual.

@@ -1,21 +1,35 @@
 # time
-Este arquivo de cabeçalho declara uma macro, dois tipos, uma estrutura e diversas funções destinadas ao controle e gerenciamento de tempo.
+Este arquivo de cabeçalho trás consigo uma série de *ferramentas* voltadas ao controle e
+gerenciamento do tempo.
 
-<hr>
+[dst]: https://en.wikipedia.org/wiki/Daylight_saving_time "Wikipédia"
+[utc]: https://en.wikipedia.org/wiki/UTC "Wikipédia"
+[posix]: https://en.wikipedia.org/wiki/POSIX "Wikipédia"
+[ms-crt]: https://learn.microsoft.com/en-us/cpp/c-runtime-library/windows-platforms-crt?view=msvc-170 "Microsoft"
+[tm-sec]: https://stackoverflow.com/questions/765778/why-does-tm-sec-range-from-0-60-instead-of-0-59-in-time-h#765780 "Stackoverflow"
+[unix-time]: https://en.wikipedia.org/wiki/Unix_time "Wikipédia"
+[iso-8601]: https://en.wikipedia.org/wiki/ISO_8601 
+[gmtime_r]: https://pubs.opengroup.org/onlinepubs/9799919799/functions/gmtime_r.html "Pubs.opengrounp"
+[gmtime_s]: https://learn.microsoft.com/en-us/cpp/c-runtime-library/reference/gmtime-s-gmtime32-s-gmtime64-s?view=msvc-170 "Microsoft"
+[localtime_r]: https://pubs.opengroup.org/onlinepubs/9699919799/functions/localtime.html "Pubs.opengrounp"
+[localtime_s]: https://learn.microsoft.com/en-us/cpp/c-runtime-library/reference/localtime-s-localtime32-s-localtime64-s?view=msvc-170&viewFallbackFrom=vs-2019 "Microsoft"
 
-* `CLOCKS\_PER\_SEC`: quatidade de *ticks* que ocorrem em um intervalo de um segundo.
+---
 
-<hr>
+* `CLOCKS_PER_SEC`: quantidade de *ticks* que ocorrem em um intervalo de um segundo.
 
-* `clock\_t`: tipo responsável pelo armazenamento do tempo de processamento usado por um processo.
-* `time\_t`: "tipo" encarregado de armazenar o tempo decorrido, com base no calendário do sistema.
+---
 
-<hr>
+* `clock_t`: tipo capaz de armazenar o tempo de processamento usado.
+* `time_t`: tipo capaz de armazenar o tempo decorrido, com base no calendário do sistema.
 
-<h3>struct tm</h3>
+---
+
+### struct tm
+###### 
 
 * Intuito: armazenar informações relacionadas a data e hora.
-* Mebros:
+* Membros:
 	* `int tm_sec`: segundos (0-60)
 	* `int tm_min`: minutos (0-59)
 	* `int tm_hour`: horas (0-23)
@@ -24,135 +38,168 @@ Este arquivo de cabeçalho declara uma macro, dois tipos, uma estrutura e divers
 	* `int tm_year`: ano (a partir de 1900)
 	* `int tm_wday`: dia do mês (0-6)
 	* `int tm_yday`: dia do ano (0-365)
-	* `int tm_isdst`: "horário de verão" (-1/0/1) - [Daylight saving time - (DST)](https://en.wikipedia.org/wiki/Daylight_saving_time "Wikipédia")
-
-<br>
+	* `int tm_isdst`: fuso horário (-1/0/1) - [Daylight saving time - (DST)][dst]
 
 > [!TIP]
-> [Por que `tm_sec` possui *0-60s* ao invés de *0-59s*?](https://stackoverflow.com/questions/765778/why-does-tm-sec-range-from-0-60-instead-of-0-59-in-time-h#765780 "Stackoverflow")
+> [Por que `tm_sec` possui *0-60s* ao invés de *0-59s*?][tm-sec]
 
-<br>
-
-<hr>
+---
 
 | Funções ||
 |:-:|:-:|
-| <a href="#1">asctime</a>  | <a href="#6">localtime</a>   |
-| <a href="#2">clock</a>    | <a href="#7">mktime</a>      |
-| <a href="#3">ctime</a>    | <a href="#8">time</a>        |
-| <a href="#4">difftime</a> | <a href="#9">strftime</a>    |
-| <a href="#5">gmtime</a>   ||
+| [asctime](#1)  | [localtime](#6)   |
+| [clock](#2)    | [mktime](#7)      |
+| [ctime](#3)    | [time](#8)        |
+| [difftime](#4) | [strftime](#9)    |
+| [gmtime](#5)   ||
 
-<hr>
+---
 
-<h3 id="1">char *asctime(const struct tm*)</h3>
+### char\* asctime(const struct tm\*)
+###### 1
 
-* Comportamento: converte `const struct tm*` em um cadeia de caracteres de formato `"Dom Jan 01 12:00:00 2000\n\0"` (conteúdo exemplar).
-* Retorno: o endereço de uma cadeia de caracteres estátca.
-
-<br>
+* Comportamento: converte `const struct tm\*` em um cadeia de caracteres de formatada.
+* Retorno: o endereço de uma cadeia de caracteres estática.
 
 > [!NOTE]
-> A cadeia de caracteres é alocada estaticamente e compartilhada entre `ctime` e `asctime`, sendo atualizada a cada nova chamada de qualquer uma destas funções.
+> A cadeia de caracteres é alocada estaticamente e compartilhada entre `ctime` e `asctime`,
+> sendo atualizada a cada nova chamada de qualquer uma destas funções.
 
-<br>
+> [!TIP]
+> Por exemplo: `"Dom Jan 01 00:00:00 1900\n\0"``
 
-<hr>
+---
 
-<h3 id="2">clock_t clock(void)</h3>
+### clock\_t clock(void)
+###### 2
 
 * Comportamento: obtém o tempo decorrido, em milissegundos, desde o início do programa.
 * Retorno: tempo decorrido.
 
-<hr>
+---
 
-<h3 id="3">char* ctime(const time_t*)</h3>
+### char\* ctime(const time\_t\*)
+###### 3
 
-* Comportamento: calcula o tempo decorrido (`const time_t`) desde *Jan 00:00:00am 1970* (baseado no [Coordinated Universal Time - UTC](https://en.wikipedia.org/wiki/UTC "Wikipédia")) e constrói uma cadeia de caracteres com o mesmo formato do retorno de <a href="#1"><code>asctime</code></a>.
-* Retorno: o endereço de uma cadeia de caracteres estátca.
+* Comportamento: calcula o tempo decorrido (`const time_t*`) desde *Jan 00:00:00am 1970\*
+(baseado no [Coordinated Universal Time - UTC][utc]) e constrói uma cadeia de caracteres
+com o mesmo formato do retorno de [`asctime`](#1).
+* Retorno: o endereço de uma cadeia de caracteres estática.
 
-<br>
+> [!NOTE]
+> [`ctime`](#3), [`gmtime`](#5) e [`localtime`](#7) compartilham a mesma estrutura
+> estática, logo chamadas de ambas estas funções poderão alterar seus valores.
 
 > [!TIP]
-> Tal função tem acesso a uma estrutura estática (`struct tm`) compartilhada entre <a href="#5"><code>gmtime</code></a> e <a href="#7"><code>localtime</code></a>, logo chamadas de ambas estas funções poderão alterar seus valores.
+> Ou seja: *Jan 00:00:00am 1970\* (em formato numérico) **menos** o conteúdo de
+> `const time_t*`.
 
-<br>
+---
 
-<hr>
-
-<h3 id="4">double difftime(time_t-0, time_t-1)</h3>
+### double difftime(time\_t0, time\_t1)
+###### 4
 
 * Comportamento: calcula a diferença entre dois espaços de tempo.
 * Retorno: a diferença.
 
-<hr>
+---
 
-<h3 id="5">struct tm* gmtime(const time_t*)</h3>
+### struct tm\* gmtime(const time\_t\*)
+###### 5
 
-* Comportamento: Converte `const time_t` em uma estrutura `struct tm`, baseado no formato [Coordinated Universal Time - UTC](https://en.wikipedia.org/wiki/UTC "Wikipédia").
+* Comportamento: Converte `const time_t*` em uma estrutura `struct tm`, baseado no formato
+[Coordinated Universal Time - UTC][utc].
 * Retorno: o endereço para uma estrutura estática.
 
-<br>
+> [!NOTE]
+> [`ctime`](#3), [`gmtime`](#5) e [`localtime`](#7) compartilham a mesma estrutura
+> estática, logo chamadas de ambas estas funções poderão alterar seus valores.
 
 > [!TIP]
-> A estrutura, cujo endereço é retornado, é compartilhada entre <a href="#3"><code>ctime</code></a>, <a href="#5"><code>gmtime</code></a> e <a href="#7"><code>localtime</code></a>, logo chamadas de ambas estas funções poderão alterar seus valores.
+> Por conta de compartilhar sua estrutura estática, tal função tende a não ser muito
+> segura, principalmente para se trabalhar com *threads*, por conta disso, alguns *padrões*
+> criaram suas próprias versões dela, as quais contém as medidas necessárias para torná-la
+> segura. Ambas apresentam-se abaixo:
+> 
+> #### struct tm\* [gmtime\_r][gmtime_r](const time\_t\*, struct tm\*)
+> ###### [`POSIX`][posix]
+> 
+> * Diferencial: armazena o resultado em seu segundo argumento.
+> * Retorno: seu segundo argumento ou `NULL`, em caso de falha.
+> 
+> #### errno\_t [gmtime\_s][gmtime_s](struct tm\*, const time\_t\*)
+> ###### [Microsoft CRT][ms-crt]
+> 
+> * Diferencial: armazena o resultado em seu primeiro argumento.
+> * Retorno: `0`, em caso de sucesso, ou um valor diferente de zero.
 
-<br>
+---
 
-> [!TIP]
-> Por compartilhar uma estrutura estática, essa função tende a não ser muito *segura*, principalmente para trabalhar-se com *threads*, por causa disso o padrão [`POSIX`](https://en.wikipedia.org/wiki/POSIX "Wikipédia") e o padrão [`Microsoft/Windows CRT`](https://learn.microsoft.com/en-us/cpp/c-runtime-library/windows-platforms-crt?view=msvc-170 "Microsoft") criaram suas próprias versões desta função, sendo elas, respectivamente, <a href="https://pubs.opengroup.org/onlinepubs/9799919799/functions/gmtime_r.html" title="Pubs.opengroun"><code>struct tm* gmtime_r(const time_t*, struct tm*)</code></a> e <a href="https://learn.microsoft.com/en-us/cpp/c-runtime-library/reference/gmtime-s-gmtime32-s-gmtime64-s?view=msvc-170" title="Microsoft"><code>errno_t gmtime_s(struct tm*, const time_t*)</code></a> O que as difere é o fato de que os valores são atribuidos a uma estrutura passado pelo usuário (`struct tm*`), ao invés de uma estrutura estática. A versão POSIX retorna o argumento `struct tm*` ou `NULL` em caso de falha, já a versão `CRT` retorná `0` ou um cógigo de erro.
+### struct tm\* localtime(const time\_t\*)
+###### 6
 
-<br>
-
-<hr>
-
-<h3 id="6">struct tm* localtime(const time_t*)</h3>
-
-* Comportamento: Converte `const time_t` em uma estrutura `struct tm`, baseado no horário local e levando em conta o "horário de verão".
+* Comportamento: Converte `const time_t` em uma estrutura `struct tm`, baseado no horário
+local e levando em conta o "horário de verão".
 * Retorno: o endereço para uma estrutura estática.
 
-<br>
+> [!TIP]
+> A estrutura, cujo endereço é retornado, é compartilhada entre [`ctime`](#3), [`gmtime`](#5)
+e [`localtime`](#7), logo chamadas de ambas estas funções poderão alterar seus valores.
 
 > [!TIP]
-> A estrutura, cujo endereço é retornado, é compartilhada entre <a href="#3"><code>ctime</code></a>, <a href="#5"><code>gmtime</code></a> e <a href="#7"><code>localtime</code></a>, logo chamadas de ambas estas funções poderão alterar seus valores.
+> Por conta de compartilhar sua estrutura estática, tal função tende a não ser muito
+> segura, principalmente para se trabalhar com *threads*, por conta disso, alguns *padrões*
+> criaram suas próprias versões dela, as quais contém as medidas necessárias para torná-la
+> segura. Ambas apresentam-se abaixo:
+> 
+> #### struct tm\* [localtime\_r][localtime_r](const time\_t\*, struct tm\*)
+> ###### [`POSIX`][posix]
+> 
+> * Diferencial: armazena o resultado em seu segundo argumento.
+> * Retorno: seu segundo argumento ou `NULL`, em caso de falha.
+> 
+> #### errno\_t [localtime\_s][localtime_s](struct tm\*, const time\_t\*)
+> ###### [Microsoft CRT][ms-crt]
+> 
+> * Diferencial: armazena o resultado em seu primeiro argumento.
+> * Retorno: `0`, em caso de sucesso, ou um valor diferente de zero.
 
-<br>
+---
 
-> [!TIP]
-> Por compartilhar uma estrutura estática, essa função tende a não ser muito *segura*, principalmente para trabalhar-se com *threads*, por causa disso o padrão [`POSIX`](https://en.wikipedia.org/wiki/POSIX "Wikipédia") e o padrão [`Microsoft/Windows CRT`](https://learn.microsoft.com/en-us/cpp/c-runtime-library/windows-platforms-crt?view=msvc-170 "Microsoft") criaram suas próprias versões desta função, sendo elas, respectivamente, <a href="https://pubs.opengroup.org/onlinepubs/9699919799/functions/localtime.html" title="Pubs.opengroun"><code>struct tm* localtime_r(const time_t*, struct tm*)</code></a> e <a href="https://learn.microsoft.com/en-us/cpp/c-runtime-library/reference/localtime-s-localtime32-s-localtime64-s?view=msvc-170&viewFallbackFrom=vs-2019" title="Microsoft"><code>errno_t localtime_s(struct tm*, const time_t*)</code></a> O que as difere é o fato de que os valores são atribuidos a uma estrutura passado pelo usuário (`struct tm*`), ao invés de uma estrutura estática. A versão POSIX retorna o argumento `struct tm*` ou `NULL` em caso de falha, já a versão `CRT` retorná `0` ou um cógigo de erro.
+### time\_t mktime(struct tm\*)
+###### 7
 
-<br>
-
-<hr>
-
-<h3 id="7">time_t mktime(struct tm*)</h3>
-
-* Comportamento: converte `struct tm*` para `time_t`.
+* Comportamento: converte `struct tm\*` para `time_t`.
 * Retorno: o valor convertido ou `-1` em caso de erro.
 
-<hr>
+---
 
-<h3 id="8">time_t time(time_t*)</h3>
+### time\_t time(time\_t\*)
+###### 8
 
-* Comportamento: obtém o tempo decorrido desde *01 Jan 1970 00:00:00am* ([Relógio Unix](https://en.wikipedia.org/wiki/Unix_time "Wikipédia")), baseado no relógio do sistema. Caso `time_t*` seja diferente de `NULL`, seu retorno lhe será atribuído;
+* Comportamento: obtém o tempo decorrido desde *01 Jan 1970 00:00:00am*
+([Relógio Unix][unix-time]), baseado no relógio do sistema. Caso `time_t*` seja diferente
+de `NULL`, o retorno lhe será atribuído.
 * Retorno: o tempo decorrido, em segundos.
 
-<hr>
+---
 
-<h3 id="9">size_t strftime(char*, size_t, const char*, const struct tm*)</h3>
+### size\_t strftime(char\*, size\_t, const char\*, const struct tm\*)
+###### 9
 
-* Comportamento: constrói uma cadeia de caracteres com formato `const char*`, usando os valores presente em `const struct tm*`, e armazena-a em caracteres de `char*`, que possui `size_t` de comprimento total (com `'\0'` incluso na contagem).
-* Retorno: a quantidade de caracteres que foram escritos em `char*` menor um (`'\0'`).
+* Comportamento: constrói uma cadeia de caracteres baseado no formato especificado por
+`const char\*`, usando os valores presentes em `const struct tm\*`, e armazena-a em
+caracteres de `char\*`, que possui `size_t` de comprimento total (com `'\0'` incluso na
+contagem).
+* Retorno: o comprimento da cadeia dada à `char\*`.
 
-<br>
-
-##### Formatos (para `const char*`)
+##### Formatos (para `const char\*`)
 
 | Código | Descrição                                      | Exemplo |
 | :-:    | :--                                            | :-:     |
 | a      | Nome do dia da semana abreviado                | Thu |
 | A      | Nome do dia da semana                          | Thursday |
-| b      | Nome do mês abreriado                          | Aug |
+| b      | Nome do mês abreviado                          | Aug |
 | B      | Nome do mês                                    | August |
 | c      | Data e hora                                    | Thu Aug 18 13:58:09 2025 |
 | C      | Ano dividido por 100 e convertido para inteiro | 56 |
@@ -174,28 +221,24 @@ Este arquivo de cabeçalho declara uma macro, dois tipos, uma estrutura e divers
 | R      | Horário em formato de 24h                      | 13:58 |
 | s      | Segundos (`00-61`)                             | 19 |
 | t      | Tabulação horizontal (`'\t'`)                  |  |
-| T      | Hora:Minutos:Segundos (baseado na [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601 ))               | 13:58:09 |
-| u      | *Índices* dos dias da semana (baseado na [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601 ); `1-7`) | 2 |
+| T      | Hora:Minutos:Segundos (baseado na [ISO 8601][iso-8601])               | 13:58:09 |
+| u      | *Índices* dos dias da semana (baseado na [ISO 8601][iso-8601]; `1-7`) | 2 |
 | U      | *Índices* das semanas cujo primeiro dia é o Domingo (`00-53`))                                       | 52 |
-| V      | *Índices* das semanas (baseado na [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601 ); `01-53`)      | 35 |
+| V      | *Índices* das semanas (baseado na [ISO 8601][iso-8601]; `01-53`)      | 35 |
 | w      | *Índices* dos dias da semana (`0-6`)                                                                 | 5 |
-| W      | *Índices* das semandas cujo primeiro dia é Segunda-Feira (`00-53`)                                   | 17 |
-| x      | Mês/Dia/Dois últimos digitos do ano                                                                  | 07/29/25 |
+| W      | *Índices* das semanas cujo primeiro dia é Segunda-Feira (`00-53`)                                   | 17 |
+| x      | Mês/Dia/Dois últimos dígitos do ano                                                                  | 07/29/25 |
 | X      | Hora:Minutos:Segundos                                                                                | 13:58:09 |
-| y      | Últimos dois digitos do ano                                                                          | 25 |
+| y      | Últimos dois dígitos do ano                                                                          | 25 |
 | Y      | Ano                                                                                                  | 2025 |
-| z      | Deslocamento (baseado na [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601 )) do fuso-horário do [Coordinated Universal Time (UTC)](https://en.wikipedia.org/wiki/UTC "Wikipédia")) (`1min = 1`; `1h = 100`). Se o fuso-horário não puder ser determinado, nada será imprimido | +100 |
-| Z      | Nome do fuso-horário abreviado. Se o fuso-horário não puder ser determinado, nada será imprimido | CDT |
+| z      | Deslocamento (baseado na [ISO 8601][iso-8601]) do fuso horário do [Coordinated Universal Time (UTC)][utc]) (`1min = 1`; `1h = 100`). Se o fuso horário não puder ser determinado, nada será imprimido | +100 |
+| Z      | Nome do fuso horário abreviado. Se o fuso horário não puder ser determinado, nada será imprimido | CDT |
 | %      | O caractere `%`                                                                                  | "%" |
-
-<br>
 
 > [!NOTE]
 > Todos devem ser prefixados por `"%"` (`"%a"`; `"%A"`; ...).
 
-<br>
-
-<hr>
+---
 
 ### Fontes:
 * [wikipedia: time.h](https://pt.wikipedia.org/wiki/Time.h )
@@ -204,4 +247,4 @@ Este arquivo de cabeçalho declara uma macro, dois tipos, uma estrutura e divers
 * [wikipedia: time\_t](https://en.wikipedia.org/w/index.php?title=Time_t&oldid=450752800 )
 * [cplusplus: strftime formats](https://cplusplus.com/reference/ctime/strftime/ )
 
-<hr>
+---

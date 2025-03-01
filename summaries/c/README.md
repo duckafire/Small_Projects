@@ -30,3 +30,4 @@
 
 > [!TIP]
 > Comece por [`stddef.h`](https://github.com/duckafire/small_projects/blob/main/summaries/c/stddef.md "Resumo de stddef.h")
+

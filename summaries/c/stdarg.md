@@ -1,66 +1,55 @@
 # stdarg
-Fornece um conjunto de quatro macros e um tipo que podem ser usados para acessar os argumentos indefinidos (`...`) de uma dada função.
+Fornece meios de se trabalhar com filas de argumentos indefinidos (`...`).
 
-<hr>
+---
 
-* `va\_list`: tipo dos parâmetros, argumentos e retorno dos macros abaixo.
+* `va_list`: tipo capaz de armazenar a fila de argumentos indefinidos.
 
-<hr>
+---
 
-<h3>va_start(va_list, last_func_arg)</h3>
+### va\_start(va\_list, foo)
+###### 
 
-* Comportamento: inicializa a lista.
+* Comportamento: inicializa `va_list`.
 * Retorno: nenhum.
 
-<br>
+> [!IMPORTANT]
+> `foo` deve ser o último argumento da função, ou seja, aquele anterior à fila.
+
+---
+
+### va\_arg(va\_list, type)
+###### 
+
+* Comportamento: obtém e remove um item de `va_list`.
+* Retorno: o item obtido.
+* 
+> [!CAUTION]
+> `va_arg` é incapaz de identificar o final da lista.
 
 > [!IMPORTANT]
-> `last_func_arg` é referente ao último argumento da função, antes de `...` (`void example(int foo, ...)`).
+> `type` é o tipo do valor extraído da lista (`char`, `int`, ...).
 
-<br>
+---
 
-<hr>
+### va\_end(va\_list)
+###### 
 
-<h3>va_arg(va_list, type)</h3>
-
-* Comportamento: obtém cada um dos valores da lista, a cada chamada.
-* Retorno: cada um dos valores presentes na list, na ordem em que eles são obtidos.
-
-<br>
-
-> [!IMPORTANT]
-> `type` é o tipo do valor extraído da lista. Uma lista pode possuir valores de tipos diversos, mas o tipo correto deve ser informado a `var_arg`.
-
-<br>
-
-> [!IMPORTANT]
-> `va_arg` não consegue identificar o final da lista, o que pode levá-lo a retornar lixo.
-
-<br>
-
-> [!TIP]
-> Especifique o comprimento da lista como último parâmetro da função (`void foo(int len, ...)`), ou use um "valor de quebra" (`NULL`, `-1`, ...), para interromper a leitura da lista, assim evitando o lixo.
-
-<br>
-
-<hr>
-
-<h3>va_end(va_list)</h3>
-
-* Comportamento: finaliza a lista.
+* Comportamento: encerra `va_list`.
 * Retorno: nenhum.
 
-<hr>
+---
 	
-<h3>va_copy(va_list0, va_list1)</h3>
+### va\_copy(va\_list0, va\_list1)
+###### 
 
-* Comportamento: copia a lista de argumentos de `va_list1` para `va_list0`.
-* Retono: nenhum.
+* Comportamento: copia o conteúdo de `va_list1` para `va_list0`.
+* Retorno: nenhum.
 
-<hr>
+---
 
 #### Fontes:
 * [wikipedia: stdarg.h](https://en.wikipedia.org/wiki/stdarg.h )
 * [technthenet: example](https://www.techonthenet.com/c_language/standard_library_functions/stdarg_h/va_arg.php )
 
-<hr>
+---
