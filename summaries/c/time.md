@@ -58,7 +58,7 @@ gerenciamento do tempo.
 ### char\* asctime(const struct tm\*)
 ###### 1
 
-* Comportamento: converte `const struct tm\*` em um cadeia de caracteres de formatada.
+* Comportamento: converte `const struct tm*` em um cadeia de caracteres de formatada.
 * Retorno: o endereço de uma cadeia de caracteres estática.
 
 > [!NOTE]
@@ -169,7 +169,7 @@ e [`localtime`](#7), logo chamadas de ambas estas funções poderão alterar seu
 ### time\_t mktime(struct tm\*)
 ###### 7
 
-* Comportamento: converte `struct tm\*` para `time_t`.
+* Comportamento: converte `struct tm*` para `time_t`.
 * Retorno: o valor convertido ou `-1` em caso de erro.
 
 ---
@@ -188,12 +188,12 @@ de `NULL`, o retorno lhe será atribuído.
 ###### 9
 
 * Comportamento: constrói uma cadeia de caracteres baseado no formato especificado por
-`const char\*`, usando os valores presentes em `const struct tm\*`, e armazena-a em
-caracteres de `char\*`, que possui `size_t` de comprimento total (com `'\0'` incluso na
+`const char*`, usando os valores presentes em `const struct tm*`, e armazena-a em
+caracteres de `char*`, que possui `size_t` de comprimento total (com `'\0'` incluso na
 contagem).
-* Retorno: o comprimento da cadeia dada à `char\*`.
+* Retorno: o comprimento da cadeia dada à `char*`.
 
-##### Formatos (para `const char\*`)
+##### Formatos (para `const char*`)
 
 | Código | Descrição                                      | Exemplo |
 | :-:    | :--                                            | :-:     |
