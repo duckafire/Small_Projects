@@ -9,3 +9,4 @@ tests/*/test
 tests/"c -> c++"/test
 tests/"c++ -> c"/test
 tests/java/*.class
+tests/javascript/*.html
