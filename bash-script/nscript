@@ -66,7 +66,7 @@ declare -r -a LANG_HEADERS=(
 '#include <stdio.h>\n\nint main(int argc, char *argv[]){\n\tputs("Hello world");\n\n\treturn 0;\n}'
 '#include <iostream>\n\nint main(int argc, char *argv[]){\n\tstd::cout << "Hello world!" << std::endl;\n\treturn;\n}'
 ':root{\n\t\n}\n\n*{\n\t\n}\n\nhtml{\n\t\n}\n\n\nhtml:before{\n\tcontent: "Hello world!";\n}\n\nbody{\n\t\n}'
-'<!DOCTYPE html>\n<html lang="en">\n<head>\n\t<metacharset="UTF-8">\n\t<meta name="viewport" content="width=device-width, initial-scale=1.0">\n\t<title>Hello world!</title>\n</head>\n<body>\n\t\n</body>\n</html>\n'
+'<!DOCTYPE html>\n<html lang="en">\n<head>\n\t<meta charset="UTF-8">\n\t<meta name="viewport" content="width=device-width, initial-scale=1.0">\n\t<title>Hello world!</title>\n</head>\n<body>\n\t\n</body>\n</html>\n'
 'console.log("Hello world!");\n'
 'print("Hello world!")\n'
 'print("Hello world!")\n'
