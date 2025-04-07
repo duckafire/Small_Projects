@@ -296,24 +296,6 @@ function format_status(){
 		508) msg="Loop Detected (WebDAV; RFC 5842)" ;;
 		510) msg="Not Extended (RFC 2774)" ;;
 		511) msg="Network Authentication Required (RFC 6585)" ;;
-		218) msg="This is fine (Apache HTTP Server)" ;;
-		419) msg="Page Expired (Laravel Framework)" ;;
-		420) msg="Method Failure (Spring Framework)" ;;
-		420) msg="Enhance Your Calm (Twitter)" ;;
-		430) msg="Request Header Fields Too Large (Shopify)" ;;
-		430) msg="Shopify Security Rejection (Shopify)" ;;
-		450) msg="Blocked by Windows Parental Controls (Microsoft)" ;;
-		498) msg="Invalid Token (Esri)" ;;
-		499) msg="Token Required (Esri)" ;;
-		509) msg="Bandwidth Limit Exceeded (Apache Web Server/cPanel)" ;;
-		529) msg="Site is overloaded" ;;
-		530) msg="Site is frozen" ;;
-		530) msg="Origin DNS Error (Shopify)" ;;
-		540) msg="Temporarily Disabled (Shopify)" ;;
-		598) msg="(Informal convention) Network read timeout error" ;;
-		599) msg="Network Connect Timeout Error" ;;
-		783) msg="Unexpected Token (Shopify)" ;;
-		999) msg="Non-standard" ;;
 	esac
 
 	function openStyle(){
