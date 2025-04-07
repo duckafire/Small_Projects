@@ -6,7 +6,7 @@
 # -O, --ojson
 
 ## NAME:       Request Manager
-## VERSION:    0.0.1
+## VERSION:    0.0.2
 ## AUTHOR:     DuckAfire
 ## LICENSE:    MIT
 ## REPOSITORY: https://github.com/duckafire/Small_Projects/tree/main/bash-script
@@ -24,7 +24,7 @@
 #$ -n, --nstyle  : remove the style of the output.
 #$ -v, --version : print the script version.
 
-#@ v0.0.1
+#@ v0.0.2
 
 # CODE CONVENTIONS #####
 #
@@ -180,11 +180,11 @@ declare -r ARG_url="${ARGS[1]}"
 check_server
 
 
+# before, to use inside the function
+declare -r ARG_json=""
+
 function check_json(){
-	if [[ $ARG_argsQuantity -eq 2 ]]; then
-		echo ""
-		return
-	fi
+	[[ $ARG_argsQuantity -eq 2 ]] && return
 
 	local -r JSON="${ARGS[@]:2}"
 	echo "$JSON" | jq . &> /dev/null
@@ -193,10 +193,10 @@ function check_json(){
 		fatal_error "JSON -> $(echo "$JSON" | jq . 2>&1)"
 	fi
 
-	echo -e "$(echo "$JSON" | jq .)";
+	ARG_json="$(echo "$JSON" | jq .)";
 }
 
-declare -r ARG_json="$(check_json)"
+check_json
 
 
 
