@@ -1,0 +1,258 @@
+#!/usr/bin/env bash
+
+## NAME:       New Bash Script
+## VERSION:    1.0.0
+## AUTHOR:     DuckAfire
+## LICENSE:    MIT
+## REPOSITORY: https://github.com/duckafire/Small_Projects/tree/main/bash-script
+## DEPENDENCES:
+## * bash      >= v5.0
+## * sed       >= v4.7
+## * coreutils >= v8.30
+
+#$ nbs [options | files-name...]
+#$ Options:
+#$ -f, --force   : force the replacement of existent files.
+#$ -h, --help    : display this message.
+#$ -H, --header  : show information about this script.
+#$ -v, --version : print the script version.
+
+#@ v1.0.0
+
+# CODE CONVENTIONS #####
+#
+# * Explicity declaration with `declare`, `local` and `function`
+# * Explicity identifier type (-i; -a; -A; ...)
+# * Explicity identifiers/names
+#
+# * Only arrays must be used with `${}`
+# * All that "return" a string must be between double quotes
+# * Arrays must be "readonly", except ARGS
+#
+# * Algorithm must be inside of functiaons
+# * Only declarations and functions call outside functions
+# * No aligned functions (except to "single command functions")
+# * Functions name must be formed by two, or more, words
+#
+# * Arguments:
+# ** This argument convention are not to apply for "single command functions"
+# ** Attribute them for "readonly" variables (`local -r arg_foo="$1"`)
+# ** Prefix their variables name with "arg_" (local) or "ARG_" (global), except to ARGS
+#
+# * Code style
+# ** camelCase            for variables and arrays
+# ** PascalCase           for variables and arrays
+# ** snake_case           for function
+# ** SCREAMING_SNAKE_CASE for constants (except arrays and "argument-variables")
+
+# SHARED CODE #####
+
+function fatal_error(){
+	local -r arg_msg="$1"
+
+	echo -e '[!] '"$arg_msg"
+	exit 1
+}
+
+function check_option_execution(){
+	local -r arg_string="$1"
+
+	local -ra supportedOptions=("-H" "--header" "-h" "--help" "-v" "--version")
+	local -i id=-1
+	local regex=""
+
+	for i in $(seq 0 $(( ${#supportedOptions[@]} - 1 ))); do
+		if [[ "$arg_string" = "${supportedOptions[$i]}" ]]; then
+			id=$i
+			break
+		fi
+	done
+
+	test $id -eq -1 && return
+
+	case $i in
+		0 | 1) regex='^\#\# ' ;; # -H, --header
+		2 | 3) regex='^\#\$ ' ;; # -h, --help
+		4 | 5) regex='^\#\@ ' ;; # -v, --version
+	esac
+
+	grep "$regex" "$PROGRAM_PATH/$PROGRAM_NAME" | sed -E s/"$regex"//g
+	echo "" # line feed
+	exit 0
+}
+
+set -u
+set -o pipefail
+
+declare -ri TRUE=1
+declare -ri FALSE=0
+declare -a ARGS=("${@}")
+
+declare -r ARG_programName="$0"
+declare -r PROGRAM_PATH="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &> /dev/null && pwd)"
+declare -r PROGRAM_NAME="$(basename "$ARG_programName")"
+
+declare -ri ARG_argsQuantity=$#
+
+declare -i ReplaceFiles=$FALSE
+
+
+
+
+# SCRIPT
+
+function are_there_none_arguments(){
+	if [[ $ARG_argsQuantity -eq 0 ]]; then
+		echo "Try: nbs --help"
+		exit 0
+	fi
+}
+
+function check_replace_file_option(){
+	local -r arg_firstArg="$1"
+
+	if [[ "$arg_firstArg" = "-f" ]] || [[ "$arg_firstArg" = "--force" ]]; then
+		ReplaceFiles=$TRUE
+	fi
+}
+
+function create_files(){
+	local -a arg_filesList
+	
+	if [[ $ReplaceFiles -eq $FALSE ]]; then
+		arg_filesList=(${@})
+	else
+		arg_filesList=(${@:2})
+	fi
+
+	for fileName in ${arg_filesList[@]}; do
+		if [[ $ReplaceFiles -eq $FALSE ]] && [[ -f "$fileName" ]]; then
+			echo "The file '$fileName' already exists."
+			continue
+		fi
+
+		echo -e '#!/usr/bin/env bash
+
+		## NAME:       Foo
+		## VERSION:    0.0.1
+		## AUTHOR:     DuckAfire
+		## LICENSE:    MIT
+		## REPOSITORY: https://github.com/duckafire/Small_Projects/tree/main/bash-script
+		## DEPENDENCES:
+		## * bash      >= v5.0
+		## * coreutils >= v8.30
+
+		#$ foo
+
+		#@ v0.0.1
+
+		# CODE CONVENTIONS #####
+		#
+		# * Explicity declaration with `declare`, `local` and `function`
+		# * Explicity identifier type (-i; -a; -A; ...)
+		# * Explicity identifiers/names
+		#
+		# * Only arrays must be used with `${}`
+		# * All that "return" a string must be between double quotes
+		# * Arrays must be "readonly", except ARGS
+		#
+		# * Algorithm must be inside of functiaons
+		# * Only declarations and functions call outside functions
+		# * No aligned functions (except to "single command functions")
+		# * Functions name must be formed by two, or more, words
+		#
+		# * Arguments:
+		# ** This argument convention are not to apply for "single command functions"
+		# ** Attribute them for "readonly" variables (`local -r arg_foo="$1"`)
+		# ** Prefix their variables name with "arg_" (local) or "ARG_" (global), except to ARGS
+		#
+		# * Code style
+		# ** camelCase            for variables and arrays
+		# ** PascalCase           for variables and arrays
+		# ** snake_case           for function
+		# ** SCREAMING_SNAKE_CASE for constants (except arrays and "argument-variables")
+
+		# SHARED CODE #####
+
+		function fatal_error(){
+			local -r arg_msg="$1"
+
+			echo -e ''[!] ''"$arg_msg"
+			exit 1
+		}
+
+		function check_dependences(){
+			# dep == dependences
+			local -ri arg_depLength=$1
+			local -ri arg_depOriginFirst=$(( $arg_depLength + 2 ))
+			local -ra arg_dep=(${@:2:$arg_depLength})
+			local -ra arg_depOrigin=(${@:$arg_depOriginFirst})
+
+			for i in $(seq 0 $(( $arg_depLength - 1 ))); do
+				if ! type "${arg_dep[$i]}" &> /dev/null; then
+					fatal_error "Dependence not found: ${arg_depOrigin[$i]}"
+				fi
+			done
+		}
+
+		function check_option_execution(){
+			local -r arg_string="$1"
+
+			local -ra supportedOptions=("-H" "--header" "-h" "--help" "-v" "--version")
+			local -i id=-1
+			local regex=""
+
+			for i in $(seq 0 $(( ${#supportedOptions[@]} - 1 ))); do
+				if [[ "$arg_string" = "${supportedOptions[$i]}" ]]; then
+					id=$i
+					break
+				fi
+			done
+
+			test $id -eq -1 && return
+
+			case $i in
+				0 | 1) regex=''^\#\# '' ;; # -H, --header
+				2 | 3) regex=''^\#\$ '' ;; # -h, --help
+				4 | 5) regex=''^\#\@ '' ;; # -v, --version
+			esac
+
+			grep "$regex" "$PROGRAM_PATH/$PROGRAM_NAME" | sed -E s/"$regex"//g
+			echo "" # line feed
+			exit 0
+		}
+
+		set -u
+		set -o pipefail
+
+		declare -ri TRUE=1
+		declare -ri FALSE=0
+		declare -a ARGS=("${@}")
+
+		declare -r ARG_programName="$0"
+		declare -r PROGRAM_PATH="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &> /dev/null && pwd)"
+		declare -r PROGRAM_NAME="$(basename "$ARG_programName")"
+
+		declare -ri ARG_argsQuantity=$#
+
+
+
+
+		# START
+
+
+
+		exit 0' | sed -E 's/\t\t//g' > "$fileName"
+
+		chmod 700 "$fileName"
+	done
+}
+
+declare -r ARG_firstArg="$1"
+
+are_there_none_arguments
+check_option_execution "$ARG_firstArg"
+check_replace_file_option "$ARG_firstArg"
+create_files "${ARGS[@]}"
+
+exit 0
