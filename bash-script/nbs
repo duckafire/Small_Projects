@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 ## NAME:       New Bash Script
-## VERSION:    1.0.0
+## VERSION:    1.0.1
 ## AUTHOR:     DuckAfire
 ## LICENSE:    MIT
 ## REPOSITORY: https://github.com/duckafire/Small_Projects/tree/main/bash-script
@@ -17,7 +17,7 @@
 #$ -H, --header  : show information about this script.
 #$ -v, --version : print the script version.
 
-#@ v1.0.0
+#@ v1.0.1
 
 # CODE CONVENTIONS #####
 #
@@ -125,6 +125,8 @@ function create_files(){
 		arg_filesList=(${@:2})
 	fi
 
+	local -r singleQuote="'"
+
 	for fileName in ${arg_filesList[@]}; do
 		if [[ $ReplaceFiles -eq $FALSE ]] && [[ -f "$fileName" ]]; then
 			echo "The file '$fileName' already exists."
@@ -175,51 +177,51 @@ function create_files(){
 		# SHARED CODE #####
 
 		function fatal_error(){
-			local -r arg_msg="$1"
+		~local -r arg_msg="$1"
 
-			echo -e ''[!] ''"$arg_msg"
-			exit 1
+		~echo -e '$singleQuote'[!] '$singleQuote'"$arg_msg"
+		~exit 1
 		}
 
 		function check_dependences(){
-			# dep == dependences
-			local -ri arg_depLength=$1
-			local -ri arg_depOriginFirst=$(( $arg_depLength + 2 ))
-			local -ra arg_dep=(${@:2:$arg_depLength})
-			local -ra arg_depOrigin=(${@:$arg_depOriginFirst})
+		~# dep == dependences
+		~local -ri arg_depLength=$1
+		~local -ri arg_depOriginFirst=$(( $arg_depLength + 2 ))
+		~local -ra arg_dep=(${@:2:$arg_depLength})
+		~local -ra arg_depOrigin=(${@:$arg_depOriginFirst})
 
-			for i in $(seq 0 $(( $arg_depLength - 1 ))); do
-				if ! type "${arg_dep[$i]}" &> /dev/null; then
-					fatal_error "Dependence not found: ${arg_depOrigin[$i]}"
-				fi
-			done
+		~for i in $(seq 0 $(( $arg_depLength - 1 ))); do
+		~~if ! type "${arg_dep[$i]}" &> /dev/null; then
+		~~~fatal_error "Dependence not found: ${arg_depOrigin[$i]}"
+		~~fi
+		~done
 		}
 
 		function check_option_execution(){
-			local -r arg_string="$1"
+		~local -r arg_string="$1"
 
-			local -ra supportedOptions=("-H" "--header" "-h" "--help" "-v" "--version")
-			local -i id=-1
-			local regex=""
+		~local -ra supportedOptions=("-H" "--header" "-h" "--help" "-v" "--version")
+		~local -i id=-1
+		~local regex=""
 
-			for i in $(seq 0 $(( ${#supportedOptions[@]} - 1 ))); do
-				if [[ "$arg_string" = "${supportedOptions[$i]}" ]]; then
-					id=$i
-					break
-				fi
-			done
+		~for i in $(seq 0 $(( ${#supportedOptions[@]} - 1 ))); do
+		~~if [[ "$arg_string" = "${supportedOptions[$i]}" ]]; then
+		~~~id=$i
+		~~~break
+		~~fi
+		~done
 
-			test $id -eq -1 && return
+		~test $id -eq -1 && return
 
-			case $i in
-				0 | 1) regex=''^\#\# '' ;; # -H, --header
-				2 | 3) regex=''^\#\$ '' ;; # -h, --help
-				4 | 5) regex=''^\#\@ '' ;; # -v, --version
-			esac
+		~case $i in
+		~~0 | 1) regex='$singleQuote'^\#\# '$singleQuote' ;; # -H, --header
+		~~2 | 3) regex='$singleQuote'^\#\$ '$singleQuote' ;; # -h, --help
+		~~4 | 5) regex='$singleQuote'^\#\@ '$singleQuote' ;; # -v, --version
+		~esac
 
-			grep "$regex" "$PROGRAM_PATH/$PROGRAM_NAME" | sed -E s/"$regex"//g
-			echo "" # line feed
-			exit 0
+		~grep "$regex" "$PROGRAM_PATH/$PROGRAM_NAME" | sed -E s/"$regex"//g
+		~echo "" # line feed
+		~exit 0
 		}
 
 		set -u
@@ -242,7 +244,7 @@ function create_files(){
 
 
 
-		exit 0' | sed -E 's/\t\t//g' > "$fileName"
+		exit 0' | sed -E 's/\t\t//g' | sed -E 's/~/\t/g' > "$fileName"
 
 		chmod 700 "$fileName"
 	done
