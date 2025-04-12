@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 ## NAME:       New Bash Script
-## VERSION:    1.0.1
+## VERSION:    1.0.2
 ## AUTHOR:     DuckAfire
 ## LICENSE:    MIT
 ## REPOSITORY: https://github.com/duckafire/Small_Projects/tree/main/bash-script
@@ -17,7 +17,7 @@
 #$ -H, --header  : show information about this script.
 #$ -v, --version : print the script version.
 
-#@ v1.0.1
+#@ v1.0.2
 
 # CODE CONVENTIONS #####
 #
@@ -144,7 +144,11 @@ function create_files(){
 		## * bash      >= v5.0
 		## * coreutils >= v8.30
 
-		#$ foo
+		#$ foo [options]
+		#$ Options:
+		#$ -h, --help    : display this message.
+		#$ -H, --header  : show information about this script.
+		#$ -v, --version : print the script version.
 
 		#@ v0.0.1
 
