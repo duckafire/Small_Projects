@@ -47,9 +47,9 @@
 # ** Prefix their variables name with "arg_" (local) or "ARG_" (global), except to ARGS
 #
 # * Code style
-# ** camelCase            for variables and arrays
-# ** PascalCase           for variables and arrays
-# ** snake_case           for function
+# ** camelCase            for global variables and arrays
+# ** PascalCase           for local variables and arrays
+# ** snake_case           for functions
 # ** SCREAMING_SNAKE_CASE for constants (except arrays and "argument-variables")
 
 # SHARED CODE #####
