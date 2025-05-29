@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="ascii" standalone="yes"?>
+<root>
+
+	<!-- it is a commentary -->
+
+	<!-- HEADER (default)
+		version (1.0): XML version.
+		encoding (utf-8): characters encoding.
+		standalone (no):
+			yes: the file is self-sufficient.
+			no: the file depende of a DTD file.
+
+		(DTD: Document Type Definition)
+	-->
+
+	<!--
+		ESCAPE CODES:
+		&amp;    &
+		&lt;     <
+		&gt;     >
+		&quot;   "
+		&apos;   '
+	-->
+
+	<container property="value">
+		<item>foo 0</item>
+		<item>foo 1</item>
+	</container>
+
+	<!-- NOTES
+		An "root element" (array or object) is necessary,
+		XML does not have standard tags or properties,
+		the "header" is optional,
+		the document is sensitive to whitespaces,
+		ALL is a string
+	-->
+
+</root>

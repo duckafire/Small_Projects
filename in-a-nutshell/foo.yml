@@ -1,0 +1,132 @@
+# it is a commentary
+
+value-options:
+    - 0
+    - 0o0
+    - 0x0
+    - 0.0
+    - 0+e0
+    - .inf
+    - -.inf
+    - .nan
+    - string
+    - 'string' # it cannot interpret "speacial content"
+    - "string" # it can interpret "speacial content"
+    - false
+    - true
+    - null
+    - ~ # null
+
+# sequences options
+
+simple-seq:
+    - 0
+    - 1
+    - 2
+
+simple-seq-2: [0, 1, 2]
+
+map-seq:
+    - language: javascript
+      extension: js
+    - language: python
+      extension: py
+
+nested-seq:
+    - child-0:
+        - anything
+    - child-1:
+        - anything
+
+seq-of-seqs:
+    - - 0
+      - 1
+    - - a
+      - b
+
+# maps options
+
+sun: sol # simple-map
+
+nested-map:
+    sea: mar
+    egg: ovo
+
+nested-map-2: {sea: mar, egg: ovo}
+
+nested-map-3: {
+    sea: mar
+    egg: ovo
+}
+
+map-of-maps:
+    child-0:
+        any: any
+    child-1:
+        any: any
+
+# complex mapping key
+
+? [0, 1]: foo # "^\? .+:" == key
+
+? - a
+  - b
+: bar
+
+? {a: 0, b: 1}: foo
+
+? c: 2
+  d: 3
+: foo
+
+# use of anchors
+
+number-0: &foo 0 # declare anchor
+number-1: *foo   # use anchor (number-1 == 0)
+
+# respect line feed
+
+paragraph-0: > # convert line feed to spaces
+    1 2 3
+    4 5 6
+    7 8 9
+
+paragraph-1: > # maintain line feed (less indentation)
+    1 2 3
+    4 5 6
+    7 8 9
+
+paragraph-2: >
+    1 2 3
+    4 5 6
+
+
+
+    7 8 9
+a b d # they are included - in `p...-2` - too!
+
+# tags
+
+# !!str: force the value to be interpreted like a string.
+# !!int: force the value to be interpreted like a number.
+# !!float: force the value to be interpreted like a float.
+# !!bool: force the value to be interpreted like a bool.
+# !!seq: force the value to be interpreted like a seq.
+# !!map: force the value to be interpreted like a map.
+# !!binary: indicate that the value is a binary.
+# !!omap: indicate that the children map order must be respected.
+# !!set: indicate that the item must be interpreted as a set.
+
+# finish the last stream and start a new,
+# simplifying: start a new document stream.
+---
+key: eulav
+
+# finish the last stream
+...
+
+#
+# NOTES:
+# YAML does not have standard keys.
+# `yaml` and `yml` are valid file extensions.
+# Use spaces, instead tabulations, to indentation.

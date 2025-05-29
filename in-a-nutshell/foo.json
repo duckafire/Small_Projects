@@ -1,0 +1,21 @@
+{
+	"key": "value",
+	"valueOptions": [
+		0,
+		0.0,
+		"string",
+		false,
+		true,
+		null,
+		[],
+		{}
+	],
+
+	"NOTES": [
+		"No support to commentaries",
+		"An 'root element' (array or object) is necessary",
+		"Indentation is optional",
+		"Only double quotes to declare strings",
+		"Last item must not be prefixed by a comman"
+	]
+}
