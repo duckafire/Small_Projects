@@ -103,29 +103,30 @@ paragraph-2: >
 
 
     7 8 9
-a b d # they are included - in `p...-2` - too!
+a b d # they are included - in `paragraph-2` - too!
 
 # tags
 
-# !!str: force the value to be interpreted like a string.
-# !!int: force the value to be interpreted like a number.
-# !!float: force the value to be interpreted like a float.
-# !!bool: force the value to be interpreted like a bool.
-# !!seq: force the value to be interpreted like a seq.
-# !!map: force the value to be interpreted like a map.
-# !!binary: indicate that the value is a binary.
-# !!omap: indicate that the children map order must be respected.
-# !!set: indicate that the item must be interpreted as a set.
+# !!str     force that the value to be interpreted like a string.
+# !!int     force that the value to be interpreted like a number.
+# !!float   force that the value to be interpreted like a float.
+# !!bool    force that the value to be interpreted like a bool.
+# !!seq     explicit that the value is a seq.
+# !!map     explicit that the value is a map.
+# !!binary  explicit that the value is a binary.
+# !!omap    indicate that the children map order must be respected.
+# !!set     indicate that the item must be interpreted as a set.
+
+integer: !!int 0 # example
 
 # finish the last stream and start a new,
 # simplifying: start a new document stream.
 ---
-key: eulav
+key: value2
 
 # finish the last stream
 ...
 
-#
 # NOTES:
 # YAML does not have standard keys.
 # `yaml` and `yml` are valid file extensions.
