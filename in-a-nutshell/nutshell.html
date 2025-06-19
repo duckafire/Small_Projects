@@ -1,120 +1,147 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"> 
 <html lang="en-US">
-<head>
+<head><!-- contains page informations -->
+	<!-- this is a commentary -->
+
+	<!-- using the XHTML Pattern -->
+
+	<title>HTML in a nutshell</title>
+	<link rel="icon" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-original.svg"/>
+
+	<!-- page metadata -->
 	<meta charset="UTF-8"/>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 	<meta name="description" content="page summary/description"/>
 	<meta name="keywords" content="foo, bar, foobar"/>
 	<meta name="author" content="DuckAfire"/>
 	<meta name="robots" content="index, follow"/>
+
+	<!-- move the user to other address after Ns -->
 	<!-- <meta http-equiv="refresh" content="5;url=http://www.example.com/"/> -->
+
+	<!-- information displayed by social medias when the page link is inside them -->
 	<meta property="og:title" content="social media title"/>
 	<meta property="og:description" content="social media description"/>
 	<meta property="og:image" content="https://image-delivery.foobar/img/cover.png"/>
 
-	<link rel="stylesheet" type='text/css' href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
+	<!-- import external css -->
+	<link rel="stylesheet" type='text/css' href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css"/>
 
-	<title>Page title</title>
-	<link rel="icon" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-original.svg"/>
+	<!-- import internal css -->
+	<!-- <link rel="stylesheet" type="text/css" href="./foo.css"/> -->
 </head>
-<body>
+<body><!-- container page structure -->
+	<!-- set the base of the relative address -->
 	<!-- <base href="https://www.example.com"> -->
 
 	<template>
-		<div>
-			<span>Lorem ipsum</span>
+		<div> <!-- division: generic element container -->
+			<span> <!-- generic text container -->
+				A template that can be "cloned" with JS and they can be putted in other place.
+				It is do not shown in page while it is between `template`.
+			</span>
 		</div>
 	</template>
 	
-	<nav>
+	<nav> <!-- navegation -->
+		<!-- information for computers; information for users -->
 		<time datetime="1970-01-01">Jan 1st 1970</time>
 		<data value="#f4ab7">Foo User</data>
 	</nav>
 
 	<header>
-		<h1>Lorem ipsum</h1>
-		<h2>Lorem ipsum</h2>
-		<h3>Lorem ipsum</h3>
-		<h4>Lorem ipsum</h4>
-		<h5>Lorem ipsum</h5>
-		<h6>Lorem ipsum</h6>
+		<!-- header (level) 1-6 -->
+		<h1>Title</h1>
+		<h2>Title</h2>
+		<h3>Title</h3>
+		<h4>Title</h4>
+		<h5>Title</h5>
+		<h6>Title</h6>
 	</header>
 
 	<main>
+		<!--
+			section is destined to group of relationed elements that
+			they do not have a better semantic tag to contain them
+		-->
 		<section>
-			<ol>
-				<li>Lorem ipsum</li>
-				<li>Lorem ipsum</li>
-				<li>Lorem ipsum</li>
+			<ol> <!-- ordered list -->
+				<li>List item</li>
+				<li>List item</li>
+				<li>List item</li>
 			</ol>
 
-			<ul>
-				<li>Lorem ipsum</li>
-				<li>Lorem ipsum</li>
-				<li>Lorem ipsum</li>
+			<ul> <!-- unordered list -->
+				<li>List item</li>
+				<li>List item</li>
+				<li>List item</li>
 			</ul>
 
-			<dl>
-				<dt>Lorem ipsum</dt>
-				<dd>Lorem ipsum</dd>
-				<dd>Lorem ipsum</dd>
-				<dd>Lorem ipsum</dd>
+			<dl> <!-- description list; description term; description description -->
+				<dt>HTML</dt>
+				<dd>Markup language for websites structure.</dd>
+
+				<dt>ECMAScript</dt>
+				<dd>Standard for scripting languages for web browsers.</dd>
 			</dl>
 		</section>
 		
+		<!-- (line) break -->
 		<br/>
 		<br/>
 
 		<article>
+			<!-- headers group -->
 			<hgroup>
-				<h1>Lorem ipsum</h1>
-				<h4>Lorem ipsum</h4>
+				<h1>Title</h1>
+				<h4>Title</h4>
 			</hgroup>
 			
+			<!-- paragraph -->
 			<p>
-			Lorem ipsum odor amet, consectetuer adipiscing elit. Potenti ultricies<wbr/>
-				inceptos, quam facilisis aliquam vehicula quis. Laoreet proin magna<wbr/>
+				Lorem ipsum odor amet, consectetuer adipiscing elit. Potenti ultricies<wbr/> <!-- word break opportunity -->
+				inceptos, quam facilisis aliquam vehicula quis. Laoreet proin magna<wbr/> <!-- it say to browser that it can break the text here -->
 				inceptos senectus lorem. Penatibus etiam metus quam sodales nisi.<wbr/>
 			</p>
 
+			<!-- ruby characters (see: https://en.wikipedia.org/wiki/Ruby_character ) -->
 			<ruby>
-				字<rt>Ji</rt>
+				字<rt>Ji</rt> <!-- ruby text; pronunciation of characters -->
 				字
-				<rp>(</rp>
+				<rp>(</rp> <!-- ruby parenthesis; load if browser do not support `ruby` tag -->
 				<rt>Ji</rt>
 				<rp>)</rp>
 			</ruby>
 
+			<!-- horizontal rule -->
 			<hr/>
 
 			<p>Lorem ipsum</p>
-			<p><bdi>Lorem ipsum</bdi></p>
-			<p><bdo dir="rtl">Lorem ipsum</bdo></p>
-			<p>Lorem <bdi>حرف</bdi> ipsum</p>
+			<p><bdo dir="rtl">Lorem ipsum</bdo></p> <!-- bidirectional override -->
+			<p>Lorem <bdi>حرف</bdi> ipsum</p> <!-- bidirectional isolation -->
 
 			<hr/>
 
 			<ul>
-				<li>Lorem <strong>ipsum</strong> odor</li>
-				<li>Lorem <b>ipsum</b> odor</li>
-				<li>Lorem <q>ipsum</q> odor</li>
-				<li>Lorem <ins>ipsum</ins> odor</li>
-				<li>Lorem <code>ipsum</code> odor</li>
-				<li>Lorem <em>ipsum</em> odor</li>
-				<li>Lorem <i>ipsum</i> odor</li>
-				<li>Lorem <cite>ipsum</cite> odor</li>
-				<li>Lorem <del>ipsum</del> odor</li>
-				<li>Lorem <small>ipsum</small> odor</li>
-				<li>Lorem <sup>ipsum</sup> odor</li>
-				<li>Lorem <sub>ipsum</sub> odor</li>
-				<li>Lorem <mark>ipsum</mark> odor</li>
-				<li>Lorem <kbd>ipsum</kbd> odor</li>
-				<li>Lorem <dfn>ipsum</dfn> odor</li>
-				<li>Lorem <samp>ipsum</samp> odor</li>
-				<li>Lorem <var>ipsum</var> odor</li>
-				<!--<li>Lorem <@>ipsum</@> odor</li>-->
-				<li><abbr title="Lorem Ipsum Odor">LIO</abbr></li>
+				<li>strong <strong>strong</strong> strong</li>
+				<li>bold <b>bold</b> bold</li>
+				<li>quotation <q>quotation</q> quotation</li>
+				<li>inserted <ins>inserted</ins> inserted</li>
+				<li>code <code>code</code> code</li>
+				<li>emphasized <em>emphasized</em> emphasized</li>
+				<li>italic <i>italic</i> italic</li>
+				<li>cite <cite>cite</cite> cite</li>
+				<li>deleted <del>deleted</del> deleted</li>
+				<li>small <small>small</small> small</li>
+				<li>superscript <sup>superscript</sup> superscript</li>
+				<li>subscript <sub>subscript</sub> subscript</li>
+				<li>marked <mark>marked</mark> marked</li>
+				<li>keyboard <kbd>keyboard</kbd> keyboard</li>
+				<li>defining <dfn>defining</dfn> defining</li>
+				<li>sample <samp>sample</samp> sample</li>
+				<li>variable <var>variable</var> variable</li>
+				<li><abbr title="abbreviation">abbr</abbr></li>
 			</ul>
 
 			<hr/>
@@ -129,25 +156,33 @@
 			<br/>
 
 			<blockquote>
-				Lorem ipsum odor amet, consectetuer adipiscing elit. Potenti ultricies
-				inceptos, quam facilisis aliquam vehicula quis. Laoreet proin magna
-				inceptos senectus lorem. Penatibus etiam metus quam sodales nisi.
+				<h1>Title</h1>
+				<p>
+					Lorem ipsum odor amet, consectetuer adipiscing elit. Potenti ultricies
+					inceptos, quam facilisis aliquam vehicula quis. Laoreet proin magna
+					inceptos senectus lorem. Penatibus etiam metus quam sodales nisi.
+				</p>
 			</blockquote>
 
 			<br/>
 			<hr/>
 			
 			<details>
-				<summary>Lorem ipsum</summary>
+				<summary>Show more</summary>
 				<button onclick="document.getElementById('foo-dialog').showModal()">
-					<a>Lorem ipsum</a>
+					<span>Open dialog-popup</span>
 				</button>
 			</details>
 
 			<dialog id="foo-dialog">
-				<iframe src="https://www.example.com">no support to iframes</iframe>
+				<!-- apparently `iframe` do not work `file://` -->
+				<iframe src="https://www.example.com">
+					<div>
+						<p>Your browser do not support `iframe` :(</p>
+					</div>
+				</iframe>
 				<button onclick="document.getElementById('foo-dialog').close()">
-					<a>Lorem ipsum</a>
+					<span>Close dialog-popup</span>
 				</button>
 			</dialog>
 
@@ -156,15 +191,19 @@
 
 		<section>
 			<figure>
+				<!-- image -->
 				<img width="200" usemap="#foo-area-img" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-original.svg" alt="html icon"/>
-				<figcaption>Lorem ipsum</figcaption>
+
+				<figcaption>Figure caption</figcaption>
 			</figure>
+
+			<hr/>
 
 			<map id="foo-area-img">
 				<area shape="rect" coords="0,0,100,100" href="#" alt="chunk of the html icon"/>
 			</map>
 
-			<!--
+			<!-- I did not find an server to request audio files
 			<audio>
 				<source src="./foo-audio.mp3" type="audio/mpeg"/>
 			</audio>
@@ -172,6 +211,8 @@
 
 			<picture>
 				<source width="200" media="(max-width: 500px)" srcset="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-plain.svg"/>
+
+				<!-- if none `source` "media querys" is true, the image below will be loaded -->
 				<img width="200" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-original.svg" alt="html icon"/>
 			</picture>
 
@@ -179,12 +220,18 @@
 
 			<video width="400" controls="controls">
 				<source src="https://cdn.pixabay.com/video/2022/04/19/114457-701051212_large.mp4" type="video/mp4"/>
-				<track kind="descriptions" src="" srclang="pt-BR" label="Lorem ipsum"/>
+
+				<!-- video caption; it must be a caption file (in `src`), like: "foo.vtt" -->
+				<!-- <track kind="descriptions" src="" srclang="pt-BR"/> -->
 			</video>
 
-			<!--
+			<!-- I did not find an server to request files that do not have specific support tag (like `audio` for audio fileso).
+				Generic container to load external resources.
+
 			<object data="./foo-pdf.pdf" type="application/pdf" width="200" height="200">
-				Lorem ipsum
+				<div>
+					<p>Your browser do not support load PDFs :(</p>
+				</div>
 			</object>
 			-->
 		</section>
@@ -192,13 +239,19 @@
 		<br/>
 		<br/>
 
+		<!-- as a whiteboard, use JS to draw on them -->
 		<canvas id="foo-canvas" width="200" height="200"></canvas>
 
 		<noscript>
-			Lorem ipsum
+			<div>
+				<p>
+					Your browser do not support JS (or you disable it, please enable
+					the JS), because of this the `canvas` above will work.
+				</p>
+			</div>
 		</noscript>
 
-		<script>
+		<script> // avoid use `script` inside `body`
 			const foo = document.getElementById("foo-canvas").getContext("2d");
 			foo.fillStyle = "gray";
 			foo.fillRect(0, 0, 200, 200);
@@ -209,12 +262,12 @@
 
 		<form action="https://www.example.com" method="post" autocomplete="off" target="_self">
 			<fieldset>
-				<legend>Lorem ipsum</legend>
+				<legend>Form title</legend>
 
 				<fieldset>
-					<label for="foo-select">Lorem ipsum</label>
+					<label>Select an item:</label>
 					<select id="foo-select">
-						<optgroup label="group 1">
+						<optgroup label="group 1"> <!-- options group -->
 							<option value="A">A</option>
 							<option value="B" selected="selected">B</option>
 							<option value="C">C</option>
@@ -226,7 +279,7 @@
 						</optgroup>
 					</select>
 
-					<input list="foo-datalist-input"/>
+					<input list="foo-datalist-input" placeholder="Try: a; b; c"/>
 					<datalist id="foo-datalist-input">
 						<optgroup label="group 1">
 							<option value="AAA"></option>
@@ -242,8 +295,8 @@
 				</fieldset>
 				
 				<fieldset>
-					<legend>Lorem ipsum</legend>
-					<textarea rows="5" cols="25" placeholder="Lorem ipsun" required="required"></textarea>
+					<legend>Write below:</legend>
+					<textarea rows="5" cols="25" placeholder="You can resize this!" required="required"></textarea>
 				</fieldset>
 
 				<fieldset>
@@ -256,6 +309,11 @@
 		<form oninput="document.getElementById('foo-form-output').value=document.getElementById('foo-form-input').value">
 			<fieldset>
 				<input id="foo-form-input" type="range" value="50" autocomplete="off"/>
+
+				<!--
+					the documentations says that `output` must auto-update its
+					value, but it was not working, so I do a simple JS code ;-;
+				-->
 				<output id="foo-form-output" for="foo-range-input">50</output>
 			</fieldset>
 		</form>
@@ -264,33 +322,33 @@
 		<br/>
 
 		<table border="1" rules="all">
-			<caption>Lorem ipsum</caption>
-			<colgroup>
-				<col style="background-color:#aaa"/>
+			<caption>Table title/name</caption>
+			<colgroup> <!-- columns group -->
+				<col style="background-color:#aaa"/> <!-- (table) column -->
 				<col span="2" style="background-color:#777"/>
 			</colgroup>
-			<thead>
-				<tr>
-					<th>Lorem ipsum</th>
-					<th>Lorem ipsum</th>
-					<th>Lorem ipsum</th>
-					<th>Lorem ipsum</th>
+			<thead> <!-- table head -->
+				<tr> <!-- table row -->
+					<th>Table header</th>
+					<th>Table header</th>
+					<th>Table header</th>
+					<th>Table header</th>
 				</tr>
 			</thead>
-			<tbody>
+			<tbody> <!-- table body -->
 				<tr>
-					<td>Lorem ipsum</td>
-					<td>Lorem ipsum</td>
-					<td>Lorem ipsum</td>
-					<td>Lorem ipsum</td>
+					<td>Table data</td>
+					<td>Table data</td>
+					<td>Table data</td>
+					<td>Table data</td>
 				</tr>
 			</tbody>
-			<tfoot>
+			<tfoot> <!-- table footer -->
 				<tr>
-					<th>Lorem ipsum</th>
-					<th>Lorem ipsum</th>
-					<th>Lorem ipsum</th>
-					<th>Lorem ipsum</th>
+					<th>Table header</th>
+					<th>Table header</th>
+					<th>Table header</th>
+					<th>Table header</th>
 				</tr>
 			</tfoot>
 		</table>
@@ -301,13 +359,22 @@
 
 	<footer>
 		<address>
+			<strong>HTML in a nutshell</strong><br/>
 			By DuckAfire<br/>
-			<a href="https://github.com/duckafire">GitHub</a><br/>
-			<a href="https://github.com/duckafire/Small_Projects/blob/main/LICENSE">License</a><br/>
-			<a href="https://github.com/duckafire/Small_Projects/tree/main/in-a-nutshell">Repository</a><br/>
+			<!-- anchor -> hyperlink -->
+			<a target="_blank" href="https://github.com/duckafire">GitHub</a><br/>
+			<a target="_blank" href="https://github.com/duckafire/Small_Projects/blob/main/LICENSE">License</a><br/>
+			<a target="_blank" href="https://github.com/duckafire/Small_Projects/tree/main/in-a-nutshell">Repository</a><br/>
 		</address>
 	</footer>
 </body>
+
+<!-- import external js -->
+<script src="https://code.jquery.com/jquery-3.7.1.slim.js" integrity="sha256-UgvvN8vBkgO0luPSUl2s8TIlOSYRoGFAX4jlCIm9Adc=" crossorigin="anonymous"></script>
+
+<!-- import internal JS -->
+<!-- <script src="./foo.js"></script> -->
+
 </html>
 
 
