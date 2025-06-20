@@ -6,7 +6,7 @@
 # -O, --ojson
 
 ## NAME:       Request Manager
-## VERSION:    0.0.3
+## VERSION:    0.0.4
 ## AUTHOR:     DuckAfire
 ## LICENSE:    MIT
 ## REPOSITORY: https://github.com/duckafire/Small_Projects/tree/main/bash-script
@@ -17,14 +17,14 @@
 ## * sed       >= v4.7
 ## * coreutils >= v8.30
 
-#$ rqm [-n | --nscript] <option | http-method> <api-url> [json-string]
+#$ rqm [-n | --nstyle] <option | http-method> <api-url> [json-string]
 #$ Options:
 #$ -h, --help    : display this message.
 #$ -H, --header  : show information about this script.
 #$ -n, --nstyle  : remove the style of the output.
 #$ -v, --version : print the script version.
 
-#@ v0.0.3
+#@ v0.0.4
 
 # CODE CONVENTIONS #####
 #
@@ -52,16 +52,18 @@
 # ** snake_case           for functions
 # ** SCREAMING_SNAKE_CASE for constants (except arrays and "argument-variables")
 
+
+
 # SHARED CODE #####
 
-function fatal_error(){
+fatal_error(){
 	local -r arg_msg="$1"
 
 	echo -e '[!] '"$arg_msg"
 	exit 1
 }
 
-function check_dependences(){
+check_dependences(){
 	# dep == dependences
 	local -ri arg_depLength=$1
 	local -ri arg_depOriginFirst=$(( $arg_depLength + 2 ))
@@ -75,7 +77,7 @@ function check_dependences(){
 	done
 }
 
-function check_option_execution(){
+check_option_execution(){
 	local -r arg_string="$1"
 
 	local -ra supportedOptions=("-H" "--header" "-h" "--help" "-v" "--version")
@@ -117,7 +119,6 @@ declare -ri ARG_argsQuantity=$#
 
 
 
-
 # GLOBAL #####
 
 declare -ra SupportedMethods=("get" "post" "put" "delete" "head" "options" "patch")
@@ -129,13 +130,12 @@ declare -i OutputStyle=$TRUE
 
 
 
-
 # CHECK SCRIPT ARGUMENTS #####
 
 check_dependences ${#Dependeces[@]} "${Dependeces[@]}" "${DependecesOrigin[@]}"
 
 
-function check_style_blockade(){
+check_style_blockade(){
 	if [[ "${ARGS[0]}" = "-n" ]] || [[ "${ARGS[0]}" = "--nstyle" ]]; then
 		
 		if [[ ${#ARGS[@]} -eq 1 ]]; then
@@ -150,13 +150,13 @@ function check_style_blockade(){
 check_style_blockade
 
 
-function check_if_there_is_method_or_option(){
+check_if_there_is_method_or_option(){
 	if [[ $ARG_argsQuantity -eq 0 ]]; then
 		fatal_error "None method or option was specified. Try: 'foo --help'"
 	fi
 }
 
-function check_method(){
+check_method(){
 	for method in ${SupportedMethods[@]}; do
 		test "$ARG_methodOption" = "$method" && return
 	done
@@ -172,13 +172,13 @@ check_option_execution "$ARG_methodOption"
 check_method
 
 
-function check_url(){
+check_url(){
 	if [[ $ARG_argsQuantity -eq 1 ]]; then
 		fatal_error "Server URL was not specified."
 	fi
 }
 
-function check_server(){
+check_server(){
 	if ! curl -I "$ARG_url" &> /dev/null; then
 		fatal_error "It was not possible to connect to the server."
 	fi
@@ -194,7 +194,7 @@ check_server
 # before, to use inside the function
 declare ARG_json=""
 
-function check_json(){
+check_json(){
 	[[ $ARG_argsQuantity -eq 2 ]] && return
 
 	local -r JSON="${ARGS[@]:2}"
@@ -211,34 +211,52 @@ check_json
 
 
 
-
-
 # MAKE REQUEST #####
 
-function make_request(){
-	# -s : --silent | -w : --write-out | -H : --header | -X : --request | -d : --data
+do_request(){
 	local -ru arg_httpMethod="$1"
 
+	local -a curl_args=(
+		--silent
+		--write-out "%{http_code}"
+		--request "$arg_httpMethod"
+		--header "Content-Type:application/json"
+	)
+
 	if [[ ! -z "$ARG_json" ]]; then
-		echo "$(curl -s -w "%{http_code}" -X "$arg_httpMethod" -H "Content-Type: application/json" -d "$ARG_json" "$ARG_url")"
+		curl_args+=(--data "$ARG_json")
+	fi
+
+	echo "$(curl ${curl_args[@]} "$ARG_url")"
+}
+
+get_response_status(){
+	local -r arg_httpResponse="$1"
+
+	echo "$(echo "$arg_httpResponse" | grep -Po '[0-9]{3}$')";
+}
+
+get_json(){
+	local -r arg_httpResponse="$1"
+
+	local firstResponseChar="$(echo "$arg_httpResponse" | grep -Po '^[\[\{]')"
+
+	if [[ "$firstResponseChar" = "[" ]] || [[ "$firstResponseChar" = "{" ]]; then
+		echo "$(echo "$1" | sed 's/[0-9]*$//g')";
 	else
-		echo "$(curl -s -w "%{http_code}" -X "$arg_httpMethod" -H "Content-Type: application/json" "$ARG_url")"
+		echo ""
 	fi
 }
 
-function get_response_status(){ echo "$(echo "$1" | sed 's/^{.*}//g')"; }
-function get_json(){            echo "$(echo "$1" | sed 's/[0-9]*$//g')"; }
-
-declare -r HTTP_RESPONSE="$(make_request "$ARG_methodOption")"
+declare -r HTTP_RESPONSE="$(do_request "$ARG_methodOption")"
 declare -r RESPONSE_STATUS="$(get_response_status "$HTTP_RESPONSE")"
 declare -r RESPONSE_JSON="$(get_json "$HTTP_RESPONSE")"
 
 
 
-
 # SET OUTPUT STYLE #####
 
-function format_status(){
+format_status(){
 	local -r code=$1
 	local msg="" style=""
 
@@ -309,12 +327,12 @@ function format_status(){
 		511) msg="Network Authentication Required (RFC 6585)" ;;
 	esac
 
-	function openStyle(){
+	openStyle(){
 		local -r code=$1
 		echo '\e['$code'm'
 	}
 
-	function closeStyle(){
+	closeStyle(){
 		local -ri max=$1
 		local toReturn=""
 		local -r code='\e[0m'
@@ -341,10 +359,10 @@ function format_status(){
 	fi
 }
 
-function format_json(){
+format_json(){
 	declare json=$(echo "$1" | jq .)
 
-	function regex_string(){
+	regex_string(){
 		# "core"
 		local -ri maxScapeSupport=$1
 		local -r mainChunk="$2"
@@ -365,15 +383,15 @@ function format_json(){
 		echo "${toReturn}${finalChunk}"
 	}
 
-	function regex_propriety(){      echo "$(regex_string $1 '([^:]?\s)("[^"\\]*' '")(: )')";  } # <"foo">: "value"
-	function regex_string_value(){   echo "$(regex_string $1 '(\s)("[^"\\]*'    '")($|,$)')";  } #  "foo": <"value">
-	function regex_number_value(){   echo '((:|\s)\s)([0-9]+)($|,$)';                          } #  "foo": <123>
-	function regex_special_value(){  echo '((:|\s)\s)(true|false|null)($|,$)';                 } #  "foo": <true>
+	regex_propriety(){      echo "$(regex_string $1 '([^:]?\s)("[^"\\]*' '")(: )')";  } # <"foo">: "value"
+	regex_string_value(){   echo "$(regex_string $1 '(\s)("[^"\\]*'    '")($|,$)')";  } #  "foo": <"value">
+	regex_number_value(){   echo '((:|\s)\s)([0-9]+)($|,$)';                          } #  "foo": <123>
+	regex_special_value(){  echo '((:|\s)\s)(true|false|null)($|,$)';                 } #  "foo": <true>
 
-	function result_propriety(){     test $OutputStyle -eq $TRUE && echo '\1\\e[1m\\e[34m\2\\e[0m\\e[0m\'"$(( 2 + $1 + 1 ))" || echo '\1\2\'"$(( 2 + $1 + 1 ))";  } # blue + bold
-	function result_string_value(){  test $OutputStyle -eq $TRUE && echo '\1\\e[32m\2\\e[0m\'"$(( 2 + $1 + 1 ))"             || echo '\1\2\'"$(( 2 + $1 + 1 ))";  } # green
-	function result_number_value(){  test $OutputStyle -eq $TRUE && echo '\1\\e[36m\3\\e[0m\4'                               || echo '\1\3\4';                    } # cyan
-	function result_special_value(){ test $OutputStyle -eq $TRUE && echo '\1\\e[1m\3\\e[0m\4'                                || echo '\1\3\4';                    } # bold
+	result_propriety(){     test $OutputStyle -eq $TRUE && echo '\1\\e[1m\\e[34m\2\\e[0m\\e[0m\'"$(( 2 + $1 + 1 ))" || echo '\1\2\'"$(( 2 + $1 + 1 ))";  } # blue + bold
+	result_string_value(){  test $OutputStyle -eq $TRUE && echo '\1\\e[32m\2\\e[0m\'"$(( 2 + $1 + 1 ))"             || echo '\1\2\'"$(( 2 + $1 + 1 ))";  } # green
+	result_number_value(){  test $OutputStyle -eq $TRUE && echo '\1\\e[36m\3\\e[0m\4'                               || echo '\1\3\4';                    } # cyan
+	result_special_value(){ test $OutputStyle -eq $TRUE && echo '\1\\e[1m\3\\e[0m\4'                                || echo '\1\3\4';                    } # bold
 
 	json="$(echo -e "$json" | sed -E s/"$(regex_propriety 5)"/"$(result_propriety 5)"/g)"
 	json="$(echo -e "$json" | sed -E s/"$(regex_string_value 5)"/"$(result_string_value 5)"/g)"
