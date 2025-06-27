@@ -196,7 +196,11 @@ foobar = Foo(5)
 del foobar # call the Foo desctrutor
 
 
-def receive_a_function(lamb):
+def receive_a_function(lamb, hasArg):
+    if not hasArg:
+        lamb()
+        return
+
     try:
         lamb("Hello world!")
 
@@ -212,7 +216,8 @@ def receive_a_function(lamb):
     finally: # it is always called (avoid it)
         print("The try-except ended")
 
-receive_a_function(lambda msg: print(msg))
+receive_a_function(lambda: print("HELLO WORLD!"), False)
+receive_a_function(lambda msg: print(msg), True)
 
 
 try:
@@ -220,6 +225,19 @@ try:
         pass
 except:
     print("'foo.bar' do not exist")
+
+
+def has_docs():
+    '''it is a docstring'''
+    return '''it
+is
+a
+multiple
+line
+string'''
+
+print(has_docs.__doc__)
+print(has_docs())
 
 
 from asyncio import sleep as slp, run # as r
