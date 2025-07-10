@@ -1,6 +1,8 @@
 ----------------------------------------------------------------------------------------
 
--- it is a commentary
+-- it is a line commentary
+
+/* it is a block commentary */
 
 -- SQL: Structured Query Language
 -- * DCL: Data Control Language      - GRANT, DENY, REVOKE

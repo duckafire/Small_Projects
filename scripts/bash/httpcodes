@@ -23,7 +23,6 @@ echo -e  "100 Continue
 306 Switch Proxy
 307 Temporary Redirect (since HTTP/1.1)
 308 Permanent Redirect
-404 Not found
 400 Bad Request
 401 Unauthorized
 402 Payment Required

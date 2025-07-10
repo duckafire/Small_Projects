@@ -227,7 +227,7 @@ except:
     print("'foo.bar' do not exist")
 
 
-def has_docs():
+def has_docs(): # double quotes works too
     '''it is a docstring'''
     return '''it
 is

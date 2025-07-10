@@ -6,7 +6,7 @@
 # -O, --ojson
 
 ## NAME:       Request Manager
-## VERSION:    0.0.4
+## VERSION:    0.0.5
 ## AUTHOR:     DuckAfire
 ## LICENSE:    MIT
 ## REPOSITORY: https://github.com/duckafire/Small_Projects/tree/main/bash-script
@@ -284,7 +284,6 @@ format_status(){
 		306) msg="Switch Proxy" ;;
 		307) msg="Temporary Redirect (since HTTP/1.1)" ;;
 		308) msg="Permanent Redirect" ;;
-		404) msg="Not found" ;;
 		400) msg="Bad Request" ;;
 		401) msg="Unauthorized" ;;
 		402) msg="Payment Required" ;;
