@@ -1,5 +1,8 @@
 # it is a commentary
 
+# the extension "yml" also is valid;
+# this is based in: https://yaml.org/spec/1.2.2/
+
 value-options:
     - 0
     - 0o0
@@ -91,19 +94,10 @@ paragraph-0: > # convert line feed to spaces
     4 5 6
     7 8 9
 
-paragraph-1: > # maintain line feed (less indentation)
+paragraph-1: | # maintain line feed (less indentation)
     1 2 3
     4 5 6
     7 8 9
-
-paragraph-2: >
-    1 2 3
-    4 5 6
-
-
-
-    7 8 9
-a b d # they are included - in `paragraph-2` - too!
 
 # tags
 
