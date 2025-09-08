@@ -206,7 +206,7 @@ contagem).
 | d      | Dia do mês (`01-31`)`                          | 04 |
 | D      | Mês/Dia/Ano                                    | 07/29/2025 |
 | e      | Dia do mês (`1-31`)                            | 22 |
-| F      | Ano-Mês-Dia                                    | 07-29-2025 |
+| F      | Ano-Mês-Dia                                    | 2025-29-07 |
 | g      | Ano baseado em semanas, últimos dois digitos   | 23 |
 | G      | Ano baseado em semanas                         | 2023 |
 | h      | Nome do mês abreviado (o mesmo que `"%b"`)     | Aug |
