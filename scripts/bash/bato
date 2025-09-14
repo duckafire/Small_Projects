@@ -4,7 +4,7 @@
 # * upower >=0.99.n
 # * notify-send >=0.7.n
 
-# BATtery Observer
+# BATtery Observer v0.0.2
 #
 # MIT License
 #
@@ -56,13 +56,14 @@ get_battery_percentage()
 
 is_battery_charging()
 {
-	if [[ "$(get_battery_info 'state: *\K(dis)?charging')" = "charging" ]]
-	# if [[ "$(cat "./charging")" = "charging" ]] # NOTE: it simulates the charging status of the battery. Use this to debug.
+	if [[ "$(get_battery_info 'state: *\K(dis)?charging')" = "discharging" ]]
+	# if [[ "$(cat "./charging")" = "discharging" ]] # NOTE: it simulates the charging status of the battery. Use this to debug.
 	then
-		return $TRUE
+		return $FALSE
 	fi
 
-	return $FALSE
+	# it can be: charging or fully-charged
+	return $TRUE
 }
 
 push_notification()
