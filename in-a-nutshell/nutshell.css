@@ -1,0 +1,301 @@
+/* @charset <encoding-name>; */
+@charset "UTF-8";
+/* defines the style sheet character encoding.
+ * It IS NOT an "At-Rule"; it MUST be placed
+ * at the very start of the file. EXACTLY with
+ * this syntax: `^@charset ".+"$`.
+ *
+ * NOTE: Perl-Regex had used to written this
+ * synopsis, but it is only an illustration.
+ *
+ * WARNING: `".+"` must be the name of a
+ * web-safe character encoding defined in
+ * INA-registry - https://www.iana.org/assignments/character-sets/character-sets.xhtml .
+ *
+ * It is used out from the start line, it will
+ * be treated as an At-Rule that defines the
+ * fallback character encoding of the style
+ * sheet, but this behavior is deprecated. */
+
+
+/* @color-profile <css-variable> { [style-rules...] } */
+@color-profile --foo-color
+{
+	src: url("./foo.icc");
+}
+/* allows to set a CSS variables, that it can
+ * be used by `color` (function), whose value
+ * it obtained from an ICC file.
+ *
+ * See more about the specific style
+ * rules of this At-Rule in the links
+ * below:
+ * - https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/At-rules/@color-profile
+ * - https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/color_value/color
+ * - https://en.wikipedia.org/wiki/ICC_profile
+
+
+/* @container [container-name] <container-queries...> { [style-rules...] }; */
+@container foo (min-width: 64rem)
+{
+	.bar
+	{
+		color: red;
+	}
+}
+/* apllies styles to "container" children,
+ * based in some user-defined condition
+ * ("container-queries") that are based in
+ * some values of the style rules defined
+ * to the "container".
+ *
+ * If `container-name` is omitted, the selectors
+ * inside the @container block will use, as base,
+ * the closest ancestor in the cascade that has a
+ * "containment context".
+ *
+ * On this context, "container" is an element
+ * that receives the style rule `container-type`
+ * and, optionally, `container-name`. See
+ * the links below to more information (there are
+ * a lot of things):
+ * - https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/container-type
+ * - https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/container-name
+ *
+ * TIP: it is like the At-Rule @media, but
+ * the information are from a specific element,
+ * instead from viewport.
+
+
+/* BASELINE 2023 */
+/* @counter-style <counter-name> { [style-rules...] } */
+@counter-style roman
+{
+	system: additive;
+	symbols: I V;
+	additive-symbols: 1 I, 2 II, 3 III, 4 IV, 5 V;
+}
+/* allows to define a customized counter
+ * style to `list-style` (style rule)`.
+ *
+ * See more about the specific style
+ * rules of this At-Rule in the links
+ * below:
+ * - https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/At-rules/@counter-style
+ * - https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/list-style */
+
+
+/* @font-face { [style-rules...] } */
+@font-face
+{
+	font-family: "Foo font";
+	src: local("./foo-font.ttf");
+}
+/* allows to define the resources location
+ * of a font (local and external) along
+ * with its style, to be used with
+ * `font-family` (style rule).
+ *
+ * See more about the specific style
+ * rules of this At-Rule in the links
+ * below:
+ * - https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/At-rules/@font-face */
+
+
+/* @font-feature-values <font-name> { [style-rules...] } */
+@font-feature-values "Foo font"
+{
+	@swash
+	{
+		bar: 1;
+	}
+}
+/* allows to declare aliases to be
+ * acessed by the style rule
+ * `font-variant-alternates`, through
+ * the use of its "value-functions".
+ *
+ * See more about the specific style
+ * rules of this At-Rule in the links
+ * below:
+ * - https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/At-rules/@font-feature-values
+ *
+ * TIP: use example:
+ * .foo
+ * {
+ *   font-family: "Foo font";
+ *   font-variant-alternates: swash(bar);
+ * }
+
+
+/* @font-palette-values <css-variable> { [style-rules...] } */
+@font-palette-values --foo-palette
+{
+	font-family: "Foo font";
+	override-colors: 0 #f0a, 1 #a0f;
+}
+/* allows to define a CSS variable that it can
+ * be used as value to `font-palette` (style
+ * rule).
+ *
+ * See more about the specific style
+ * rules of this At-Rule in the links
+ * below:
+ * - https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/At-rules/@font-palette-values
+ * - https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/font-palette
+ * - https://developer.mozilla.org/en-US/play?uuid=577a5afdb767e27b12c300e5a2a2f4c2a32b596a&state=hZDLasMwEEV%2FZVCX9ashEFAcN%2B0vdKuNYo8cpXohyYE05N8rR8G0UOhKM5eje2fmSo5RK0JJ67oBBZ9UhN4q60Nbu46Z1kGveAg7RriK6A2PyEi31L9gUpA%2BhGS2l9pZH4El9%2BgCrWthTQzVaO2okDsZqt7qOsGrV8G1VJfd%2B2RGxOcPJ%2FsUsGXGwZUZgPljmRma%2FDIGD6wAwU3k4bJd0CC%2FkMLKo07ajZn9XXVcYYxYnrmaMEBZvi0L%2FJ9yN7dn9F4OWOaF6awBNPDUNEIcDkXuX%2BZ%2Bs1mvc3jF%2F4h5zEJ%2FTpHxdL%2FTfL70xiNqTOXA%2FSe5fQM%3D&srcPrefix=%2Fen-US%2Fdocs%2FWeb%2FCSS%2FReference%2FAt-rules%2F%40font-palette-values%2F
+ *
+ * NOTE: the value of `color` (style rule) cannot
+ * overlap the value of `font-palette` - even with
+ * `!important`. */
+
+
+/* @import <path-or-url> [layer(...)] [supports(...)] [media-queries]; */
+@import "./foo.css" layer(foo) supports(-webkit-) screen, print and (min-width: 20rem);
+/* imports a style sheet from a local/remote
+ * locally.
+ *
+ * It MUST be placed before all other types
+ * of rules, except @charset and @layer.
+ *
+ * NOTE: `layer` receives "cascate layers"
+ * defined with @layer; `supports` receives
+ * the conditions that must be met, by the
+ * browser, so that the style sheet can be
+ * imported; `medias-queries` is a comman-
+ * separated list with media queries required
+ * import the style sheet. */
+
+
+/* @keyframes <animation-name> { [style-rules...] } */
+@keyframes
+{
+	0%   { color: red; }
+	50%  { color: blue; }
+	100% { color: red; }
+}
+/* allows to declare animations to use with the
+ * style rule `animation`.
+ *
+ * See more about the specific style
+ * rules of this At-Rule in the links
+ * below:
+ * - https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/At-rules/@keyframes
+ * - https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/animation
+ * - https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Animations/Using
+ *
+ * NOTE: this At-Rule has an equivalent webkit
+ * rule: `-webkit-keyframes`. */
+
+
+/* @layer <layer-name0>[, ..., layer-nameN]; */
+/* @layer [layer-name] { [style-rules...] }; */
+@layer foo, bar;
+@layer foo
+{
+	.bar
+	{
+		color: #c9c9c9;
+	}
+}
+/* defined styles rules layers, whose
+ * overlap order can be set.
+ *
+ * The definition of the overlap order
+ * occur when this At-Rule is used no
+ * rule block - like the first example.
+ * It can be done before or after the
+ * declaration of the layers style rules
+ * block - it can be done following the
+ * second synopsis.
+ *
+ * TIP: see this to a overview about
+ * the priority run order of the style
+ * rules: https://mdn.github.io/shared-assets/images/diagrams/css/at-rules/layer-cascade.svg . */
+
+
+/* @media <container-queries...> { [style-rules...] }; */
+@media (min-width: 64rem)
+{
+	.bar
+	{
+		color: red;
+	}
+}
+/* apllies styles to the page elements based
+ * in some user-conditions that are based in
+ * the viewport information ones.
+ *
+ * On this context, "container" is an element
+ * that receives the style rule `container-type`
+ * and, optionally, `container-name`. See
+ * the links below to more information (there are
+ * a lot of things):
+ * - https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/container-type
+ * - https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/container-name
+ *
+ * TIP: it is like the At-Rule @container,
+ * but the information are from viewport,
+ * instead from a specific element. */
+
+
+/* @namespace [prefix] url(...); */
+@namespace svg url("http://www.w3.org/2000/svg");
+/* defines the default namespace, or defines
+ * a namespace and associate a names (`prefix`)
+ * to it.
+ *
+ * If a default namespace is set, all styles
+ * no prefix will be apllied to the elements
+ * from this namespace; if a namespace prefix
+ * is set, all style prefixed by it will be
+ * apllied to the elements from its namespace.
+ *
+ * A namespace is associated with an element
+ * through of the attribute `xmlns` (XML
+ * NameSpace), that it can be used in
+ * XML-like (e.g: HTML; SVG) elements.
+ * Children of those element also will be
+ * part of the namespace.
+ *
+ * NOTE: the value of `url()` do not need to
+ * be an URL, because it is an "identifier".
+ * But to use an URL is a convention,
+ * recommended by the CSS Specification
+ * (because URL are single, what avoid
+ * possible conflicts).
+ *
+ * TIP: use example:
+ * svg|a { color: red; } */
+
+
+/* BASELINE 2024 */
+/* @page { [style-rules...] } */
+@page
+{
+	size: A4 portrait;
+}
+/* allows to modify different aspects (like:
+ * margin length; orientation; ...) of printed
+ * pages.
+ *
+ * See more about the specific style
+ * rules of this At-Rule in the links
+ * below:
+ * - https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/At-rules/@page */
+
+
+
+/* LIMITED AVAILABLE */
+@position-try {}
+
+
+/*
+ * TODO:
+ * position-try!
+ * property
+ * scope
+ * starting-style
+ * supports
+ * view-transition
+ * */
