@@ -1,3 +1,178 @@
+/* it is a line comment */
+
+/* CSS has MANY content, because of this, I
+ * had divided this in some parts (they are
+ * listed below), and I had added some
+ * explanation comments (and links).
+ *
+ * - SELECTORS
+ * - AT-RULES
+ *
+ * */
+
+
+
+
+/*************/
+/* SELECTORS */
+/*************/
+
+
+/* <tag-name> { [style-rules...] } */
+div
+{
+	color: red;
+}
+/* applies a style to all elements declared
+ * with the same tag.
+ *
+ * On the example, all `<div>` will receive
+ * the style. */
+
+
+/* .<class-name> { [style-rules...] } */
+.foo
+{
+	color: red;
+}
+/* applies a style to all elements whose attribute
+ * `class` has a specific value (class).
+ *
+ * On the example, all elements whose `class` has
+ * `foo` will receive the style.
+ *
+ * NOTE: classes names must be prefixed by a dot. */
+
+
+/* #<id-name> { [style-rules...] } */
+#foo
+{
+	color: red;
+}
+/* applies a style to all elements whose attribute
+ * `id` is equal to the specified text.
+ *
+ * On the example, all elements whose `id` is equal
+ * `foo` will receive the style.
+ *
+ * NOTE: classes names must be prefixed by a sharp;
+ * each `id` must be unique. */
+
+
+/* [<attribute>] { [style-rules...] } */
+[readonly]
+{
+	color: red;
+}
+/* applies a style to all elements that have the
+ * attribute specified.
+ *
+ * On the example, all elements that has the attribute
+ * `readonly` will receive the style. */
+
+
+/* [<attribute><operator><value>] { [style-rules...] } */
+[title="foo"]
+{
+	color: red;
+}
+/* applies a style to all elements that have the
+ * attribute specified, and whose value of that
+ * attribute mets the used operator.
+ *
+ * On the example, all elements that has the attribute
+ * `readonly` will receive the style.
+ *
+ * The available operators are:
+ * -  = : is it equal to FOO.
+ * - ~= : does it have a space-separated string equal FOO.
+ * - |= : is it equal to FOO, or is it start with FOO
+ *        suffixed by `-`.
+ * - ^= : is it start with FOO.
+ * - $= : is it end with FOO.
+ * - *= : does it have the substring FOO.
+ *
+ * In addition to them, the "case-insensitive" operator
+ * also be implemented. It is the letter `i` (or `I`),
+ * that when putted before `]` (separated with a space)
+ * to enable the mode case-insensitive; E.g.:
+ * [data-foo="bar" I].
+ *
+ * NOTE: there is also a "case-sensitive" operator
+ * (`s` or `S`), but it is not a baseline feature. */
+
+
+/* * { [style-rules...] } */
+* {}
+/* represents all elements from a specifig container.
+ *
+ * NOTE: when used alone, it represents all elements
+ * from the XML-like file. */
+
+
+/* Selectors have support to some operators, they are:
+ * - a+b : element `b` positioned immediataly after `a`,
+ *         in the same container.
+ * - a~b : elements `b` positioned after `a`, in the
+ *         same container.
+ * - a>b : elements `b` that are children of `a`.
+ * - a b : elements `b` that are descending of `a`.
+ * - a,b : `a` and `b` will receive the same style.
+ * - a#c : (no-separation) element `a` that has the `id`
+ *         `#c`.
+ * - e|a : elements `a` from the "namespace" `e`
+ *         (namespaces are defined with the At-Rule
+ *         @namespace).
+ *
+ * TIP: "no-separation" can combine all selectors,
+ * except tag names in a row, like: `htmlbody`.
+ *
+ * TIP: use spaces between the operatos - this works
+ *
+ * NOTE: "children" is the first layer of descending of
+ * an element. E.g.:
+ * <a>
+ *   <b>
+ *     <c></c>
+ *   </b>
+ * <a/>
+ * `a` is the pattern of `b` and `c`; `b` is child of `a`;
+ * `b` and `c` are descending of `a`.
+ * with the "space operator". */
+
+
+/* All these things can be merged and used to create
+ * complex selectors, like: */
+
+input[readonly].popup
+{}
+
+#footer .title,
+#footer .subtitle,
+#footer .text
+{}
+
+article > [lang|=en I]
+{}
+
+ol .item + .item,
+ul .item + .item
+{}
+
+.content .title ~ *
+{}
+
+svg|a
+{}
+
+
+
+
+/************/
+/* AT-RULES */
+/************/
+
+
 /* @charset <encoding-name>; */
 @charset "UTF-8";
 /* defines the style sheet character encoding.
@@ -286,13 +461,8 @@
 
 
 
-/* LIMITED AVAILABLE */
-@position-try {}
-
-
 /*
  * TODO:
- * position-try!
  * property
  * scope
  * starting-style
