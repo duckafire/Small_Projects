@@ -1,8 +1,8 @@
 ----------------------------------------------------------------------------------------
 
--- it is a line commentary
+-- it is a line comment
 
-/* it is a block commentary */
+/* it is a block comment */
 
 -- SQL: Structured Query Language
 -- * DCL: Data Control Language      - GRANT, DENY, REVOKE
@@ -39,7 +39,7 @@ CREATE TABLE other_nutshell {
 
 ALTER nutshell_core
 ADD bar INT NULL, -- it can be null
-MODIFY num INT DEFAULT 1, -- no commentary
+MODIFY num INT DEFAULT 1, -- no comment
 RENAME COLUMN id TO unique_id,
 DROP COLUMN foo,
 RENAME nutcore; -- rename the table

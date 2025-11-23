@@ -12,7 +12,7 @@
 	],
 
 	"NOTES": [
-		"No support to commentaries",
+		"No support to comments",
 		"An 'root element' (array or object) is necessary",
 		"Indentation is optional",
 		"Only double quotes to declare strings",

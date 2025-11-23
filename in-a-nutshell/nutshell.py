@@ -1,4 +1,4 @@
-# it is a commentary
+# it is a comment
 
 
 import random                      # random.randint()

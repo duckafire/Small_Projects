@@ -73,7 +73,7 @@ text paragraph
 [Text that contain a hyperlink](url "optional message/title")
 [!image-from-hyperlink](url "optional message/title")
 
-[//]: # "This is an improvised commentary!"
+[//]: # "This is an improvised comment!"
 
 [hyperlink-scope]: url "optional message/title"
 [Text that contain a hyperlink 2][hyperlink-scope]

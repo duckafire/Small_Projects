@@ -1,6 +1,6 @@
--- it is a line commentary
+-- it is a line comment
 --[[
-	it is a block commentary
+	it is a block comment
 ]]
 
 

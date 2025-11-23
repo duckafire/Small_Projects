@@ -1,4 +1,4 @@
-# it is a commentary
+# it is a comment
 # You do NOT need the syntax highlight!
 
 # I recommends that you deeping in:
@@ -25,7 +25,7 @@
 # * Docker instructions have to use UPPERCASE.
 # * Docker directives have to use lowercase.
 
-# Directives and its syntaxes (they must be commentaries "pre-FROM"):
+# Directives and its syntaxes (they must be comments "pre-FROM"):
 # syntax=<value>
 # escape=<value>
 # check=<key>=<value>
