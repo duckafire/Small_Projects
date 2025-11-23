@@ -168,6 +168,160 @@ svg|a
 
 
 
+/******************/
+/* PSEUDO-CLASSES */
+/******************/
+
+/* They are keywords that represents a state
+ * of an element - what it allows styles
+ * orientated to states.
+ *
+ * They can be accessed through the special
+ * character `:`, after a valid selector. */
+
+a:active
+/* an activable element is actived (clicked). */
+
+/* BASELINE 2025 */
+:root:active-view-transition
+/* allows to aplly a style while a "view transition"
+ * is occuring.
+ *
+ * See more about the specific style
+ * rules of this At-Rule in the links
+ * below:
+ * - https://developer.mozilla.org/en-US/docs/Web/API/View_Transition_API#concepts_and_usage
+ * - https://developer.mozilla.org/en-US/docs/Web/API/View_Transition_API/Using */
+
+/* BASELINE 2020 */
+a:any-link
+/* every `a` and `area` that have the attribute
+ * `href`. */
+
+/* BASELINE 2023 */
+input:autofill
+/* `input` whose value was autofilled by the browser. */
+
+/* LIMITED AVAILABILITY */
+video:buffering
+/* represents playable elements that are buffering a media
+ * resource, in other words, they are "downloading" the
+ * data necessary to start/continue the presentation. */
+
+input:checked
+/* an `input`, of type `radio`, is checked. */
+
+input:default
+/* an `input`, whose type can receive the attribute
+ * `checked`, marked as checked (in the HTML file). */
+
+/* BASELINE 2020 */
+custom-element:defined
+/* represents any element that has been defined, what
+ * include standard and customized elements. */
+
+/* BASELINE 2023 */
+div:dir(/* ltr OR rtl */)
+/* elements whose the "text direction" is equal the
+ * argument given to it.
+ *
+ * IMPORTANT: Unlike `[dir=]`, `:dir()` considers the
+ * heritage and the default values of the "text direction". */
+
+div:disable
+/* activable elements that are disabled. */
+
+div:empty
+/* no children elements. */
+
+div:enabled
+/* activable elements that are enabled. */
+
+/* BASELINE 2023 */
+@page :first {}
+/* represents the first page of a printed document.
+ * It only can be used with the At-Rule @page. */
+
+div:first-child
+/* first child of an element. */
+
+div:first-of-type
+/* first child, of its type (tag name), of an element. */
+
+/* LIMITED AVAILABILITY */
+div:fullscreen
+/* elements that is in fullscreen mode. */
+
+div:focus
+/* clicaked or selectable elements that are in focus
+ * (they had/were selected/clicked). */
+
+/* BASELINE 2023 */
+div:has(/* selector0, ..., selectorN */)
+/* represents elements whose their children met the
+ * selectors given as arguments, or elements whose
+ * their characteristics met these selectors. */
+
+/* BASELINE 2020 */
+:host
+/* represents the root of Shadow DOM Tree (it have to
+ * be used along with JavaScript). */
+
+/* BASELINE 2020 */
+:host( /* selector */ )
+/* represents the root of Shadow DOM Tree (it have to
+ * be used along with JavaScript). It only applies the
+ * style if the `host` mets the selector. */
+
+div:hover
+/* elements that are below the mouse cursor (in Z axis). */
+
+input:indeterminate
+/* form elements whose their state is indeterminate (it
+ * is not checked and it is not unchecked, it is
+ * indeterminated). */
+
+input:in-range
+/* `input` ones whose value is within the range limits
+ * specified by the attribute: `min`; `max`. */
+
+input:invalid
+/* form elements whose their values are invalid. */
+
+/* BASELINE 2021 */
+:is( /* selector0, ..., selectorN */ )
+/* allows to group a list of selectors to apply a specific
+ * style to them.
+ *
+ * It is good to minimize the length of selectors, e.g.:
+ *
+ * :is(.foo, .bar, .foobar) input {}
+ *
+ * .foo input,
+ * .bar input,
+ * .foobar input {} */
+
+div:lang(/* en-US; OR pt-BR; OR ... */)
+/* elements whose the value of the attribute `lang` is
+ * equal the argument given to it.
+ *
+ * IMPORTANT: Unlike `[lang=]`, `:lang()` considers the
+ * heritage and the default values of the "text direction". */
+
+div:last-child
+/* last child of an element. */
+
+div:last-of-type
+/* last child, of its type (tag name), of an element. */
+
+/* LIMITED AVAILABILITY */
+@page :left {}
+/* represents the all the left-hand pages of a printed
+ * document. It only can be used with the At-Rule @page. */
+
+
+
+
 /************/
 /* AT-RULES */
 /************/
